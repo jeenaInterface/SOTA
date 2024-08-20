@@ -13,6 +13,7 @@ Given('User navigates to the application', async function () {
 
 When('User enter the username and password', async function () {
     await login.enterUserName(data.userEmail)
+    console.log("executed step")
     await login.enterPassword(data.userPassword)
 });
 

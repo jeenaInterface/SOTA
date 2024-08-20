@@ -12,15 +12,26 @@ Given('Go to steady management screen', async function () {
     await steady.clicksteadyMenuButton()
 });
 
-// When('User enter the username and password', async function () {
-//     await login.enterUserName(data.userEmail)
-//     await login.enterPassword(data.userPassword)
-// });
+Given('Select vessel as operational type', async function () {
+    // await login.enterUserName(data.userEmail)
+    // await login.enterPassword(data.userPassword)
+});
 
-// When('User click on the login button', async function () {
-//   await login.clickLoginButton();
-// });
+When('Click on search button', async function () {
+    //   await login.clickLoginButton();
+});
 
-// Then('user click on logout button', async function () {
-// await login.logOutDropDownlist();
-// });
+Then('Verify the steadies are loaded in the table', async function () {
+    // await login.logOutDropDownlist();
+});
+
+Given('Select vessel as operational type', async function () {
+    // await login.logOutDropDownlist();
+});
+
+When('Click on search button', async function () {
+    // await login.logOutDropDownlist();
+});
+Then('Verify the steadies are loaded in the table with vessel opearional type', async function () {
+    // await login.logOutDropDownlist();
+});

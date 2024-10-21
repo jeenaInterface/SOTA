@@ -10,7 +10,7 @@ Scenario: Update a steady details
     Given Go to steady management screen
     And Select vessel as operational type
     When Click on search button
-    Then Update First Steady listed in the table
+    Then Update the remarks of the First Steady listed in the table 
 
 @Steadymanagement
 Scenario: Create new Steady

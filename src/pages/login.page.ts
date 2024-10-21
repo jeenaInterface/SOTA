@@ -26,6 +26,7 @@ export default class loginPage {
     async navigateToLoginPage() {
         await this.base.goto(process.env.BASEURL);
     }
+    
     async enterUserName(user: string) {
         await this.page.locator(this.Elements.userName).fill(user);
         await this.base.waitAndClick(this.Elements.next);

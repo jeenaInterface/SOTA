@@ -12,15 +12,15 @@ Given('Go to steady management screen', async function () {
     await steady.clicksteadyMenuButton()
 });
 
-Given('Select vessel as operational type', async function () {
-    await steady.SelectoperationalType()
-});
+// When('User enter the username and password', async function () {
+//     await login.enterUserName(data.userEmail)
+//     await login.enterPassword(data.userPassword)
+// });
 
-When('Click on search button', async function () {
-    await steady.ClickOnSearch()
-});
+// When('User click on the login button', async function () {
+//   await login.clickLoginButton();
+// });
 
-Then('Update First Steady listed in the table', async function () {
-    await steady.updateFirstSteady();
-});
-
+// Then('user click on logout button', async function () {
+// await login.logOutDropDownlist();
+// });

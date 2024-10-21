@@ -1,12 +1,7 @@
 Feature: Steady Management
 
-  Background:
-    Given User navigates to the application
-    When TR management User enter the username and password
-    When User click on the login button
-
-@Steadymanagement1
-Scenario: Update a steady details
+@Opsuser @Steady
+Scenario: Search Steady management
     Given Go to steady management screen
     And Select vessel as operational type
     When Click on search button

@@ -29,31 +29,36 @@ export default class steadyManagementPage {
         OperationType: "//select[@ng-reflect-name='opsType']",
         column: "th",
         orderDetails: "//small[text()='Order Id']/following-sibling::div",
-        button:"(//button[text()='View'])[1]"
+        button:"(//button[text()='View'])[1]",
+        search:"//button[normalize-space(text())='SEARCH']",
+        FirstRowInTheTable:"//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[2]/label[1]",
+        Remarks:"(//textarea[@id='remarks'])[1]",
+        save:"//button[normalize-space(text())='SAVE']",
+        Notification:"//span[normalize-space(text())='Steady Information updated successfully']"
+    
+
     };
 
     async clicksteadyMenuButton(): Promise<void> {
-       await this.page.goto("https://sotadev.gcp.lbct.llc/#/home/steadyLookup");
         await this.base.waitAndClick(this.Elements.steady);
         await this.base.waitAndClick(this.Elements.steadyManagement);
     }
 
-    // async clickOrderButton1(): Promise<void> {
-    //     await this.base.waitAndClick(this.Elements.myOrders);
-    // }
+    async SelectoperationalType(): Promise<void> {
 
-    // async getOrderId(): Promise<string> {
-    //     const orderdetails = await this.page.locator(this.Elements.orderDetails);
-    //     const innertextPanel = await orderdetails.innerText();
-    //     console.log("innertextPanel" +innertextPanel);
-    //     return innertextPanel;
-    // }
-    // async addTokenToLocalStorage(): Promise<void> {
-    //     // Adds a script to the page that sets the 'token' key in the local storage with the provided token value.
-    //     await this.page.addInitScript((token) => {
-    //         localStorage.setItem('token', token);
-    //     }, Response.token);         
-    // }
+        await this.page.locator(this.Elements.OperationType).selectOption("Vessel");
+    }
+    async ClickOnSearch(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.search);
+    }
+    async updateFirstSteady(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.FirstRowInTheTable);
+        await this.page.locator(this.Elements.Remarks).clear()
+        await this.page.locator(this.Elements.Remarks).fill("TestRemarks")
+        await this.base.waitAndClick(this.Elements.save);
+        expect.soft(await this.page.locator(this.Elements.Notification))
+
+    }
 
 
 }

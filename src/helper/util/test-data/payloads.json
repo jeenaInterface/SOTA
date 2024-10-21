@@ -1,4 +1,16 @@
 {
-    "userEmail": "devsotaopsmgmt@lbct.com",
-    "userPassword": "RbP?y2.1}hA/%)jNVX"
+    "userEmailOps": "devsotaopsmgmt@lbct.com",
+    "userPasswordOps": "RbP?y2.1}hA/%)jNVX",
+    "userEmailTR": "devsotatrmgmt@lbct.com",
+    "userPasswordTR": "Devso90802",
+    "userEmailSentry": "devsotatsentry@lbct.com",
+    "userPasswordSentry": "1&N.Xu1A*n}=WW(",
+    "userEmailOCU": "devsotaaccocu@lbct.com",
+    "userPasswordOCU": "^f+K/O**ixF(_|;-",
+    "userEmailAccounts": "devsotaaccmgmt@lbct.com",
+    "userPasswordAccounts": "AXsbO>jeG;in{[!J",
+    "userEmailSecurityManager": "devsotassemgmt@lbct.com",
+    "userPasswordSecurityManager": ";)l#IS(x1d:kqgVFR+",
+    "userEmailSecuritySergeant": "devsotassesgt@lbct.com",
+    "userPasswordSergeant": ";bFKQ&!@Qys%EPS"
 }

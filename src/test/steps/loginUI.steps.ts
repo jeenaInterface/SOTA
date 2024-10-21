@@ -11,9 +11,9 @@ Given('User navigates to the application', async function () {
     await login.navigateToLoginPage()
 });
 
-When('User enter the username and password', async function () {
-    await login.enterUserName(data.userEmail)
-    await login.enterPassword(data.userPassword)
+When('TR management User enter the username and password', async function () {
+    await login.enterUserName(data.userEmailTR)
+    await login.enterPassword(data.userPasswordTR)
 });
 
 When('User click on the login button', async function () {

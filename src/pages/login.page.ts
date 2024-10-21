@@ -17,9 +17,8 @@ export default class loginPage {
 
     private Elements = {
         userName: "//input[@type='email']",
+        next:"//input[@value='Next']",
         password: "//input[@type='password']",
-        LoginButton: "//input[@type='submit']",
-        yesButton:"//input[@data-report-value='Submit']",
         logOutButton:"//i[@role='button']",
         logOut:"//a[normalize-space(text())='Logout']"
     };
@@ -29,14 +28,16 @@ export default class loginPage {
     }
     async enterUserName(user: string) {
         await this.page.locator(this.Elements.userName).fill(user);
+        await this.base.waitAndClick(this.Elements.next);
+
     }
     async enterPassword(Password: string) {
         await this.page.locator(this.Elements.password).fill(Password);
+        await this.page.getByRole('button', { name: 'Sign in' }).click();
     }
 
-    async clickLoginButton() {
-        await this.base.waitAndClick(this.Elements.LoginButton);
-        await this.base.waitAndClick(this.Elements.yesButton);
+    async clickLoginButton() {     
+        await this.page.getByRole('button', { name: 'Yes' }).click();
     }
 
     async logOutDropDownlist(){

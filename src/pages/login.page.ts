@@ -25,6 +25,7 @@ export default class loginPage {
 
     async navigateToLoginPage() {
         await this.base.goto(process.env.BASEURL);
+        await this.page.setViewportSize({ width: 1536, height: 864 });
     }
     
     async enterUserName(user: string) {

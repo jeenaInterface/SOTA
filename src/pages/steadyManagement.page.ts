@@ -4,6 +4,7 @@ import * as data from "../helper/util/test-data/payloads.json";
 import { request } from "@playwright/test";
 import { APiUtils } from "../helper/util/apiUtils/api.utils";
 import {setDefaultTimeout } from "@cucumber/cucumber"
+import { fixture } from "../hooks/pageFixture";
 
 setDefaultTimeout(60 * 1000)
 let Response: any; // Define Response variable
@@ -34,8 +35,9 @@ export default class steadyManagementPage {
         FirstRowInTheTable:"//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[2]/label[1]",
         Remarks:"(//textarea[@id='remarks'])[1]",
         save:"//button[normalize-space(text())='SAVE']",
-        Notification:"//span[normalize-space(text())='Steady Information updated successfully']"
-    
+        Notification:"//span[normalize-space(text())='Steady Information updated successfully']",
+        steadtSearchTextBox:"//input[@formcontrolname='name']",
+        errorNotification:"//span[normalize-space(text())='No data found for the selected criteria']"
 
     };
 
@@ -56,10 +58,20 @@ export default class steadyManagementPage {
         await this.page.locator(this.Elements.Remarks).clear()
         await this.page.locator(this.Elements.Remarks).fill("TestRemarks")
         await this.base.waitAndClick(this.Elements.save);
+        fixture.logger.info("Waiting for 5 seconds")
+        await fixture.page.waitForTimeout(5000);
         expect.soft(await this.page.locator(this.Elements.Notification))
 
     }
 
+    async enterWrongSteadyName(): Promise<void> {
+        await this.page.locator(this.Elements.steadtSearchTextBox).clear()
+        await this.page.locator(this.Elements.steadtSearchTextBox).fill("TestData")
+    }
+
+    async verifyErrorMessage(): Promise<void> {
+        expect.soft(await this.page.locator(this.Elements.errorNotification))
+    }
 
 }
 

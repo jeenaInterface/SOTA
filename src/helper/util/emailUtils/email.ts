@@ -5,7 +5,7 @@ async function sendEmail() {
   try {
     const transporter = nodemailer.createTransport({
       host: 'smtp.office365.com',
-      port: 567,
+      port: 587,
       secure: false,
       auth: {
         user: 'jeena.manuel@milestone.tech',

@@ -1,5 +1,8 @@
 const report = require("multiple-cucumber-html-reporter");
 
+import { defineConfig } from "@playwright/test";
+import { OrtoniReportConfig } from "ortoni-report";
+
 report.generate({
     jsonDir: "test-results",
     reportPath: "test-results/reports/",
@@ -26,3 +29,6 @@ report.generate({
         ],
     },
 });
+
+
+

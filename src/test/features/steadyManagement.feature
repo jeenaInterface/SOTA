@@ -12,7 +12,7 @@ Scenario: Update a steady details
     When Click on search button
     Then Update the details for the First Steady in the table and confirm the success message.
 
-@Steadymanagement1
+@Steadymanagement
 Scenario: Check that the appropriate message is displayed when searching for an incorrect steady.
     Given Go to steady management screen
     Then Enter a wrong steady name in the search box

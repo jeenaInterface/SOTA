@@ -47,6 +47,8 @@ export default class yardOrderPage {
     };
 
     async clickOnLaborOrderMenu(): Promise<void> {
+        await this.base.goto(process.env.BASEURL);
+        await this.page.setViewportSize({ width: 1536, height: 864 });
         await this.base.waitAndClick(this.Elements.laborOrderMenu);
         await this.base.waitAndClick(this.Elements.yardOrder);
     }

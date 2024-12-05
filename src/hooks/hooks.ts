@@ -102,7 +102,9 @@ AfterAll(async function () {
 })
 
 
-function getStorageState(TAGS: string): string | { cookies: { name: string; value: string; domain: string; path: string; expires: number; httpOnly: boolean; secure: boolean; sameSite: "Strict" | "Lax" | "None"; }[]; origins: { origin: string; localStorage: { name: string; value: string; }[]; }[]; } {
-    if (TAGS == "Opsuser")
-        return "src/helper/auth/Opsuser.json";
+function getStorageState(user: string): string | { cookies: { name: string; value: string; domain: string; path: string; expires: number; httpOnly: boolean; secure: boolean; sameSite: "Strict" | "Lax" | "None"; }[]; origins: { origin: string; localStorage: { name: string; value: string; }[]; }[]; } {
+    if (user.includes("TR"))
+        return "src/helper/auth/TR.json";
+    else if (user.includes("Ops"))
+        return "src/helper/auth/Ops.json";
 }

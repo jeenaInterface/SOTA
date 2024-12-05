@@ -29,11 +29,7 @@ Given('Go to yard order screen', async function () {
   Then('verify whether the yard order is created successfully', async function () {
     await yardOrder.VerifySuccessMessage();
   });
-  Then('the user clicks on the Firm button', async function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
-  });
   Then('the user clicks on the push button', async function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+    await yardOrder.ClickPushButton();
+    await yardOrder.VerifyPushFunctionalitySuccessMessage()
   });

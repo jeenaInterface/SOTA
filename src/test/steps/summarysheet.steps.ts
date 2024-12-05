@@ -1,6 +1,6 @@
 import { Given, setDefaultTimeout, Then, When } from "@cucumber/cucumber";
 import { fixture } from "../../hooks/pageFixture";
-import summarySheetPage from "../../pages/summarysheet";
+import summarySheetPage from "../../pages/summarysheet.page";
 
 
 let summarysheet: summarySheetPage;

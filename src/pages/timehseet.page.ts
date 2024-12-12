@@ -34,14 +34,14 @@ export default class timesheetPage {
     };
 
     async clickOnTimehseetMenu(): Promise<void> {
-        await this.base.goto(process.env.BASEURL);
+        await this.base.goto(process.env.BASEURL, { timeout: 60000 });
         await this.page.setViewportSize({ width: 1536, height: 864 });
         await this.base.waitAndClick(this.Elements.TimehseetMenu);
         await this.base.waitAndClick(this.Elements.yardTimehseet);
     }
     async SelectDetailsOnLandingPage(): Promise<void> {
         const today = new Date();
-        today.setDate(today.getDate() + 1); // Move to tomorrow's date
+        today.setDate(today.getDate() + 2); // Move to tomorrow's date
 
         const day = today.getDate();
         const month = today.getMonth() + 1; // Months are 0-based, so add 1

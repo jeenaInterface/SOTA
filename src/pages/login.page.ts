@@ -24,7 +24,7 @@ export default class loginPage {
     };
 
     async navigateToLoginPage() {
-        await this.base.goto(process.env.BASEURL);
+        await this.base.goto(process.env.BASEURL, { timeout: 60000 });
         await this.page.setViewportSize({ width: 1536, height: 864 });
     }
     

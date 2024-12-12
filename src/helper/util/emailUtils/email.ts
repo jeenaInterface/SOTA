@@ -8,20 +8,25 @@ async function sendEmail() {
       port: 587,
       secure: false,
       auth: {
-        user: 'jeena.manuel@milestone.tech',
-        pass: 'Onboarding2025!',
+        user: 'lbct.sa@milestone.tech',
+        pass: 'Milestone@Dec24',
       },
     });
  
     const mailOptions = {
-      from: 'jeena.manuel@milestone.tech',
+      from: 'lbct.sa@milestone.tech',
       to: 'jeena.manuel@milestone.tech',
-      subject: 'Automation Test Report',
-      text: 'Please find attached the test report.',
+      subject: 'SOTA Automation Test Report',
+      text: `Hi,
+
+Please find attached the test report.
+
+From
+QA team`,
       attachments: [
         {
           filename: 'cucumber-report.html',
-          path: '/SOTA-AUTOMATION/test-results/index.html',
+          path: '/SOTA-AUTOMATION/test-results/cucumber-report.html',
         },
       ],
     };

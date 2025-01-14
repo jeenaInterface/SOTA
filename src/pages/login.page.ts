@@ -1,6 +1,7 @@
 import { Page, BrowserContext, expect } from "@playwright/test";
 import PlaywrightWrapper from "../helper/wrapper/PlaywrightWrappers";
 import {setDefaultTimeout } from "@cucumber/cucumber"
+import { fixture } from "../hooks/pageFixture";
 
 setDefaultTimeout(100 * 1000)
 
@@ -20,7 +21,9 @@ export default class loginPage {
         next:"//input[@value='Next']",
         password: "//input[@type='password']",
         logOutButton:"//i[@role='button']",
-        logOut:"//a[normalize-space(text())='Logout']"
+        logOut:"//a[normalize-space(text())='Logout']",
+        pickAnAccount:"(//div[@data-bind='text: ((session.isSignedIn || session.isSamsungSso) && session.unsafe_fullName) || session.unsafe_displayName'])[1]",
+        useAnotherAccount:"//div[normalize-space(text())='Use another account']",
     };
 
     async navigateToLoginPage() {
@@ -45,6 +48,8 @@ export default class loginPage {
     async logOutDropDownlist(){
         await this.base.waitAndClick(this.Elements.logOutButton);
         await this.base.waitAndClick(this.Elements.logOut);
+        await this.base.waitAndClick(this.Elements.pickAnAccount);
+        await this.base.waitAndClick(this.Elements.useAnotherAccount);
     }
 
 }

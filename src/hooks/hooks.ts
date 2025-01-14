@@ -6,6 +6,7 @@ import { getEnv } from "../helper/env/env";
 import { createLogger } from "winston";
 import { options } from "../helper/util/logger";
 const fs = require("fs-extra");
+import { ITestCaseHookParameter } from '@cucumber/cucumber';
 
 let browser: Browser;
 let context: BrowserContext;
@@ -28,7 +29,6 @@ Before({ tags: "not @auth" }, async function ({ pickle }) {
 });
 
 
-// It will trigger for auth scenarios
 Before({ tags: '@auth' }, async function ({ pickle }) {
     const scenarioName = pickle.name + pickle.id
     context = await browser.newContext({
@@ -41,6 +41,8 @@ Before({ tags: '@auth' }, async function ({ pickle }) {
     fixture.page = page;
     fixture.logger = createLogger(options(scenarioName));
 });
+
+
 
 After(async function ({ pickle, result }) {
     let videoPath: string;
@@ -107,4 +109,8 @@ function getStorageState(user: string): string | { cookies: { name: string; valu
         return "src/helper/auth/TR.json";
     else if (user.includes("Ops"))
         return "src/helper/auth/Ops.json";
+    else if (user.includes("OCU"))
+        return "src/helper/auth/ops.json";
+    else if (user.includes("Accounting"))
+        return "src/helper/auth/ops.json";
 }

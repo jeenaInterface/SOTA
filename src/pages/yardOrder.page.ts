@@ -5,6 +5,8 @@ import { request } from "@playwright/test";
 import { APiUtils } from "../helper/util/apiUtils/api.utils";
 import { setDefaultTimeout } from "@cucumber/cucumber"
 import { fixture } from "../hooks/pageFixture";
+import * as fs from 'fs';
+import * as path from 'path';
 
 setDefaultTimeout(60 * 1000)
 
@@ -14,7 +16,8 @@ export default class yardOrderPage {
     public page: Page;  // Same with page property
 
     // Declare the global variable for noTRStatusDate at the class level
-    public noTRStatusDate: string = '';
+    public noTRStatusDate: string;
+    private weekNumber: number;
 
     // Constructor accepts the Page object
     constructor(page: Page) {
@@ -22,15 +25,6 @@ export default class yardOrderPage {
         this.page = page;
     }
 
-    // Method to set the noTRStatusDate (you can set this from elsewhere in the code)
-    setNoTRStatusDate(date: string): void {
-        this.noTRStatusDate = date;
-    }
-
-    // Method to get the noTRStatusDate (can be used in child class or other classes)
-    getNoTRStatusDate(): string {
-        return this.noTRStatusDate;
-    }
 
     public Elements = {
         laborOrderMenu: "//div[normalize-space(text())='Labor Order']",
@@ -77,9 +71,29 @@ export default class yardOrderPage {
         SThrFirstRow: "//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[8]/input[1]",
         OThrFirstRow: "//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[9]/input[1]",
         DFThrFirstRow: "//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[10]/input[1]",
-        SaveWithoutSubmit: "//button[normalize-space(text())='SAVE WITHOUT SUBMITTING']",
+        OThrSecondRow: "//tbody/tr[2]/td[9]/input[1]",
+        SaveANDSubmit: "//button[normalize-space()='SAVE AND SUBMIT']",
         successNotificationtimesheet: "//span[normalize-space(text())='Timesheet Information has been updated successfully']",
-    };
+        conductSaftyTalk: "(//input[contains(@class,'form-check-input input-checkbox')])[2]",
+        TimehseetApprovalName: "//input[@aria-describedby='signature']",
+        LBCTManagemnetName: "//input[@aria-describedby='mgmtName']",
+        ApproveButton: "//button[normalize-space(text())='APPROVE']",
+        payrollLink: "(//a[@id='navbarDropdown'])[3]",
+        payrollOCUDashboard: "//a[normalize-space()='Payroll OCU Dashboard']",
+        batchReadyButton: "//button[normalize-space(text())='BATCH READY ?']",
+        BatchConfirmationPopUp: "//button[normalize-space(text())='Yes']",
+        successNotificationBatchReady: "//span[normalize-space(text())='Timesheet status have been updated to Batch Ready successfully']",
+        batchDownloadButton: "//span[text()='Ready for Download - ']/following-sibling::i",
+        RefreshButton: "//button[normalize-space(text())='REFRESH']",
+        pmaBatchNumber: "//input[@placeholder='Enter PMA Batch No']",
+        uploadFilePath: "//input[@type='file']",
+        uploadButton: "//button[normalize-space()='Upload']",
+        successMessageAfterUpload: "//span[normalize-space(text())='Processed Successfully']",
+        SOTAConfirm:"//button[normalize-space(text())='SOTA CONFIRM?']",
+        successMessageAfterSOTA: "//span[normalize-space(text())='Batch SOTA Confirmed successfully']",
+  
+
+    }
 
     async clickOnLaborOrderMenu(): Promise<void> {
         await this.base.goto(process.env.BASEURL, { timeout: 100000 });
@@ -87,48 +101,58 @@ export default class yardOrderPage {
         await this.base.waitAndClick(this.Elements.laborOrderMenu);
         await this.base.waitAndClick(this.Elements.yardOrder);
     }
-    async SelectDetailsOnLandingPage(): Promise<void> {
-        let currentDate = new Date();
-        let formattedDate: string;
-        const maxAttempts = 10;
 
+    async SelectDetailsOnLandingPage(): Promise<void> {
+        // let currentDate = new Date();
+        // let formattedDate: string;
+        // const maxAttempts = 10;
+
+        // await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
+        // await this.page.locator(this.Elements.Go).click();
+
+        // fixture.logger.info("Waiting for 1 seconds");
+        // await fixture.page.waitForTimeout(1000);
+
+        // for (let attempts = 0; attempts < maxAttempts; attempts++) {
+
+        //     const trStatusVisible = await this.page.locator(this.Elements.TRStatus).isVisible();
+        //     fixture.logger.info("Waiting for 2 seconds");
+        //     await fixture.page.waitForTimeout(2000);
+
+        //     if (trStatusVisible) {
+        //         await this.page.locator(this.Elements.homeicon).click();
+        //         await this.page.locator(this.Elements.laborOrderMenu).click();
+        //         await this.page.locator(this.Elements.yardOrder).click();
+        //         currentDate.setDate(currentDate.getDate() + 1);
+
+        //         formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+
+        //         // Wait and fill the date for the next order
+        //         await this.page.locator(this.Elements.workDate).waitFor({ state: 'attached', timeout: 3000 });
+        //         await this.page.locator(this.Elements.workDate).click();
+        //         await this.page.locator(this.Elements.workDate).fill(formattedDate);
+        //         await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
+
+        //         // Click Go button
+        //         await this.page.locator(this.Elements.Go).click();
+
+        //     } else {
+        //         // If no TR status, assign the formatted date as noTRStatusDate
+        //         this.noTRStatusDate = formattedDate;
+        //         fixture.logger.info(`TR status is not present on ${formattedDate}`);
+        //     }
+        // }
+        await this.page.locator(this.Elements.workDate).fill('2025-01-15');
         await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
         await this.page.locator(this.Elements.Go).click();
 
-        fixture.logger.info("Waiting for 5 seconds");
-        await fixture.page.waitForTimeout(5000);
+        // Store the date to noTRStatusDate
+        this.noTRStatusDate = '2025-01-15';
 
-        for (let attempts = 0; attempts < maxAttempts; attempts++) {
-
-            const trStatusVisible = await this.page.locator(this.Elements.TRStatus).isVisible();
-            fixture.logger.info("Waiting for 3 seconds");
-            await fixture.page.waitForTimeout(3000);
-
-            if (trStatusVisible) {
-                await this.page.locator(this.Elements.homeicon).click();
-                await this.page.locator(this.Elements.laborOrderMenu).click();
-                await this.page.locator(this.Elements.yardOrder).click();
-                currentDate.setDate(currentDate.getDate() + 1);
-
-                formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
-
-                // Wait and fill the date for the next order
-                await this.page.locator(this.Elements.workDate).waitFor({ state: 'attached', timeout: 3000 });
-                await this.page.locator(this.Elements.workDate).click();
-                await this.page.locator(this.Elements.workDate).fill(formattedDate);
-                await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
-
-                // Click Go button
-                await this.page.locator(this.Elements.Go).click();
-
-            } else {
-                // If no TR status, assign the formatted date as noTRStatusDate
-                this.noTRStatusDate = formattedDate;
-                fixture.logger.info(`TR status is not present on ${formattedDate}`);
-            }
-        }
-
+        // Return the noTRStatusDate
+        // return this.noTRStatusDate;
     }
+
 
     async getLatestWorkOrderDate(): Promise<string> {
         return this.noTRStatusDate;  // Access the global noTRStatusDate
@@ -197,6 +221,7 @@ export default class yardOrderPage {
         await fixture.page.waitForTimeout(2000);
         await this.page.locator(this.Elements.workDate).click();
         await this.page.locator(this.Elements.workDate).fill(this.noTRStatusDate);
+        // await this.passDate();
         await this.base.waitAndClick(this.Elements.Go);
     }
     async VerifySummarySheetCreated(): Promise<void> {
@@ -227,7 +252,7 @@ export default class yardOrderPage {
         expect(stdFXFlexList).toContain("1");
 
     }
-    
+
     async clickOnTimehseetMenu(): Promise<void> {
         // await this.base.goto(process.env.BASEURL, { timeout: 60000 });
         // await this.page.setViewportSize({ width: 1536, height: 864 });
@@ -251,11 +276,12 @@ export default class yardOrderPage {
         await this.page.locator(this.Elements.SThrFirstRow).fill("8");
         await this.page.locator(this.Elements.OThrFirstRow).fill("2");
         await this.page.locator(this.Elements.DFThrFirstRow).fill("1");
+        await this.page.locator(this.Elements.OThrSecondRow).fill("1");
         fixture.logger.info("Waiting for 2 seconds")
         await fixture.page.waitForTimeout(5000);
     }
     async clickOnSaveAndSubmit(): Promise<void> {
-        await this.base.waitAndClick(this.Elements.SaveWithoutSubmit);
+        await this.base.waitAndClick(this.Elements.SaveANDSubmit);
 
         fixture.logger.info("Waiting for 2 seconds")
         await fixture.page.waitForTimeout(5000);
@@ -263,5 +289,157 @@ export default class yardOrderPage {
     async verifySuccessMessage(): Promise<void> {
         expect(await this.page.locator(this.Elements.successNotification))
     }
+    async SubmitandApprovetheTimehseet(): Promise<void> {
+        await fixture.page.waitForTimeout(2000);
+        await this.page.locator(this.Elements.conductSaftyTalk).check();
+        await this.page.locator(this.Elements.TimehseetApprovalName).fill("TestUser");
+        await this.base.waitAndClick(this.Elements.SaveANDSubmit);
+        await this.page.locator(this.Elements.LBCTManagemnetName).fill("Ops");
+        await this.base.waitAndClick(this.Elements.ApproveButton);
 
-}
+    }
+
+    async clickOnPayrollMenu(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.payrollLink);
+        await this.base.waitAndClick(this.Elements.payrollOCUDashboard);
+    }
+
+    async selectTheBatch(): Promise<void> {
+
+        const date = new Date(this.noTRStatusDate);
+        const dayOfWeek = date.getDay(); // 0 (Sunday) to 6 (Saturday)
+
+        // Map day of the week to week number
+        const weekNumberMap = {
+            6: 1, // Saturday -> batch 1
+            0: 2, // Sunday -> batch 2
+            1: 3, // Monday -> batch 3
+            2: 4, // Tuesday -> batch 4
+            3: 5, // Wednesday -> batch 5
+            4: 6, // Thursday -> batch 6
+            5: 7  // Friday -> batch 7
+        };
+        const weekNumber = weekNumberMap[dayOfWeek];
+        console.log(`Clicking on week number: ${weekNumber}`);
+
+        // Click on the particular number (week number)
+        const weekNumberXPath = `//span[normalize-space(text())='${weekNumber}']`;
+
+        // Click on the particular number (week number)
+        await this.page.locator(weekNumberXPath).click();
+    }
+
+    async ClickOnBatchReady(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.batchReadyButton);
+        await this.base.waitAndClick(this.Elements.BatchConfirmationPopUp);
+
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+    }
+    async verifyBatchReadySuccessMessage(): Promise<void> {
+        const successMessage = await this.page.locator(this.Elements.successNotificationBatchReady).textContent();
+        expect(successMessage).toContain("Timesheet status have been updated to Batch Ready successfully");
+    }
+    async calculateWeekNumber(): Promise<void> {
+        const date = new Date(this.noTRStatusDate);
+        const dayOfWeek = date.getDay(); // 0 (Sunday) to 6 (Saturday)
+
+        // Map day of the week to batch number
+        const weekNumberMap = {
+            6: 1, // Saturday -> batch 1
+            0: 2, // Sunday -> batch 2
+            1: 3, // Monday -> batch 3
+            2: 4, // Tuesday -> batch 4
+            3: 5, // Wednesday -> batch 5
+            4: 6, // Thursday -> batch 6
+            5: 7  // Friday -> batch 7
+        };
+
+        this.weekNumber = weekNumberMap[dayOfWeek];
+        console.log(`Calculated week number: ${this.weekNumber}`);
+    }
+
+    async waitForDownloadButton(): Promise<void> {
+        const downloadButtonXPath = `//td[span[normalize-space(text())='${this.weekNumber}']]/following-sibling::td[6]//i[contains(@class, 'bi-save')]`;
+
+        let downloadButtonVisible = false;
+        while (!downloadButtonVisible) {
+            await this.base.waitAndClick(this.Elements.RefreshButton);
+            await fixture.page.waitForTimeout(3000);
+            downloadButtonVisible = await this.page.locator(downloadButtonXPath).isVisible();
+        }
+    }
+
+    async downloadBatchFile(): Promise<void> {
+        const downloadButtonXPath = `//td[span[normalize-space(text())='${this.weekNumber}']]/following-sibling::td[6]//i[contains(@class, 'bi-save')]`;
+
+        // Create a folder for downloads if it doesn't exist
+        const downloadPath = path.resolve(__dirname, 'downloads');
+        if (!fs.existsSync(downloadPath)) {
+            fs.mkdirSync(downloadPath, { recursive: true });
+        }
+        this.clearDownloadFolder(downloadPath);
+
+        // Handle the download event
+        const [download] = await Promise.all([
+            this.page.waitForEvent('download'), // Wait for the download to start
+            this.page.locator(downloadButtonXPath).click() // Perform the action that initiates download
+        ]);
+
+        // Save the downloaded file to the specified folder as a text file
+        const downloadPathWithFileName = path.join(downloadPath, 'downloadedFile.txt');
+        await download.saveAs(downloadPathWithFileName);
+        console.log(`File downloaded to: ${downloadPathWithFileName}`);
+        expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+
+        // return downloadPathWithFileName;
+        const uploadPMABatch = this.page.locator(`//td[span[normalize-space(text())='${this.weekNumber}']]/following-sibling::td[7]//i[contains(@class, 'bi bi-folder')]`);
+        await uploadPMABatch.click();
+        await this.page.locator(this.Elements.pmaBatchNumber).fill("10");
+
+        // Locate the file input element and set the file path
+        const fileInput = await this.page.locator('//input[@type="file"]');
+        await fileInput.setInputFiles(downloadPathWithFileName);
+        console.log(`File uploaded from: ${downloadPathWithFileName}`);
+
+        await fixture.page.waitForTimeout(3000);
+        await this.page.locator(this.Elements.uploadButton).click();
+        await fixture.page.waitForTimeout(3000);
+    }
+
+    async verifyUploadSuccess(): Promise<void> {
+        let successMessageAfterUpload = false;
+    
+        while (!successMessageAfterUpload) {
+            await this.base.waitAndClick(this.Elements.RefreshButton);
+            await fixture.page.waitForTimeout(3000);
+            successMessageAfterUpload = await this.page.locator(this.Elements.successMessageAfterUpload).isVisible();
+        }
+    
+        const successMessage = await this.page.locator(this.Elements.successMessageAfterUpload).textContent();
+        expect(successMessage).toContain("Processed Successfully");
+    }
+
+
+    clearDownloadFolder(downloadPath: string): void {
+        fs.readdir(downloadPath, (err, files) => {
+            if (err) throw err;
+
+            for (const file of files) {
+                fs.unlink(path.join(downloadPath, file), err => {
+                    if (err) throw err;
+                });
+            }
+        });
+    }
+    async ClickOnSOTAButton(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.SOTAConfirm);
+        await this.base.waitAndClick(this.Elements.BatchConfirmationPopUp);
+
+    }
+    async verifySOTASuccessMessage(): Promise<void> {
+        const successMessage = await this.page.locator(this.Elements.successMessageAfterSOTA).textContent();
+        expect(successMessage).toContain("Batch SOTA Confirmed successfully");
+    }
+
+} 

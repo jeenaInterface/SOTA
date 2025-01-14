@@ -3,13 +3,15 @@
 import { Given, setDefaultTimeout, Then, When } from "@cucumber/cucumber";
 import { fixture } from "../../hooks/pageFixture";
 import yardOrderPage from "../../pages/yardOrder.page";
-
+import loginPage from "../../pages/login.page";
+import * as data from "../../helper/util/test-data/payloads.json"
 
 
 let yardOrder: yardOrderPage;
+let login: loginPage;
 setDefaultTimeout(60 * 1000 * 5)
 
-Given('User creates a new labor order', async function () {
+Given('TR user creates a new labor order', async function () {
   yardOrder = new yardOrderPage(fixture.page)
   await yardOrder.clickOnLaborOrderMenu();
   await yardOrder.SelectDetailsOnLandingPage();
@@ -24,7 +26,7 @@ Given('User creates a new labor order', async function () {
   await fixture.page.waitForTimeout(3000);
 });
 
-Given('User verifies that the labor order is pushed to the summary sheet and verifies the details', async function () {
+Then('TR user verifies that the labor order is pushed to the summary sheet and verifies the details', async function () {
   await yardOrder.clickOnSummarySheetMenu();
   let LatestWorkOrderDate: string
   await yardOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate);
@@ -32,7 +34,7 @@ Given('User verifies that the labor order is pushed to the summary sheet and ver
   await yardOrder.VerifySteadyDetailsAndManningCount();
 
 });
-Given('User creates a timesheet for the same yard order', async function () {
+Then('TR user creates a timesheet for the same labor order', async function () {
   await yardOrder.clickOnTimehseetMenu();
   let LatestWorkOrderDate: string
   await yardOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
@@ -41,6 +43,29 @@ Given('User creates a timesheet for the same yard order', async function () {
   await yardOrder.clickOnSaveAndSubmit();
   await yardOrder.verifySuccessMessage();
 });
+Then('Ops user submits and approve the timesheet', async function () {
+  await yardOrder.clickOnTimehseetMenu();
+  let LatestWorkOrderDate: string
+  await yardOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
+  await yardOrder.clickOnForemanTab();
+  await yardOrder.SubmitandApprovetheTimehseet()
+
+});
 
 
+Then('OCU user does the Batch ready and SOTA approval', async function () {
+  await yardOrder.clickOnPayrollMenu();
+  await yardOrder.selectTheBatch();
+  await yardOrder.ClickOnBatchReady();
+  await yardOrder.verifyBatchReadySuccessMessage();
+  await yardOrder.clickOnPayrollMenu();
+  await yardOrder.calculateWeekNumber();
+  await yardOrder.waitForDownloadButton();
+  await yardOrder.downloadBatchFile();
+  await yardOrder.verifyUploadSuccess();
+  await yardOrder.selectTheBatch();
+  await yardOrder.ClickOnSOTAButton();
+});
+Then('Accounting user does the final approval', async function () {
 
+});

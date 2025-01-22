@@ -7,7 +7,7 @@ module.exports = {
         paths: [
             "src/test/features/"
         ],
-        publishQuiet: true,
+        publishQuiet: false,
         dryRun: false,
         require: [
             "src/test/steps/*.ts",
@@ -43,6 +43,6 @@ module.exports = {
             "json:test-results/cucumber-report.json",
             "rerun:@rerun.txt"
         ],
-        parallel: 2
+        parallel: 1
     }
 }

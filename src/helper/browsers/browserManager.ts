@@ -4,7 +4,9 @@ const options: LaunchOptions = {
     headless: !true
 }
 export const invokeBrowser = () => {
+    
     const browserType = process.env.npm_config_BROWSER || "chrome";
+    args: ['--ignore-certificate-errors']
     switch (browserType) {
         case "chrome":
             return chromium.launch(options);
@@ -12,8 +14,12 @@ export const invokeBrowser = () => {
             return firefox.launch(options);
         case "webkit":
             return webkit.launch(options);
+        case "msedge":
+            return webkit.launch(options);
         default:
             throw new Error("Please set the proper browser!")
     }
 
 }
+
+

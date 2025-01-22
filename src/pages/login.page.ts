@@ -28,7 +28,11 @@ export default class loginPage {
 
     async navigateToLoginPage() {
         await this.base.goto(process.env.BASEURL, { timeout: 60000 });
-        await this.page.setViewportSize({ width: 1536, height: 864 });
+        // await this.page.setViewportSize({ width: 1536, height: 864 });
+        await this.page.evaluate(() => {
+            window.moveTo(0, 0);
+            window.resizeTo(screen.width, screen.height);
+        });
     }
     
     async enterUserName(user: string) {

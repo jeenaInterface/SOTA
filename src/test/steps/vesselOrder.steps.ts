@@ -3,8 +3,6 @@
 import { Given, setDefaultTimeout, Then, When } from "@cucumber/cucumber";
 import { fixture } from "../../hooks/pageFixture";
 import vesselOrderPage from "../../pages/vesselOrder.page";
-import loginPage from "../../pages/login.page";
-import * as data from "../../helper/util/test-data/payloads.json"
 
 
 let vesselOrder: vesselOrderPage;
@@ -20,7 +18,7 @@ Given('the user creates a new vessel order', async function () {
   await vesselOrder.ClickSaveMayCan();
 
 });
-Then('the user discards the vessel order', async function () {
+Then('the user discards the order', async function () {
   await vesselOrder.ClickDiscard();
 });
 Then('the user firm the order', async function () {
@@ -31,4 +29,46 @@ Then('the user push the labor order to the summary sheet', async function () {
 });
 Then('the user cancel the order', async function () {
   await vesselOrder.ClickCancelButton();
+});
+Given('the user creates a new vessel timesheet', async function () {
+  await vesselOrder.clickOnTimehseetMenu();
+  let LatestWorkOrderDate: string
+  await vesselOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
+  await vesselOrder.clickOnForemanTab();
+  await vesselOrder.FillHrsTab();
+});
+When('the user saves the vessel order without submitting it', async function () {
+  await vesselOrder.clickOnSaveWithoutSubmit();
+  await vesselOrder.VerifySuccessMessage();
+
+});
+Then('the user saves and submits the vessel order', async function () {
+  await vesselOrder.clickOnSaveAndSubmit();
+  await vesselOrder.VerifySuccessMessage();
+
+});
+Then('Ops user submits and approve the vessel timesheet', async function () {
+  await vesselOrder.clickOnTimehseetMenu();
+  let LatestWorkOrderDate: string
+  await vesselOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
+  await vesselOrder.clickOnForemanTab();
+  await vesselOrder.SubmitTimehseet();
+  await vesselOrder.ApprovetheTimehseet()
+
+});
+Then('the user verifies the download report functionality for the vessel order', async function () {
+  await vesselOrder.downloadTimehseetReport();
+});
+Then('ops user reject the vessel timesheet', async function () {
+  await vesselOrder.clickOnReject();
+});
+Then('verify remove approval functionality', async function () {
+  await vesselOrder.clickOnRemoveApproval();
+  await vesselOrder.storeRollingCode()
+});
+Then('Labor entry add new steady details and mgr comments and submit the timehseet', async function () {
+  let RollingCode: string
+  await vesselOrder.pasteRollingCode(RollingCode);
+  await vesselOrder.AddNewRow();
+  await vesselOrder.SubmitTimehseet();
 });

@@ -10,7 +10,7 @@ import * as path from 'path';
 
 setDefaultTimeout(60 * 1000)
 
-export default class yardOrderPage {
+export default class yardOrderPagePOC {
 
     protected base: PlaywrightWrapper;  // Change to protected so that subclasses can access it
     public page: Page;  // Same with page property
@@ -105,51 +105,51 @@ export default class yardOrderPage {
     }
 
     async SelectDetailsOnLandingPage(): Promise<void> {
-        // let currentDate = new Date();
-        // let formattedDate: string;
-        // const maxAttempts = 10;
+        let currentDate = new Date();
+        let formattedDate: string;
+        const maxAttempts = 10;
 
-        // await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
-        // await this.page.locator(this.Elements.Go).click();
-
-        // fixture.logger.info("Waiting for 1 seconds");
-        // await fixture.page.waitForTimeout(1000);
-
-        // for (let attempts = 0; attempts < maxAttempts; attempts++) {
-
-        //     const trStatusVisible = await this.page.locator(this.Elements.TRStatus).isVisible();
-        //     fixture.logger.info("Waiting for 2 seconds");
-        //     await fixture.page.waitForTimeout(2000);
-
-        //     if (trStatusVisible) {
-        //         await this.page.locator(this.Elements.homeicon).click();
-        //         await this.page.locator(this.Elements.laborOrderMenu).click();
-        //         await this.page.locator(this.Elements.yardOrder).click();
-        //         currentDate.setDate(currentDate.getDate() + 1);
-
-        //         formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
-
-        //         // Wait and fill the date for the next order
-        //         await this.page.locator(this.Elements.workDate).waitFor({ state: 'attached', timeout: 3000 });
-        //         await this.page.locator(this.Elements.workDate).click();
-        //         await this.page.locator(this.Elements.workDate).fill(formattedDate);
-        //         await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
-
-        //         // Click Go button
-        //         await this.page.locator(this.Elements.Go).click();
-
-        //     } else {
-        //         // If no TR status, assign the formatted date as noTRStatusDate
-        //         this.noTRStatusDate = formattedDate;
-        //         fixture.logger.info(`TR status is not present on ${formattedDate}`);
-        //     }
-        // }
-        await this.page.locator(this.Elements.workDate).fill('2025-01-16');
         await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
         await this.page.locator(this.Elements.Go).click();
 
-        // Store the date to noTRStatusDate
-        this.noTRStatusDate = '2025-01-16';
+        fixture.logger.info("Waiting for 1 seconds");
+        await fixture.page.waitForTimeout(1000);
+
+        for (let attempts = 0; attempts < maxAttempts; attempts++) {
+
+            const trStatusVisible = await this.page.locator(this.Elements.TRStatus).isVisible();
+            fixture.logger.info("Waiting for 2 seconds");
+            await fixture.page.waitForTimeout(2000);
+
+            if (trStatusVisible) {
+                await this.page.locator(this.Elements.homeicon).click();
+                await this.page.locator(this.Elements.laborOrderMenu).click();
+                await this.page.locator(this.Elements.yardOrder).click();
+                currentDate.setDate(currentDate.getDate() + 1);
+
+                formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+
+                // Wait and fill the date for the next order
+                await this.page.locator(this.Elements.workDate).waitFor({ state: 'attached', timeout: 3000 });
+                await this.page.locator(this.Elements.workDate).click();
+                await this.page.locator(this.Elements.workDate).fill(formattedDate);
+                await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
+
+                // Click Go button
+                await this.page.locator(this.Elements.Go).click();
+
+            } else {
+                // If no TR status, assign the formatted date as noTRStatusDate
+                this.noTRStatusDate = formattedDate;
+                fixture.logger.info(`TR status is not present on ${formattedDate}`);
+            }
+        }
+        // await this.page.locator(this.Elements.workDate).fill('2025-01-16');
+        // await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
+        // await this.page.locator(this.Elements.Go).click();
+
+        // // Store the date to noTRStatusDate
+        // this.noTRStatusDate = '2025-01-16';
 
         // Return the noTRStatusDate
         // return this.noTRStatusDate;

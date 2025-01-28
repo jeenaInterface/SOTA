@@ -25,6 +25,10 @@ Then('Accounting user logged into the application', async function () {
   await login.enterUserName(data.userEmailAccounts)
   await login.enterPassword(data.userPasswordAccounts)
 });
+Then('Timehseet entry user logged into the application', async function () {
+  await login.enterUserName(data.userEmailentry)
+  await login.enterPassword(data.userPasswordentry)
+});
 Then('user click on logout button', async function () {
 await login.logOutDropDownlist();
 });

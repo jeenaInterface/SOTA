@@ -104,7 +104,7 @@ export default class yardOrderPagePOC {
         await this.base.waitAndClick(this.Elements.yardOrder);
     }
 
-    async SelectDetailsOnLandingPage(): Promise<void> {
+    async SelectDetailsOnLandingPage(): Promise<string> {
         let currentDate = new Date();
         let formattedDate: string;
         const maxAttempts = 10;
@@ -142,6 +142,7 @@ export default class yardOrderPagePOC {
                 // If no TR status, assign the formatted date as noTRStatusDate
                 this.noTRStatusDate = formattedDate;
                 fixture.logger.info(`TR status is not present on ${formattedDate}`);
+                
             }
         }
         // await this.page.locator(this.Elements.workDate).fill('2025-01-16');
@@ -150,9 +151,8 @@ export default class yardOrderPagePOC {
 
         // // Store the date to noTRStatusDate
         // this.noTRStatusDate = '2025-01-16';
-
-        // Return the noTRStatusDate
-        // return this.noTRStatusDate;
+        this.noTRStatusDate = formattedDate;
+        return this.noTRStatusDate;
     }
 
 

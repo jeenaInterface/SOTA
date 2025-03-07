@@ -14,13 +14,29 @@ Feature: Vessel Order by TR Management User - Create, Discard, Firm, Push to Sum
     Then the user cancel the order
 
   @vessel
-  Scenario: TR user creates a vessel order timesheet and verifies save without submit, save and submit, and download report functionalities
+  Scenario: The TR user creates a new vessel order, discards it, and then verifies the mandatory validations
+    Given TR user logged into the application
+    Then Verify that the appropriate validation message is displayed when attempting to save without selecting a berth, reference, or start time.
+    Given the user creates a new vessel order
+    Then the user discards the order
+
+
+  @vessel
+  Scenario: TR user creates, firms, pushes to summary sheet, and cancels a vessel order
+    Given TR user logged into the application
+    Given the user creates a new vessel order
+    Then the user firm the order
+    Then the user push the labor order to the summary sheet
+    Then the user cancel the order
+
+  @vessel
+  Scenario: Vessel Order Timehseet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report
     Given TR user logged into the application
     Given the user creates a new vessel order
     Then the user push the labor order to the summary sheet
-    # Given the user creates a new vessel timesheet
-    # When the user saves the vessel order without submitting it
-    # Then the user saves and submits the vessel order
+    Given the user creates a new vessel timesheet
+    When the user saves the vessel order without submitting it
+    Then the user saves and submits the vessel order
     Then user click on logout button
     Then Ops user logged into the application
     Then Ops user submits and approve the vessel timesheet

@@ -89,7 +89,9 @@ export default class vesselOrderPage {
         RollingCode: "//h5[@id='rollingCode']",
         RollingCodeTextBox: "//input[@id='rollingCode']",
         RollingCodeCloseButton: "//div[@id='rollingCode']//button[@class='btn button-action'][normalize-space()='Close']",
-        GoButton:"//button[normalize-space()='Go']"
+        GoButton: "//button[normalize-space()='Go']",
+        validationMessageForMandatoryFields: "//div[@class='col-10 p-2']"
+
 
 
     }
@@ -130,52 +132,53 @@ export default class vesselOrderPage {
         }
     }
 
-    async SelectDetailsOnLandingPage(): Promise<void> {
-        // let currentDate = new Date();
-        // let formattedDate: string;
-        // const maxAttempts = 10;
+    async SelectDetailsOnLandingPage(): Promise<string> {
+        let currentDate = new Date();
+        let formattedDate: string;
+        const maxAttempts = 10;
 
-        // await this.page.getByPlaceholder('Search By Job No or Vessel').click();
-        // await this.page.locator(this.Elements.shift).selectOption("2ND");
-        // this.selectJobNumber();
-
-        // fixture.logger.info("Waiting for 1 seconds");
-        // await fixture.page.waitForTimeout(1000);
-
-        // for (let attempts = 0; attempts < maxAttempts; attempts++) {
-
-        //     const trStatusVisible = await this.page.locator(this.Elements.TRStatus).isVisible();
-        //     fixture.logger.info("Waiting for 2 seconds");
-        //     await fixture.page.waitForTimeout(2000);
-
-        //     if (trStatusVisible) {
-        //         await this.page.locator(this.Elements.homeicon).click();
-        //         await this.page.locator(this.Elements.laborOrderMenu).click();
-        //         await this.page.locator(this.Elements.vesselOrder).click();
-        //         currentDate.setDate(currentDate.getDate() + 1);
-
-        //         formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
-
-        //         // Wait and fill the date for the next order
-        //         await this.page.locator(this.Elements.workDate).waitFor({ state: 'attached', timeout: 3000 });
-        //         await this.page.locator(this.Elements.workDate).click();
-        //         await this.page.locator(this.Elements.workDate).fill(formattedDate);
-        //         await this.page.locator(this.Elements.shift).selectOption("2ND");
-        //         this.selectJobNumber();
-
-        //     } else {
-        //         // If no TR status, assign the formatted date as noTRStatusDate
-        //         this.noTRStatusDate = formattedDate;
-        //         fixture.logger.info(`TR status is not present on ${formattedDate}`);
-        //     }
-        // }
-        await this.page.locator(this.Elements.workDate).fill('2025-01-28');
+        await this.page.getByPlaceholder('Search By Job No or Vessel').click();
         await this.page.locator(this.Elements.shift).selectOption("2ND");
         this.selectJobNumber();
 
+        fixture.logger.info("Waiting for 1 seconds");
+        await fixture.page.waitForTimeout(1000);
 
-        // Store the date to noTRStatusDate
-        this.noTRStatusDate = '2025-01-28';
+        for (let attempts = 0; attempts < maxAttempts; attempts++) {
+
+            const trStatusVisible = await this.page.locator(this.Elements.TRStatus).isVisible();
+            fixture.logger.info("Waiting for 2 seconds");
+            await fixture.page.waitForTimeout(2000);
+
+            if (trStatusVisible) {
+                await this.page.locator(this.Elements.homeicon).click();
+                await this.page.locator(this.Elements.laborOrderMenu).click();
+                await this.page.locator(this.Elements.vesselOrder).click();
+                currentDate.setDate(currentDate.getDate() + 1);
+
+                formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+
+                // Wait and fill the date for the next order
+                await this.page.locator(this.Elements.workDate).waitFor({ state: 'attached', timeout: 3000 });
+                await this.page.locator(this.Elements.workDate).click();
+                await this.page.locator(this.Elements.workDate).fill(formattedDate);
+                await this.page.locator(this.Elements.shift).selectOption("2ND");
+                this.selectJobNumber();
+
+            } else {
+                // If no TR status, assign the formatted date as noTRStatusDate
+                this.noTRStatusDate = formattedDate;
+                fixture.logger.info(`TR status is not present on ${formattedDate}`);
+            }
+        }
+        // await this.page.locator(this.Elements.workDate).fill('2025-01-28');
+        // await this.page.locator(this.Elements.shift).selectOption("2ND");
+        // this.selectJobNumber();
+
+        this.noTRStatusDate = formattedDate;
+        return this.noTRStatusDate;
+        // // Store the date to noTRStatusDate
+        // this.noTRStatusDate = '2025-01-28';
     }
 
     async EnterHeaderDetails(): Promise<void> {
@@ -381,45 +384,39 @@ export default class vesselOrderPage {
     async storeRollingCode(): Promise<string> {
         let attempts = 0;
         const maxAttempts = 5; // Set a maximum number of attempts to avoid infinite loops
-    
+
         while (attempts < maxAttempts) {
             // Try clicking to open the rolling code dialog
             await this.base.waitAndClick(this.Elements.RollingCodeButton);
-            // await this.page.waitForSelector(this.Elements.RollingCode, { state: 'visible' });
-            
+
             // Wait for the rolling code element to appear and get its text
             const rollingCodeElement = await this.page.locator(this.Elements.RollingCode);
             this.rollingCodeText = await rollingCodeElement.textContent();
-    
+
             if (this.rollingCodeText && this.rollingCodeText.trim() !== '') {
                 // Exit the loop if the rolling code is found and has content
                 await this.base.waitAndClick(this.Elements.RollingCodeCloseButton);
                 return this.rollingCodeText;
             }
-    
+
             // If no valid rolling code is found, log and try closing and reopening the popup
             fixture.logger.info("Rolling code not found, closing and reopening the popup.");
             await this.base.waitAndClick(this.Elements.RollingCodeCloseButton);
-    
-            // Wait for the popup to be closed and ensure that the next interaction is valid
-            // await this.page.waitForSelector(this.Elements.RollingCodeButton, { state: 'visible' });
-    
+
+
             attempts++;
             await this.page.waitForTimeout(1000); // Optional, can adjust based on your application's behavior
         }
-    
-    
-        // fixture.logger.info("Waiting for 3 seconds");
-        // await fixture.page.waitForTimeout(3000);
-    
-        // // Click the close button after the text is visible
-        // await this.base.waitAndClick(this.Elements.RollingCodeCloseButton);
-        // return this.rollingCodeText.trim();
 
     }
     async pasteRollingCode(RollingCode: string): Promise<void> {
         await this.page.locator(this.Elements.RollingCodeTextBox).fill(this.rollingCodeText);
         await this.base.waitAndClick(this.Elements.GoButton);
+
+    }
+    async validationMessageForMandatoryFields(): Promise<void> {
+        const successMessage = await this.page.locator(this.Elements.validationMessageForMandatoryFields).textContent();
+        expect(successMessage).toContain("Timesheet status have been updated to Batch Ready successfully");
 
     }
 }

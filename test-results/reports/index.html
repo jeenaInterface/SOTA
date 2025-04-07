@@ -773,9 +773,20 @@ input#darkCheck:checked ~ label>svg#moon {
                                 Failed
                             </p>
                         </td>
-                        <td class="percentage">100.00 %</td>
+                        <td class="percentage">0.00 %</td>
                     </tr>
                     
+                    
+                    <tr>
+                        <td>
+                            <p data-toggle="tooltip" data-placement="left"
+                               title="Features with undefined step definitions.">
+                                <i class="fa fa-question-circle not-defined-color"></i>
+                                Not Defined
+                            </p>
+                        </td>
+                        <td class="percentage">100.00 %</td>
+                    </tr>
                     
                     
                     
@@ -840,8 +851,18 @@ input#darkCheck:checked ~ label>svg#moon {
                                 Failed
                             </p>
                         </td>
-                        <td class="percentage">100.00 %</td>
+                        <td class="percentage">0.00 %</td>
                     
+                    
+                    <tr>
+                        <td>
+                            <p data-toggle="tooltip" data-placement="left" title="Scenario has no step implmentation.">
+                                <i class="fa fa-question-circle not-defined-color"></i>
+                                Not defined
+                            </p>
+                        </td>
+                        <td class="percentage">100.00 %</td>
+                    </tr>
                     
                     </tr>
                     
@@ -946,6 +967,8 @@ input#darkCheck:checked ~ label>svg#moon {
                         
                         
                         
+                        <th>Undefined</th>
+                        
                         
                     </tr>
                     </thead>
@@ -954,7 +977,7 @@ input#darkCheck:checked ~ label>svg#moon {
                     
                     <tr>
                         <td>
-                            <a href="features/32e53b11-66bb-40af-8dfe-8d43a054e597-yard-order-functionalities---yard-order--summary-sheet--timesheet--sota-approval-and-pma-approval.html">Yard order Functionalities - Yard Order, Summary Sheet, Timesheet, SOTA Approval and pma Approval</a>
+                            <a href="features/39566b9a-4416-4481-95d8-f9b144e0a616-terminal-service-order-and-ops-terminal-service-order-timehseet-functionalities.html">Terminal Service Order and ops terminal service order timehseet functionalities</a>
                         </td>
                         <td class="text-center">
                             
@@ -969,8 +992,8 @@ input#darkCheck:checked ~ label>svg#moon {
                             
                             
                             <i class="fa fa-tag fa-lg" data-toggle="tooltip" data-placement="top"
-                               title="@poc">
-                                <span>@poc</span>
+                               title="@terminalServiceOrder">
+                                <span>@terminalServiceOrder</span>
                             </i>
                             
                             
@@ -982,8 +1005,8 @@ input#darkCheck:checked ~ label>svg#moon {
                             
                             
                             
-                            <i class="fa fa-exclamation-circle failed-color fa-lg" data-toggle="tooltip" data-placement="top" title="Failed">
-                                <span>exclamation-circle failed-color</span>
+                            <i class="fa fa-question-circle not-defined-color fa-lg" data-toggle="tooltip" data-placement="top" title="Not Defined">
+                                <span>question-circle not-defined-color</span>
                             </i>
                         </td>
                         
@@ -1035,9 +1058,11 @@ input#darkCheck:checked ~ label>svg#moon {
                         
                         <td class="text-right ">1</td>
                         <td class="text-right none">0</td>
+                        <td class="text-right none">0</td>
+                        
+                        
+                        
                         <td class="text-right ">1</td>
-                        
-                        
                         
                         
                     </tr>
@@ -1109,11 +1134,11 @@ input#darkCheck:checked ~ label>svg#moon {
                         datasets: [{
                             data: [
                                 0,
-                                1,
                                 0,
                                 0,
                                 0,
-                                0
+                                0,
+                                1
                             ],
                             backgroundColor: [
                                 getColor(".passed-color", "#26B99A"),
@@ -1148,11 +1173,11 @@ input#darkCheck:checked ~ label>svg#moon {
                         datasets: [{
                             data: [
                                 0,
-                                1,
                                 0,
                                 0,
                                 0,
-                                0
+                                0,
+                                1
                             ],
                             backgroundColor: [
                                 getColor(".passed-color", "#26B99A"),

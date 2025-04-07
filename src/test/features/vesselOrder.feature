@@ -1,12 +1,11 @@
-Feature: Vessel Order by TR Management User - Create, Discard, Firm, Push to Summary Sheet, and Cancel Vessel Orders
-
+Feature: Vessel order and ops vessel timehseet functionalities
   @auth
   Scenario: TR user creates a new vessel order and then discards the order
     Given the user creates a new vessel order
     Then the user discards the order
 
 
-  @auth
+  @auth1
   Scenario: TR user creates, firms, pushes to summary sheet, and cancels a vessel order
     Given the user creates a new vessel order
     Then the user firm the order
@@ -14,11 +13,16 @@ Feature: Vessel Order by TR Management User - Create, Discard, Firm, Push to Sum
     Then the user cancel the order
 
   @vessel
-  Scenario: The TR user creates a new vessel order, discards it, and then verifies the mandatory validations
+  Scenario: The TR user creates a new vessel order and discards it
     Given TR user logged into the application
-    Then Verify that the appropriate validation message is displayed when attempting to save without selecting a berth, reference, or start time.
     Given the user creates a new vessel order
     Then the user discards the order
+
+  @vessel
+  Scenario: Verify Mandatory validation messages in vessel order
+    Given TR user logged into the application
+    Then Verify that the appropriate validation message for berth , start time and reference field
+    Then Verify that the appropriate validation message for steady name and steady count field
 
 
   @vessel

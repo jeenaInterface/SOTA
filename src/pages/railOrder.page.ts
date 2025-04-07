@@ -39,9 +39,26 @@ export default class railOrderPage {
         textArea:"(//label[normalize-space(text())='Notes']/following::textarea)[1]",
         savemaycan:"//button[normalize-space(text())='SAVE/MAY-CAN']",
         SteadyDBName: "//datalist//option[contains(text(), 'Allen, Johnnie - 133290')]",
-        
+        stdyValidationMessage: "//span[normalize-space(text())='The total Flex Steady Count and the total Flex Steady names are not matching for Clerk']",
+        TimehseetMenu: "//div[normalize-space(text())='Timesheet']",
+        railTimehseet: "//a[normalize-space(text())='Ops Rail Timesheet']",
+        workDatetimehseet: "//input[@id='sWorkDt']",
+        shifttimehseet: "//select[@ng-reflect-name='shift']",
+        jobTypetimehseet: "//select[@ng-reflect-name='jobCode']",
+        SThrFirstRow: "//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[8]/input[1]",
+        OThrFirstRow: "//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[9]/input[1]",
+        plusBtton: "//i[contains(@class,'bi bi-plus-square')]",
+        jobList: "(//input[contains(@class,'form-control dynamic-input')])[2]",
+        JobListAddButton: "//button[normalize-space(text())='ADD']",
+        FirstNamecell: "(//input[contains(@class,'form-control dynamic-input')])[2]",
+        ST: "//table[contains(@class,'table table-form')]/tbody[1]/tr[2]/td[8]/input[1]",
+        OT: "//table[contains(@class,'table table-form')]/tbody[1]/tr[2]/td[9]/input[1]",
+        MGRRemarks: "(//i[@data-bs-target='#remarks'])[3]",
+        RemarksTextArea: "//textarea[@id='addComment']",
+        AddRemarksButton: "//button[normalize-space()='Add Remarks']",
+        RegisterNo: "//input[@id='regNo1']",
     }
-    async clickOnVesselOrderMenu(): Promise<void> {
+    async clickOnRailOrderMenu(): Promise<void> {
         await this.base.goto(process.env.BASEURL, { timeout: 100000 });
         // await this.page.setViewportSize({ width: 1536, height: 864 });
         await this.base.waitAndClick(this.Elements.laborOrderMenu);
@@ -119,6 +136,67 @@ export default class railOrderPage {
         await this.page.locator(this.Elements.RailPlannerflexType).selectOption('1');
         await this.page.locator(this.Elements.textArea).fill("text data");
     }
+    async validationMessageForSteadtcount(): Promise<void> {
+        this.EnterHeaderDetails()
+        await this.page.locator(this.Elements.ClerkTab).click();
+        await this.page.locator(this.Elements.STDYFX).fill("1");
+        await this.page.locator('body').click();
+        await this.base.waitAndClick(this.Elements.savemaycan);
+        const validationMessageForSteady = await this.page.locator(this.Elements.stdyValidationMessage).textContent();
+        expect(validationMessageForSteady).toContain("The total Flex Steady Count and the total Flex Steady names are not matching for Clerk");
 
+
+
+    }
+    async clickOnTimehseetMenu(): Promise<void> {
+        // await this.base.goto(process.env.BASEURL, { timeout: 60000 });
+        // await this.page.setViewportSize({ width: 1536, height: 864 });
+        await this.base.waitAndClick(this.Elements.TimehseetMenu);
+        await this.base.waitAndClick(this.Elements.railTimehseet);
+    }
+    async SelectDetailsOnLandingPageTimehseet(formatteddate: string): Promise<void> {
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        await this.page.locator(this.Elements.workDatetimehseet).click();
+        await this.page.locator(this.Elements.workDatetimehseet).fill(this.noTRStatusDate);
+        await this.page.locator(this.Elements.shift).selectOption("2ND");
+        await this.page.locator(this.Elements.jobType).selectOption("Testing - 790197");
+        await this.base.waitAndClick(this.Elements.Go);
+    }
+    async clickOnClerkTab(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.ClerkTab);
+    }
+    async FillHrsTab(): Promise<void> {
+        await this.page.locator(this.Elements.SThrFirstRow).fill("8");
+        await this.page.locator(this.Elements.OThrFirstRow).fill("2");
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+    }
+
+    async AddNewRowRail(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.plusBtton);
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('122');
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').press('Enter');
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').click();
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('122 - RP - RAIL PLANNER');
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        await this.base.waitAndClick(this.Elements.JobListAddButton);
+        await this.page.locator(this.Elements.FirstNamecell).click();
+        await this.page.locator(this.Elements.FirstNamecell).fill("3961305");
+        await this.page.locator(this.Elements.FirstNamecell).press('Enter');
+        await this.page.locator(this.Elements.FirstNamecell).fill("Acosta, Johnnie A");
+        await this.page.locator(this.Elements.RegisterNo).fill("3961305");
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        await this.page.locator(this.Elements.ST).fill("7");
+        await this.page.locator(this.Elements.OT).fill("3");
+        await this.base.waitAndClick(this.Elements.MGRRemarks);
+        await this.page.locator(this.Elements.RemarksTextArea).fill("MGR REMARKS!");
+        fixture.logger.info("Waiting for 1 seconds")
+        await fixture.page.waitForTimeout(1000);
+        await this.base.waitAndClick(this.Elements.AddRemarksButton);
+
+    }
 
 }

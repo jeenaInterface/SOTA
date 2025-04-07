@@ -72,3 +72,13 @@ Then('Labor entry add new steady details and mgr comments and submit the timehse
   await vesselOrder.AddNewRow();
   await vesselOrder.SubmitTimehseet();
 });
+Then('Verify that the appropriate validation message for berth , start time and reference field', async function () {
+  vesselOrder = new vesselOrderPage(fixture.page)
+  await vesselOrder.clickOnVesselOrderMenu();
+  await vesselOrder.SelectDetailsOnLandingPage();
+  await vesselOrder.ClickSaveMayCan();
+  await vesselOrder.validationMessageForMandatoryFields();
+});
+Then('Verify that the appropriate validation message for steady name and steady count field', async function () {
+  await vesselOrder.validationMessageForSteadtcount();
+});

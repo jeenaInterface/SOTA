@@ -67,7 +67,7 @@ export default class vesselOrderPage {
         saveWithoutSubmit: "//button[normalize-space(text())='SAVE WITHOUT SUBMITTING']",
         SaveANDSubmit: "//button[normalize-space()='SAVE AND SUBMIT']",
         successNotificationtimesheet: "//span[normalize-space(text())='Timesheet Information has been updated successfully']",
-        conductSaftyTalk: "(//input[contains(@class,'form-check-input input-checkbox')])[3]",
+        conductSaftyTalk: "//input[@id='flexCheckDefault']",
         TimehseetApprovalName: "//input[@aria-describedby='signature']",
         LBCTManagemnetName: "//input[@aria-describedby='mgmtName']",
         ApproveButton: "//button[normalize-space(text())='APPROVE']",
@@ -90,10 +90,9 @@ export default class vesselOrderPage {
         RollingCodeTextBox: "//input[@id='rollingCode']",
         RollingCodeCloseButton: "//div[@id='rollingCode']//button[@class='btn button-action'][normalize-space()='Close']",
         GoButton: "//button[normalize-space()='Go']",
-        validationMessageForMandatoryFields: "//div[@class='col-10 p-2']"
-
-
-
+        validationMessageForMandatoryFields: "(//span[@class='text-bold color-white'])[1]",
+        stdyHammerhead: "//*[@id='first']/div/div/tbody/tr[5]/td[10]/input",
+        stdyValidationMessage: "//span[normalize-space(text())='The total Flex Steady Count and the total Flex Steady names are not matching for Longshore']",
     }
     async clickOnVesselOrderMenu(): Promise<void> {
         await this.base.goto(process.env.BASEURL, { timeout: 100000 });
@@ -362,8 +361,8 @@ export default class vesselOrderPage {
         await this.page.getByPlaceholder('Search Job Type or OCC Code').press('Enter');
         await this.page.getByPlaceholder('Search Job Type or OCC Code').click();
         await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('140 - LB - LASH BOSS');
-        fixture.logger.info("Waiting for 1 seconds")
-        await fixture.page.waitForTimeout(1000);
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
         await this.base.waitAndClick(this.Elements.JobListAddButton);
         await this.page.locator(this.Elements.FirstNamecell).click();
         await this.page.locator(this.Elements.FirstNamecell).fill("3961305");
@@ -415,8 +414,26 @@ export default class vesselOrderPage {
 
     }
     async validationMessageForMandatoryFields(): Promise<void> {
-        const successMessage = await this.page.locator(this.Elements.validationMessageForMandatoryFields).textContent();
-        expect(successMessage).toContain("Timesheet status have been updated to Batch Ready successfully");
+        const validationMessageForMandatoryFields = await this.page.locator(this.Elements.validationMessageForMandatoryFields).textContent();
+        expect(validationMessageForMandatoryFields).toContain("Please select a Berth");
+        expect(validationMessageForMandatoryFields).toContain("Please select a Shift Start Time");
+        expect(validationMessageForMandatoryFields).toContain("Please select a Reference");
+
 
     }
+    async validationMessageForSteadtcount(): Promise<void> {
+        this.EnterHeaderDetails()
+        await this.page.locator(this.Elements.stdyHammerhead).fill("1");
+        await this.page.locator('body').click();
+        await this.base.waitAndClick(this.Elements.savemaycan);
+        const validationMessageForSteady = await this.page.locator(this.Elements.stdyValidationMessage).textContent();
+        expect(validationMessageForSteady).toContain("The total Flex Steady Count and the total Flex Steady names are not matching for Longshore");
+
+
+
+    }
+
+
+
+
 }

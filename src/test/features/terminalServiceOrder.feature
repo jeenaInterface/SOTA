@@ -33,8 +33,8 @@ Feature: Terminal Service Order and ops terminal service order timehseet functio
     Given the user creates a new Terminal Services Order
     Then the user push the Terminal Services Order to the summary sheet
     Given the user creates a timesheet for the Terminal Services Order
-    Then delete two rows in the timesheet
-    When the user saves the Terminal Services Timehseet without submitting it
+    Then delete three rows in the timesheet and add a new row in the timesheet
+    Then the user saves the Terminal Services Timehseet without submitting it
     Then the user saves and submits the Terminal Services Timehseet
     Then user click on logout button
     Then Ops user logged into the application
@@ -44,8 +44,9 @@ Feature: Terminal Service Order and ops terminal service order timehseet functio
     Then user click on logout button
     Then Timehseet entry user logged into the application
     Then Labor entry add new steady details and mgr comments and submit the Terminal Services Timehseet
+    Then the user saves and submits the Terminal Services Timehseet
+    Then the user verifies the download report functionality for the Terminal Services Timehseet
     Then user click on logout button
     Then Ops user logged into the application
     Then Ops user submits and approve the Terminal Services Timehseet
-    Then the user verifies the download report functionality for the Terminal Services Timehseet
     Then user click on logout button

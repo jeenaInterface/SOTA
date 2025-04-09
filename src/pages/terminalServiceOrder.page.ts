@@ -45,18 +45,26 @@ export default class terminalServiceOrderPage {
         plusBtton: "//i[contains(@class,'bi bi-plus-square')]",
         jobList: "(//input[contains(@class,'form-control dynamic-input')])[2]",
         JobListAddButton: "//button[normalize-space(text())='ADD']",
-        FirstNamecell: "(//input[contains(@class,'form-control dynamic-input')])[2]",
-        ST: "//table[contains(@class,'table table-form')]/tbody[1]/tr[2]/td[8]/input[1]",
-        OT: "//table[contains(@class,'table table-form')]/tbody[1]/tr[2]/td[9]/input[1]",
+        FirstNamecell: "//input[@id='longshore0']",
+        ST: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[8]/input[1]",
+        OT: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[9]/input[1]",
         MGRRemarks: "(//i[@data-bs-target='#remarks'])[3]",
         RemarksTextArea: "//textarea[@id='addComment']",
         AddRemarksButton: "//button[normalize-space()='Add Remarks']",
-        RegisterNo: "//input[@id='regNo1']",
+        RegisterNo: "//input[@id='regNo0']",
+        RegisterNo2: "//input[@id='regNo1']",
         FirstHallEntry: "//input[@id='longshore0']",
         SecondHallEntry: "//input[@id='longshore1']",
         thridHallEntry: "//input[@id='longshore2']",
-ST1:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[8]/input[1]",
-OT1:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[9]/input[1]",
+        ST1: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[8]/input[1]",
+        OT1: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[9]/input[1]",
+        FirstRowCheckBox: "//tbody/tr[1]/td[1]/input[1]",
+        SecondRowCheckBox: "//tbody/tr[2]/td[1]/input[1]",
+        ThirdRowCheckBox: "//tbody/tr[3]/td[1]/input[1]",
+        deleteIcon: "//button[normalize-space()='DELETE ROWS']",
+        YesButton: "//button[normalize-space()='Yes']",
+        CountDropDown: "//select[@id='rowCounter']",
+
 
 
     }
@@ -138,7 +146,8 @@ OT1:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-times
         fixture.logger.info("Waiting for 2 seconds")
         await fixture.page.waitForTimeout(2000);
         await this.page.locator(this.Elements.workDatetimehseet).click();
-        await this.page.locator(this.Elements.workDatetimehseet).fill(this.noTRStatusDate);
+       // await this.page.locator(this.Elements.workDatetimehseet).fill(this.noTRStatusDate);
+        await this.page.locator(this.Elements.workDatetimehseet).fill('2025-04-11');
         await this.page.locator(this.Elements.shift).selectOption("2ND");
         await this.page.locator(this.Elements.jobType).selectOption("Sweeper - 490137");
         await this.base.waitAndClick(this.Elements.Go);
@@ -146,33 +155,61 @@ OT1:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-times
     async clickOnSweeperTab(): Promise<void> {
         await this.base.waitAndClick(this.Elements.sweeperTab);
     }
+    async deleteAllEntries(): Promise<void> {
+        await this.page.locator(this.Elements.FirstRowCheckBox).click();
+        await this.page.locator(this.Elements.SecondRowCheckBox).click();
+        await this.page.locator(this.Elements.ThirdRowCheckBox).click();
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(5000);
+        await this.base.waitAndClick(this.Elements.deleteIcon);
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(5000);
+        await this.base.waitAndClick(this.Elements.YesButton);
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(5000);
+
+    }
+
+    async addNewRowInTimesheet(): Promise<void> {
+        fixture.logger.info("Waiting for 3 seconds")
+        await fixture.page.waitForTimeout(3000);
+        await this.base.waitAndClick(this.Elements.plusBtton);
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('200');
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').press('Enter');
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').click();
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('200 - SWEEPER - SWEEPER');
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        await this.base.waitAndClick(this.Elements.JobListAddButton);
+
+    }
     async FillHrsTab(): Promise<void> {
         await this.page.locator(this.Elements.FirstNamecell).click();
-        await this.page.locator(this.Elements.FirstNamecell).fill("3961305");
+        await this.page.locator(this.Elements.FirstNamecell).fill("61199");
         await this.page.locator(this.Elements.FirstNamecell).press('Enter');
-        await this.page.locator(this.Elements.FirstNamecell).fill("Acosta, Johnnie A");
-        await this.page.locator(this.Elements.RegisterNo).fill("3961305");
+        await this.page.locator(this.Elements.FirstNamecell).fill("Alfiche, John I");
+        await this.page.locator(this.Elements.RegisterNo).fill("61199");
 
-        await this.page.locator(this.Elements.SThrFirstRow).fill("8");
-        await this.page.locator(this.Elements.OThrFirstRow).fill("2");
+        await this.page.locator(this.Elements.ST1).fill("8");
+        await this.page.locator(this.Elements.OT1).fill("2");
         fixture.logger.info("Waiting for 2 seconds")
         await fixture.page.waitForTimeout(2000);
     }
 
-    async AddNewRowRail(): Promise<void> {
+    async AddNewRowterminal(): Promise<void> {
         await this.base.waitAndClick(this.Elements.plusBtton);
-        await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('122');
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('200');
         await this.page.getByPlaceholder('Search Job Type or OCC Code').press('Enter');
         await this.page.getByPlaceholder('Search Job Type or OCC Code').click();
-        await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('122 - RP - RAIL PLANNER');
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('200 - SWEEPER - SWEEPER');
         fixture.logger.info("Waiting for 2 seconds")
         await fixture.page.waitForTimeout(2000);
         await this.base.waitAndClick(this.Elements.JobListAddButton);
-        await this.page.locator(this.Elements.FirstNamecell).click();
-        await this.page.locator(this.Elements.FirstNamecell).fill("3961305");
-        await this.page.locator(this.Elements.FirstNamecell).press('Enter');
-        await this.page.locator(this.Elements.FirstNamecell).fill("Acosta, Johnnie A");
-        await this.page.locator(this.Elements.RegisterNo).fill("3961305");
+        await this.page.locator(this.Elements.SecondHallEntry).click();
+        await this.page.locator(this.Elements.SecondHallEntry).fill("3961305");
+        await this.page.locator(this.Elements.SecondHallEntry).press('Enter');
+        await this.page.locator(this.Elements.SecondHallEntry).fill("Acosta, Johnnie A");
+        await this.page.locator(this.Elements.RegisterNo2).fill("3961305");
         fixture.logger.info("Waiting for 2 seconds")
         await fixture.page.waitForTimeout(2000);
         await this.page.locator(this.Elements.ST).fill("7");

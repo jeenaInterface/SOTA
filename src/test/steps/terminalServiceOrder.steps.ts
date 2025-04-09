@@ -33,38 +33,56 @@ Then('the user cancel the Terminal Services Order', async function () {
 
 
 Given('the user creates a timesheet for the Terminal Services Order', async function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+    await terminalServiceOrder.clickOnTimehseetMenu();
+    let LatestWorkOrderDate: string
+    await terminalServiceOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
+    await terminalServiceOrder.clickOnSweeperTab();
+});
+Then('delete three rows in the timesheet and add a new row in the timesheet', async function () {
+    await terminalServiceOrder.deleteAllEntries();
+    fixture.logger.info("Waiting for 2 seconds")
+    await fixture.page.waitForTimeout(2000);
+    await terminalServiceOrder.addNewRowInTimesheet();
+    fixture.logger.info("Waiting for 2 seconds")
+    await fixture.page.waitForTimeout(2000);
+    await vesselOrder.clickOnSaveWithoutSubmit();
+
+
+
 });
 When('the user saves the Terminal Services Timehseet without submitting it', async function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+    await vesselOrder.clickOnSaveWithoutSubmit();
+    await vesselOrder.VerifySuccessMessage();
 });
 Then('the user saves and submits the Terminal Services Timehseet', async function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+    await vesselOrder.clickOnSaveAndSubmit();
+    await vesselOrder.VerifySuccessMessage();
 });
 Then('Ops user submits and approve the Terminal Services Timehseet', async function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+    terminalServiceOrder = new terminalServiceOrderPage(fixture.page)
+    vesselOrder = new vesselOrderPage(fixture.page)
+    await terminalServiceOrder.clickOnTimehseetMenu();
+    let LatestWorkOrderDate: string
+    await terminalServiceOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
+    await terminalServiceOrder.clickOnSweeperTab();
+    await terminalServiceOrder.FillHrsTab();
+    await vesselOrder.SubmitTimehseet();
+    await vesselOrder.ApprovetheTimehseet()
 });
 Then('ops user reject the Terminal Services Timehseet', async function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+    await vesselOrder.clickOnReject();
 });
 Then('verify remove approval functionality of Terminal Services Timehseet', async function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+    await vesselOrder.clickOnRemoveApproval();
+    await vesselOrder.storeRollingCode()
 });
 Then('Labor entry add new steady details and mgr comments and submit the Terminal Services Timehseet', async function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+    let RollingCode: string
+    await vesselOrder.pasteRollingCode(RollingCode);
+    await terminalServiceOrder.AddNewRowterminal();
+    await vesselOrder.SubmitTimehseet();
 });
-Then('Ops user submits and approve the Terminal Services Timehseet', async function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
-});
+
 Then('the user verifies the download report functionality for the Terminal Services Timehseet', async function () {
-    // Write code here that turns the phrase above into concrete actions
-    return 'pending';
+    await vesselOrder.downloadTimehseetReport();
 });

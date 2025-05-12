@@ -24,7 +24,6 @@ Feature: Rail order and ops rail order timehseet functionalities
     Then Verify that the appropriate validation message for start time field in rail order
     Then Verify that the appropriate validation message for steady name and steady count field in rail order
 
-
   @rail
   Scenario: TR user creates, firms, pushes to summary sheet, and cancels a yard order
     Given TR user logged into the application
@@ -54,4 +53,3 @@ Feature: Rail order and ops rail order timehseet functionalities
     Then Ops user submits and approve the rail order timesheet
     Then the user verifies the download report functionality for the rail order
     Then user click on logout button
-

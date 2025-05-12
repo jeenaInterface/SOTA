@@ -5,12 +5,11 @@ import * as data from "../../helper/util/test-data/payloads.json"
 
 let login: loginPage;
 
-
 Given('TR user logged into the application', async function () {
-    login = new loginPage(fixture.page)
-    await login.navigateToLoginPage()
-    await login.enterUserName(data.userEmailTR)
-    await login.enterPassword(data.userPasswordTR)
+    login = new loginPage(fixture.page);
+    await login.navigateToLoginPage();
+    await login.enterUserName(data.userEmailTR);
+    await login.enterPassword(data.userPasswordTR);
     await login.clickLoginButton();
 });
 Then('Ops user logged into the application', async function () {

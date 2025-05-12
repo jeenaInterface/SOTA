@@ -82,3 +82,9 @@ Then('Verify that the appropriate validation message for berth , start time and 
 Then('Verify that the appropriate validation message for steady name and steady count field', async function () {
   await vesselOrder.validationMessageForSteadtcount();
 });
+Then('TR user verifies that the vessel labor order is pushed to the summary sheet and verifies the details', async function () {
+
+  await vesselOrder.clickOnSummarySheetMenu();
+  let LatestWorkOrderDate: string
+  await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate);
+});

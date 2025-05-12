@@ -1,4 +1,4 @@
-import { Page, BrowserContext, expect } from "@playwright/test";
+import { Page, expect } from "@playwright/test";
 import PlaywrightWrapper from "../helper/wrapper/PlaywrightWrappers";
 import { setDefaultTimeout } from "@cucumber/cucumber"
 import { fixture } from "../hooks/pageFixture";
@@ -26,8 +26,10 @@ export default class vesselOrderPage {
 
     public Elements = {
         laborOrderMenu: "//div[normalize-space(text())='Labor Order']",
+        summarysheet: "//a[normalize-space(text())='Summary Sheet']",
         vesselOrder: "//a[normalize-space(text())='Ops Vessel Order']",
         workDate: "//input[@aria-describedby='Work Date']",
+        workDateSummarySheet: "//input[@type='date']",
         shift: "//select[@ng-reflect-name='shift']",
         jobNo: "//input[@ng-reflect-name='jobNo']",
         Go: "//button[normalize-space(text())='GO']",
@@ -105,7 +107,7 @@ export default class vesselOrderPage {
         await this.page.waitForTimeout(1000);
         await this.page.getByPlaceholder('Search By Job No or Vessel').press('ArrowRight');
         await this.page.getByPlaceholder('Search By Job No or Vessel').click();
-        await this.page.getByPlaceholder('Search By Job No or Vessel').fill('COSCO ASIA - 081 - 100627 - 9345403');
+        await this.page.getByPlaceholder('Search By Job No or Vessel').fill('COSCO ENGLAND - 053 - 100714 - 9516428');
         // await this.page.getByPlaceholder('Search By Job No or Vessel Name or Voyage or Lloyds').click();
         // Wait for datalist options
         await this.page.waitForTimeout(4000);
@@ -432,8 +434,20 @@ export default class vesselOrderPage {
 
 
     }
-
-
-
+    async SelectDetailsOnLandingPageSummarysheet(formatteddate: string): Promise<void> {
+        const LatestWorkOrderDate = await this.getLatestWorkOrderDate();
+        console.log(LatestWorkOrderDate);
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        await this.page.locator(this.Elements.workDateSummarySheet).click();
+        await this.page.locator(this.Elements.workDateSummarySheet).fill(this.noTRStatusDate);
+        await this.page.locator(this.Elements.shift).selectOption("Nightside");
+        // await this.passDate();
+        await this.base.waitAndClick(this.Elements.Go);
+    }
+    async clickOnSummarySheetMenu(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.laborOrderMenu);
+        await this.base.waitAndClick(this.Elements.summarysheet);
+    }
 
 }

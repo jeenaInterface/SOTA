@@ -1,4 +1,4 @@
-// The step definition’s role is to link the page and feature files. 
+// The step definition's role is to link the page and feature files. 
 // It contains the test steps where the methods from the page module are invoked to execute the functionalities. 
 import { Given, setDefaultTimeout, Then, When } from "@cucumber/cucumber";
 import { fixture } from "../../hooks/pageFixture";
@@ -29,11 +29,10 @@ Given('TR user creates a new labor order', async function () {
 
 Then('TR user verifies that the labor order is pushed to the summary sheet and verifies the details', async function () {
   await yardOrder.clickOnSummarySheetMenu();
-  let LatestWorkOrderDate: string
+  let LatestWorkOrderDate: string;
   await yardOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate);
   await yardOrder.VerifySummarySheetCreated();
   await yardOrder.VerifySteadyDetailsAndManningCount();
-
 });
 Then('TR user creates a timesheet for the same labor order', async function () {
   await yardOrder.clickOnTimehseetMenu();

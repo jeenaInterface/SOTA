@@ -2,7 +2,7 @@
 # Test cases are written in the feature file using Gherkin syntax.
 
 Feature:  Yard order Functionalities - Yard Order, Summary Sheet, Timesheet, SOTA Approval and pma Approval
-    @poc
+    @sanity
     Scenario: Workflow from Yard Order creation to PMA approval started by TR user
         Given TR user logged into the application
         Then TR user creates a new labor order

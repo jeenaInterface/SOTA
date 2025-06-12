@@ -4,7 +4,6 @@ import { fixture } from '../../hooks/pageFixture';
 import { adminPage } from '../../pages/admin.page';
 
 
-
 let admin: adminPage;
 
 
@@ -160,6 +159,7 @@ Then('Verify steady report contains data with row count', async function() {
 });
 
 Then('select steady Job Role from the admin menu', async function() {
+    admin = new adminPage(fixture.page);
     await admin.clickOnSteadyJobRoleMenu();
 });
 

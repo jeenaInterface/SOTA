@@ -59,8 +59,6 @@ Then('the user saves and submits the Terminal Services Timehseet', async functio
     await vesselOrder.VerifySuccessMessage();
 });
 Then('Ops user submits and approve the Terminal Services Timehseet', async function () {
-    terminalServiceOrder = new terminalServiceOrderPage(fixture.page)
-    vesselOrder = new vesselOrderPage(fixture.page)
     await terminalServiceOrder.clickOnTimehseetMenu();
     let LatestWorkOrderDate: string
     await terminalServiceOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);

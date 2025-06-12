@@ -146,8 +146,7 @@ export default class terminalServiceOrderPage {
         fixture.logger.info("Waiting for 2 seconds")
         await fixture.page.waitForTimeout(2000);
         await this.page.locator(this.Elements.workDatetimehseet).click();
-       // await this.page.locator(this.Elements.workDatetimehseet).fill(this.noTRStatusDate);
-        await this.page.locator(this.Elements.workDatetimehseet).fill('2025-04-11');
+       await this.page.locator(this.Elements.workDatetimehseet).fill(this.noTRStatusDate);
         await this.page.locator(this.Elements.shift).selectOption("2ND");
         await this.page.locator(this.Elements.jobType).selectOption("Sweeper - 490137");
         await this.base.waitAndClick(this.Elements.Go);

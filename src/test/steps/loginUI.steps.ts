@@ -6,11 +6,11 @@ import * as data from "../../helper/util/test-data/payloads.json"
 let login: loginPage;
 
 Given('TR user logged into the application', async function () {
-    login = new loginPage(fixture.page);
-    await login.navigateToLoginPage();
-    await login.enterUserName(data.userEmailTR);
-    await login.enterPassword(data.userPasswordTR);
-    await login.clickLoginButton();
+  login = new loginPage(fixture.page);
+  await login.navigateToLoginPage();
+  await login.enterUserName(data.userEmailTR);
+  await login.enterPassword(data.userPasswordTR);
+  await login.clickLoginButton();
 });
 Then('Ops user logged into the application', async function () {
   await login.enterUserName(data.userEmailOps)
@@ -28,6 +28,19 @@ Then('Timehseet entry user logged into the application', async function () {
   await login.enterUserName(data.userEmailentry)
   await login.enterPassword(data.userPasswordentry)
 });
+Given('Security management user logged into the application', async function () {
+  login = new loginPage(fixture.page);
+  await login.navigateToLoginPage();
+  await login.enterUserName(data.userEmailSecurityManager)
+  await login.enterPassword(data.userPasswordSecurityManager)
+  await login.clickLoginButton();
+});
+Then('Security sergeant user logged into the application', async function () {
+
+  await login.enterUserName(data.userEmailSecuritySergeant)
+  await login.enterPassword(data.userPasswordSergeant)
+
+});
 Then('user click on logout button', async function () {
-await login.logOutDropDownlist();
+  await login.logOutDropDownlist();
 });

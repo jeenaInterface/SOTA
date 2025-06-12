@@ -8,30 +8,72 @@ let steady: steadyManagementPage;
 setDefaultTimeout(60 * 1000 * 5)
 
 Given('Go to steady management screen', async function () {
-    steady = new steadyManagementPage(fixture.page)
-    await steady.clicksteadyMenuButton()
+    steady = new steadyManagementPage(fixture.page);
+    await steady.clicksteadyMenuButton();
 });
 
 When('Select vessel as operational type', async function () {
-    await steady.SelectoperationalType()
+    await steady.SelectoperationalType();
+});
+
+Then('Select steady name as {string}', async function (name: string) {
+    await steady.enterSteadyName(name);
 });
 
 When('Click on search button', async function () {
-  await steady.ClickOnSearch();
-  fixture.logger.info("Waiting for 5 seconds")
-  await fixture.page.waitForTimeout(5000);
+    await steady.ClickOnSearch();
+    fixture.logger.info("Waiting for 5 seconds");
+    await fixture.page.waitForTimeout(5000);
 });
 
-Then('Update the details for the First Steady in the table and confirm the success message.', async function () {
-await steady.updateFirstSteady();
+Then('Verify the steady details are displayed in the table', async function () {
+    await steady.verifyTableDetails();
 });
- 
+
+Then('Verify update steady functioanlities', async function () {
+    await steady.updateFirstSteady();
+});
+
+Then('click on back button', async function () {
+    await steady.clickBackButton();
+});
+
+Then('Click on reset button', async function () {
+    await steady.clickResetButton();
+});
+
+Then('Verify the operational type is reset to default', async function () {
+    await steady.verifyOperationalTypeReset();
+});
+
+Then('Verify the steady name field is empty', async function () {
+    await steady.verifySteadyNameEmpty();
+});
+
+Then('Click on create new steady button', async function () {
+    await steady.clickCreateNewSteady();
+});
+
+Then('Verify new steady is created or proper message is displayed', async function () {
+    await steady.verifyNewSteadyCreation();
+});
+
 Then('Enter a wrong steady name in the search box', async function () {
-  await steady.enterWrongSteadyName();
+    await steady.enterWrongSteadyName();
 });
 
 Then('Confirm validation message is displayed', async function () {
-  await steady.verifyErrorMessage();
-  fixture.logger.info("Waiting for 2 seconds")
-  await fixture.page.waitForTimeout(5000);
+    await steady.verifyErrorMessage();
+    fixture.logger.info("Waiting for 2 seconds");
+    await fixture.page.waitForTimeout(5000);
+});
+
+Then('Verify the download report is downloaded successfully', async function () {
+    await steady.downloadReport();
+    await steady.verifyDownload();
+});
+
+Then('Verify the steady report is downloaded successfully', async function () {
+    await steady.downloadSteadyReport();
+    await steady.verifyDownload();
 });

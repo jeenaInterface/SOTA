@@ -44,7 +44,7 @@ export class adminPage {
         steadyReportDownloadButton: "//button[normalize-space()='Download Report']",
         steadySuccessMessage: "//span[contains(text(),'The information has been updated successfully')]",
         steadyPositionMenu: "//a[normalize-space()='Steady Positions & Functions']",
-        steadyJobRoleMenu: "//a[normalize-space()='Steady Job Role']",
+        steadyJobRoleMenu: "//a[normalize-space()='Steady Job Roles']",
         jobWorkedInput: "//input[@placeholder='Search Job Worked']",
         jobWorkedCell: "//tbody//tr[1]//td[4]",
         steadyJobRoleSuccessMessage: "//span[contains(text(),'The information has been updated successfully')]"
@@ -263,7 +263,7 @@ export class adminPage {
 
     async verifyPositionReset(): Promise<void> {
         const selectedValue = await this.page.locator(this.Elements.positionDropdown).textContent();
-        expect(selectedValue).toContain('All Positions'); // or whatever the default value should be
+        expect(selectedValue).toContain('All Position'); // or whatever the default value should be
 
     }
 

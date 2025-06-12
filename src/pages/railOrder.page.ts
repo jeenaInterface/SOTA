@@ -38,7 +38,7 @@ export default class railOrderPage {
         RailPlannerflexType:"//select[@ng-reflect-name='RAIL PLANNERcbSteadyFx00']",
         textArea:"(//label[normalize-space(text())='Notes']/following::textarea)[1]",
         savemaycan:"//button[normalize-space(text())='SAVE/MAY-CAN']",
-        SteadyDBName: "//datalist//option[contains(text(), 'Allen, Johnnie - 133290')]",
+        SteadyDBName: "//datalist//option[contains(text(), 'Mendez, Daniel (Daniel) - 39195')]",
         stdyValidationMessage: "//span[normalize-space(text())='The total Flex Steady Count and the total Flex Steady names are not matching for Clerk']",
         TimehseetMenu: "//div[normalize-space(text())='Timesheet']",
         railTimehseet: "//a[normalize-space(text())='Ops Rail Timesheet']",
@@ -128,7 +128,7 @@ export default class railOrderPage {
 
     }
     async SelectSteadyDetails(): Promise<void> {
-        await this.page.locator(this.Elements.RailPlannerSTEADY).fill("133290");
+        await this.page.locator(this.Elements.RailPlannerSTEADY).fill("39195");
         await this.page.locator(this.Elements.RailPlannerSTEADY).press("Enter");
         // Locate the option element using XPath and get the text
         const RailPlannerSTEADYddl = await this.page.locator(this.Elements.SteadyDBName).textContent();

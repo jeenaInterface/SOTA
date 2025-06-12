@@ -66,8 +66,8 @@ Feature: Admin module
     And Verify steady report contains data with row count
 
 
-  @steadyJobRole
-  Scenario: Search/Reset/Download functioanlities in steady positions
+  @sanity1
+  Scenario: Search/Reset/Download functioanlities in steady job role
     Given TR user logged into the application    
     Then select steady Job Role from the admin menu
     When Select Operational Type as "Vessel"

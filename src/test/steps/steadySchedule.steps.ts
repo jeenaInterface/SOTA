@@ -10,64 +10,48 @@ Given('User navigates to the steady schedule page', async function () {
     await steadySchedulePage.navigateToSteadySchedule();
 });
 
-When('User selects a work date for steady schedule', async function () {
-    const currentDate = new Date().toISOString().split('T')[0];
-    await steadySchedulePage.selectWorkDate(currentDate);
-});
-
 When('User clicks on GO button', async function () {
     await steadySchedulePage.clickGoButton();
 });
 
-When('User adds steady details with following information:', async function (dataTable) {
-    const data = dataTable.hashes()[0];
-    await steadySchedulePage.enterNumberOfJobs(data['Number of Jobs']);
-    await steadySchedulePage.selectJobType(data['Job Type']);
-    await steadySchedulePage.selectStartTime(data['Start Time']);
-    await steadySchedulePage.selectFinishTime(data['Finish Time']);
-});
 
-When('User adds remarks {string}', async function (remarks) {
-    await steadySchedulePage.clickRemarksButton();
-    await steadySchedulePage.enterRemarks(remarks);
-    await steadySchedulePage.clickAddRemarksButton();
-});
 
 When('User clicks on Save button', async function () {
     await steadySchedulePage.clickSaveButton();
 });
 
-When('User updates steady details with following information:', async function (dataTable) {
-    const data = dataTable.hashes()[0];
-    await steadySchedulePage.enterNumberOfJobs(data['Number of Jobs']);
-    await steadySchedulePage.selectJobType(data['Job Type']);
-    await steadySchedulePage.selectStartTime(data['Start Time']);
-    await steadySchedulePage.selectFinishTime(data['Finish Time']);
-});
 
-When('User updates remarks to {string}', async function (remarks) {
-    await steadySchedulePage.clickRemarksButton();
-    await steadySchedulePage.enterRemarks(remarks);
-    await steadySchedulePage.clickAddRemarksButton();
-});
-
-When('User tries to save without entering mandatory fields', async function () {
-    await steadySchedulePage.clearMandatoryFields();
-    await steadySchedulePage.clickSaveButton();
-});
-
-When('User clicks on Cancel button', async function () {
-    await steadySchedulePage.clickCancelButton();
-});
 
 Then('User should see success message for steady schedule', async function () {
     await steadySchedulePage.verifySuccessMessage();
 });
 
-Then('User should see validation messages for required fields', async function () {
-    await steadySchedulePage.verifyValidationMessages();
+
+When('Select Job code for some steadies under CO tab', async function () {
+    await steadySchedulePage.selectCOTab();
+    // Selecting job codes for multiple rows
+    await steadySchedulePage.selectJobCode(1, 'JC001'); // Example job code
+    await steadySchedulePage.selectJobCode(2, 'JC002'); // Example job code
 });
 
-Then('User should be returned to steady schedule list without saving', async function () {
-    await steadySchedulePage.verifyScheduleListPage();
+When('Select Job code for some steadies under FM tab', async function () {
+    await steadySchedulePage.selectFMTab();
+    // Selecting job codes for multiple rows
+    await steadySchedulePage.selectJobCode(1, 'FM001'); // Example job code
+    await steadySchedulePage.selectJobCode(2, 'FM002'); // Example job code
+});
+
+When('Select Job code for some steadies under Vessel tab', async function () {
+    await steadySchedulePage.selectVesselTab();
+    // Selecting job codes for multiple rows
+    await steadySchedulePage.selectJobCode(1, 'VS001'); // Example job code
+    await steadySchedulePage.selectJobCode(2, 'VS002'); // Example job code
+});
+
+Then('Enter remarks for first row.', async function () {
+    await steadySchedulePage.enterRemarks('Test remarks for steady schedule');
+});
+
+Then('Verify total and gurantee value', async function () {
+    await steadySchedulePage.verifyTotalAndGuaranteeValue();
 });

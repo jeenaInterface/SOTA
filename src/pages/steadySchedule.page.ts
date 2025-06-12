@@ -14,89 +14,80 @@ export class SteadySchedulePage {
     private Elements = {
         steadyMenu: "//div[normalize-space()='Steady Menu']",
         steadyScheduleMenu: "//a[normalize-space()='Steady Schedule']",
-        workDateInput: "//input[@id='workDate']",
         goButton: "//button[normalize-space()='GO']",
-        numberOfJobsInput: "//input[@id='numberOfJobs']",
-        jobTypeDropdown: "//select[@id='jobType']",
-        startTimeDropdown: "//select[@id='startTime']",
-        finishTimeDropdown: "//select[@id='finishTime']",
-        remarksButton: "//button[contains(@aria-label,'Add Remarks')]",
         remarksInput: "//textarea[@id='remarks']",
-        addRemarksButton: "//button[normalize-space()='Add Remarks']",
         saveButton: "//button[normalize-space()='Save']",
-        cancelButton: "//button[normalize-space()='Cancel']",
         successMessage: "//div[contains(@class,'success-message')]",
-        scheduleListContainer: "//div[contains(@class,'schedule-list')]"
+        coTab: "//a[contains(text(),'CO')]",
+        fmTab: "//a[contains(text(),'FM')]",
+        vesselTab: "//a[contains(text(),'Vessel')]",
+        jobCodeDropdown: "//select[contains(@id,'jobCode')]",
+        cell1CO:"//td[contains(@class,'cell1-co')]",
+        totalValue: "//td[contains(@class,'total-value')]",
+        guaranteeValue: "//td[contains(@class,'guarantee-value')]"
     };
 
     async navigateToSteadySchedule(): Promise<void> {
         await this.base.waitAndClick(this.Elements.steadyMenu);
         await this.base.waitAndClick(this.Elements.steadyScheduleMenu);
-    }
-
-    async selectWorkDate(date: string): Promise<void> {
-        await this.page.locator(this.Elements.workDateInput).fill(date);
+        fixture.logger.info('Navigated to Steady Schedule page');
     }
 
     async clickGoButton(): Promise<void> {
         await this.base.waitAndClick(this.Elements.goButton);
+        fixture.logger.info('Clicked GO button');
     }
 
-    async enterNumberOfJobs(jobs: string): Promise<void> {
-        await this.page.locator(this.Elements.numberOfJobsInput).fill(jobs);
+    async selectCOTab(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.coTab);
+        fixture.logger.info('Selected CO tab');
     }
 
-    async selectJobType(jobType: string): Promise<void> {
-        await this.page.locator(this.Elements.jobTypeDropdown).selectOption({ label: jobType });
+    async selectFMTab(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.fmTab);
+        fixture.logger.info('Selected FM tab');
     }
 
-    async selectStartTime(time: string): Promise<void> {
-        await this.page.locator(this.Elements.startTimeDropdown).selectOption(time);
+    async selectVesselTab(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.vesselTab);
+        fixture.logger.info('Selected Vessel tab');
     }
 
-    async selectFinishTime(time: string): Promise<void> {
-        await this.page.locator(this.Elements.finishTimeDropdown).selectOption(time);
-    }
-
-    async clickRemarksButton(): Promise<void> {
-        await this.base.waitAndClick(this.Elements.remarksButton);
+    async selectJobCode(rowIndex: number, jobCode: string): Promise<void> {
+        const jobCodeSelector = `(${this.Elements.jobCodeDropdown})[${rowIndex}]`;
+        await this.page.locator(jobCodeSelector).selectOption(jobCode);
+        fixture.logger.info(`Selected job code ${jobCode} for row ${rowIndex}`);
     }
 
     async enterRemarks(remarks: string): Promise<void> {
         await this.page.locator(this.Elements.remarksInput).fill(remarks);
+        fixture.logger.info(`Entered remarks: ${remarks}`);
     }
 
-    async clickAddRemarksButton(): Promise<void> {
-        await this.base.waitAndClick(this.Elements.addRemarksButton);
+    async verifyTotalAndGuaranteeValue(): Promise<void> {
+        const totalValueElement = this.page.locator(this.Elements.totalValue);
+        const guaranteeValueElement = this.page.locator(this.Elements.guaranteeValue);
+
+        await totalValueElement.waitFor({ state: 'visible' });
+        await guaranteeValueElement.waitFor({ state: 'visible' });
+
+        const totalValue = await totalValueElement.textContent();
+        const guaranteeValue = await guaranteeValueElement.textContent();
+
+        expect(totalValue).not.toBeNull();
+        expect(guaranteeValue).not.toBeNull();
+        fixture.logger.info(`Verified total value: ${totalValue} and guarantee value: ${guaranteeValue}`);
     }
 
     async clickSaveButton(): Promise<void> {
         await this.base.waitAndClick(this.Elements.saveButton);
-    }
-
-    async clickCancelButton(): Promise<void> {
-        await this.base.waitAndClick(this.Elements.cancelButton);
+        fixture.logger.info('Clicked Save button');
     }
 
     async verifySuccessMessage(): Promise<void> {
         await this.page.locator(this.Elements.successMessage).waitFor({ state: 'visible' });
         const message = await this.page.locator(this.Elements.successMessage).textContent();
         expect(message).toContain('successfully');
-    }
-
-    async clearMandatoryFields(): Promise<void> {
-        await this.page.locator(this.Elements.numberOfJobsInput).fill('');
-        await this.page.locator(this.Elements.jobTypeDropdown).selectOption('');
-    }
-
-    async verifyValidationMessages(): Promise<void> {
-        // Add specific validation message checks based on your application's requirements
-        const validationMessages = await this.page.locator('div.validation-message').all();
-        expect(validationMessages.length).toBeGreaterThan(0);
-    }
-
-    async verifyScheduleListPage(): Promise<void> {
-        await this.page.locator(this.Elements.scheduleListContainer).waitFor({ state: 'visible' });
-        expect(await this.page.locator(this.Elements.scheduleListContainer).isVisible()).toBeTruthy();
+        fixture.logger.info('Success message verified');
     }
 }

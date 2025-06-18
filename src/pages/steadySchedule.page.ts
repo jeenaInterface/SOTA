@@ -9,22 +9,23 @@ export class SteadySchedulePage {
     constructor(page: Page) {
         this.base = new PlaywrightWrapper(page);
         this.page = page;
-    }
-
-    private Elements = {
-        steadyMenu: "//div[normalize-space()='Steady Menu']",
-        steadyScheduleMenu: "//a[normalize-space()='Steady Schedule']",
+    }    private Elements = {
+        steadyMenu: "//div[normalize-space()='Steady']",
+        steadyScheduleMenu: "//a[normalize-space()='Steady Schedules']",
         goButton: "//button[normalize-space()='GO']",
-        remarksInput: "//textarea[@id='remarks']",
-        saveButton: "//button[normalize-space()='Save']",
+        remarksInput: "//tbody/tr[1]/td[9]/i[1]",
+        saveButton: "//button[normalize-space()='SAVE']",
         successMessage: "//div[contains(@class,'success-message')]",
         coTab: "//a[contains(text(),'CO')]",
         fmTab: "//a[contains(text(),'FM')]",
         vesselTab: "//a[contains(text(),'Vessel')]",
-        jobCodeDropdown: "//select[contains(@id,'jobCode')]",
-        cell1CO:"//td[contains(@class,'cell1-co')]",
-        totalValue: "//td[contains(@class,'total-value')]",
-        guaranteeValue: "//td[contains(@class,'guarantee-value')]"
+        searchCell: "td:nth-child({0}) > .search",
+        searchDropdownItem: ".search-dropdown-item",
+        jobCodeInput: "input.search",
+        jobCodeOption: ".search-dropdown-item >> text={0}",
+        totalValue: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-steady-schedules[1]/div[1]/div[3]/div[2]/div[1]/div[1]/div[1]/table[1]/tbody[1]/tr[8]/td[8]",
+        guaranteeValue: "//input[@class='search text-center bgwhite ng-valid ng-touched ng-dirty']",
+        remarksArea: "//textarea[@id='addComment']"
     };
 
     async navigateToSteadySchedule(): Promise<void> {
@@ -54,14 +55,34 @@ export class SteadySchedulePage {
     }
 
     async selectJobCode(rowIndex: number, jobCode: string): Promise<void> {
-        const jobCodeSelector = `(${this.Elements.jobCodeDropdown})[${rowIndex}]`;
-        await this.page.locator(jobCodeSelector).selectOption(jobCode);
-        fixture.logger.info(`Selected job code ${jobCode} for row ${rowIndex}`);
+        try {
+            // Format cell selector with the row index
+            const cellSelector = this.Elements.searchCell.replace('{0}', rowIndex.toString());
+            
+            // Click to open the search dropdown
+            await this.page.locator(cellSelector).click();
+            await this.page.waitForTimeout(500); // Wait for dropdown to appear
+            
+            // Type the job code in the search input
+            const searchInput = this.page.locator(this.Elements.jobCodeInput).last();
+            await searchInput.fill(jobCode);
+            await this.page.waitForTimeout(500); // Wait for dropdown options to update
+            
+            // Click the matching option
+            const optionSelector = this.Elements.jobCodeOption.replace('{0}', jobCode);
+            await this.page.locator(optionSelector).click();
+            
+            fixture.logger.info(`Selected job code ${jobCode} for row ${rowIndex}`);
+        } catch (error) {
+            fixture.logger.error(`Failed to select job code ${jobCode} for row ${rowIndex}: ${error}`);
+            throw error;
+        }
     }
 
     async enterRemarks(remarks: string): Promise<void> {
-        await this.page.locator(this.Elements.remarksInput).fill(remarks);
-        fixture.logger.info(`Entered remarks: ${remarks}`);
+        await this.page.locator(this.Elements.remarksInput).click();
+        await this.page.locator(this.Elements.remarksArea).fill(remarks);
+
     }
 
     async verifyTotalAndGuaranteeValue(): Promise<void> {

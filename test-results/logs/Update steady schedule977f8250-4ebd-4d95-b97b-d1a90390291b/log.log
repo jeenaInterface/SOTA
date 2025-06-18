@@ -1,0 +1,19 @@
+info: Jun-13-2025 10:10:47: 	Navigated to Steady Schedule page
+info: Jun-13-2025 10:10:51: 	Clicked GO button
+info: Jun-13-2025 10:10:55: 	Selected CO tab
+error: Jun-13-2025 10:11:11: 	Failed to select job code VSL1 for row 1: Error: locator.click: Error: strict mode violation: locator('td:nth-child(1) > .search') resolved to 104 elements:
+    1) <input type="text" title="VSL1" data-placement="top" _n…/> aka locator('.search').first()
+    2) <input title="" type="text" data-placement="top" _ngcon…/> aka locator('tr:nth-child(2) > td > .search').first()
+    3) <input title="" type="text" data-placement="top" _ngcon…/> aka locator('tr:nth-child(3) > td > .search').first()
+    4) <input title="" type="text" data-placement="top" _ngcon…/> aka locator('tr:nth-child(4) > td > .search').first()
+    5) <input title="" type="text" data-placement="top" _ngcon…/> aka locator('tr:nth-child(5) > td > .search').first()
+    6) <input title="" type="text" data-placement="top" _ngcon…/> aka locator('tr:nth-child(6) > td > .search').first()
+    7) <input title="" type="text" data-placement="top" _ngcon…/> aka locator('tr:nth-child(7) > td > .search').first()
+    8) <input title="" type="text" data-placement="top" _ngcon…/> aka locator('tr:nth-child(8) > td > .search').first()
+    9) <input title="" type="text" data-placement="top" _ngcon…/> aka locator('tr:nth-child(9) > td > .search').first()
+    10) <input title="" type="text" data-placement="top" _ngcon…/> aka locator('tr:nth-child(10) > td > .search').first()
+    ...
+
+=========================== logs ===========================
+waiting for locator('td:nth-child(1) > .search')
+============================================================

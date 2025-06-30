@@ -98,9 +98,8 @@ After(async function ({ pickle, result }) {
 
 });
 
-AfterAll(async function () {
+AfterAll(async function() {
     await browser.close();
-
 })
 
 

@@ -145,12 +145,12 @@ export default class yardOrderPagePOC {
                 
         //     }
         // }
-        await this.page.locator(this.Elements.workDate).fill('2025-06-15');
+        await this.page.locator(this.Elements.workDate).fill('2025-06-16');
         await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
         await this.page.locator(this.Elements.Go).click();
 
         // // Store the date to noTRStatusDate
-        this.noTRStatusDate = '2025-06-15';
+        this.noTRStatusDate = '2025-06-16';
         // this.noTRStatusDate = formattedDate;
         return this.noTRStatusDate;
     }

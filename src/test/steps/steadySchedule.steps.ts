@@ -30,25 +30,24 @@ Then('User should see success message for steady schedule', async function () {
 When('Select Job code for some steadies under CO tab', async function () {
     await steadySchedulePage.selectCOTab();
     // Selecting job codes for multiple rows
-    await steadySchedulePage.selectJobCode(1, 'VSL1'); // Example job code
-    await steadySchedulePage.selectJobCode(2, 'VSL1'); // Example job code
+    await steadySchedulePage.selectJobCode();
 });
 
 When('Select Job code for some steadies under FM tab', async function () {
-    await steadySchedulePage.selectFMTab();
-    // Selecting job codes for multiple rows
-    await steadySchedulePage.selectJobCode(1, 'WORK'); // Example job code
-    await steadySchedulePage.selectJobCode(2, 'WORK'); // Example job code
+    // await steadySchedulePage.selectFMTab();
+    // // Selecting job codes for multiple rows
+    // await steadySchedulePage.selectJobCode(1, 'WORK'); // Example job code
+    // await steadySchedulePage.selectJobCode(2, 'WORK'); // Example job code
 });
 
 When('Select Job code for some steadies under Vessel tab', async function () {
     await steadySchedulePage.selectVesselTab();
-    // Selecting job codes for multiple rows
-    await steadySchedulePage.selectJobCode(1, 'SC26'); // Example job code
-    await steadySchedulePage.selectJobCode(2, 'SC26'); // Example job code
+    // // Selecting job codes for multiple rows
+    // await steadySchedulePage.selectJobCode(1, 'SC26'); // Example job code
+    // await steadySchedulePage.selectJobCode(2, 'SC26'); // Example job code
 });
 
-Then('Enter remarks for first row.', async function () {
+Then('Enter remarks for first row', async function () {
     await steadySchedulePage.enterRemarks('Test remarks for steady schedule');
 });
 

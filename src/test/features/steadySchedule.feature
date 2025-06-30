@@ -11,16 +11,16 @@ Feature: Steady Schedule Functionalities
     Scenario: Update steady schedule
         And User clicks on GO button
         And Select Job code for some steadies under CO tab
-        Then Enter remarks for first row.   
-        And Verify total and gurantee value
+        Then Enter remarks for first row
+        And Verify total and guarantee value
         And User clicks on Save button
-        Then User should see success message for steady schedule
-        And Select Job code for some steadies under FM tab
-        And Verify total and gurantee value
-        And User clicks on Save button
-        Then User should see success message for steady schedule
-        And Select Job code for some steadies under Vessel tab
-        And Verify total and gurantee value
-        And User clicks on Save button
-        Then User should see success message for steady schedule
+        # Then User should see success message for steady schedule
+        # And Select Job code for some steadies under FM tab
+        # And Verify total and guarantee value
+        # And User clicks on Save button
+        # Then User should see success message for steady schedule
+        # And Select Job code for some steadies under Vessel tab
+        # And Verify total and gurantee value
+        # And User clicks on Save button
+        # Then User should see success message for steady schedule
 

@@ -13,7 +13,7 @@ Feature: Labor Order Difference Report
         Then Verify the ignore Functionalities
         Then Verify the add remarks Functionalities
 
-        @LaborOrderDiscrepancies
+    @LaborOrderDiscrepancies
     Scenario: VERIFY Labor Order Discrepancies Report
         Given TR user logged into the application
         # Then TR user creates a new labor order
@@ -22,5 +22,15 @@ Feature: Labor Order Difference Report
         Then Verify Update Discrepancies Functionalities
         Then Verify discrepancies report downloaded successfully
         Then Verify discrepancies summary report downloaded successfully
+        Then Verify Search Discrepancies Functionalities
+        Then Verify Reset Discrepancies Functionalities
 
-        
+    @DispatchNote
+    Scenario: VERIFY Dispatch Note Report
+        Given TR user logged into the application
+        Then I am on the Dispatch Note Report page
+        Then Verify Add Dispatch Note Functionalities
+        Then Verify Update Dispatch Note Functionalities
+        Then Verify Dispatch Note downloaded successfully
+        Then Verify Search Dispatch Note Functionalities
+        Then Verify Reset Dispatch Note Functionalities

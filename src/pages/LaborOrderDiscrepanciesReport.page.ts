@@ -24,7 +24,9 @@ export class LaborOrderDiscrepanciesReportPage {
         saveButton:"//button[normalize-space()='ADD']",
         successConfirmationMessageLocator: "//span[contains(text(),'Labor Order Discrepancy information saved successfully')]",
         FirstRow: "//tbody/tr[1]/td[1]/label[1]",
-        UpdateButton: "//button[normalize-space()='UPDATE']"
+        UpdateButton: "//button[normalize-space()='UPDATE']",
+        AOM: "//input[@id='sentBy']",
+        DateReceived: "//input[@id='recvDtTm']"
 
     };
 
@@ -57,8 +59,11 @@ export class LaborOrderDiscrepanciesReportPage {
         // Wait and check for success message
         await this.base.waitAndClick(this.Elements.addDiscrepancyButton);
         await this.page.waitForTimeout(1000);
+       
         // Fill random text in description
         const randomText = 'TestData_' + Math.random().toString(36).substring(2, 10);
+         await this.page.locator(this.Elements.AOM).fill(randomText);
+          await this.page.locator(this.Elements.DateReceived).fill(formatted);
         await this.page.locator(this.Elements.descriptionOfDiscrepancy).fill(randomText);
         await this.page.locator(this.Elements.ErrorType1).check();
         await this.base.waitAndClick(this.Elements.saveButton);
@@ -70,6 +75,7 @@ export class LaborOrderDiscrepanciesReportPage {
     async verifyUpdateFunctionality(): Promise<void> {
         await this.base.waitAndClick(this.Elements.FirstRow);
         const randomText = 'TestData_' + Math.random().toString(36).substring(2, 10);
+        await this.page.locator(this.Elements.AOM).fill(randomText);
         await this.page.locator(this.Elements.descriptionOfDiscrepancy).fill(randomText);
         await this.base.waitAndClick(this.Elements.UpdateButton);
         const validationMessageForUpdate = await this.page.locator(this.Elements.successConfirmationMessageLocator).textContent();

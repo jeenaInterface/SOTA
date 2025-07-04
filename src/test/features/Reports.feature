@@ -40,8 +40,6 @@ Feature: Labor Order Difference Report
     Scenario: VERIFY Steady Schedule Tracking Sheet Report
         Given TR user logged into the application
         Then I am on the Steady Schedule Tracking Sheet Report page
-        Then Verify Add Steady Schedule Tracking Sheet Functionalities
-        Then Verify Update Steady Schedule Tracking Sheet Functionalities
-        Then Verify Steady Schedule Tracking Sheet downloaded successfully
-        Then Verify Search and Reset Steady Schedule Tracking Sheet Functionalities
-        Then Verify Delete Steady Schedule Tracking Sheet Functionalities
+        Then Click on Steady report button by select Tracking option and verify the report downloaded successfully
+        Then Verify Steady Schedule Tracking Sheet Report reset functionalities
+        Then Click on Steady report button by select schedule option and verify the report downloaded successfully

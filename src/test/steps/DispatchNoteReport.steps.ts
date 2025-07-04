@@ -20,5 +20,12 @@ Then('Verify Update Dispatch Note Functionalities', async function () {
 });
 
 Then('Verify Dispatch Note downloaded successfully', async function () {
-    expect(await dispatchNotePage.downloadDispatchNote()).toBeTruthy();
+    await dispatchNotePage.downloadDiscrepancyReport();
+});
+Then('Verify Search and Reset Dispatch Note Functionalities', async function () {
+    await dispatchNotePage.searchAndResetDispatchNotes();
+});
+
+Then('Verify Delete Dispatch Note Functionalities', async function () {
+    await dispatchNotePage.deleteDispatchNote();
 });

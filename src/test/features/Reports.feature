@@ -24,6 +24,7 @@ Feature: Labor Order Difference Report
         Then Verify discrepancies summary report downloaded successfully
         Then Verify Search Discrepancies Functionalities
         Then Verify Reset Discrepancies Functionalities
+        Then Verify Delete Discrepancies Functionalities
 
     @DispatchNote
     Scenario: VERIFY Dispatch Note Report
@@ -32,5 +33,15 @@ Feature: Labor Order Difference Report
         Then Verify Add Dispatch Note Functionalities
         Then Verify Update Dispatch Note Functionalities
         Then Verify Dispatch Note downloaded successfully
-        Then Verify Search Dispatch Note Functionalities
-        Then Verify Reset Dispatch Note Functionalities
+        Then Verify Search and Reset Dispatch Note Functionalities
+        Then Verify Delete Dispatch Note Functionalities
+
+@steadySchedukeleTrackingSheetReport
+    Scenario: VERIFY Steady Schedule Tracking Sheet Report
+        Given TR user logged into the application
+        Then I am on the Steady Schedule Tracking Sheet Report page
+        Then Verify Add Steady Schedule Tracking Sheet Functionalities
+        Then Verify Update Steady Schedule Tracking Sheet Functionalities
+        Then Verify Steady Schedule Tracking Sheet downloaded successfully
+        Then Verify Search and Reset Steady Schedule Tracking Sheet Functionalities
+        Then Verify Delete Steady Schedule Tracking Sheet Functionalities

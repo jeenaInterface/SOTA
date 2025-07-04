@@ -24,3 +24,12 @@ Then('Verify discrepancies report downloaded successfully', async function () {
 Then('Verify discrepancies summary report downloaded successfully', async function () {
     await discrepanciesPage.downloadSummaryReport();
 });
+Then('Verify Search Discrepancies Functionalities', async function () {
+    await discrepanciesPage.searchDiscrepancies();
+});
+Then('Verify Reset Discrepancies Functionalities', async function () {
+    await discrepanciesPage.resetDiscrepancies();
+});
+Then('Verify Delete Discrepancies Functionalities', async function () {
+    await discrepanciesPage.deleteDiscrepancy();
+});

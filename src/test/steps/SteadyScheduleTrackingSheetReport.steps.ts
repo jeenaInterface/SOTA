@@ -1,7 +1,7 @@
 import { Given, Then } from '@cucumber/cucumber';
 import { fixture } from '../../hooks/pageFixture';
 import { SteadyScheduleTrackingSheetReportPage } from '../../pages/SteadyScheduleTrackingSheetReport.page';
-
+import * as fs from 'fs';
 let steadyReportPage: SteadyScheduleTrackingSheetReportPage;
 
 
@@ -18,7 +18,11 @@ Then('Click on Steady report button by select Tracking option and verify the rep
     const dd = String(today.getDate()).padStart(2, '0');
     const formatted = `${yyyy}-${mm}-${dd}`;
     await steadyReportPage.selectToDate(formatted);
-    await steadyReportPage.downloadReport();
+    const filePath = await steadyReportPage.downloadReport();
+    if (fs.existsSync(filePath) && this.attach) {
+        const fileBuffer = fs.readFileSync(filePath);
+        await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    }
 });
 
 Then('Verify Steady Schedule Tracking Sheet Report reset functionalities', async function () {
@@ -34,5 +38,9 @@ Then('Click on Steady report button by select schedule option and verify the rep
     const dd = String(today.getDate()).padStart(2, '0');
     const formatted = `${yyyy}-${mm}-${dd}`;
     await steadyReportPage.selectToDate(formatted);
-    await steadyReportPage.downloadReport();
+    const filePath = await steadyReportPage.downloadReport();
+    if (fs.existsSync(filePath) && this.attach) {
+        const fileBuffer = fs.readFileSync(filePath);
+        await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    }
 });

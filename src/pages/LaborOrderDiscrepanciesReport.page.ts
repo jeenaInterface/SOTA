@@ -103,7 +103,7 @@ export class LaborOrderDiscrepanciesReportPage {
         // Add logic to verify update functionality
     }
 
-    async downloadSummaryReport(): Promise<void> {
+    async downloadSummaryReport(): Promise<string> {
         const downloadPath = path.resolve(__dirname, 'DiscrepancySummaryReport');
         if (!fs.existsSync(downloadPath)) {
             fs.mkdirSync(downloadPath, { recursive: true });
@@ -121,9 +121,10 @@ export class LaborOrderDiscrepanciesReportPage {
         await download.saveAs(downloadPathWithFileName);
         console.log(`File downloaded to: ${downloadPathWithFileName}`);
         expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+        return downloadPathWithFileName;
 
     }
-    async downloadDiscrepancyReport(): Promise<void> {
+    async downloadDiscrepancyReport(): Promise<string> {
         // Create a folder for downloads if it doesn't exist
         const downloadPath = path.resolve(__dirname, 'downloads');
         if (!fs.existsSync(downloadPath)) {
@@ -142,6 +143,7 @@ export class LaborOrderDiscrepanciesReportPage {
         await download.saveAs(downloadPathWithFileName);
         console.log(`File downloaded to: ${downloadPathWithFileName}`);
         expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+        return downloadPathWithFileName;
 
 
     }

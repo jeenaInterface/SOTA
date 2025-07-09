@@ -43,7 +43,7 @@ export class SteadyScheduleTrackingSheetReportPage {
     }
 
 
-    async downloadReport(): Promise<void> {
+    async downloadReport(): Promise<string> {
         const downloadPath = path.resolve(__dirname, 'downloads');
         if (!fs.existsSync(downloadPath)) {
             fs.mkdirSync(downloadPath, { recursive: true });
@@ -61,6 +61,7 @@ export class SteadyScheduleTrackingSheetReportPage {
         await download.saveAs(downloadPathWithFileName);
         console.log(`File downloaded to: ${downloadPathWithFileName}`);
         expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+        return downloadPathWithFileName;
     }
 
     clearDownloadFolder(downloadPath: string): void {

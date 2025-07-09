@@ -2,6 +2,7 @@ import { Given, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { fixture } from '../../hooks/pageFixture';
 import { LaborOrderDiscrepanciesReportPage } from '../../pages/LaborOrderDiscrepanciesReport.page';
+import * as fs from 'fs';
 
 let discrepanciesPage: LaborOrderDiscrepanciesReportPage;
 
@@ -18,11 +19,19 @@ Then('Verify Update Discrepancies Functionalities', async function () {
 });
 
 Then('Verify discrepancies report downloaded successfully', async function () {
-    await discrepanciesPage.downloadDiscrepancyReport();
+    const filePath = await discrepanciesPage.downloadDiscrepancyReport();
+    if (fs.existsSync(filePath) && this.attach) {
+        const fileBuffer = fs.readFileSync(filePath);
+        await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    }
 });
 
 Then('Verify discrepancies summary report downloaded successfully', async function () {
-    await discrepanciesPage.downloadSummaryReport();
+    const filePath = await discrepanciesPage.downloadSummaryReport();
+    if (fs.existsSync(filePath) && this.attach) {
+        const fileBuffer = fs.readFileSync(filePath);
+        await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    }
 });
 Then('Verify Search Discrepancies Functionalities', async function () {
     await discrepanciesPage.searchDiscrepancies();

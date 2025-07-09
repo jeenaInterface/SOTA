@@ -47,7 +47,7 @@ export class DispatchNoteReportPage {
         FirstRow: "//tbody/tr[1]/td[1]/label[1]",
         deleteButton: "//tbody/tr[1]/td[8]/i[1]",
         yesButton: "//button[normalize-space()='Yes']",
-        LaborOrderDispatchNoteDeletedMessage:"//span[contains(text(),'Dispatch Notes information deleted successfully')]"
+        LaborOrderDispatchNoteDeletedMessage: "//span[contains(text(),'Dispatch Notes information deleted successfully')]"
 
     };
 
@@ -73,13 +73,13 @@ export class DispatchNoteReportPage {
     }
     async fillHeaderDefaults(): Promise<void> {
 
-    await this.page.locator('input[type="text"]').click();
-    await this.page.locator("//span[contains(@class,'ng-option-label') and text()='Yard']").click();
-    fixture.page.waitForTimeout(1000);
-    await this.page.locator(this.Elements.FromDate).fill(await this.getFormattedDate());
-    await this.page.locator(this.Elements.ToDate).fill(await this.getFormattedDate());
-    await this.page.locator(this.Elements.shift).selectOption({ label: '1ST' });
-    await this.page.locator(this.Elements.JobCode).selectOption({ label: 'Yard Ops - 690101' });
+        await this.page.locator('input[type="text"]').click();
+        await this.page.locator("//span[contains(@class,'ng-option-label') and text()='Yard']").click();
+        fixture.page.waitForTimeout(1000);
+        await this.page.locator(this.Elements.FromDate).fill(await this.getFormattedDate());
+        await this.page.locator(this.Elements.ToDate).fill(await this.getFormattedDate());
+        await this.page.locator(this.Elements.shift).selectOption({ label: '1ST' });
+        await this.page.locator(this.Elements.JobCode).selectOption({ label: 'Yard Ops - 690101' });
 
     }
     async addDispatchNote(): Promise<void> {
@@ -124,7 +124,7 @@ export class DispatchNoteReportPage {
         expect(message).toContain('Dispatch Notes information saved successfully');
     }
 
-    async downloadDiscrepancyReport(): Promise<void> {
+    async downloadDiscrepancyReport(): Promise<string> {
         // Create a folder for downloads if it doesn't exist
         const downloadPath = path.resolve(__dirname, 'downloads');
         if (!fs.existsSync(downloadPath)) {
@@ -143,6 +143,7 @@ export class DispatchNoteReportPage {
         await download.saveAs(downloadPathWithFileName);
         console.log(`File downloaded to: ${downloadPathWithFileName}`);
         expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+        return downloadPathWithFileName;
 
 
     }
@@ -159,23 +160,23 @@ export class DispatchNoteReportPage {
     }
 
     async searchAndResetDispatchNotes(): Promise<void> {
-            await this.fillHeaderDefaults();
-            await this.base.waitAndClick(this.Elements.search);
-            const FirstRow = await this.page.locator(this.Elements.FirstRow).textContent();
-            expect(FirstRow).toContain("1");
-            await this.base.waitAndClick(this.Elements.resetButton);
-            const shift = await this.page.locator(this.Elements.shift).textContent();
-            expect(shift).toContain('Select');
-        }
-        async deleteDispatchNote(): Promise<void> {
-            await this.fillHeaderDefaults();
-            await this.base.waitAndClick(this.Elements.search);
-            fixture.page.setDefaultTimeout(2000)
-            await this.base.waitAndClick(this.Elements.deleteButton);
-            await this.base.waitAndClick(this.Elements.yesButton);
-            await this.page.waitForTimeout(1000);
-            const validationMessageForDelete = await this.page.locator(this.Elements.LaborOrderDispatchNoteDeletedMessage).textContent();
-            expect(validationMessageForDelete).toContain("Dispatch Notes information deleted successfully");
-        }
+        await this.fillHeaderDefaults();
+        await this.base.waitAndClick(this.Elements.search);
+        const FirstRow = await this.page.locator(this.Elements.FirstRow).textContent();
+        expect(FirstRow).toContain("1");
+        await this.base.waitAndClick(this.Elements.resetButton);
+        const shift = await this.page.locator(this.Elements.shift).textContent();
+        expect(shift).toContain('Select');
+    }
+    async deleteDispatchNote(): Promise<void> {
+        await this.fillHeaderDefaults();
+        await this.base.waitAndClick(this.Elements.search);
+        fixture.page.setDefaultTimeout(2000)
+        await this.base.waitAndClick(this.Elements.deleteButton);
+        await this.base.waitAndClick(this.Elements.yesButton);
+        await this.page.waitForTimeout(1000);
+        const validationMessageForDelete = await this.page.locator(this.Elements.LaborOrderDispatchNoteDeletedMessage).textContent();
+        expect(validationMessageForDelete).toContain("Dispatch Notes information deleted successfully");
+    }
 
 }

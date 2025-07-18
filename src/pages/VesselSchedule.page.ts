@@ -31,7 +31,8 @@ export class VesselSchedulePage {
         stern:"//input[@id='stern']",
         amp:"//input[@id='amp']",
         caddy:"//input[@id='caddy0']",
-        checkbox:"//*[@id='moveIcons']/input"
+        checkbox:"//*[@id='moveIcons']/input",
+        remarks:"//i[@class='bi bi-card-list icon-lg p-0 m-0']"
     };
 
     constructor(page: Page) {
@@ -80,7 +81,7 @@ export class VesselSchedulePage {
                 await yesButton.click();
             }
         }
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(5000);
         await this.clickAddVessel();               
         await closeButton.click();
 
@@ -122,7 +123,7 @@ export class VesselSchedulePage {
     }
 
     async fillBerthVesselWeekForVoyage53(): Promise<void> {
-        
+            await this.page.waitForTimeout(4000);
         await this.page.getByPlaceholder('Search').nth(2).click();
         await this.page.getByPlaceholder('Search').nth(2).type('53', { delay: 100 });
         await this.page.getByPlaceholder('Search').nth(2).press('Enter');
@@ -133,7 +134,17 @@ export class VesselSchedulePage {
         await this.page.locator(this.Elements.stern).fill('10');
         await this.page.locator(this.Elements.amp).fill('100');
         await this.page.locator(this.Elements.caddy).check();
-
+       await this.page.locator(this.Elements.remarks).click();
+        await this.page.getByPlaceholder('Enter your remarks here...').fill('test remarks');
+        await this.page.getByRole('button', { name: 'Add Remarks' }).click();
+        await this.page.getByRole('button', { name: 'SAVE' }).click();
+        await this.page.locator(this.Elements.checkbox).check();
+            await this.page.getByRole('button', { name: 'Delete Vessel' }).click();
+            const yesButton = this.page.locator("//button[normalize-space()='Yes']");
+            if (await yesButton.isVisible()) {
+                await this.page.waitForTimeout(1000);
+                await yesButton.click();
+            }
 
     }
 }

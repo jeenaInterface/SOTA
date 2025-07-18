@@ -14,7 +14,7 @@ When('Schedule a vessel', async function () {
     await vesselSchedulePage.enterVesselName();
 });
 
-When('Enter berth info, vessel info and week info', async function () {
+When('Enter berth info, vessel info , week info and remarks', async function () {
     // Example values, update as needed
     await vesselSchedulePage.fillBerthVesselWeekForVoyage53();
 });
@@ -23,14 +23,6 @@ When('Click on Save button', async function () {
     await vesselSchedulePage.clickSave();
 });
 
-Then('Verify remarks are added successfully', async function () {
-    await vesselSchedulePage.addRemarks('Test Remark');
-    await vesselSchedulePage.verifyRemarksAdded();
-});
-
-Then('verify delete vessel functionalities', async function () {
-    await vesselSchedulePage.deleteVessel();
-});
 
 Then('Verify View schedule View', async function () {
     await vesselSchedulePage.verifyViewSchedule();

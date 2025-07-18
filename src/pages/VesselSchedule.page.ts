@@ -11,18 +11,27 @@ export class VesselSchedulePage {
         GoButton: "//button[normalize-space()='GO']",
         addVesselButton: "//button[normalize-space()='Add Vessel']",
         vesselNameInput: "//input[@id='jobNo']",
-        addVessel:"//button[@type='button'][normalize-space()='Add Vessel']",
+        addVessel: "//button[@type='button'][normalize-space()='Add Vessel']",
+        voyagenumber: "//input[@id='voyage']",
+        search: "//input[@class='search-filter ng-valid ng-dirty ng-touched']",
         berthInfoInput: "//input[@id='berthInfo']",
         vesselInfoInput: "//input[@id='vesselInfo']",
         weekInfoInput: "//input[@id='weekInfo']",
-        saveButton: "//button[normalize-space()='Save']",
-        successMessage: "//span[contains(text(),'Vessel added successfully')]",
+        saveButton: "//button[normalize-space()='SAVE']",
+        successMessage: "//span[contains(text(),'Vessel Schedule information saved successfully')]",
         remarksInput: "//textarea[@id='remarks']",
         addRemarksButton: "//button[normalize-space()='Add Remarks']",
         deleteVesselButton: "//button[normalize-space()='Delete Vessel']",
         confirmDeleteButton: "//button[normalize-space()='Yes']",
         viewScheduleButton: "//button[normalize-space()='View Schedule']",
-        scheduleTable: "//table[@id='scheduleTable']"
+        scheduleTable: "//table[@id='scheduleTable']",
+        closeButton: "//div[@class='modal-footer']//button[@type='button'][normalize-space()='Close']",
+        service:"//select[@id='serv0']",
+        berthInfo: "//select[@id='berth']",
+        stern:"//input[@id='stern']",
+        amp:"//input[@id='amp']",
+        caddy:"//input[@id='caddy0']",
+        checkbox:"//*[@id='moveIcons']/input"
     };
 
     constructor(page: Page) {
@@ -35,19 +44,46 @@ export class VesselSchedulePage {
         await this.base.waitAndClick(this.Elements.VesselScheduleMenu);
         await this.base.waitAndClick(this.Elements.GoButton);
     }
-
     async clickAddVessel(): Promise<void> {
         await this.base.waitAndClick(this.Elements.addVesselButton);
+
+        await this.page.getByPlaceholder('Search By Job No or Vessel').fill('cos');
+        await this.page.waitForTimeout(1000);
+        await this.page.getByPlaceholder('Search By Job No or Vessel').press('ArrowRight');
+        await this.page.getByPlaceholder('Search By Job No or Vessel').click();
+        await this.page.getByPlaceholder('Search By Job No or Vessel').fill('COSCO ENGLAND - 053 - 100714 - 9516428');
+        await this.page.waitForTimeout(1000);
+        await this.base.waitAndClick(this.Elements.addVessel);
     }
 
-    async enterVesselName(name: string): Promise<void> {
-        await this.page.locator(this.Elements.vesselNameInput).fill(name);
-        await this.page.locator(this.Elements.vesselNameInput).press('Enter');
-        await this.page.waitForTimeout(500); // Wait for any potential UI updates
-        //select first entry from the dropdown
-        const firstOption = this.page.locator("//*[@id='nameListData']/option[1]");
-        await firstOption.click();
-        await this.base.waitAndClick(this.Elements.addVessel);
+    async enterVesselName(): Promise<void> {
+        // Search for voyage number '53'
+        await this.page.getByPlaceholder('Search').nth(2).click();
+        await this.page.getByPlaceholder('Search').nth(2).type('53', { delay: 100 });
+        await this.page.getByPlaceholder('Search').nth(2).press('Enter');
+        await this.page.waitForTimeout(1000);
+        const closeButton = this.page.locator(this.Elements.closeButton);
+        // Check if any entries exist for voyage number 53
+        //verify the voyage number of if the xpath is visible otherwise add the vessel
+        //add a vessel if the voyage number is not visible and if the voyage number is not equal to 53
+
+        // Directly search table rows for voyage number 053 and delete if found
+        // After filter, check if any checkbox is visible in the table rows and tick it
+
+        const checkbox = this.Elements.checkbox;
+        if (await this.page.locator(checkbox).count() > 0 && await this.page.locator(checkbox).isVisible()) {
+            await this.page.locator(checkbox).check();
+            await this.page.getByRole('button', { name: 'Delete Vessel' }).click();
+            const yesButton = this.page.locator("//button[normalize-space()='Yes']");
+            if (await yesButton.isVisible()) {
+                await this.page.waitForTimeout(1000);
+                await yesButton.click();
+            }
+        }
+        await this.page.waitForTimeout(1000);
+        await this.clickAddVessel();               
+        await closeButton.click();
+
     }
 
     async enterBerthVesselWeekInfo(berth: string, vessel: string, week: string): Promise<void> {
@@ -57,13 +93,11 @@ export class VesselSchedulePage {
     }
 
     async clickSave(): Promise<void> {
-        await this.base.waitAndClick(this.Elements.saveButton);
+                await this.base.waitAndClick(this.Elements.saveButton);
+        const message = await this.page.locator(this.Elements.successMessage).textContent();
+        expect(message).toContain('Vessel Schedule information saved successfully');
     }
 
-    async verifySuccessMessage(): Promise<void> {
-        const message = await this.page.locator(this.Elements.successMessage).textContent();
-        expect(message).toContain('Vessel added successfully');
-    }
 
     async addRemarks(remarks: string): Promise<void> {
         await this.page.locator(this.Elements.remarksInput).fill(remarks);
@@ -85,5 +119,21 @@ export class VesselSchedulePage {
         await this.base.waitAndClick(this.Elements.viewScheduleButton);
         const tableVisible = await this.page.locator(this.Elements.scheduleTable).isVisible();
         expect(tableVisible).toBeTruthy();
+    }
+
+    async fillBerthVesselWeekForVoyage53(): Promise<void> {
+        
+        await this.page.getByPlaceholder('Search').nth(2).click();
+        await this.page.getByPlaceholder('Search').nth(2).type('53', { delay: 100 });
+        await this.page.getByPlaceholder('Search').nth(2).press('Enter');
+        await this.page.waitForTimeout(1000);
+        //SELECT PVCS FROM SERVICE
+        await this.page.locator(this.Elements.berthInfo).selectOption('E22');
+        await this.page.locator(this.Elements.service).selectOption('PCC1');
+        await this.page.locator(this.Elements.stern).fill('10');
+        await this.page.locator(this.Elements.amp).fill('100');
+        await this.page.locator(this.Elements.caddy).check();
+
+
     }
 }

@@ -10,25 +10,17 @@ Then('I am on the Vessel Schedule page', async function () {
     await vesselSchedulePage.goto();
 });
 
-When('Click on Add Vessel button', async function () {
-    await vesselSchedulePage.clickAddVessel();
-});
-
-When('Enter Vessel Name as {string}', async function (vesselName: string) {
-    await vesselSchedulePage.enterVesselName(vesselName);
+When('Schedule a vessel', async function () {
+    await vesselSchedulePage.enterVesselName();
 });
 
 When('Enter berth info, vessel info and week info', async function () {
     // Example values, update as needed
-    await vesselSchedulePage.enterBerthVesselWeekInfo('Berth1', 'VesselInfo1', 'Week1');
+    await vesselSchedulePage.fillBerthVesselWeekForVoyage53();
 });
 
 When('Click on Save button', async function () {
     await vesselSchedulePage.clickSave();
-});
-
-Then('Verify success message is displayed for adding vessel', async function () {
-    await vesselSchedulePage.verifySuccessMessage();
 });
 
 Then('Verify remarks are added successfully', async function () {

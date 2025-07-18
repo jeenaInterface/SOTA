@@ -44,3 +44,11 @@ Then('Security sergeant user logged into the application', async function () {
 Then('user click on logout button', async function () {
   await login.logOutDropDownlist();
 });
+
+Given('Vessel schedule user logged into the application', async function () {
+  login = new loginPage(fixture.page);
+  await login.navigateToLoginPage();
+  await login.enterUserName(data.userEmailVesselSchedule)
+  await login.enterPassword(data.userPasswordVesselSchedule)
+  await login.clickLoginButton();
+});

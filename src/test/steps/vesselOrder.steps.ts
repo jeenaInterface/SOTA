@@ -88,3 +88,30 @@ Then('TR user verifies that the vessel labor order is pushed to the summary shee
   let LatestWorkOrderDate: string
   await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate);
 });
+
+When('the user navigates to the new order form', async function () {
+  vesselOrder = new vesselOrderPage(fixture.page);
+    await vesselOrder.navigateToNewOrderForm();
+});
+
+When('the user enters work date and shift', async function () {
+    await vesselOrder.enterWorkDate();
+
+});
+
+
+When('the user fills details in local 13 tab', async function () {
+    await vesselOrder.fillLocal13Details();
+    await vesselOrder.clickSaveButton();
+    await vesselOrder.verifySuccessMessage();
+});
+
+When('the user fills details in local 63 tab', async function () {
+    await vesselOrder.fillLocal63Details();
+    await vesselOrder.clickSaveButton();
+    await vesselOrder.verifySuccessMessage();
+});
+
+When('the user fills details in local 94 tab', async function () {
+    await vesselOrder.fillLocal94Details();
+});

@@ -95,6 +95,42 @@ export default class vesselOrderPage {
         validationMessageForMandatoryFields: "(//span[@class='text-bold color-white'])[1]",
         stdyHammerhead: "//*[@id='first']/div/div/tbody/tr[5]/td[10]/input",
         stdyValidationMessage: "//span[normalize-space(text())='The total Flex Steady Count and the total Flex Steady names are not matching for Longshore']",
+        newOrderMenu: "//a[normalize-space()='New Order Form']",
+        workDateNEWORDER: "//input[@id='sWorkDt']",
+        shiftNEWOrder: "//select[@id='shift']",
+        goButton: "//button[normalize-space(text())='GO']",
+        local13Tab: "//a[normalize-space()='LOCAL 13']",
+        local63Tab: "//a[normalize-space()='LOCAL 63']",
+        local94Tab: "//a[normalize-space()='LOCAL 94']",
+        saveButton: "//button[normalize-space(text())='SAVE']",
+        successMessageneworder: "//span[contains(normalize-space(text()), 'New Order information saved successfully')]",
+        carbonField: "#carbon",
+        carbonCheckbox: "#cbCarbon",
+        alcNo: "//tr[.//text()='Alc No']//input",
+        reqRound: "select[name='reqRound']",
+        orderedRound: "select[name='orderedRound']",
+        reqTime: "/html/body/app-root/app-home/div/div/section/div/app-neworder-form/div/div/neworder-form-details/div/div[1]/div[3]/div[2]/div/div/div[2]/table[1]/tbody/tr[2]/td[2]/select",
+        orderTime:"/html/body/app-root/app-home/div/div/section/div/app-neworder-form/div/div/neworder-form-details/div/div[1]/div[3]/div[2]/div/div/div[2]/table[1]/tbody/tr[2]/td[3]/select",
+        jobType: "select[name='jobType']",
+        jobTypeReq: "input[name='jobTypeReq']",
+        jobTypeOrd: "input[name='jobTypeOrd']",
+        hallNameTime: "//input[@id='hallName']",
+        reqJobType: "input[name='reqJobType']",
+        orderedJobType: "input[name='orderedJobType']",
+        remarksInput: "//textarea[@placeholder='Enter your remarks here...']",
+        addRemarksButton: "//button[text()='Add Remarks']",
+        addSteadyTableButton: "//button[text()='ADD STEADY TABLE']",
+        searchByName: "//input[@placeholder='Search By Name or Reg #']",
+        invalidCheck: "#invalidCheck",
+        lateOrder: "#lateOrder1",
+        carbonInput: '#carbon',
+        reqRoundSelect: 'select[name="reqRound"]',
+        orderedRoundSelect: 'select[name="orderedRound"]',
+        reqTimeSelect: 'select[name="reqTime"]',
+        jobTypeSelect: 'select[name="jobType"]',
+        jobTypeReqInput: 'input[name="jobTypeReq"]',
+        jobTypeOrdInput: 'input[name="jobTypeOrd"]',
+        alcNoRowTextbox: { row: 'Alc No', role: 'textbox' },
     }
     async clickOnVesselOrderMenu(): Promise<void> {
         await this.base.goto(process.env.BASEURL, { timeout: 100000 });
@@ -107,7 +143,7 @@ export default class vesselOrderPage {
         await this.page.waitForTimeout(1000);
         await this.page.getByPlaceholder('Search By Job No or Vessel').press('ArrowRight');
         await this.page.getByPlaceholder('Search By Job No or Vessel').click();
-        await this.page.getByPlaceholder('Search By Job No or Vessel').fill('COSCO ENGLAND - 053 - 100714 - 9516428');
+        await this.page.getByPlaceholder('Search By Job No or Vessel').fill('COSCO OCEANIA - 092 - 100783 - 9334923');
         // await this.page.getByPlaceholder('Search By Job No or Vessel Name or Voyage or Lloyds').click();
         // Wait for datalist options
         await this.page.waitForTimeout(4000);
@@ -133,7 +169,7 @@ export default class vesselOrderPage {
         }
     }
 
-    async SelectDetailsOnLandingPage(): Promise<string> {
+  async SelectDetailsOnLandingPage(): Promise<string> {
         let currentDate = new Date();
         let formattedDate: string;
         const maxAttempts = 10;
@@ -448,6 +484,102 @@ export default class vesselOrderPage {
     async clickOnSummarySheetMenu(): Promise<void> {
         await this.base.waitAndClick(this.Elements.laborOrderMenu);
         await this.base.waitAndClick(this.Elements.summarysheet);
+    }
+        async navigateToNewOrderForm(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.laborOrderMenu);
+        await this.base.waitAndClick(this.Elements.newOrderMenu);
+    }
+
+    async enterWorkDate() {
+        await this.page.locator(this.Elements.workDateNEWORDER).click();
+        // await this.page.locator(this.Elements.workDateNEWORDER).fill(this.noTRStatusDate);
+        await this.page.locator(this.Elements.workDateNEWORDER).fill("2025-07-21");
+        await this.page.locator(this.Elements.shiftNEWOrder).selectOption("Nightside");
+        await this.base.waitAndClick(this.Elements.goButton);
+
+    }
+
+
+    async fillLocal13Details() {
+        const carbonInput = this.page.locator('#carbon');
+        const reqRoundSelect = this.page.locator('select[name="reqRound"]');
+        const orderedRoundSelect = this.page.locator('select[name="orderedRound"]');
+        const reqTimeSelectFirst = this.page.locator('select[name="reqTime"]').first();
+        const reqTimeSelectSecond = this.page.locator('select[name="reqTime"]').nth(1);
+        const jobTypeSelect = this.page.locator('select[name="jobType"]');
+        const jobTypeReqInput = this.page.locator('input[name="jobTypeReq"]');
+        const jobTypeOrdInput = this.page.locator('input[name="jobTypeOrd"]');
+        const alcNoTextbox = this.page.getByRole('row', { name: 'Alc No', exact: true }).getByRole('textbox');
+        const saveButton = this.page.getByRole('button', { name: 'SAVE' });
+
+        await carbonInput.fill('1');
+        await reqRoundSelect.selectOption('MRO');
+        await orderedRoundSelect.selectOption('MRO');
+        await reqTimeSelectFirst.selectOption('3-3AMfx HT LS');
+        await reqTimeSelectSecond.selectOption('4AM HT LS');
+        await jobTypeSelect.selectOption('GEAR LEADMAN-SPECIAL');
+        await jobTypeReqInput.click();
+        await jobTypeReqInput.fill('111');
+        await jobTypeOrdInput.click();
+        await jobTypeOrdInput.fill('1');
+        await alcNoTextbox.click();
+        await alcNoTextbox.fill('22');
+        await saveButton.click();
+        await saveButton.click();
+    }
+
+    async fillLocal63Details() {
+        await fixture.page.waitForTimeout(2000);
+        await this.base.waitAndClick(this.Elements.local63Tab);
+
+        // Fill hall name and time
+        await this.page.locator(this.Elements.hallNameTime).click();
+        await this.page.locator(this.Elements.hallNameTime).fill('john @10am');
+
+        // Select options
+        await this.page.getByRole('combobox').nth(2).selectOption('REGULAR');
+        await this.page.getByRole('combobox').nth(3).selectOption('FLEX');
+        await this.page.locator(this.Elements.jobType).selectOption('SR');
+
+        // Fill job type details
+        await this.page.locator(this.Elements.reqJobType).click();
+        await this.page.locator(this.Elements.reqJobType).fill('11');
+        await this.page.locator(this.Elements.orderedJobType).click();
+        await this.page.locator(this.Elements.orderedJobType).fill('1');
+
+        // Add remarks
+        await this.page.locator('.col > .bi').first().click();
+        await this.page.locator(this.Elements.remarksInput).fill('test');
+        await this.page.locator(this.Elements.addRemarksButton).click();
+
+        // Add steady table
+        await this.page.locator(this.Elements.addSteadyTableButton).click();
+        await this.page.locator(this.Elements.reqTime).nth(2).selectOption('FLEX');
+        await this.page.locator(this.Elements.reqTime).nth(3).selectOption('REGULAR');
+        await this.page.locator(this.Elements.jobType).nth(1).selectOption('VPT');
+        await this.page.getByRole('cell', { name: '--Select--' }).getByRole('combobox').selectOption('SUPERVISOR-SHIP');
+
+        // Search and select employee
+        await this.page.locator(this.Elements.searchByName).fill('john');
+        await this.page.locator(this.Elements.searchByName).press('Enter');
+        await this.page.locator(this.Elements.searchByName).fill('Allen, Johnny L - 1635032');
+
+        // Check boxes
+        await this.page.locator(this.Elements.invalidCheck).check();
+        await this.page.locator(this.Elements.lateOrder).check();
+    }
+
+    async fillLocal94Details() {
+        await this.base.waitAndClick(this.Elements.local94Tab);
+        // Add specific details for Local 94
+    }
+
+    async clickSaveButton() {
+        await this.base.waitAndClick(this.Elements.saveButton);
+    }
+
+    async verifySuccessMessagenewOrder() {
+        expect(await this.page.locator(this.Elements.successMessageneworder))
     }
 
 }

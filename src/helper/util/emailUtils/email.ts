@@ -1,8 +1,11 @@
 import * as nodemailer from 'nodemailer';
- 
- 
+
 async function sendEmail() {
   try {
+    const sharedReportPath = 'C:\\Users\\jmanuel.SUYMIL\\OneDrive - Milestone Technologies Inc\\LBCT - Automation Practice\\Automation Reports\\test-results\\cucumber-report.html';
+    // Add your actual OneDrive/SharePoint web link below
+    const sharedReportWebUrl = 'https://milestn.sharepoint.com/:u:/r/sites/LBCT/Shared%20Documents/General/Automation%20Practice/Automation%20Reports/test-results/cucumber-report.html?csf=1&web=1&e=0hbgrC';
+
     const transporter = nodemailer.createTransport({
       host: 'smtp.office365.com',
       port: 587,
@@ -12,30 +15,32 @@ async function sendEmail() {
         pass: 'Milestone@Dec24',
       },
     });
- 
+
     const mailOptions = {
       from: 'lbct.sa@milestone.tech',
       to: 'jeena.manuel@milestone.tech',
       subject: 'SOTA Automation Test Report',
-      text: `Hi,
-
-Please find attached the test report.
-
-From
-QA team`,
+      html: `
+        <p>Hi,</p>
+        <p>Please find attached the test report.</p>
+        <p><b>Shared report location:</b><br>
+        <a href="${sharedReportWebUrl}">${sharedReportWebUrl}</a>
+        </p>
+        <p>From<br>QA team</p>
+      `,
       attachments: [
         {
           filename: 'cucumber-report.html',
-          path: '/SOTA-AUTOMATION/test-results/cucumber-report.html',
+          path: sharedReportPath,
         },
       ],
     };
- 
+
     await transporter.sendMail(mailOptions);
     console.log('Email sent successfully');
   } catch (error) {
     console.error('Error occurred while sending email:', error);
   }
 }
- 
+
 sendEmail().catch(console.error);

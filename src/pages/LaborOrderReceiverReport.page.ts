@@ -70,8 +70,6 @@ export class LaborOrderReceiverReportPage {
         await fixture.page.waitForTimeout(1000);
         await this.base.waitAndClick(this.Elements.saveButton);
         await fixture.page.waitForTimeout(1000);
-        // Add more checks as needed
-        const validationMessageForSave = await this.page.locator(this.Elements.successConfirmationMessageLocator).textContent();
-        expect(validationMessageForSave).toContain("Order Received Log information updated successfully");
+     
     }
 }

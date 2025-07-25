@@ -104,7 +104,7 @@ export class LaborOrderDiscrepanciesReportPage {
     }
 
     async downloadSummaryReport(): Promise<string> {
-        const downloadPath = path.resolve(__dirname, 'DiscrepancySummaryReport');
+        const downloadPath = path.resolve(__dirname, 'downloads');
         if (!fs.existsSync(downloadPath)) {
             fs.mkdirSync(downloadPath, { recursive: true });
         }

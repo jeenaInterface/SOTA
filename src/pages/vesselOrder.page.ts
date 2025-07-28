@@ -88,7 +88,7 @@ export default class vesselOrderPage {
         AddRemarksButton: "//button[normalize-space()='Add Remarks']",
         RegisterNo: "//input[@id='regNo1']",
         RollingCodeButton: "//button[normalize-space()='View']",
-        RollingCode: "//h5[@id='rollingCode']",
+        RollingCode: "//div[contains(@class,'modal-body')]//div[.//span[text()='Foreman']]/span[last()]",
         RollingCodeTextBox: "//input[@id='rollingCode']",
         RollingCodeCloseButton: "//div[@id='rollingCode']//button[@class='btn button-action'][normalize-space()='Close']",
         GoButton: "//button[normalize-space()='Go']",
@@ -303,6 +303,7 @@ export default class vesselOrderPage {
         await fixture.page.waitForTimeout(2000);
         await this.page.locator(this.Elements.workDatetimehseet).click();
         await this.page.locator(this.Elements.workDatetimehseet).fill(this.noTRStatusDate);
+        // await this.page.locator(this.Elements.workDatetimehseet).fill('2025-07-29');
         await this.page.locator(this.Elements.shift).selectOption("2ND");
         this.selectJobNumber();
     }
@@ -420,31 +421,40 @@ export default class vesselOrderPage {
     }
     async storeRollingCode(): Promise<string> {
         let attempts = 0;
-        const maxAttempts = 5; // Set a maximum number of attempts to avoid infinite loops
+        const maxAttempts = 10; // Increase attempts for reliability
 
         while (attempts < maxAttempts) {
-            // Try clicking to open the rolling code dialog
+            // Open the rolling code dialog
             await this.base.waitAndClick(this.Elements.RollingCodeButton);
 
-            // Wait for the rolling code element to appear and get its text
-            const rollingCodeElement = await this.page.locator(this.Elements.RollingCode);
-            this.rollingCodeText = await rollingCodeElement.textContent();
-
-            if (this.rollingCodeText && this.rollingCodeText.trim() !== '') {
-                // Exit the loop if the rolling code is found and has content
-                await this.base.waitAndClick(this.Elements.RollingCodeCloseButton);
-                return this.rollingCodeText;
+            // Wait for the rolling code value to be visible (not just any text)
+            const rollingCodeElement = this.page.locator(this.Elements.RollingCode);
+            // Wait up to 2 seconds for the value to be non-empty
+            let foremanCode = '';
+            try {
+                await rollingCodeElement.waitFor({ state: 'visible', timeout: 2000 });
+                const value = await rollingCodeElement.textContent();
+                if (value && value.trim() !== '') {
+                    foremanCode = value.trim();
+                }
+            } catch (e) {
+                // If not visible, treat as not found
+                foremanCode = '';
             }
 
-            // If no valid rolling code is found, log and try closing and reopening the popup
-            fixture.logger.info("Rolling code not found, closing and reopening the popup.");
+            // Close the popup
             await this.base.waitAndClick(this.Elements.RollingCodeCloseButton);
 
+            if (foremanCode !== '') {
+                this.rollingCodeText = foremanCode;
+                return foremanCode;
+            }
 
+            fixture.logger.info("Foreman rolling code not found, reopening the popup.");
             attempts++;
-            await this.page.waitForTimeout(1000); // Optional, can adjust based on your application's behavior
+            await this.page.waitForTimeout(1000);
         }
-
+        throw new Error('Foreman rolling code was not generated after multiple attempts.');
     }
     async pasteRollingCode(RollingCode: string): Promise<void> {
         await this.page.locator(this.Elements.RollingCodeTextBox).fill(this.rollingCodeText);

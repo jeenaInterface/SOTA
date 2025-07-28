@@ -12,20 +12,20 @@ Feature: Vessel order and ops vessel timehseet functionalities
     Then the user push the labor order to the summary sheet
     Then the user cancel the order
 
-  @sanity
+  @vessel
   Scenario: The TR user creates a new vessel order and discards it
     Given TR user logged into the application
     Given the user creates a new vessel order
     Then the user discards the order
 
-  @sanity
+  @vessel
   Scenario: Verify Mandatory validation messages in vessel order
     Given TR user logged into the application
     Then Verify that the appropriate validation message for berth , start time and reference field
     Then Verify that the appropriate validation message for steady name and steady count field
 
 
-  @sanity
+  @vessel
   Scenario: TR user creates, firms, pushes to summary sheet, and cancels a vessel order
     Given TR user logged into the application
     Given the user creates a new vessel order
@@ -33,7 +33,7 @@ Feature: Vessel order and ops vessel timehseet functionalities
     Then the user push the labor order to the summary sheet
     Then the user cancel the order
 
-  @sanity
+  @vessel1
   Scenario: Vessel Order Timehseet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report
     Given TR user logged into the application
     Given the user creates a new vessel order

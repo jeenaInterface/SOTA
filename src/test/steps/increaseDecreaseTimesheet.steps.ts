@@ -1,4 +1,5 @@
 
+
 import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { IncreaseDecreaseTimesheetPage } from '../../pages/increaseDecreaseTimesheet.page';
@@ -62,4 +63,22 @@ Then('verify the report downloaded successfully', async function () {
   //timeout
   await fixture.page.waitForTimeout(5000);
   await timesheetPage.downloadTimehseetReport();
+});
+
+Then('Click on submit button without entering any details', async function () {
+  await timesheetPage.saveAndSubmitTimesheetWithValidation();
+});
+
+Then('Verify that the appropriate validation message for timesheet entry when click on approve button', async function () {
+  await timesheetPage.approveWithValidation();
+});
+
+Then('Verify validation message for Longshore Name, Payroll and Hours', async function () {
+  // Implement this method in the page object if not present
+  await timesheetPage.verifyValidationMessageForLongshorePayrollHours();
+});
+
+Then('Verify validation message for LBCT Management Name', async function () {
+  // Implement this method in the page object if not present
+  await timesheetPage.verifyValidationMessageForLBCTManagementName();
 });

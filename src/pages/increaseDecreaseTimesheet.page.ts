@@ -1,3 +1,4 @@
+
 import { Page, expect } from "@playwright/test";
 import PlaywrightWrapper from "../helper/wrapper/PlaywrightWrappers";
 import { setDefaultTimeout } from "@cucumber/cucumber"
@@ -61,8 +62,9 @@ export class IncreaseDecreaseTimesheetPage {
         deletePopup: "//button[normalize-space()='Yes']",
         deleteButton: "//button[normalize-space()='DELETE']",
         downloadReport: "//button[normalize-space()='DOWNLOAD REPORT']",
-        DFT:"xpath=/html/body/app-root/app-home/div/div/section/div/app-timesheet/div/div[1]/div/div[3]/table/tbody/tr[1]/td[8]/input"
-        
+        DFT:"xpath=/html/body/app-root/app-home/div/div/section/div/app-timesheet/div/div[1]/div/div[3]/table/tbody/tr[1]/td[8]/input",
+        validationMessageTimesheetEntry:"//span[contains(text(),'Please enter at least one Timesheet Entry for submitting the timesheet')]"
+
     };
 
     async clickOnTimehseetMenu(): Promise<void> {
@@ -262,4 +264,52 @@ export class IncreaseDecreaseTimesheetPage {
         expect(isGoButtonVisible).toBeTruthy();
 
     }
+    async saveAndSubmitTimesheetWithValidation(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.saveButton);
+        await this.page.waitForSelector(this.Elements.successMessage, { timeout: 5000 });
+        const successMessage = await this.page.locator(this.Elements.successMessage).textContent();
+        expect(successMessage).toContain("Timesheet Information has been updated successfully");
+    }
+    async approveWithValidation(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.approveButton);
+//verify validation message for timesheet entry
+        const isValidationMessageVisible = await this.page.isVisible(this.Elements.validationMessageTimesheetEntry);
+        expect(isValidationMessageVisible).toBeTruthy();
+
+    }
+
+    async verifyValidationMessageForLongshorePayrollHours(): Promise<void> {
+        // Example: Adjust the selector/message as per your app's actual validation
+        await this.base.waitAndClick(this.Elements.plusBtton);
+                await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('140');
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').press('Enter');
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').click();
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('140 - LB - LASH BOSS');
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        await this.base.waitAndClick(this.Elements.JobListAddButton);
+        await this.base.waitAndClick(this.Elements.approveButton);
+        const selector = "//span[contains(text(),'Please enter Longshore Name, Payroll and Hours')]";
+        const isVisible = await this.page.isVisible(selector);
+        expect(isVisible).toBeTruthy();
+    }
+
+    // Verifies validation message for LBCT Management Name
+    async verifyValidationMessageForLBCTManagementName(): Promise<void> {
+        // Example: Adjust the selector/message as per your app's actual validation
+        await this.page.locator(this.Elements.FirstNamecell).click();
+        await this.page.locator(this.Elements.FirstNamecell).fill("3961305");
+        await this.page.locator(this.Elements.FirstNamecell).press('Enter');
+        await this.page.locator(this.Elements.FirstNamecell).fill("Acosta, Johnnie A");
+        await this.page.locator(this.Elements.RegisterNo).fill("3961305");
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        await this.page.locator(this.Elements.ST).fill("7");
+        await this.page.locator(this.Elements.OT).fill("3");
+        await this.base.waitAndClick(this.Elements.approveButton);
+        const selector = "//span[contains(text(),'Please enter your name in 'LBCT Management Name')]";
+        const isVisible = await this.page.isVisible(selector);
+        expect(isVisible).toBeTruthy();
+    }
+
 }

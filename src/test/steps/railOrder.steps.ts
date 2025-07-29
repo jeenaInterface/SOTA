@@ -86,12 +86,12 @@ Then('ops user reject the rail timesheet', async function () {
 
 Then('verify remove approval functionality in rail timehseet', async function () {
   await vesselOrder.clickOnRemoveApproval();
-  await vesselOrder.storeRollingCode();
+  await railOrder.storeRollingCodeRailTimesheet();
 });
 
 Then('Labor entry add new steady details and mgr comments and submit the rail order timehseet', async function () {
   let RollingCode: string;
-  await vesselOrder.pasteRollingCode(RollingCode);
+  await railOrder.pasteRollingCode(RollingCode);
   await railOrder.AddNewRowRail();
   await vesselOrder.SubmitTimehseet();
 });

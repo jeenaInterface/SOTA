@@ -47,8 +47,6 @@ Then('delete three rows in the timesheet and add a new row in the timesheet', as
     await fixture.page.waitForTimeout(2000);
     await vesselOrder.clickOnSaveWithoutSubmit();
 
-
-
 });
 When('the user saves the Terminal Services Timehseet without submitting it', async function () {
     await vesselOrder.clickOnSaveWithoutSubmit();
@@ -59,6 +57,7 @@ Then('the user saves and submits the Terminal Services Timehseet', async functio
     await vesselOrder.VerifySuccessMessage();
 });
 Then('Ops user submits and approve the Terminal Services Timehseet', async function () {
+
     await terminalServiceOrder.clickOnTimehseetMenu();
     let LatestWorkOrderDate: string
     await terminalServiceOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
@@ -72,11 +71,11 @@ Then('ops user reject the Terminal Services Timehseet', async function () {
 });
 Then('verify remove approval functionality of Terminal Services Timehseet', async function () {
     await vesselOrder.clickOnRemoveApproval();
-    await vesselOrder.storeRollingCode()
+    await terminalServiceOrder.storeRollingCodeTerminalServiceOrderTimesheet();
 });
 Then('Labor entry add new steady details and mgr comments and submit the Terminal Services Timehseet', async function () {
     let RollingCode: string
-    await vesselOrder.pasteRollingCode(RollingCode);
+    await terminalServiceOrder.pasteRollingCode(RollingCode);
     await terminalServiceOrder.AddNewRowterminal();
     await vesselOrder.SubmitTimehseet();
 });

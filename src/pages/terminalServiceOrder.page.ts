@@ -13,7 +13,7 @@ export default class terminalServiceOrderPage {
     // Declare the global variable for noTRStatusDate at the class level
     public noTRStatusDate: string;
     private weekNumber: number;
-
+    public rollingCodeText: string;
     // Constructor accepts the Page object
     constructor(page: Page) {
         this.base = new PlaywrightWrapper(page);
@@ -65,8 +65,11 @@ export default class terminalServiceOrderPage {
         YesButton: "//button[normalize-space()='Yes']",
         CountDropDown: "//select[@id='rowCounter']",
 
-
-
+        RollingCodeButton: "//button[normalize-space()='View']",
+        RollingCode: "//div[contains(@class,'modal-body')]//div[.//span[text()='Sweeper']]/span[last()]",
+        RollingCodeTextBox: "//input[@id='rollingCode']",
+        RollingCodeCloseButton: "//div[@id='rollingCode']//button[@class='btn button-action'][normalize-space()='Close']",
+        GoButton: "//button[normalize-space()='Go']",
     }
     async clickOnTerminalServiceOrderMenu(): Promise<void> {
         await this.base.goto(process.env.BASEURL, { timeout: 100000 });
@@ -146,7 +149,7 @@ export default class terminalServiceOrderPage {
         fixture.logger.info("Waiting for 2 seconds")
         await fixture.page.waitForTimeout(2000);
         await this.page.locator(this.Elements.workDatetimehseet).click();
-       await this.page.locator(this.Elements.workDatetimehseet).fill(this.noTRStatusDate);
+        await this.page.locator(this.Elements.workDatetimehseet).fill(this.noTRStatusDate);
         await this.page.locator(this.Elements.shift).selectOption("2ND");
         await this.page.locator(this.Elements.jobType).selectOption("Sweeper - 490137");
         await this.base.waitAndClick(this.Elements.Go);
@@ -177,8 +180,8 @@ export default class terminalServiceOrderPage {
         await this.page.getByPlaceholder('Search Job Type or OCC Code').press('Enter');
         await this.page.getByPlaceholder('Search Job Type or OCC Code').click();
         await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('200 - SWEEPER - SWEEPER');
-        fixture.logger.info("Waiting for 2 seconds")
-        await fixture.page.waitForTimeout(2000);
+        fixture.logger.info("Waiting for 1 seconds")
+        await fixture.page.waitForTimeout(1000);
         await this.base.waitAndClick(this.Elements.JobListAddButton);
 
     }
@@ -220,6 +223,47 @@ export default class terminalServiceOrderPage {
         await this.base.waitAndClick(this.Elements.AddRemarksButton);
 
     }
+    async storeRollingCodeTerminalServiceOrderTimesheet(): Promise<string> {
+        let attempts = 0;
+        const maxAttempts = 10; // Increase attempts for reliability
 
+        while (attempts < maxAttempts) {
+            // Open the rolling code dialog
+            await this.base.waitAndClick(this.Elements.RollingCodeButton);
+
+            // Wait for the rolling code value to be visible (not just any text)
+            const rollingCodeElement = this.page.locator(this.Elements.RollingCode);
+            // Wait up to 2 seconds for the value to be non-empty
+            let SweeperCode = '';
+            try {
+                await rollingCodeElement.waitFor({ state: 'visible', timeout: 2000 });
+                const value = await rollingCodeElement.textContent();
+                if (value && value.trim() !== '') {
+                    SweeperCode = value.trim();
+                }
+            } catch (e) {
+                // If not visible, treat as not found
+                SweeperCode = '';
+            }
+
+            // Close the popup
+            await this.base.waitAndClick(this.Elements.RollingCodeCloseButton);
+
+            if (SweeperCode !== '') {
+                this.rollingCodeText = SweeperCode;
+                return this.rollingCodeText;
+            }
+
+            fixture.logger.info("Sweeper rolling code not found, reopening the popup.");
+            attempts++;
+            await this.page.waitForTimeout(1000);
+        }
+        throw new Error('Sweeper rolling code was not generated after multiple attempts.');
+    }
+    async pasteRollingCode(RollingCode: string): Promise<void> {
+        await this.page.locator(this.Elements.RollingCodeTextBox).fill(this.rollingCodeText);
+        await this.base.waitAndClick(this.Elements.GoButton);
+
+    }
 
 }

@@ -12,20 +12,20 @@ Feature: Yard Order and ops yard order timehseet functioanlities
         Then the user push the Yard labor order to the summary sheet
         Then the user cancel the Yard order
 
-    @yard
+    @sanity
     Scenario: The TR user creates a new yard order and discards it
         Given TR user logged into the application
         Given the user creates a new Yard order
         Then the user discards the Yard order
 
-    @yard
+    @sanity
     Scenario: Verify Mandatory validation messages in yard order
         Given TR user logged into the application
         Then Verify that the appropriate validation message for start time field
         Then Verify that the appropriate validation message for steady name and steady count field in yard order
 
 
-    @yard
+    @sanity
     Scenario: TR user creates, firms, pushes to summary sheet, and cancels a yard order
         Given TR user logged into the application
         Given the user creates a new Yard order
@@ -33,7 +33,7 @@ Feature: Yard Order and ops yard order timehseet functioanlities
         Then the user push the Yard labor order to the summary sheet
         Then the user cancel the Yard order
 
-@yard
+@sanity
   Scenario: Yard Order Timehseet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report
     Given TR user logged into the application
     Given the user creates a new Yard order

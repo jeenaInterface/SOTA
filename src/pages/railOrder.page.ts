@@ -13,6 +13,7 @@ export default class railOrderPage {
     // Declare the global variable for noTRStatusDate at the class level
     public noTRStatusDate: string;
     private weekNumber: number;
+    public rollingCodeText: string;
 
     // Constructor accepts the Page object
     constructor(page: Page) {
@@ -31,13 +32,13 @@ export default class railOrderPage {
         TRStatus: "//select[@ng-reflect-name='trStatus']",
         homeicon: "//div[@ng-reflect-router-link='/home']//a[1]",
         dataList: "//datalist[@id='nameListData']",
-        startTime:"//select[@id='startTime']",
-        ClerkTab:"//a[normalize-space(text())='Clerk']",
-        STDYFX:"//*[@id='first']/div/div/tbody/tr[1]/td[7]/input",
-        RailPlannerSTEADY:"//input[@ng-reflect-name='RAIL PLANNERtxSteadyNm00']",
-        RailPlannerflexType:"//select[@ng-reflect-name='RAIL PLANNERcbSteadyFx00']",
-        textArea:"(//label[normalize-space(text())='Notes']/following::textarea)[1]",
-        savemaycan:"//button[normalize-space(text())='SAVE/MAY-CAN']",
+        startTime: "//select[@id='startTime']",
+        ClerkTab: "//a[normalize-space(text())='Clerk']",
+        STDYFX: "//*[@id='first']/div/div/tbody/tr[1]/td[7]/input",
+        RailPlannerSTEADY: "//input[@ng-reflect-name='RAIL PLANNERtxSteadyNm00']",
+        RailPlannerflexType: "//select[@ng-reflect-name='RAIL PLANNERcbSteadyFx00']",
+        textArea: "(//label[normalize-space(text())='Notes']/following::textarea)[1]",
+        savemaycan: "//button[normalize-space(text())='SAVE/MAY-CAN']",
         SteadyDBName: "//datalist//option[contains(text(), 'Mendez, Daniel (Daniel) - 39195')]",
         stdyValidationMessage: "//span[normalize-space(text())='The total Flex Steady Count and the total Flex Steady names are not matching for Clerk']",
         TimehseetMenu: "//div[normalize-space(text())='Timesheet']",
@@ -57,6 +58,11 @@ export default class railOrderPage {
         RemarksTextArea: "//textarea[@id='addComment']",
         AddRemarksButton: "//button[normalize-space()='Add Remarks']",
         RegisterNo: "//input[@id='regNo1']",
+        RollingCodeButton: "//button[normalize-space()='View']",
+        RollingCode: "//div[contains(@class,'modal-body')]//div[.//span[text()='Clerk']]/span[last()]",
+        RollingCodeTextBox: "//input[@id='rollingCode']",
+        RollingCodeCloseButton: "//div[@id='rollingCode']//button[@class='btn button-action'][normalize-space()='Close']",
+        GoButton: "//button[normalize-space()='Go']",
     }
     async clickOnRailOrderMenu(): Promise<void> {
         await this.base.goto(process.env.BASEURL, { timeout: 100000 });
@@ -64,7 +70,7 @@ export default class railOrderPage {
         await this.base.waitAndClick(this.Elements.laborOrderMenu);
         await this.base.waitAndClick(this.Elements.railOrder);
     }
-    
+
     async SelectDetailsOnLandingPage(): Promise<void> {
         let currentDate = new Date();
         let formattedDate: string;
@@ -198,5 +204,46 @@ export default class railOrderPage {
         await this.base.waitAndClick(this.Elements.AddRemarksButton);
 
     }
+    async storeRollingCodeRailTimesheet(): Promise<string> {
+        let attempts = 0;
+        const maxAttempts = 10; // Increase attempts for reliability
 
+        while (attempts < maxAttempts) {
+            // Open the rolling code dialog
+            await this.base.waitAndClick(this.Elements.RollingCodeButton);
+
+            // Wait for the rolling code value to be visible (not just any text)
+            const rollingCodeElement = this.page.locator(this.Elements.RollingCode);
+            // Wait up to 2 seconds for the value to be non-empty
+            let clerkCode = '';
+            try {
+                await rollingCodeElement.waitFor({ state: 'visible', timeout: 2000 });
+                const value = await rollingCodeElement.textContent();
+                if (value && value.trim() !== '') {
+                    clerkCode = value.trim();
+                }
+            } catch (e) {
+                // If not visible, treat as not found
+                clerkCode = '';
+            }
+
+            // Close the popup
+            await this.base.waitAndClick(this.Elements.RollingCodeCloseButton);
+
+            if (clerkCode !== '') {
+                this.rollingCodeText = clerkCode;
+                return this.rollingCodeText;
+            }
+
+            fixture.logger.info("Clerk rolling code not found, reopening the popup.");
+            attempts++;
+            await this.page.waitForTimeout(1000);
+        }
+        throw new Error('Clerk rolling code was not generated after multiple attempts.');
+    }
+    async pasteRollingCode(RollingCode: string): Promise<void> {
+        await this.page.locator(this.Elements.RollingCodeTextBox).fill(this.rollingCodeText);
+        await this.base.waitAndClick(this.Elements.GoButton);
+
+    }
 }

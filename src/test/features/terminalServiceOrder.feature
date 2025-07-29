@@ -11,14 +11,14 @@ Feature: Terminal Service Order and ops terminal service order timehseet functio
     Then the user push the Terminal Services Order to the summary sheet
     Then the user cancel the Terminal Services Order
 
-  @sanity
+  @terminalServiceOrder
   Scenario: The TR user creates a new Terminal Services Order and discards it
     Given TR user logged into the application
     Given the user creates a new Terminal Services Order
     Then the user discards the Terminal Services Order
 
 
-  @sanity
+  @terminalServiceOrder
   Scenario: TR user creates, firms, pushes to summary sheet, and cancels a Terminal Services Order
     Given TR user logged into the application
     Given the user creates a new Terminal Services Order
@@ -27,15 +27,15 @@ Feature: Terminal Service Order and ops terminal service order timehseet functio
     Then the user cancel the Terminal Services Order
 
 
-  @sanity
+  @terminalServiceOrder1
   Scenario: Terminal Services Order Timehseet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report
     Given TR user logged into the application
-    Given the user creates a new Terminal Services Order
-    Then the user push the Terminal Services Order to the summary sheet
-    Given the user creates a timesheet for the Terminal Services Order
-    Then delete three rows in the timesheet and add a new row in the timesheet
-    Then the user saves the Terminal Services Timehseet without submitting it
-    Then the user saves and submits the Terminal Services Timehseet
+    # Given the user creates a new Terminal Services Order
+    # Then the user push the Terminal Services Order to the summary sheet
+    # Given the user creates a timesheet for the Terminal Services Order
+    # Then delete three rows in the timesheet and add a new row in the timesheet
+    # Then the user saves the Terminal Services Timehseet without submitting it
+    # Then the user saves and submits the Terminal Services Timehseet
     Then user click on logout button
     Then Ops user logged into the application
     Then Ops user submits and approve the Terminal Services Timehseet

@@ -1,5 +1,3 @@
-
-
 import { Given, When, Then } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { IncreaseDecreaseTimesheetPage } from '../../pages/increaseDecreaseTimesheet.page';
@@ -8,12 +6,10 @@ import { fixture } from '../../hooks/pageFixture';
 
 let timesheetPage: IncreaseDecreaseTimesheetPage;
 
-
 let currentDate = new Date();
 
-
-
 When('I navigate to the Increase-Decrease Timesheet page', async function () {
+
   timesheetPage = new IncreaseDecreaseTimesheetPage(fixture.page);
   await timesheetPage.clickOnTimehseetMenu();
 });
@@ -50,14 +46,14 @@ When('I approve the timesheet entry', async function () {
 
 Then('Then Reject the timesheet entry', async function () {
   // Implement reject logic
-    await timesheetPage.clickOnReject();
-  
+  await timesheetPage.clickOnReject();
+
 });
 
 Then('Then delete entire timesheet entry', async function () {
   // Implement delete logic
-    await timesheetPage.deleteIndividualTimesheetEntry();
-  
+  await timesheetPage.deleteIndividualTimesheetEntry();
+
 });
 Then('verify the report downloaded successfully', async function () {
   //timeout
@@ -81,4 +77,9 @@ Then('Verify validation message for Longshore Name, Payroll and Hours', async fu
 Then('Verify validation message for LBCT Management Name', async function () {
   // Implement this method in the page object if not present
   await timesheetPage.verifyValidationMessageForLBCTManagementName();
+});
+
+Then('Delete entire timesheet entire entry', async function () {
+  // Implement this method in the page object if not present
+  await timesheetPage.deleteEntireTimesheetEntry();
 });

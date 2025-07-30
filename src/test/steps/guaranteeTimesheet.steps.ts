@@ -48,3 +48,23 @@ Then('verify the GuaranteeTimesheet report downloaded successfully', async funct
     await fixture.page.waitForTimeout(5000);
     await timesheetPage.downloadTimehseetReport();
 });
+
+Then('Click on submit button without entering any details in guarantee timesheet', async function () {
+    await timesheetPage.saveAndSubmitTimesheetWithValidation();
+});
+
+Then('Verify that the appropriate validation message for guarantee timesheet entry when click on approve button', async function () {
+    await timesheetPage.approveWithValidation();
+});
+
+Then('Verify validation message for Longshore Name, Payroll and Hours for Guarantee Timesheet', async function () {
+    await guaranteePage.verifyValidationMessageForLongshorePayrollHours();
+});
+
+Then('Verify validation message for LBCT Management Name for Guarantee Timesheet', async function () {
+    await timesheetPage.verifyValidationMessageForLBCTManagementName();
+});
+
+Then('Delete entire guarantee timesheet entry', async function () {
+    await timesheetPage.deleteEntireTimesheetEntry();
+});

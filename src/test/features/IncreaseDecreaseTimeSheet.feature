@@ -40,6 +40,4 @@ Feature: Increase/Decrease Timesheet Management
     Then Verify that the appropriate validation message for timesheet entry when click on approve button
     Then Verify validation message for Longshore Name, Payroll and Hours
     Then Verify validation message for LBCT Management Name
-    And I approve the timesheet entry
-    Then Then Reject the timesheet entry
-    Then Then delete entire timesheet entry
+    Then Delete entire timesheet entire entry

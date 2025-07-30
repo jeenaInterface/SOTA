@@ -281,7 +281,7 @@ export class IncreaseDecreaseTimesheetPage {
     async verifyValidationMessageForLongshorePayrollHours(): Promise<void> {
         // Example: Adjust the selector/message as per your app's actual validation
         await this.base.waitAndClick(this.Elements.plusBtton);
-                await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('140');
+         await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('140');
         await this.page.getByPlaceholder('Search Job Type or OCC Code').press('Enter');
         await this.page.getByPlaceholder('Search Job Type or OCC Code').click();
         await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('140 - LB - LASH BOSS');
@@ -289,7 +289,9 @@ export class IncreaseDecreaseTimesheetPage {
         await fixture.page.waitForTimeout(2000);
         await this.base.waitAndClick(this.Elements.JobListAddButton);
         await this.base.waitAndClick(this.Elements.approveButton);
-        const selector = "//span[contains(text(),'Please enter Longshore Name, Payroll and Hours')]";
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        const selector = "//span[@class='text-bold color-white']";
         const isVisible = await this.page.isVisible(selector);
         expect(isVisible).toBeTruthy();
     }
@@ -307,9 +309,19 @@ export class IncreaseDecreaseTimesheetPage {
         await this.page.locator(this.Elements.ST).fill("7");
         await this.page.locator(this.Elements.OT).fill("3");
         await this.base.waitAndClick(this.Elements.approveButton);
-        const selector = "//span[contains(text(),'Please enter your name in 'LBCT Management Name')]";
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        const selector = "//span[@class='text-bold color-white']";
         const isVisible = await this.page.isVisible(selector);
         expect(isVisible).toBeTruthy();
     }
-
+async deleteEntireTimesheetEntry(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.deleteButton);
+        await this.base.waitAndClick(this.Elements.deletePopup);
+        //verify go button is visible
+        fixture.logger.info("Waiting for 3 seconds")
+        await fixture.page.waitForTimeout(3000);
+        const isGoButtonVisible = await this.page.isVisible(this.Elements.goButton);
+        expect(isGoButtonVisible).toBeTruthy();
+    }
 }

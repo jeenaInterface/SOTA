@@ -97,6 +97,23 @@ export class GuaranteeTimesheetPage {
     }
 
 
+ async verifyValidationMessageForLongshorePayrollHours(): Promise<void> {
+        // Example: Adjust the selector/message as per your app's actual validation
+        await this.base.waitAndClick(this.Elements.plusBtton);
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('215');
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').press('Enter');
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').click();
+        await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('215 - GM - GEARMEN');
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        await this.base.waitAndClick(this.Elements.JobListAddButton);
+        await this.base.waitAndClick(this.Elements.approveButton);
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        const selector = "//span[@class='text-bold color-white']";
+        const isVisible = await this.page.isVisible(selector);
+        expect(isVisible).toBeTruthy();
+    }
 
 
 }

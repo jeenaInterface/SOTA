@@ -15,4 +15,16 @@ Feature:  Guarantee Timesheet Management
     Then Then Reject the guarantee timesheet entry
     Then delete entire guarantee timesheet 
 
+    @guaranteeTimesheetvalidation
+  Scenario: Mandatory validation messages in guarantee timesheet
+    Given Ops management user logged into the application
+    When I navigate to the Guarantee Timesheet page
+    And I select landing page details for Guarantee timesheet with work order date, shift and job type
+    Then Click on submit button without entering any details in guarantee timesheet
+    Then Verify that the appropriate validation message for guarantee timesheet entry when click on approve button
+    Then Verify validation message for Longshore Name, Payroll and Hours for Guarantee Timesheet
+    Then Verify validation message for LBCT Management Name for Guarantee Timesheet
+    Then Delete entire guarantee timesheet entry
+
+
 

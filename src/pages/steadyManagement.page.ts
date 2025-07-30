@@ -1,8 +1,7 @@
 import { Page, BrowserContext, expect } from "@playwright/test";
 import PlaywrightWrapper from "../helper/wrapper/PlaywrightWrappers";
-import * as data from "../helper/util/test-data/payloads.json";
-import { request } from "@playwright/test";
-import { APiUtils } from "../helper/util/apiUtils/api.utils";
+import * as fs from 'fs';
+import * as path from 'path';
 import { setDefaultTimeout } from "@cucumber/cucumber"
 import { fixture } from "../hooks/pageFixture";
 
@@ -40,8 +39,8 @@ export default class steadyManagementPage {
         backButton: "//button[normalize-space()='BACK']",
         resetButton: "//button[normalize-space()='RESET']",
         createNewSteadyButton: "//button[normalize-space()='ADD STEADY']",
-        downloadReportButton: "//button[normalize-space()='Download Report']",
-        steadyReportButton: "//button[normalize-space()='Steady Report']",
+        downloadReportButton: "//button[normalize-space()='DOWNLOAD REPORT']",
+        steadyReportButton: "//button[normalize-space()='STEADY DETAILS REPORT']",
         operationalTypeDefault: "//select[@ng-reflect-name='opsType']//option[@value='']",
         steadyNameField: "//input[@formcontrolname='name']",
         successMessage: "//span[contains(text(),'successfully')]",
@@ -59,7 +58,18 @@ export default class steadyManagementPage {
         secondPositionDropdown: "(//select)[2]",
         clerkPositionOption: "//option[contains(text(),'30/25% Clerk')]",
         acClerkFunctionOption: "//option[contains(text(),'AC Clerk')]",
-        steadyCreatedMessage: "//span[contains(text(),'Steady created successfully')]"
+        steadyCreatedMessage: "//span[contains(text(),'Steady created successfully')]",
+        cellInfo: "//input[@formcontrolname='cellPhone']",
+        homephone:"//input[@formcontrolname='homePhone']",
+        alternativePhone:"//input[@formcontrolname='altPhone']",
+        name1:"//input[@formcontrolname='emer1Nm']",
+        name2:"//input[@formcontrolname='emer2Nm']",
+        relation1:"//input[@formcontrolname='emer1Rel']",
+        relation2:"//input[@ng-reflect-name='emer2Rel']",
+        cell1:"//input[@ng-reflect-name='emer1CellPhone']",
+        cell2:"//input[@ng-reflect-name='emer2CellPhone']",
+        home1:"//input[@ng-reflect-name='emer1HomePhone']",
+        home2:"//input[@ng-reflect-name='emer2HomePhone']",
     };
 
     async clicksteadyMenuButton(): Promise<void> {
@@ -78,10 +88,22 @@ export default class steadyManagementPage {
         await this.base.waitAndClick(this.Elements.FirstRowInTheTable);
         await this.page.locator(this.Elements.Remarks).clear()
         await this.page.locator(this.Elements.Remarks).fill("TestRemarks")
+        await this.page.locator(this.Elements.cellInfo).fill("1234567890")
+        await this.page.locator(this.Elements.homephone).fill("1234567890")
+        await this.page.locator(this.Elements.alternativePhone).fill("1234567890")
+        await this.page.locator(this.Elements.name1).fill("TestName1")
+        await this.page.locator(this.Elements.name2).fill("TestName2")
+        await this.page.locator(this.Elements.relation1).fill("TestRelation1")
+        await this.page.locator(this.Elements.relation2).fill("TestRelation2")
+        await this.page.locator(this.Elements.cell1).fill("1234567890")
+        await this.page.locator(this.Elements.cell2).fill("1234567890")
+        await this.page.locator(this.Elements.home1).fill("1234567890")
+        await this.page.locator(this.Elements.home2).fill("1234567890")
         await this.base.waitAndClick(this.Elements.save);
         fixture.logger.info("Waiting for 5 seconds")
         await fixture.page.waitForTimeout(5000);
         expect.soft(await this.page.locator(this.Elements.Notification))
+
 
     }
 
@@ -134,11 +156,12 @@ export default class steadyManagementPage {
         await this.page.waitForTimeout(1000);
         await this.page.locator(this.Elements.searchByNameInput).press('ArrowRight');
         await this.page.locator(this.Elements.searchByNameInput).click();
-        await this.page.waitForTimeout(1000); // Wait for search results - once fill ponce and click on enter a list will show, that xpath is not able to get. need to select the below text from the list - Ponce De Leon, Adolfo - 1915431
 
         // Select steady from search results
         await this.page.locator(this.Elements.searchByNameInput).fill('Ponce De Leon, Adolfo - 1915431');
+                // Wait for datalist options
         await this.page.waitForTimeout(4000);
+        // Get the first option value
         await this.base.waitAndClick(this.Elements.addButton);
     }
 
@@ -152,15 +175,50 @@ export default class steadyManagementPage {
         await this.page.locator(this.Elements.steadyNameField).fill(name);
     }
 
-    async downloadReport(): Promise<void> {
-        await this.base.waitAndClick(this.Elements.downloadReportButton);
-        await this.page.waitForTimeout(3000); // Wait for download
-    }
 
-    async downloadSteadyReport(): Promise<void> {
-        await this.base.waitAndClick(this.Elements.steadyReportButton);
-        await this.page.waitForTimeout(3000); // Wait for download
+
+    async downloadSteadyReport(): Promise<string> {
+
+        const downloadPath = path.resolve(__dirname, 'downloads');
+            if (!fs.existsSync(downloadPath)) {
+                fs.mkdirSync(downloadPath, { recursive: true });
+            }
+            this.clearDownloadFolder(downloadPath);
+            const [download] = await Promise.all([
+                this.page.waitForEvent('download'),
+                this.page.locator(this.Elements.steadyReportButton).click()
+            ]);
+            const downloadPathWithFileName = path.join(downloadPath, 'Steady_Report.xlsx');
+            await download.saveAs(downloadPathWithFileName);
+            expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+            return downloadPathWithFileName;
     }
+    async downloadReport(): Promise<string> {
+            const downloadPath = path.resolve(__dirname, 'downloads');
+            if (!fs.existsSync(downloadPath)) {
+                fs.mkdirSync(downloadPath, { recursive: true });
+            }
+            this.clearDownloadFolder(downloadPath);
+            const [download] = await Promise.all([
+                this.page.waitForEvent('download'),
+                this.page.locator(this.Elements.downloadReportButton).click()
+            ]);
+            const downloadPathWithFileName = path.join(downloadPath, 'Steady_Report.xlsx');
+            await download.saveAs(downloadPathWithFileName);
+            expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+            return downloadPathWithFileName;
+        }
+    
+        clearDownloadFolder(downloadPath: string): void {
+            fs.readdir(downloadPath, (err, files) => {
+                if (err) throw err;
+                for (const file of files) {
+                    fs.unlink(path.join(downloadPath, file), err => {
+                        if (err) throw err;
+                    });
+                }
+            });
+        }
 
     async verifyDownload(): Promise<void> {
         // Verify download completed

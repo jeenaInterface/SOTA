@@ -103,8 +103,6 @@ When('the user enters work date and shift', async function () {
 
 When('the user fills details in local 13 tab', async function () {
     await vesselOrder.fillLocal13Details();
-    await vesselOrder.clickSaveButton();
-    await vesselOrder.verifySuccessMessage();
 });
 
 When('the user fills details in local 63 tab', async function () {

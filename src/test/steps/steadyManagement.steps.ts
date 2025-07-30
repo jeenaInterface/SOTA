@@ -3,6 +3,7 @@ import { fixture } from "../../hooks/pageFixture";
 import loginPage from "../../pages/steadyManagement.page";
 import * as data from "../../helper/util/test-data/payloads.json"
 import steadyManagementPage from "../../pages/steadyManagement.page";
+import * as fs from 'fs';
 
 let steady: steadyManagementPage;
 setDefaultTimeout(60 * 1000 * 5)
@@ -69,11 +70,17 @@ Then('Confirm validation message is displayed', async function () {
 });
 
 Then('Verify the download report is downloaded successfully', async function () {
-    await steady.downloadReport();
-    await steady.verifyDownload();
-});
+    const filePath = await steady.downloadReport();
+    if (filePath && fs.existsSync(filePath) && this.attach) {
+        const fileBuffer = fs.readFileSync(filePath);
+        await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    }
+})
 
 Then('Verify the steady report is downloaded successfully', async function () {
-    await steady.downloadSteadyReport();
-    await steady.verifyDownload();
+    const filePath = await steady.downloadSteadyReport();
+    if (filePath && fs.existsSync(filePath) && this.attach) {
+        const fileBuffer = fs.readFileSync(filePath);
+        await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    }
 });

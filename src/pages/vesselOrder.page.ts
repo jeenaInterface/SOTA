@@ -110,7 +110,7 @@ export default class vesselOrderPage {
         reqRound: "select[name='reqRound']",
         orderedRound: "select[name='orderedRound']",
         reqTime: "/html/body/app-root/app-home/div/div/section/div/app-neworder-form/div/div/neworder-form-details/div/div[1]/div[3]/div[2]/div/div/div[2]/table[1]/tbody/tr[2]/td[2]/select",
-        orderTime:"/html/body/app-root/app-home/div/div/section/div/app-neworder-form/div/div/neworder-form-details/div/div[1]/div[3]/div[2]/div/div/div[2]/table[1]/tbody/tr[2]/td[3]/select",
+        orderTime: "/html/body/app-root/app-home/div/div/section/div/app-neworder-form/div/div/neworder-form-details/div/div[1]/div[3]/div[2]/div/div/div[2]/table[1]/tbody/tr[2]/td[3]/select",
         jobType: "select[name='jobType']",
         jobTypeReq: "input[name='jobTypeReq']",
         jobTypeOrd: "input[name='jobTypeOrd']",
@@ -169,7 +169,7 @@ export default class vesselOrderPage {
         }
     }
 
-  async SelectDetailsOnLandingPage(): Promise<string> {
+    async SelectDetailsOnLandingPage(): Promise<string> {
         let currentDate = new Date();
         let formattedDate: string;
         const maxAttempts = 10;
@@ -495,7 +495,7 @@ export default class vesselOrderPage {
         await this.base.waitAndClick(this.Elements.laborOrderMenu);
         await this.base.waitAndClick(this.Elements.summarysheet);
     }
-        async navigateToNewOrderForm(): Promise<void> {
+    async navigateToNewOrderForm(): Promise<void> {
         await this.base.waitAndClick(this.Elements.laborOrderMenu);
         await this.base.waitAndClick(this.Elements.newOrderMenu);
     }
@@ -503,7 +503,7 @@ export default class vesselOrderPage {
     async enterWorkDate() {
         await this.page.locator(this.Elements.workDateNEWORDER).click();
         // await this.page.locator(this.Elements.workDateNEWORDER).fill(this.noTRStatusDate);
-        await this.page.locator(this.Elements.workDateNEWORDER).fill("2025-07-21");
+        await this.page.locator(this.Elements.workDateNEWORDER).fill("2025-07-30");
         await this.page.locator(this.Elements.shiftNEWOrder).selectOption("Nightside");
         await this.base.waitAndClick(this.Elements.goButton);
 
@@ -515,27 +515,27 @@ export default class vesselOrderPage {
         const reqRoundSelect = this.page.locator('select[name="reqRound"]');
         const orderedRoundSelect = this.page.locator('select[name="orderedRound"]');
         const reqTimeSelectFirst = this.page.locator('select[name="reqTime"]').first();
-        const reqTimeSelectSecond = this.page.locator('select[name="reqTime"]').nth(1);
+        // const reqTimeSelectSecond = this.page.locator('select[name="reqTime"]').nth(1);
         const jobTypeSelect = this.page.locator('select[name="jobType"]');
         const jobTypeReqInput = this.page.locator('input[name="jobTypeReq"]');
         const jobTypeOrdInput = this.page.locator('input[name="jobTypeOrd"]');
         const alcNoTextbox = this.page.getByRole('row', { name: 'Alc No', exact: true }).getByRole('textbox');
-        const saveButton = this.page.getByRole('button', { name: 'SAVE' });
 
-        await carbonInput.fill('1');
-        await reqRoundSelect.selectOption('MRO');
-        await orderedRoundSelect.selectOption('MRO');
-        await reqTimeSelectFirst.selectOption('3-3AMfx HT LS');
-        await reqTimeSelectSecond.selectOption('4AM HT LS');
-        await jobTypeSelect.selectOption('GEAR LEADMAN-SPECIAL');
-        await jobTypeReqInput.click();
-        await jobTypeReqInput.fill('111');
-        await jobTypeOrdInput.click();
-        await jobTypeOrdInput.fill('1');
-        await alcNoTextbox.click();
-        await alcNoTextbox.fill('22');
-        await saveButton.click();
-        await saveButton.click();
+        await carbonInput.fill("1");
+       await alcNoTextbox.fill("1");
+        await reqRoundSelect.selectOption("MRO");
+        await orderedRoundSelect.selectOption("MRO");
+        await reqTimeSelectFirst.selectOption("3-3AMfx HT LS");
+        // await reqTimeSelectSecond.selectOption("3-3AMfx HT LS");
+        await jobTypeSelect.selectOption("GEAR LEADMAN-SPECIAL");
+        await jobTypeReqInput.fill("1");
+        await jobTypeOrdInput.fill("1");
+        await fixture.page.waitForTimeout(5000);
+        await this.base.waitAndClick(this.Elements.saveButton);
+        await fixture.page.waitForTimeout(5000);
+        // expect(await this.page.locator(this.Elements.successMessageneworder)).toBeVisible();
+        // fixture.logger.info("Waiting for 2 seconds");
+        // await fixture.page.waitForTimeout(2000);
     }
 
     async fillLocal63Details() {

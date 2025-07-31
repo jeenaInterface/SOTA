@@ -31,15 +31,15 @@ export default class YardOrderPage {
         TRStatus: "//select[@ng-reflect-name='trStatus']",
         homeicon: "//div[@ng-reflect-router-link='/home']//a[1]",
         dataList: "//datalist[@id='nameListData']",
-        startTime:"//select[@id='startTime']",
+        startTime: "//select[@id='startTime']",
         stdFX: "//*[@id='first']/div/div/tbody/tr[1]/td[7]/input",
         SteadyFXName: "//datalist//option[contains(text(), 'Babich, Vince (Vince) - 36464')]",
         stdFXFlexList: "//select[@ng-reflect-name='YARD BOSScbSteadyFx00']",
         YardBossddl1: "//input[@ng-reflect-name='YARD BOSStxSteadyNm00']",
-        textArea:"(//label[normalize-space(text())='Notes']/following::textarea)[1]",
-        savemaycan:"//button[normalize-space(text())='SAVE/MAY-CAN']",
-        validationMessageForMandatoryFields:"(//span[@class='text-bold color-white'])[1]",
-        yardBossSteady:"//*[@id='first']/div/div/tbody/tr[1]/td[7]/input",
+        textArea: "(//label[normalize-space(text())='Notes']/following::textarea)[1]",
+        savemaycan: "//button[normalize-space(text())='SAVE/MAY-CAN']",
+        validationMessageForMandatoryFields: "(//span[@class='text-bold color-white'])[1]",
+        yardBossSteady: "//*[@id='first']/div/div/tbody/tr[1]/td[7]/input",
         stdyValidationMessage: "//span[normalize-space(text())='The total Flex Steady Count and the total Flex Steady names are not matching for Longshore']",
         TimehseetMenu: "//div[normalize-space(text())='Timesheet']",
         yardTimehseet: "//a[normalize-space(text())='Ops Yard Timesheet']",
@@ -66,8 +66,8 @@ export default class YardOrderPage {
         await this.base.waitAndClick(this.Elements.laborOrderMenu);
         await this.base.waitAndClick(this.Elements.yardOrder);
     }
-    
-    async SelectDetailsOnLandingPage(): Promise<void> {
+
+    async SelectDetailsOnLandingPage(): Promise<string> {
         let currentDate = new Date();
         let formattedDate: string;
         const maxAttempts = 10;
@@ -80,41 +80,54 @@ export default class YardOrderPage {
         await fixture.page.waitForTimeout(1000);
 
         for (let attempts = 0; attempts < maxAttempts; attempts++) {
+            formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
+                .toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
 
-            const trStatusVisible = await this.page.locator(this.Elements.TRStatus).isVisible();
-            fixture.logger.info("Waiting for 2 seconds");
-            await fixture.page.waitForTimeout(2000);
+            fixture.logger.info(`Checking TRStatus for date: ${formattedDate}`);
+            const trStatusLocator = this.page.locator(this.Elements.TRStatus);
+
+            const isAttached = await trStatusLocator.waitFor({ state: 'attached', timeout: 5000 })
+                .then(() => true)
+                .catch(() => false);
+
+            let trStatusVisible = false;
+
+            if (isAttached) {
+                trStatusVisible = await trStatusLocator.isVisible();
+                fixture.logger.info(`TRStatus element is attached. isVisible: ${trStatusVisible}`);
+            } else {
+                fixture.logger.info("TRStatus element is not attached to DOM.");
+            }
 
             if (trStatusVisible) {
+                fixture.logger.info(`TRStatus is visible for ${formattedDate}, moving to next date.`);
+
+                // Increment date for next attempt
+                currentDate.setDate(currentDate.getDate() + 1);
+
+                // Navigate back to form
                 await this.page.locator(this.Elements.homeicon).click();
                 await this.page.locator(this.Elements.laborOrderMenu).click();
                 await this.page.locator(this.Elements.yardOrder).click();
-                currentDate.setDate(currentDate.getDate() + 1);
-
-                formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
-
-                // Wait and fill the date for the next order
+                formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
+                    .toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
                 await this.page.locator(this.Elements.workDate).waitFor({ state: 'attached', timeout: 3000 });
                 await this.page.locator(this.Elements.workDate).click();
                 await this.page.locator(this.Elements.workDate).fill(formattedDate);
+
                 await this.page.locator(this.Elements.shift).selectOption("2ND");
                 await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
                 await this.page.locator(this.Elements.Go).click();
 
 
             } else {
-                // If no TR status, assign the formatted date as noTRStatusDate
+                fixture.logger.info(`Order created for date: ${formattedDate}`);
                 this.noTRStatusDate = formattedDate;
-                fixture.logger.info(`TR status is not present on ${formattedDate}`);
+                return formattedDate; // stop loop on success
             }
         }
-        // await this.page.locator(this.Elements.workDate).fill('2025-01-26');
-        // await this.page.locator(this.Elements.shift).selectOption("2ND");
-        // this.selectJobNumber();
 
-
-        // // Store the date to noTRStatusDate
-        // this.noTRStatusDate = '2025-01-26';
+        throw new Error("Unable to create order — all attempted dates already have TRStatus.");
     }
 
     async EnterHeaderDetails(): Promise<void> {
@@ -136,7 +149,7 @@ export default class YardOrderPage {
         await this.page.locator(this.Elements.stdFXFlexList).selectOption('1');
 
     }
-    
+
     async validationMessageForMandatoryFields(): Promise<void> {
         const validationMessageForMandatoryFields = await this.page.locator(this.Elements.validationMessageForMandatoryFields).textContent();
         expect(validationMessageForMandatoryFields).toContain("Please select a Shift Start Time");

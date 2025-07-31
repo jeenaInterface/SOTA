@@ -51,7 +51,7 @@ export default class summarySheetPage {
     
     async VerifySummarySheetCreated(): Promise<void> {
         const TabPresent = await this.page.locator(this.Elements.vesselOrderTab).textContent();
-        expect(TabPresent).toContain("COSCO ENGLAND - 100714");
+        expect(TabPresent).toContain("COSCO NETHERLANDS - 100604");
         for (let i = 0; i < 10; i++) {
             await this.page.keyboard.press('PageDown');
             await this.page.waitForTimeout(500);

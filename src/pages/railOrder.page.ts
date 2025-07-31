@@ -71,7 +71,7 @@ export default class railOrderPage {
         await this.base.waitAndClick(this.Elements.railOrder);
     }
 
-    async SelectDetailsOnLandingPage(): Promise<void> {
+    async SelectDetailsOnLandingPage(): Promise<string> {
         let currentDate = new Date();
         let formattedDate: string;
         const maxAttempts = 10;
@@ -84,41 +84,54 @@ export default class railOrderPage {
         await fixture.page.waitForTimeout(1000);
 
         for (let attempts = 0; attempts < maxAttempts; attempts++) {
+            formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
+                .toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
 
-            const trStatusVisible = await this.page.locator(this.Elements.TRStatus).isVisible();
-            fixture.logger.info("Waiting for 2 seconds");
-            await fixture.page.waitForTimeout(2000);
+            fixture.logger.info(`Checking TRStatus for date: ${formattedDate}`);
+            const trStatusLocator = this.page.locator(this.Elements.TRStatus);
+
+            const isAttached = await trStatusLocator.waitFor({ state: 'attached', timeout: 5000 })
+                .then(() => true)
+                .catch(() => false);
+
+            let trStatusVisible = false;
+
+            if (isAttached) {
+                trStatusVisible = await trStatusLocator.isVisible();
+                fixture.logger.info(`TRStatus element is attached. isVisible: ${trStatusVisible}`);
+            } else {
+                fixture.logger.info("TRStatus element is not attached to DOM.");
+            }
 
             if (trStatusVisible) {
+                fixture.logger.info(`TRStatus is visible for ${formattedDate}, moving to next date.`);
+
+                // Increment date for next attempt
+                currentDate.setDate(currentDate.getDate() + 1);
+
+                // Navigate back to form
                 await this.page.locator(this.Elements.homeicon).click();
                 await this.page.locator(this.Elements.laborOrderMenu).click();
                 await this.page.locator(this.Elements.railOrder).click();
-                currentDate.setDate(currentDate.getDate() + 1);
-
-                formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
-
-                // Wait and fill the date for the next order
+                formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
+                    .toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
                 await this.page.locator(this.Elements.workDate).waitFor({ state: 'attached', timeout: 3000 });
                 await this.page.locator(this.Elements.workDate).click();
                 await this.page.locator(this.Elements.workDate).fill(formattedDate);
+
                 await this.page.locator(this.Elements.shift).selectOption("2ND");
                 await this.page.locator(this.Elements.jobType).selectOption("Testing - 790197");
                 await this.page.locator(this.Elements.Go).click();
 
 
             } else {
-                // If no TR status, assign the formatted date as noTRStatusDate
+                fixture.logger.info(`Order created for date: ${formattedDate}`);
                 this.noTRStatusDate = formattedDate;
-                fixture.logger.info(`TR status is not present on ${formattedDate}`);
+                return formattedDate; // stop loop on success
             }
         }
-        // await this.page.locator(this.Elements.workDate).fill('2025-01-26');
-        // await this.page.locator(this.Elements.shift).selectOption("2ND");
-        // this.selectJobNumber();
 
-
-        // // Store the date to noTRStatusDate
-        // this.noTRStatusDate = '2025-01-26';
+        throw new Error("Unable to create order — all attempted dates already have TRStatus.");
     }
 
     async EnterHeaderDetails(): Promise<void> {

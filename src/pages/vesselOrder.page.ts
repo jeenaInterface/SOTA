@@ -143,10 +143,11 @@ export default class vesselOrderPage {
         await this.page.waitForTimeout(1000);
         await this.page.getByPlaceholder('Search By Job No or Vessel').press('ArrowRight');
         await this.page.getByPlaceholder('Search By Job No or Vessel').click();
-        await this.page.getByPlaceholder('Search By Job No or Vessel').fill('COSCO OCEANIA - 092 - 100783 - 9334923');
+        await this.page.waitForTimeout(1000);
+        await this.page.getByPlaceholder('Search By Job No or Vessel').fill('COSCO ENGLAND - 050 - 100643 - 9516428');
         // await this.page.getByPlaceholder('Search By Job No or Vessel Name or Voyage or Lloyds').click();
         // Wait for datalist options
-        await this.page.waitForTimeout(4000);
+        await this.page.waitForTimeout(1000);
         // Get the first option value
         await this.page.evaluate(() => {
             const xpath = "//button[text()='GO']";
@@ -170,53 +171,65 @@ export default class vesselOrderPage {
     }
 
     async SelectDetailsOnLandingPage(): Promise<string> {
-        let currentDate = new Date();
-        let formattedDate: string;
-        const maxAttempts = 10;
+    let currentDate = new Date();
+    let formattedDate: string;
+    const maxAttempts = 10;
 
-        await this.page.getByPlaceholder('Search By Job No or Vessel').click();
-        await this.page.locator(this.Elements.shift).selectOption("2ND");
-        this.selectJobNumber();
+    await this.page.locator(this.Elements.shift).selectOption("2ND");
+    await this.selectJobNumber();
 
-        fixture.logger.info("Waiting for 1 seconds");
-        await fixture.page.waitForTimeout(1000);
 
-        for (let attempts = 0; attempts < maxAttempts; attempts++) {
+    for (let attempts = 0; attempts < maxAttempts; attempts++) {
+        formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
+            .toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
 
-            const trStatusVisible = await this.page.locator(this.Elements.TRStatus).isVisible();
-            fixture.logger.info("Waiting for 2 seconds");
-            await fixture.page.waitForTimeout(2000);
+        fixture.logger.info(`Checking TRStatus for date: ${formattedDate}`);
+        const trStatusLocator = this.page.locator(this.Elements.TRStatus);
 
-            if (trStatusVisible) {
-                await this.page.locator(this.Elements.homeicon).click();
-                await this.page.locator(this.Elements.laborOrderMenu).click();
-                await this.page.locator(this.Elements.vesselOrder).click();
-                currentDate.setDate(currentDate.getDate() + 1);
+        const isAttached = await trStatusLocator.waitFor({ state: 'attached', timeout: 5000 })
+            .then(() => true)
+            .catch(() => false);
 
-                formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+        let trStatusVisible = false;
 
-                // Wait and fill the date for the next order
-                await this.page.locator(this.Elements.workDate).waitFor({ state: 'attached', timeout: 3000 });
-                await this.page.locator(this.Elements.workDate).click();
-                await this.page.locator(this.Elements.workDate).fill(formattedDate);
-                await this.page.locator(this.Elements.shift).selectOption("2ND");
-                this.selectJobNumber();
-
-            } else {
-                // If no TR status, assign the formatted date as noTRStatusDate
-                this.noTRStatusDate = formattedDate;
-                fixture.logger.info(`TR status is not present on ${formattedDate}`);
-            }
+        if (isAttached) {
+            trStatusVisible = await trStatusLocator.isVisible();
+            fixture.logger.info(`TRStatus element is attached. isVisible: ${trStatusVisible}`);
+        } else {
+            fixture.logger.info("TRStatus element is not attached to DOM.");
         }
-        // await this.page.locator(this.Elements.workDate).fill('2025-01-28');
-        // await this.page.locator(this.Elements.shift).selectOption("2ND");
-        // this.selectJobNumber();
 
-        this.noTRStatusDate = formattedDate;
-        return this.noTRStatusDate;
-        // // Store the date to noTRStatusDate
-        // this.noTRStatusDate = '2025-01-28';
+        if (trStatusVisible) {
+            fixture.logger.info(`TRStatus is visible for ${formattedDate}, moving to next date.`);
+
+            // Increment date for next attempt
+            currentDate.setDate(currentDate.getDate() + 1);
+
+            // Navigate back to form
+            await this.page.locator(this.Elements.homeicon).click();
+            await this.page.locator(this.Elements.laborOrderMenu).click();
+            await this.page.locator(this.Elements.vesselOrder).click();
+
+            // Fill the next date
+            formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
+                .toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+            await this.page.locator(this.Elements.workDate).waitFor({ state: 'attached', timeout: 3000 });
+            await this.page.locator(this.Elements.workDate).click();
+            await this.page.locator(this.Elements.workDate).fill(formattedDate);
+
+            await this.page.locator(this.Elements.shift).selectOption("2ND");
+            await this.selectJobNumber(); // 
+
+        } else {
+            fixture.logger.info(`Order created for date: ${formattedDate}`);
+            this.noTRStatusDate = formattedDate;
+            return formattedDate; // stop loop on success
+        }
     }
+
+    throw new Error("Unable to create order — all attempted dates already have TRStatus.");
+}
+
 
     async EnterHeaderDetails(): Promise<void> {
         await this.page.locator(this.Elements.berth).selectOption("Pier E - LB 24");
@@ -522,7 +535,7 @@ export default class vesselOrderPage {
         const alcNoTextbox = this.page.getByRole('row', { name: 'Alc No', exact: true }).getByRole('textbox');
 
         await carbonInput.fill("1");
-       await alcNoTextbox.fill("1");
+        await alcNoTextbox.fill("1");
         await reqRoundSelect.selectOption("MRO");
         await orderedRoundSelect.selectOption("MRO");
         await reqTimeSelectFirst.selectOption("3-3AMfx HT LS");

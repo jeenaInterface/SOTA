@@ -84,7 +84,7 @@ Then('Verify that the appropriate validation message for steady name and steady 
   await vesselOrder.validationMessageForSteadtcount();
 });
 Then('TR user verifies that the vessel labor order is pushed to the summary sheet and verifies the details', async function () {
-
+  vesselOrder = new vesselOrderPage(fixture.page)
   await vesselOrder.clickOnSummarySheetMenu();
   let LatestWorkOrderDate: string
   await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate);

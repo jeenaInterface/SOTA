@@ -499,9 +499,9 @@ export default class vesselOrderPage {
         fixture.logger.info("Waiting for 2 seconds")
         await fixture.page.waitForTimeout(2000);
         await this.page.locator(this.Elements.workDateSummarySheet).click();
-        await this.page.locator(this.Elements.workDateSummarySheet).fill(this.noTRStatusDate);
+        // await this.page.locator(this.Elements.workDateSummarySheet).fill(this.noTRStatusDate);
+        await this.page.locator(this.Elements.workDateSummarySheet).fill('2025-07-31');
         await this.page.locator(this.Elements.shift).selectOption("Nightside");
-        // await this.passDate();
         await this.base.waitAndClick(this.Elements.Go);
     }
     async clickOnSummarySheetMenu(): Promise<void> {

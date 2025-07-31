@@ -2,6 +2,9 @@ import { Page, BrowserContext, expect } from "@playwright/test";
 import PlaywrightWrapper from "../helper/wrapper/PlaywrightWrappers";
 import { setDefaultTimeout } from "@cucumber/cucumber"
 import { fixture } from "../hooks/pageFixture";
+import * as fs from 'fs';
+import * as path from 'path';
+import { title } from "process";
 
 setDefaultTimeout(60 * 1000)
 
@@ -22,7 +25,7 @@ export default class summarySheetPage {
     private Elements = {
         summarysheet: "//a[normalize-space(text())='Summary Sheet']",
         laborOrderMenu: "//div[normalize-space(text())='Labor Order']",
-        vesselOrderTab: "//a[normalize-space(text())='COSCO ENGLAND - 100714']",
+        vesselOrderTab: "(//a[normalize-space()='COSCO ENGLAND - 100643'])",
         saveButton: "//button[normalize-space()='SAVE']",
         successNotification: "//span[contains(normalize-space(text()), 'Summary Sheet information has been saved successfully')]",
         logOutButton: "//i[@role='button']",
@@ -33,31 +36,48 @@ export default class summarySheetPage {
         // New locators for summary sheet update
         calStatus: "#calStatus",
         newOrderStatus: "#newOrderStatus",
-        comeBackCatchUpSpin2: () => this.page.locator("(//input[@type='number'])[3]"),
-        comeBackCatchUpSpin3: () => this.page.locator("(//input[@type='number'])[4]"),
+        comeBackCatchUpSpin2: "//*[@id='vesselLongshore']/div[2]/div/div/tbody/tr[1]/td[15]/input",
+        comeBackCatchUpSpin3: "//*[@id='vesselLongshore']/div[2]/div/div/tbody/tr[1]/td[16]/input",
         references: "#references",
         gangsFinish: "#gangsFinish",
-        manningField15: "(//input[contains(@class,'form-control ng-pristine')])[3]",
-        manningField16: "(//input[contains(@class,'form-control ng-pristine')])[4]",
-        manningField16Row3: () => this.page.locator('tr:nth-child(3) > td:nth-child(16) > .form-control'),
-        swingLashIcon: () => this.page.getByRole('row', { name: 'SWING LASH --Select--   ' }).locator('i').first(),
-        remarksInput: () => this.page.getByPlaceholder('Enter your remarks here...'),
-        addRemarksButton: () => this.page.getByRole('button', { name: 'Add Remarks' }),
-        trNotes: "#trNotes"
+        manningField15: "//*[@id='vesselLongshore']/div[2]/div/div/tbody/tr[1]/td[4]/input",
+        manningField16: "//*[@id='vesselLongshore']/div[2]/div/div/tbody/tr[1]/td[5]/input",
+        manningField16Row3: "//*[@id='vesselLongshore']/div[2]/div/div/tbody/tr[1]/td[5]/input",
+        swingLashIcon: "//*[@id='vesselLongshore']/div[3]/div/div/tbody/tr[4]/td[3]/input",
+        remarksButton: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-summary-sheet[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/tbody[1]/tr[1]/td[17]/i[1]",
+        remarksInput: "//*[@placeholder='Enter your remarks here...']",
+        addRemarksButton: "//button[normalize-space()='Add Remarks']",
+        trNotes: "#trNotes",
+        downloadReport: "//button[normalize-space()='DOWNLOAD REPORT']",
+        LaborOrderDifferenceReport: "//i[@title='Labor Order Difference Report']",
+        DuplicateReport: "//i[@title='Duplicate Report']",
+        HallLaborReport: "//i[@title='Hall Labor Table']",
+        transferToTrackingSheet: "//i[@title='Transfer to Tracking Sheet']",
+        steadyDispatchReport: "//i[@title='Steady Dispatch Report']",
+        placeNewOrders: "//i[@title='Place New Orders']",
+        labelOnDifferenceReport: "//h5[contains(text(),'Pier E - LB 24 - COSCO ENGLAND - 050 - 100643 - 2N')]",
+        summarysheetContent: "//td[normalize-space()='BACK']",
+        hallreportlabel:"//span[@class='page-title p-1']",
+        yesPopUp: "//button[normalize-space()='Yes']",
+        transferToTrackingSheetMessage:"//div[@class='col-10 p-2']",
+        title:"//span[@class='page-title p-1']",
+        vesselLabel:"//h5[normalize-space()='Vessel - COSCO ENGLAND']"
     };
 
 
 
-    
+
     async VerifySummarySheetCreated(): Promise<void> {
+        await this.page.locator(this.Elements.vesselOrderTab).click();
+        fixture.logger.info("Clicked on the vessel order tab");
         const TabPresent = await this.page.locator(this.Elements.vesselOrderTab).textContent();
-        expect(TabPresent).toContain("COSCO NETHERLANDS - 100604");
-        for (let i = 0; i < 10; i++) {
-            await this.page.keyboard.press('PageDown');
-            await this.page.waitForTimeout(500);
-        }
-        fixture.logger.info("Waiting for 2 seconds")
-        await fixture.page.waitForTimeout(5000);
+        expect(TabPresent).toContain("COSCO ENGLAND - 100643");
+        // for (let i = 0; i < 10; i++) {
+        //     await this.page.keyboard.press('PageDown');
+        //     await this.page.waitForTimeout(500);
+        // }
+
+
     }
     async clickOnSave(): Promise<void> {
         await this.base.waitAndClick(this.Elements.saveButton);
@@ -69,13 +89,14 @@ export default class summarySheetPage {
 
     async updateSummarySheetDetails(): Promise<void> {
         // Update calo status and new order status
-        await this.page.locator(this.Elements.calStatus).selectOption('2');
-        await this.page.locator(this.Elements.newOrderStatus).selectOption('1');
+        // await this.page.locator(this.Elements.calStatus).selectOption('1');
+        // await this.page.locator(this.Elements.newOrderStatus).selectOption('1');
 
         // Update NF and Cut time
-        await this.Elements.comeBackCatchUpSpin2().click();
-        await this.Elements.comeBackCatchUpSpin2().fill('11');
-        await this.Elements.comeBackCatchUpSpin3().click();
+        await this.page.locator(this.Elements.comeBackCatchUpSpin2).click();
+        await this.page.locator(this.Elements.comeBackCatchUpSpin2).fill('11');
+        await this.page.locator(this.Elements.comeBackCatchUpSpin3).click();
+        await this.page.locator(this.Elements.comeBackCatchUpSpin3).fill('11');
 
         // Update reference and gangs finish
         await this.page.locator(this.Elements.references).selectOption('To Finish');
@@ -87,19 +108,105 @@ export default class summarySheetPage {
         await this.page.locator(this.Elements.manningField15).fill('11');
         await this.page.locator(this.Elements.manningField16).click();
         await this.page.locator(this.Elements.manningField16).fill('11');
-        await this.Elements.manningField16Row3().click();
-        await this.Elements.manningField16Row3().fill('1');
+        await this.page.locator(this.Elements.manningField16Row3).click();
+        await this.page.locator(this.Elements.manningField16Row3).fill('1');
 
         // Add remarks
-        await this.Elements.swingLashIcon().click();
-        await this.Elements.remarksInput().fill('sdsfg');
-        await this.Elements.remarksInput().click();
-        await this.Elements.remarksInput().fill('re');
-        await this.Elements.addRemarksButton().click();
+        // await this.page.locator(this.Elements.swingLashIcon).click();
+        // await this.page.locator(this.Elements.remarksButton).click();
+        // await this.page.locator(this.Elements.remarksInput).fill('test remarks');
+        // await this.page.locator(this.Elements.addRemarksButton).click();
 
         // Add notes
         await this.page.locator(this.Elements.trNotes).click();
         await this.page.locator(this.Elements.trNotes).fill('notes');
     }
+    async downloadsummaryreport(): Promise<string> {
+        const downloadPath = path.resolve(__dirname, 'downloads');
+        if (!fs.existsSync(downloadPath)) {
+            fs.mkdirSync(downloadPath, { recursive: true });
+        }
+        this.clearDownloadFolder(downloadPath);
+        const [download] = await Promise.all([
+            this.page.waitForEvent('download'),
+            this.page.locator(this.Elements.downloadReport).click()
+        ]);
+        const downloadPathWithFileName = path.join(downloadPath, 'summaryReport.pdf');
+        await download.saveAs(downloadPathWithFileName);
+        expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+        return downloadPathWithFileName;
+    }
+    async downloadDuplicateReport(): Promise<string> {
+        const downloadPath = path.resolve(__dirname, 'downloads');
+        if (!fs.existsSync(downloadPath)) {
+            fs.mkdirSync(downloadPath, { recursive: true });
+        }
+        this.clearDownloadFolder(downloadPath);
+        const [download] = await Promise.all([
+            this.page.waitForEvent('download'),
+            this.page.locator(this.Elements.DuplicateReport).click()
+        ]);
+        const downloadPathWithFileName = path.join(downloadPath, 'Duplicate_Report.XLSX');
+        await download.saveAs(downloadPathWithFileName);
+        expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+        return downloadPathWithFileName;
+    }
 
+    clearDownloadFolder(downloadPath: string): void {
+        fs.readdir(downloadPath, (err, files) => {
+            if (err) throw err;
+            for (const file of files) {
+                fs.unlink(path.join(downloadPath, file), err => {
+                    if (err) throw err;
+                });
+            }
+        });
+    }
+
+    async downloadLaborOrderDifferenceReport(): Promise<void> {
+
+        this.page.locator(this.Elements.LaborOrderDifferenceReport).click()
+        fixture.logger.info("Waiting for 5 seconds")
+        await fixture.page.waitForTimeout(5000);
+        const label = await this.page.locator(this.Elements.labelOnDifferenceReport).textContent();
+        expect(label).toContain("Pier E - LB 24 - COSCO ENGLAND - 050 - 100643 - 2N");
+        const summarysheetChanged = await this.page.locator(this.Elements.summarysheetContent).textContent();
+        expect(summarysheetChanged).toContain("BACK");
+
+
+    }
+    async HallLaborReport(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.HallLaborReport);
+        fixture.logger.info("Waiting for 2 seconds");
+        await fixture.page.waitForTimeout(2000);
+        // Add verification logic for Hall Labor Report if needed
+        const hallReportLabel = await this.page.locator(this.Elements.hallreportlabel).textContent();
+        expect(hallReportLabel).toContain("Hall Labor Report");
+    }
+    async transferToTrackingSheet(): Promise<void> {
+        await fixture.page.waitForTimeout(2000);
+        this.page.locator(this.Elements.transferToTrackingSheet).click();
+        this.page.locator(this.Elements.yesPopUp).click();
+        await fixture.page.waitForTimeout(2000);
+        const transferMessage = await this.page.locator(this.Elements.transferToTrackingSheetMessage).textContent();
+        expect(transferMessage).toContain("successfully transferred to Steady Tracking Sheet");
+    }
+    async steadyDispatchReport(): Promise<void> {
+        this.page.locator(this.Elements.steadyDispatchReport).click();
+        fixture.logger.info("Waiting for 2 seconds");
+        await fixture.page.waitForTimeout(2000);
+        // Add verification logic for Steady Dispatch Report if needed
+        const steadyDispatchLabel = await this.page.locator(this.Elements.title).textContent();
+        expect(steadyDispatchLabel).toContain("Steady Dispatch Report");
+        const vesselLabel = await this.page.locator(this.Elements.vesselLabel).textContent();
+        expect(vesselLabel).toContain("Vessel - COSCO ENGLAND");
+    }
+    async placeNewOrders(): Promise<void> {
+        this.page.locator(this.Elements.placeNewOrders).click();
+        fixture.logger.info("Waiting for 2 seconds");
+        await fixture.page.waitForTimeout(2000);
+        // Add verification logic for Place New Orders if needed
+        const newOrder = await this.page.locator(this.Elements.title).textContent();
+        expect(newOrder).toContain("New Order Form");
+    }
 }

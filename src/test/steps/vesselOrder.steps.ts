@@ -3,12 +3,16 @@
 import { Given, setDefaultTimeout, Then, When } from "@cucumber/cucumber";
 import { fixture } from "../../hooks/pageFixture";
 import vesselOrderPage from "../../pages/vesselOrder.page";
+import summarySheetPage from "../../pages/summarySheet.page";
 
 
 let vesselOrder: vesselOrderPage;
+let summarySheet: summarySheetPage;
+
 setDefaultTimeout(60 * 1000 * 1)
 Given('the user creates a new vessel order', async function () {
   vesselOrder = new vesselOrderPage(fixture.page)
+  summarySheet = new summarySheetPage(fixture.page)
   await vesselOrder.clickOnVesselOrderMenu();
   await vesselOrder.SelectDetailsOnLandingPage();
   await vesselOrder.EnterHeaderDetails();
@@ -84,7 +88,6 @@ Then('Verify that the appropriate validation message for steady name and steady 
   await vesselOrder.validationMessageForSteadtcount();
 });
 Then('TR user verifies that the vessel labor order is pushed to the summary sheet and verifies the details', async function () {
-  vesselOrder = new vesselOrderPage(fixture.page)
   await vesselOrder.clickOnSummarySheetMenu();
   let LatestWorkOrderDate: string
   await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate);
@@ -113,4 +116,25 @@ When('the user fills details in local 63 tab', async function () {
 
 When('the user fills details in local 94 tab', async function () {
     await vesselOrder.fillLocal94Details();
+});
+Then('Verify download labor order difference report', async function () {
+  await vesselOrder.downloadLaborOrderDifferenceReport();
+    await vesselOrder.clickOnSummarySheetMenu();
+  let LatestWorkOrderDate: string
+  await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate)
+  await summarySheet.VerifySummarySheetCreated();
+});
+Then('Verify hall labor report', async function () {
+await summarySheet.HallLaborReport();
+  await vesselOrder.clickOnSummarySheetMenu();
+  let LatestWorkOrderDate: string
+  await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate)
+  await summarySheet.VerifySummarySheetCreated();
+});
+Then('Verify steady dispatch report', async function () {
+    await summarySheet.steadyDispatchReport();
+    await vesselOrder.clickOnSummarySheetMenu();
+    let LatestWorkOrderDate: string
+    await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate)
+    await summarySheet.VerifySummarySheetCreated();
 });

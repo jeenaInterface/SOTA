@@ -1,0 +1,27 @@
+info: Jul-31-2025 18:32:02: 	Checking TRStatus for date: 2025-07-31
+info: Jul-31-2025 18:32:05: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:32:05: 	TRStatus is visible for 2025-07-31, moving to next date.
+info: Jul-31-2025 18:32:08: 	Checking TRStatus for date: 2025-08-01
+info: Jul-31-2025 18:32:11: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:32:11: 	TRStatus is visible for 2025-08-01, moving to next date.
+info: Jul-31-2025 18:32:14: 	Checking TRStatus for date: 2025-08-02
+info: Jul-31-2025 18:32:16: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:32:16: 	TRStatus is visible for 2025-08-02, moving to next date.
+info: Jul-31-2025 18:32:20: 	Checking TRStatus for date: 2025-08-03
+info: Jul-31-2025 18:32:22: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:32:22: 	TRStatus is visible for 2025-08-03, moving to next date.
+info: Jul-31-2025 18:32:25: 	Checking TRStatus for date: 2025-08-04
+info: Jul-31-2025 18:32:28: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:32:28: 	TRStatus is visible for 2025-08-04, moving to next date.
+info: Jul-31-2025 18:32:31: 	Checking TRStatus for date: 2025-08-05
+info: Jul-31-2025 18:32:34: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:32:34: 	TRStatus is visible for 2025-08-05, moving to next date.
+info: Jul-31-2025 18:32:38: 	Checking TRStatus for date: 2025-08-06
+info: Jul-31-2025 18:32:40: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:32:40: 	TRStatus is visible for 2025-08-06, moving to next date.
+info: Jul-31-2025 18:32:44: 	Checking TRStatus for date: 2025-08-07
+info: Jul-31-2025 18:32:46: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:32:46: 	TRStatus is visible for 2025-08-07, moving to next date.
+info: Jul-31-2025 18:32:50: 	Checking TRStatus for date: 2025-08-08
+info: Jul-31-2025 18:32:55: 	TRStatus element is not attached to DOM.
+info: Jul-31-2025 18:32:55: 	Order created for date: 2025-08-08

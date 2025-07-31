@@ -1,0 +1,37 @@
+info: Jul-31-2025 18:24:51: 	Checking TRStatus for date: 2025-07-31
+info: Jul-31-2025 18:24:53: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:24:53: 	TRStatus is visible for 2025-07-31, moving to next date.
+info: Jul-31-2025 18:24:57: 	Checking TRStatus for date: 2025-08-01
+info: Jul-31-2025 18:25:00: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:25:00: 	TRStatus is visible for 2025-08-01, moving to next date.
+info: Jul-31-2025 18:25:03: 	Checking TRStatus for date: 2025-08-02
+info: Jul-31-2025 18:25:07: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:25:07: 	TRStatus is visible for 2025-08-02, moving to next date.
+info: Jul-31-2025 18:25:11: 	Checking TRStatus for date: 2025-08-03
+info: Jul-31-2025 18:25:13: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:25:13: 	TRStatus is visible for 2025-08-03, moving to next date.
+info: Jul-31-2025 18:25:17: 	Checking TRStatus for date: 2025-08-04
+info: Jul-31-2025 18:25:19: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:25:19: 	TRStatus is visible for 2025-08-04, moving to next date.
+info: Jul-31-2025 18:25:23: 	Checking TRStatus for date: 2025-08-05
+info: Jul-31-2025 18:25:26: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:25:26: 	TRStatus is visible for 2025-08-05, moving to next date.
+info: Jul-31-2025 18:25:30: 	Checking TRStatus for date: 2025-08-06
+info: Jul-31-2025 18:25:32: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:25:32: 	TRStatus is visible for 2025-08-06, moving to next date.
+info: Jul-31-2025 18:25:36: 	Checking TRStatus for date: 2025-08-07
+info: Jul-31-2025 18:25:38: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:25:38: 	TRStatus is visible for 2025-08-07, moving to next date.
+info: Jul-31-2025 18:25:42: 	Checking TRStatus for date: 2025-08-08
+info: Jul-31-2025 18:25:47: 	TRStatus element is not attached to DOM.
+info: Jul-31-2025 18:25:47: 	Order created for date: 2025-08-08
+info: Jul-31-2025 18:25:48: 	Waiting for 2 seconds
+info: Jul-31-2025 18:25:53: 	Waiting for 2 seconds
+info: Jul-31-2025 18:25:57: 	Waiting for 3 seconds
+info: Jul-31-2025 18:26:01: 	Waiting for 2 seconds
+info: Jul-31-2025 18:26:07: 	Clicked on the vessel order tab
+info: Jul-31-2025 18:26:09: 	Waiting for 2 seconds
+info: Jul-31-2025 18:26:19: 	Waiting for 5 seconds
+info: Jul-31-2025 18:26:24: 	Waiting for 2 seconds
+info: Jul-31-2025 18:26:29: 	Clicked on the vessel order tab
+info: Jul-31-2025 18:26:37: 	Waiting for 2 seconds

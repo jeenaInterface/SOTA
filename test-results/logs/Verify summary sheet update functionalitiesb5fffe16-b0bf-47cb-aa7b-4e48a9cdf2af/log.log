@@ -1,0 +1,23 @@
+info: Jul-31-2025 14:55:37: 	Checking TRStatus for date: 2025-07-31
+info: Jul-31-2025 14:55:40: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 14:55:40: 	TRStatus is visible for 2025-07-31, moving to next date.
+info: Jul-31-2025 14:55:44: 	Checking TRStatus for date: 2025-08-01
+info: Jul-31-2025 14:55:47: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 14:55:47: 	TRStatus is visible for 2025-08-01, moving to next date.
+info: Jul-31-2025 14:55:51: 	Checking TRStatus for date: 2025-08-02
+info: Jul-31-2025 14:55:53: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 14:55:53: 	TRStatus is visible for 2025-08-02, moving to next date.
+info: Jul-31-2025 14:55:57: 	Checking TRStatus for date: 2025-08-03
+info: Jul-31-2025 14:55:59: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 14:55:59: 	TRStatus is visible for 2025-08-03, moving to next date.
+info: Jul-31-2025 14:56:02: 	Checking TRStatus for date: 2025-08-04
+info: Jul-31-2025 14:56:07: 	TRStatus element is not attached to DOM.
+info: Jul-31-2025 14:56:07: 	Order created for date: 2025-08-04
+info: Jul-31-2025 14:56:08: 	Waiting for 2 seconds
+info: Jul-31-2025 14:56:13: 	Waiting for 2 seconds
+info: Jul-31-2025 14:56:17: 	Waiting for 3 seconds
+info: Jul-31-2025 14:56:21: 	Waiting for 2 seconds
+info: Jul-31-2025 14:56:27: 	Clicked on the vessel order tab
+info: Jul-31-2025 14:56:29: 	Waiting for 2 seconds
+info: Jul-31-2025 14:56:37: 	Waiting for 5 seconds
+info: Jul-31-2025 14:56:42: 	Waiting for 2 seconds

@@ -131,6 +131,9 @@ export default class vesselOrderPage {
         jobTypeReqInput: 'input[name="jobTypeReq"]',
         jobTypeOrdInput: 'input[name="jobTypeOrd"]',
         alcNoRowTextbox: { row: 'Alc No', role: 'textbox' },
+        LaborOrderDifferenceReport: "//i[@title='Labor Order Difference Report']",
+        labelOnDifferenceReport: "//h5[contains(text(),'Pier E - LB 24 - COSCO KAOHSIUNG - 090 - 100741 - ')]",
+        summarysheetContent: "//td[normalize-space()='BACK']",
     }
     async clickOnVesselOrderMenu(): Promise<void> {
         await this.base.goto(process.env.BASEURL, { timeout: 100000 });
@@ -144,7 +147,7 @@ export default class vesselOrderPage {
         await this.page.getByPlaceholder('Search By Job No or Vessel').press('ArrowRight');
         await this.page.getByPlaceholder('Search By Job No or Vessel').click();
         await this.page.waitForTimeout(1000);
-        await this.page.getByPlaceholder('Search By Job No or Vessel').fill('COSCO ENGLAND - 050 - 100643 - 9516428');
+        await this.page.getByPlaceholder('Search By Job No or Vessel').fill('COSCO KAOHSIUNG - 090 - 100741 - 9355563');
         // await this.page.getByPlaceholder('Search By Job No or Vessel Name or Voyage or Lloyds').click();
         // Wait for datalist options
         await this.page.waitForTimeout(1000);
@@ -171,64 +174,64 @@ export default class vesselOrderPage {
     }
 
     async SelectDetailsOnLandingPage(): Promise<string> {
-    let currentDate = new Date();
-    let formattedDate: string;
-    const maxAttempts = 10;
+        let currentDate = new Date();
+        let formattedDate: string;
+        const maxAttempts = 20;
 
-    await this.page.locator(this.Elements.shift).selectOption("2ND");
-    await this.selectJobNumber();
+        await this.page.locator(this.Elements.shift).selectOption("2ND");
+        await this.selectJobNumber();
 
 
-    for (let attempts = 0; attempts < maxAttempts; attempts++) {
-        formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
-            .toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
-
-        fixture.logger.info(`Checking TRStatus for date: ${formattedDate}`);
-        const trStatusLocator = this.page.locator(this.Elements.TRStatus);
-
-        const isAttached = await trStatusLocator.waitFor({ state: 'attached', timeout: 5000 })
-            .then(() => true)
-            .catch(() => false);
-
-        let trStatusVisible = false;
-
-        if (isAttached) {
-            trStatusVisible = await trStatusLocator.isVisible();
-            fixture.logger.info(`TRStatus element is attached. isVisible: ${trStatusVisible}`);
-        } else {
-            fixture.logger.info("TRStatus element is not attached to DOM.");
-        }
-
-        if (trStatusVisible) {
-            fixture.logger.info(`TRStatus is visible for ${formattedDate}, moving to next date.`);
-
-            // Increment date for next attempt
-            currentDate.setDate(currentDate.getDate() + 1);
-
-            // Navigate back to form
-            await this.page.locator(this.Elements.homeicon).click();
-            await this.page.locator(this.Elements.laborOrderMenu).click();
-            await this.page.locator(this.Elements.vesselOrder).click();
-
-            // Fill the next date
+        for (let attempts = 0; attempts < maxAttempts; attempts++) {
             formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
                 .toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
-            await this.page.locator(this.Elements.workDate).waitFor({ state: 'attached', timeout: 3000 });
-            await this.page.locator(this.Elements.workDate).click();
-            await this.page.locator(this.Elements.workDate).fill(formattedDate);
 
-            await this.page.locator(this.Elements.shift).selectOption("2ND");
-            await this.selectJobNumber(); // 
+            fixture.logger.info(`Checking TRStatus for date: ${formattedDate}`);
+            const trStatusLocator = this.page.locator(this.Elements.TRStatus);
 
-        } else {
-            fixture.logger.info(`Order created for date: ${formattedDate}`);
-            this.noTRStatusDate = formattedDate;
-            return formattedDate; // stop loop on success
+            const isAttached = await trStatusLocator.waitFor({ state: 'attached', timeout: 5000 })
+                .then(() => true)
+                .catch(() => false);
+
+            let trStatusVisible = false;
+
+            if (isAttached) {
+                trStatusVisible = await trStatusLocator.isVisible();
+                fixture.logger.info(`TRStatus element is attached. isVisible: ${trStatusVisible}`);
+            } else {
+                fixture.logger.info("TRStatus element is not attached to DOM.");
+            }
+
+            if (trStatusVisible) {
+                fixture.logger.info(`TRStatus is visible for ${formattedDate}, moving to next date.`);
+
+                // Increment date for next attempt
+                currentDate.setDate(currentDate.getDate() + 1);
+
+                // Navigate back to form
+                await this.page.locator(this.Elements.homeicon).click();
+                await this.page.locator(this.Elements.laborOrderMenu).click();
+                await this.page.locator(this.Elements.vesselOrder).click();
+
+                // Fill the next date
+                formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
+                    .toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+                await this.page.locator(this.Elements.workDate).waitFor({ state: 'attached', timeout: 3000 });
+                await this.page.locator(this.Elements.workDate).click();
+                await this.page.locator(this.Elements.workDate).fill(formattedDate);
+
+                await this.page.locator(this.Elements.shift).selectOption("2ND");
+                await this.selectJobNumber(); // 
+
+            } else {
+                fixture.logger.info(`Order created for date: ${formattedDate}`);
+                this.noTRStatusDate = formattedDate;
+                return formattedDate; // stop loop on success
+            }
         }
-    }
 
-    throw new Error("Unable to create order — all attempted dates already have TRStatus.");
-}
+        throw new Error("Unable to create order — all attempted dates already have TRStatus.");
+    }
 
 
     async EnterHeaderDetails(): Promise<void> {
@@ -499,14 +502,24 @@ export default class vesselOrderPage {
         fixture.logger.info("Waiting for 2 seconds")
         await fixture.page.waitForTimeout(2000);
         await this.page.locator(this.Elements.workDateSummarySheet).click();
-        // await this.page.locator(this.Elements.workDateSummarySheet).fill(this.noTRStatusDate);
-        await this.page.locator(this.Elements.workDateSummarySheet).fill('2025-07-31');
+        await this.page.locator(this.Elements.workDateSummarySheet).fill(this.noTRStatusDate);
+        // await this.page.locator(this.Elements.workDateSummarySheet).fill('2025-07-31');
         await this.page.locator(this.Elements.shift).selectOption("Nightside");
         await this.base.waitAndClick(this.Elements.Go);
     }
     async clickOnSummarySheetMenu(): Promise<void> {
         await this.base.waitAndClick(this.Elements.laborOrderMenu);
         await this.base.waitAndClick(this.Elements.summarysheet);
+    }
+    async downloadLaborOrderDifferenceReport(): Promise<void> {
+
+        this.page.locator(this.Elements.LaborOrderDifferenceReport).click()
+        fixture.logger.info("Waiting for 5 seconds")
+        await fixture.page.waitForTimeout(5000);
+        const label = await this.page.locator(this.Elements.labelOnDifferenceReport).textContent();
+        expect(label).toContain(" Pier E - LB 24 - COSCO KAOHSIUNG - 090 - 100741 - 2ND Shift");
+
+
     }
     async navigateToNewOrderForm(): Promise<void> {
         await this.base.waitAndClick(this.Elements.laborOrderMenu);

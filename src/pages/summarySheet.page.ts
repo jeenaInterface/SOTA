@@ -25,7 +25,7 @@ export default class summarySheetPage {
     private Elements = {
         summarysheet: "//a[normalize-space(text())='Summary Sheet']",
         laborOrderMenu: "//div[normalize-space(text())='Labor Order']",
-        vesselOrderTab: "(//a[normalize-space()='COSCO ENGLAND - 100643'])",
+        vesselOrderTab: "(//a[normalize-space()='COSCO KAOHSIUNG - 100741'])",
         saveButton: "//button[normalize-space()='SAVE']",
         successNotification: "//span[contains(normalize-space(text()), 'Summary Sheet information has been saved successfully')]",
         logOutButton: "//i[@role='button']",
@@ -71,7 +71,7 @@ export default class summarySheetPage {
         await this.page.locator(this.Elements.vesselOrderTab).click();
         fixture.logger.info("Clicked on the vessel order tab");
         const TabPresent = await this.page.locator(this.Elements.vesselOrderTab).textContent();
-        expect(TabPresent).toContain("COSCO ENGLAND - 100643");
+        expect(TabPresent).toContain("COSCO KAOHSIUNG - 100741");
         // for (let i = 0; i < 10; i++) {
         //     await this.page.keyboard.press('PageDown');
         //     await this.page.waitForTimeout(500);
@@ -163,18 +163,7 @@ export default class summarySheetPage {
         });
     }
 
-    async downloadLaborOrderDifferenceReport(): Promise<void> {
 
-        this.page.locator(this.Elements.LaborOrderDifferenceReport).click()
-        fixture.logger.info("Waiting for 5 seconds")
-        await fixture.page.waitForTimeout(5000);
-        const label = await this.page.locator(this.Elements.labelOnDifferenceReport).textContent();
-        expect(label).toContain("Pier E - LB 24 - COSCO ENGLAND - 050 - 100643 - 2N");
-        const summarysheetChanged = await this.page.locator(this.Elements.summarysheetContent).textContent();
-        expect(summarysheetChanged).toContain("BACK");
-
-
-    }
     async HallLaborReport(): Promise<void> {
         await this.base.waitAndClick(this.Elements.HallLaborReport);
         fixture.logger.info("Waiting for 2 seconds");
@@ -185,16 +174,17 @@ export default class summarySheetPage {
     }
     async transferToTrackingSheet(): Promise<void> {
         await fixture.page.waitForTimeout(2000);
-        this.page.locator(this.Elements.transferToTrackingSheet).click();
-        this.page.locator(this.Elements.yesPopUp).click();
+        await this.page.locator(this.Elements.transferToTrackingSheet).click();
+        await this.page.locator(this.Elements.yesPopUp).click();
         await fixture.page.waitForTimeout(2000);
         const transferMessage = await this.page.locator(this.Elements.transferToTrackingSheetMessage).textContent();
         expect(transferMessage).toContain("successfully transferred to Steady Tracking Sheet");
     }
     async steadyDispatchReport(): Promise<void> {
-        this.page.locator(this.Elements.steadyDispatchReport).click();
         fixture.logger.info("Waiting for 2 seconds");
-        await fixture.page.waitForTimeout(2000);
+        await fixture.page.waitForTimeout(7000);
+        //wait until steadyDispatchReport visible
+        await this.page.locator(this.Elements.steadyDispatchReport).click();
         // Add verification logic for Steady Dispatch Report if needed
         const steadyDispatchLabel = await this.page.locator(this.Elements.title).textContent();
         expect(steadyDispatchLabel).toContain("Steady Dispatch Report");
@@ -202,7 +192,7 @@ export default class summarySheetPage {
         expect(vesselLabel).toContain("Vessel - COSCO ENGLAND");
     }
     async placeNewOrders(): Promise<void> {
-        this.page.locator(this.Elements.placeNewOrders).click();
+        await this.page.locator(this.Elements.placeNewOrders).click();
         fixture.logger.info("Waiting for 2 seconds");
         await fixture.page.waitForTimeout(2000);
         // Add verification logic for Place New Orders if needed

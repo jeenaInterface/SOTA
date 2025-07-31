@@ -1,0 +1,40 @@
+info: Jul-31-2025 18:38:49: 	Checking TRStatus for date: 2025-07-31
+info: Jul-31-2025 18:38:52: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:38:52: 	TRStatus is visible for 2025-07-31, moving to next date.
+info: Jul-31-2025 18:38:56: 	Checking TRStatus for date: 2025-08-01
+info: Jul-31-2025 18:38:58: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:38:58: 	TRStatus is visible for 2025-08-01, moving to next date.
+info: Jul-31-2025 18:39:02: 	Checking TRStatus for date: 2025-08-02
+info: Jul-31-2025 18:39:04: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:39:04: 	TRStatus is visible for 2025-08-02, moving to next date.
+info: Jul-31-2025 18:39:08: 	Checking TRStatus for date: 2025-08-03
+info: Jul-31-2025 18:39:11: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:39:11: 	TRStatus is visible for 2025-08-03, moving to next date.
+info: Jul-31-2025 18:39:14: 	Checking TRStatus for date: 2025-08-04
+info: Jul-31-2025 18:39:18: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:39:18: 	TRStatus is visible for 2025-08-04, moving to next date.
+info: Jul-31-2025 18:39:21: 	Checking TRStatus for date: 2025-08-05
+info: Jul-31-2025 18:39:24: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:39:24: 	TRStatus is visible for 2025-08-05, moving to next date.
+info: Jul-31-2025 18:39:27: 	Checking TRStatus for date: 2025-08-06
+info: Jul-31-2025 18:39:30: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:39:30: 	TRStatus is visible for 2025-08-06, moving to next date.
+info: Jul-31-2025 18:39:33: 	Checking TRStatus for date: 2025-08-07
+info: Jul-31-2025 18:39:36: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:39:36: 	TRStatus is visible for 2025-08-07, moving to next date.
+info: Jul-31-2025 18:39:40: 	Checking TRStatus for date: 2025-08-08
+info: Jul-31-2025 18:39:42: 	TRStatus element is attached. isVisible: true
+info: Jul-31-2025 18:39:42: 	TRStatus is visible for 2025-08-08, moving to next date.
+info: Jul-31-2025 18:39:46: 	Checking TRStatus for date: 2025-08-09
+info: Jul-31-2025 18:39:51: 	TRStatus element is not attached to DOM.
+info: Jul-31-2025 18:39:51: 	Order created for date: 2025-08-09
+info: Jul-31-2025 18:39:52: 	Waiting for 2 seconds
+info: Jul-31-2025 18:39:58: 	Waiting for 2 seconds
+info: Jul-31-2025 18:40:03: 	Waiting for 3 seconds
+info: Jul-31-2025 18:40:06: 	Waiting for 2 seconds
+info: Jul-31-2025 18:40:12: 	Clicked on the vessel order tab
+info: Jul-31-2025 18:40:14: 	Waiting for 2 seconds
+info: Jul-31-2025 18:40:24: 	Waiting for 5 seconds
+info: Jul-31-2025 18:40:29: 	Waiting for 2 seconds
+info: Jul-31-2025 18:40:34: 	Clicked on the vessel order tab
+info: Jul-31-2025 18:40:40: 	Waiting for 2 seconds

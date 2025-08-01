@@ -29,6 +29,7 @@ export default class yardOrderPagePOC {
     public Elements = {
         laborOrderMenu: "//div[normalize-space(text())='Labor Order']",
         yardOrder: "//a[normalize-space(text())='Ops Yard Order']",
+        payrollManagemnetDashboardMenu: "//a[normalize-space()='Payroll Management Dashboard']",
         workDate: "//input[@type='date']",
         shift: "//select[@ng-reflect-name='shift']",
         jobType: "//select[@ng-reflect-name='jobCode']",
@@ -88,12 +89,38 @@ export default class yardOrderPagePOC {
         pmaBatchNumber: "//input[@placeholder='Enter PMA Batch No']",
         uploadFilePath: "//input[@type='file']",
         uploadButton: "//button[normalize-space()='Upload']",
-        SOTAConfirm:"//button[normalize-space(text())='SOTA CONFIRM?']",
+        SOTAConfirm: "//button[normalize-space(text())='SOTA CONFIRM?']",
         successMessageAfterSOTA: "//span[normalize-space(text())='Batch SOTA Confirmed successfully']",
-        PMAApprovedButton:"//button[normalize-space(text())='PMA APPROVED?']",
-        successMessageAfterPMAApproved:"//span[normalize-space(text())='Batch PMA Approved successfully']",
-        
-  
+        PMAApprovedButton: "//button[normalize-space(text())='PMA APPROVED?']",
+        successMessageAfterPMAApproved: "//span[normalize-space(text())='Batch PMA Approved successfully']",
+        shiftBatchLevelScreen: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-payroll-mgmt-summary[1]/div[1]/div[2]/table[1]/tbody[1]/tr[1]/td[3]/span[1]",
+        completeCheckList: "//input[@id='complete']",
+        reviewNotesButton: "//i[@class='bi bi-card-list icon-lg m-2']",
+        reviewTextArea: "//textarea[@id='addComment']",
+        addRemarksButton: "//button[normalize-space()='Add Remarks']",
+        checklist1: "//div[@class='col-6']//div[1]//input[1]'",
+        checklist2: "//div[@class='row justify-content-md-center']//div[2]//input[1]",
+        checkList3: "//div[@class='row justify-content-md-center']//div[5]//input[1]",
+        saveInfo: "//button[normalize-space()='SAVE INFO']",
+        viewTimesheet: "//button[normalize-space()='VIEW TIMESHEETS']",
+        pageTitle: "//span[@class='page-title p-1']",
+        backButton: "//button[normalize-space()='BACK']",
+        timeSheetReport: "//button[normalize-space()='TIMESHEET REPORT']",
+        steadyListReport: "//button[normalize-space()='STEADY LIST REPORT']",
+        timeSheetReviewRecap: "//button[normalize-space()='TIMESHEET REVIEW RECAP']",
+        OCULogHistory: "//button[normalize-space()='VIEW OCU LOG HISTORY']",
+        downloadBatchReport: "//button[normalize-space()='DOWNLOAD BATCH REPORT']",
+        gangLink: "//span[@class='link-color']",
+        batchUnready: "//button[normalize-space()='BATCH UN-READY?']",
+        successNotificationBatchUnReady: "//span[normalize-space(text())='Timesheet status have been updated to Batch Un-Ready successfully']",
+        differenceDownLoadReport: "//button[normalize-space()='DOWNLOAD']",
+        pmaUnApproved: "//button[normalize-space()='PMA UN-APPROVED?']",
+        successNotificationPMAUnapproved: "//span[normalize-space(text())='Batch PMA Un-Approved successfully']",
+        successNotificationSOTAUnapproved: "//span[normalize-space(text())='Batch SOTA Un-Confirmed successfully']",
+        SOTAUnnConfirm: "//button[normalize-space()='SOTA UN-CONFIRM?']",
+        payrollMenu: "//div[normalize-space()='Payroll']",
+
+
 
     }
 
@@ -105,54 +132,75 @@ export default class yardOrderPagePOC {
     }
 
     async SelectDetailsOnLandingPage(): Promise<string> {
-        // let currentDate = new Date();
-        // let formattedDate: string;
-        // const maxAttempts = 10;
+        let currentDate = new Date();
+        let formattedDate: string;
+        const maxAttempts = 10;
 
-        // await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
-        // await this.page.locator(this.Elements.Go).click();
-
-        // fixture.logger.info("Waiting for 1 seconds");
-        // await fixture.page.waitForTimeout(1000);
-
-        // for (let attempts = 0; attempts < maxAttempts; attempts++) {
-
-        //     const trStatusVisible = await this.page.locator(this.Elements.TRStatus).isVisible();
-        //     fixture.logger.info("Waiting for 2 seconds");
-        //     await fixture.page.waitForTimeout(2000);
-
-        //     if (trStatusVisible) {
-        //         await this.page.locator(this.Elements.homeicon).click();
-        //         await this.page.locator(this.Elements.laborOrderMenu).click();
-        //         await this.page.locator(this.Elements.yardOrder).click();
-        //         currentDate.setDate(currentDate.getDate() + 1);
-
-        //         formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1).toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
-
-        //         // Wait and fill the date for the next order
-        //         await this.page.locator(this.Elements.workDate).waitFor({ state: 'attached', timeout: 3000 });
-        //         await this.page.locator(this.Elements.workDate).click();
-        //         await this.page.locator(this.Elements.workDate).fill(formattedDate);
-        //         await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
-
-        //         // Click Go button
-        //         await this.page.locator(this.Elements.Go).click();
-
-        //     } else {
-        //         // If no TR status, assign the formatted date as noTRStatusDate
-        //         this.noTRStatusDate = formattedDate;
-        //         fixture.logger.info(`TR status is not present on ${formattedDate}`);
-                
-        //     }
-        // }
-        await this.page.locator(this.Elements.workDate).fill('2025-07-22');
+        // await this.page.locator(this.Elements.shift).selectOption("2ND");
         await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
         await this.page.locator(this.Elements.Go).click();
 
-        // // Store the date to noTRStatusDate
-        this.noTRStatusDate = '2025-07-22';
-        // this.noTRStatusDate = formattedDate;
-        return this.noTRStatusDate;
+        fixture.logger.info("Waiting for 1 seconds");
+        await fixture.page.waitForTimeout(1000);
+
+        for (let attempts = 0; attempts < maxAttempts; attempts++) {
+            formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
+                .toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+
+            fixture.logger.info(`Checking TRStatus for date: ${formattedDate}`);
+            const trStatusLocator = this.page.locator(this.Elements.TRStatus);
+
+            const isAttached = await trStatusLocator.waitFor({ state: 'attached', timeout: 5000 })
+                .then(() => true)
+                .catch(() => false);
+
+            let trStatusVisible = false;
+
+            if (isAttached) {
+                trStatusVisible = await trStatusLocator.isVisible();
+                fixture.logger.info(`TRStatus element is attached. isVisible: ${trStatusVisible}`);
+            } else {
+                fixture.logger.info("TRStatus element is not attached to DOM.");
+            }
+
+            if (trStatusVisible) {
+                fixture.logger.info(`TRStatus is visible for ${formattedDate}, moving to next date.`);
+
+                // Increment date for next attempt
+                currentDate.setDate(currentDate.getDate() + 1);
+
+                // Navigate back to form
+                await this.page.locator(this.Elements.homeicon).click();
+                await this.page.locator(this.Elements.laborOrderMenu).click();
+                await this.page.locator(this.Elements.yardOrder).click();
+                formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)
+                    .toString().padStart(2, '0')}-${currentDate.getDate().toString().padStart(2, '0')}`;
+                await this.page.locator(this.Elements.workDate).waitFor({ state: 'attached', timeout: 3000 });
+                await this.page.locator(this.Elements.workDate).click();
+                await this.page.locator(this.Elements.workDate).fill(formattedDate);
+
+                // await this.page.locator(this.Elements.shift).selectOption("2ND");
+                await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
+                await this.page.locator(this.Elements.Go).click();
+
+
+            } else {
+                fixture.logger.info(`Order created for date: ${formattedDate}`);
+                this.noTRStatusDate = formattedDate;
+                return formattedDate; // stop loop on success
+            }
+        }
+
+        throw new Error("Unable to create order — all attempted dates already have TRStatus.");
+
+        // await this.page.locator(this.Elements.workDate).fill('2025-07-22');
+        // await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
+        // await this.page.locator(this.Elements.Go).click();
+
+        // // // Store the date to noTRStatusDate
+        // this.noTRStatusDate = '2025-07-22';
+        // // this.noTRStatusDate = formattedDate;
+        // return this.noTRStatusDate;
     }
 
 
@@ -311,6 +359,7 @@ export default class yardOrderPagePOC {
     async selectTheBatch(): Promise<void> {
 
         const date = new Date(this.noTRStatusDate);
+        // const date = new Date('2025-08-01');
         const dayOfWeek = date.getDay(); // 0 (Sunday) to 6 (Saturday)
 
         // Map day of the week to week number
@@ -346,6 +395,7 @@ export default class yardOrderPagePOC {
     }
     async calculateWeekNumber(): Promise<void> {
         const date = new Date(this.noTRStatusDate);
+        // const date = new Date('2025-08-01');
         const dayOfWeek = date.getDay(); // 0 (Sunday) to 6 (Saturday)
 
         // Map day of the week to batch number
@@ -361,6 +411,18 @@ export default class yardOrderPagePOC {
 
         this.weekNumber = weekNumberMap[dayOfWeek];
         console.log(`Calculated week number: ${this.weekNumber}`);
+    }
+    async waitForDifferenceButton(): Promise<void> {
+        const downloadButtonXPath = `//td[span[normalize-space(text())='${this.weekNumber}']]/following-sibling::td[9]//i[contains(@class, 'bi bi-journal-arrow-down')]`;
+        await this.page.locator(downloadButtonXPath).click();
+        const pageTitle = await this.page.locator(this.Elements.pageTitle).textContent();
+        expect(pageTitle).toContain("OCU - Differences Report");
+        fixture.logger.info("Waiting for 2 seconds");
+        await fixture.page.waitForTimeout(2000);
+        this.downLoadDifference();
+        await this.base.waitAndClick(this.Elements.backButton);
+
+
     }
 
     async waitForDownloadButton(): Promise<void> {
@@ -390,6 +452,7 @@ export default class yardOrderPagePOC {
             this.page.locator(downloadButtonXPath).click() // Perform the action that initiates download
         ]);
 
+
         // Save the downloaded file to the specified folder as a text file
         const downloadPathWithFileName = path.join(downloadPath, 'downloadedFile.txt');
         await download.saveAs(downloadPathWithFileName);
@@ -414,13 +477,13 @@ export default class yardOrderPagePOC {
     async verifyUploadSuccess(): Promise<void> {
         const successMessageXPath = `//td[span[normalize-space(text())='${this.weekNumber}']]/following-sibling::td[7]//div//span[normalize-space(text())='Processed Successfully']`;
         let successMessageAfterUpload = false;
-    
+
         while (!successMessageAfterUpload) {
             await this.base.waitAndClick(this.Elements.RefreshButton);
             await fixture.page.waitForTimeout(3000);
             successMessageAfterUpload = await this.page.locator(successMessageXPath).isVisible();
         }
-    
+
         const successMessage = await this.page.locator(successMessageXPath).textContent();
         expect(successMessage).toContain("Processed Successfully");
         await fixture.page.waitForTimeout(2000);
@@ -459,6 +522,155 @@ export default class yardOrderPagePOC {
         const successMessage = await this.page.locator(this.Elements.successMessageAfterPMAApproved).textContent();
         expect(successMessage).toContain("Batch PMA Approved successfully");
         await fixture.page.waitForTimeout(2000);
+    }
+    async clickPayrollManagementDashnoard(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.payrollMenu);
+        await this.base.waitAndClick(this.Elements.payrollManagemnetDashboardMenu);
+    }
+    async clickOnBatchInBatchLevel(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.shiftBatchLevelScreen);
+    }
+    async saveInfo(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.completeCheckList);
+        await fixture.page.waitForTimeout(2000);
+        await this.base.waitAndClick(this.Elements.reviewNotesButton);
+        await this.page.locator(this.Elements.reviewTextArea).fill("Test remarks");
+        await this.base.waitAndClick(this.Elements.addRemarksButton);
+        await fixture.page.waitForTimeout(2000);
+        await this.page.locator('#items').first().check();
+        await this.page.locator('div:nth-child(4) > #items').check();
+        await this.page.locator('div:nth-child(5) > #items').check();
+
+        await this.base.waitAndClick(this.Elements.saveInfo);
+    }
+    async viewTimehseet(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.viewTimesheet);
+        const pageTitle = await this.page.locator(this.Elements.pageTitle).textContent();
+        expect(pageTitle).toContain("Timesheet Management");
+        await this.page.goBack();
+
+
+    }
+    async backButton(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.backButton);
+        const pageTitle = await this.page.locator(this.Elements.pageTitle).textContent();
+        expect(pageTitle).toContain("Payroll - Batch Level");
+        await this.page.goBack();
+        await fixture.page.waitForTimeout(2000);
+
+
+    }
+    async OCULogHistory(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.OCULogHistory);
+        const pageTitle = await this.page.locator(this.Elements.pageTitle).textContent();
+        expect(pageTitle).toContain("View OCU Logs");
+        await this.base.waitAndClick(this.Elements.backButton);
+
+
+    }
+    async ganglink(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.gangLink);
+        const pageTitle = await this.page.locator(this.Elements.pageTitle).textContent();
+        expect(pageTitle).toContain("Timesheet Management");
+
+    }
+    async batchUnready(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.batchUnready);
+        await this.base.waitAndClick(this.Elements.BatchConfirmationPopUp);
+
+        const pageTitle = await this.page.locator(this.Elements.successNotificationBatchUnReady).textContent();
+        expect(pageTitle).toContain("Timesheet status have been updated to Batch Un-Ready successfully");
+
+    }
+
+    async PMAProcess(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.pmaUnApproved);
+        await this.base.waitAndClick(this.Elements.BatchConfirmationPopUp);
+
+        const PMA = await this.page.locator(this.Elements.successNotificationPMAUnapproved).textContent();
+        expect(PMA).toContain("Batch PMA Un-Approved successfully");
+        await this.base.waitAndClick(this.Elements.SOTAUnnConfirm);
+        await this.base.waitAndClick(this.Elements.BatchConfirmationPopUp);
+        const SOTA = await this.page.locator(this.Elements.successNotificationSOTAUnapproved).textContent();
+        expect(SOTA).toContain("Batch SOTA Un-Confirmed successfully");
+
+
+    }
+    async timeSheetReport(): Promise<string> {
+        const downloadPath = path.resolve(__dirname, 'downloads');
+        if (!fs.existsSync(downloadPath)) {
+            fs.mkdirSync(downloadPath, { recursive: true });
+        }
+        this.clearDownloadFolder(downloadPath);
+        const [download] = await Promise.all([
+            this.page.waitForEvent('download'),
+            this.page.locator(this.Elements.timeSheetReport).click()
+        ]);
+        const downloadPathWithFileName = path.join(downloadPath, 'TimeSheet_Report.XLSX');
+        await download.saveAs(downloadPathWithFileName);
+        expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+        return downloadPathWithFileName;
+    }
+    async steadyListReport(): Promise<string> {
+        const downloadPath = path.resolve(__dirname, 'downloads');
+        if (!fs.existsSync(downloadPath)) {
+            fs.mkdirSync(downloadPath, { recursive: true });
+        }
+        this.clearDownloadFolder(downloadPath);
+        const [download] = await Promise.all([
+            this.page.waitForEvent('download'),
+            this.page.locator(this.Elements.steadyListReport).click()
+        ]);
+        const downloadPathWithFileName = path.join(downloadPath, 'SteadyList_Report.XLSX');
+        await download.saveAs(downloadPathWithFileName);
+        expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+        return downloadPathWithFileName;
+    }
+    async timeSheetReviewRecap(): Promise<string> {
+        const downloadPath = path.resolve(__dirname, 'downloads');
+        if (!fs.existsSync(downloadPath)) {
+            fs.mkdirSync(downloadPath, { recursive: true });
+        }
+        this.clearDownloadFolder(downloadPath);
+        const [download] = await Promise.all([
+            this.page.waitForEvent('download'),
+            this.page.locator(this.Elements.timeSheetReviewRecap).click()
+        ]);
+        const downloadPathWithFileName = path.join(downloadPath, 'TimeSheetReviewRecap_Report.XLSX');
+        await download.saveAs(downloadPathWithFileName);
+        expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+        return downloadPathWithFileName;
+    }
+
+    async downLoadBatchReport(): Promise<string> {
+        const downloadPath = path.resolve(__dirname, 'downloads');
+        if (!fs.existsSync(downloadPath)) {
+            fs.mkdirSync(downloadPath, { recursive: true });
+        }
+        this.clearDownloadFolder(downloadPath);
+        const [download] = await Promise.all([
+            this.page.waitForEvent('download'),
+            this.page.locator(this.Elements.downloadBatchReport).click()
+        ]);
+        const downloadPathWithFileName = path.join(downloadPath, 'Batch_Report.XLSX');
+        await download.saveAs(downloadPathWithFileName);
+        expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+        return downloadPathWithFileName;
+    }
+    async downLoadDifference(): Promise<string> {
+        const downloadPath = path.resolve(__dirname, 'downloads');
+        if (!fs.existsSync(downloadPath)) {
+            fs.mkdirSync(downloadPath, { recursive: true });
+        }
+        this.clearDownloadFolder(downloadPath);
+        const [download] = await Promise.all([
+            this.page.waitForEvent('download'),
+            this.page.locator(this.Elements.differenceDownLoadReport).click()
+        ]);
+        const downloadPathWithFileName = path.join(downloadPath, 'PMADifference_Report.XLSX');
+        await download.saveAs(downloadPathWithFileName);
+        expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+        return downloadPathWithFileName;
     }
 
 } 

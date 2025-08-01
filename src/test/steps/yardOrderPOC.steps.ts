@@ -4,7 +4,7 @@ import { Given, setDefaultTimeout, Then, When } from "@cucumber/cucumber";
 import { fixture } from "../../hooks/pageFixture";
 import yardOrderPage from "../../pages/yardOrderPOC.page";
 import loginPage from "../../pages/login.page";
-import * as data from "../../helper/util/test-data/payloads.json"
+import * as fs from 'fs';
 
 
 let yardOrder: yardOrderPage;
@@ -66,11 +66,109 @@ Then('OCU user does the Batch ready and SOTA approval', async function () {
   await yardOrder.selectTheBatch();
   await yardOrder.ClickOnSOTAButton();
 });
+
+Then('OCU user does the Batch ready, batch Unready, SOTA Approval and verify difference report', async function () {
+  await yardOrder.clickOnPayrollMenu();
+  await yardOrder.selectTheBatch();
+  await yardOrder.ClickOnBatchReady();
+  await yardOrder.verifyBatchReadySuccessMessage();
+  await yardOrder.clickOnPayrollMenu();
+  await yardOrder.calculateWeekNumber();
+  await yardOrder.waitForDownloadButton();
+  await yardOrder.downloadBatchFile();
+  await yardOrder.verifyUploadSuccess();
+  await yardOrder.waitForDifferenceButton();
+  await yardOrder.selectTheBatch();
+  await yardOrder.batchUnready();
+  await yardOrder.ClickOnBatchReady();
+  await yardOrder.clickOnPayrollMenu();
+  await yardOrder.calculateWeekNumber();
+  await yardOrder.waitForDownloadButton();
+  await yardOrder.downloadBatchFile();
+  await yardOrder.selectTheBatch();
+  await yardOrder.ClickOnSOTAButton();
+  await yardOrder.verifySOTASuccessMessage();
+});
+
 Then('Accounting user does the final approval', async function () {
   await yardOrder.clickOnPayrollMenu();
   await yardOrder.selectTheBatch();
   await yardOrder.ClickOnPMAApproved();
   await yardOrder.verifyPMASuccessMessageAfterPMAApproval();
 
+});
+
+ Then('Accouting user does PMA un approval and SOTA Un approval', async function () {
+  await yardOrder.PMAProcess();
+
+});
+
+Then('user open payroll managemnt dashboard', async function () {
+  await yardOrder.clickPayrollManagementDashnoard();
+
+});
+Then('Click on batch number', async function () {
+  await yardOrder.selectTheBatch();
+
+});
+Then('Click on shift', async function () {
+  await yardOrder.clickOnBatchInBatchLevel();
+
+});
+Then('verify the link in child tab payroll-timesheet screen', async function () {
+  await yardOrder.ganglink();
+
+});
+
+
+Then('Verify Save Info functionality', async function () {
+    await yardOrder.saveInfo();
+
+});
+Then('Verify View timehseet functionality', async function () {
+    await yardOrder.viewTimehseet();
+
+});
+
+Then('Verify back button functionality', async function () {
+    await yardOrder.backButton();
+
+});
+Then('Verify timehseet report', async function () {
+  const filePath = await yardOrder.timeSheetReport();
+  if (filePath && fs.existsSync(filePath) && this.attach) {
+    const fileBuffer = fs.readFileSync(filePath);
+    await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  }
+
+});
+Then('Verify steady list report', async function () {
+  const filePath = await yardOrder.steadyListReport();
+  if (filePath && fs.existsSync(filePath) && this.attach) {
+    const fileBuffer = fs.readFileSync(filePath);
+    await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  }
+
+});
+Then('verify steady recap report', async function () {
+  const filePath = await yardOrder.timeSheetReviewRecap();
+  if (filePath && fs.existsSync(filePath) && this.attach) {
+    const fileBuffer = fs.readFileSync(filePath);
+    await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  }
+
+});
+
+Then('verify OCU log history', async function () {
+  await yardOrder.OCULogHistory();
+});
+
+
+Then('verify download batch report', async function () {
+  const filePath = await yardOrder.downLoadBatchReport();
+  if (filePath && fs.existsSync(filePath) && this.attach) {
+    const fileBuffer = fs.readFileSync(filePath);
+    await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  }
 
 });

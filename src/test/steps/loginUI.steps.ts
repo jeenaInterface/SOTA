@@ -12,6 +12,12 @@ Given('TR user logged into the application', async function () {
   await login.enterPassword(data.userPasswordTR);
   await login.clickLoginButton();
 });
+
+Then('TR management user logged into the application', async function () {
+  await login.enterUserName(data.userEmailTR);
+  await login.enterPassword(data.userPasswordTR);
+});
+
 Then('Ops management user logged into the application', async function () {
   login = new loginPage(fixture.page);
   await login.navigateToLoginPage();

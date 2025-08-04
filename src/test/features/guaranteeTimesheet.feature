@@ -1,6 +1,6 @@
 Feature:  Guarantee Timesheet Management
 
-@GuaranteeTimesheet
+@sanity
   Scenario: TR management user creates and saves Guarantee timesheet, OPS management approves, reject and deletes the entry - rail order
     Given TR user logged into the application
     And I navigate to the Guarantee Timesheet page
@@ -15,7 +15,7 @@ Feature:  Guarantee Timesheet Management
     Then Then Reject the guarantee timesheet entry
     Then delete entire guarantee timesheet 
 
-    @guaranteeTimesheetvalidation
+    @sanity
   Scenario: Mandatory validation messages in guarantee timesheet
     Given Ops management user logged into the application
     When I navigate to the Guarantee Timesheet page

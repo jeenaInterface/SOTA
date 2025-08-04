@@ -1,5 +1,5 @@
 Feature:  Payroll Management Functionalities
-    @payroll
+    @sanity
     Scenario: Functionalities under payroll management
         Given TR user logged into the application
         Then TR user creates a new labor order

@@ -1,0 +1,20 @@
+info: Aug-04-2025 13:26:34: 	Waiting for 1 seconds
+info: Aug-04-2025 13:26:36: 	Order status field is attached. Value: 'Firm'
+info: Aug-04-2025 13:26:36: 	Order already exists for 2025-07-30 (status: 'Firm'), moving to next date.
+info: Aug-04-2025 13:26:36: 	Waiting for 1 seconds
+info: Aug-04-2025 13:26:37: 	Order status field is attached. Value: 'Firm'
+info: Aug-04-2025 13:26:37: 	Order already exists for 2025-07-31 (status: 'Firm'), moving to next date.
+info: Aug-04-2025 13:26:38: 	Waiting for 1 seconds
+info: Aug-04-2025 13:26:39: 	Order status field is attached. Value: 'Firm'
+info: Aug-04-2025 13:26:39: 	Order already exists for 2025-08-01 (status: 'Firm'), moving to next date.
+info: Aug-04-2025 13:26:39: 	Waiting for 1 seconds
+info: Aug-04-2025 13:26:41: 	Order status field is attached. Value: 'Cancelled'
+info: Aug-04-2025 13:26:41: 	Order already exists for 2025-08-02 (status: 'Cancelled'), moving to next date.
+info: Aug-04-2025 13:26:41: 	Waiting for 1 seconds
+info: Aug-04-2025 13:26:42: 	Order status field is attached. Value: 'Cancelled'
+info: Aug-04-2025 13:26:42: 	Order already exists for 2025-08-03 (status: 'Cancelled'), moving to next date.
+info: Aug-04-2025 13:26:42: 	Waiting for 1 seconds
+info: Aug-04-2025 13:26:45: 	Order status field is attached. Value: ''
+info: Aug-04-2025 13:26:45: 	Order can be created for date: 2025-08-04
+info: Aug-04-2025 13:26:46: 	Entered order date/time: 2025-08-04T13:26
+info: Aug-04-2025 13:26:47: 	Waiting for 3 seconds

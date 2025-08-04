@@ -1,7 +1,7 @@
 Feature: Steady Management
 
 
-  @steady
+  @sanity
   Scenario: Steady Management - search, Update,reset functionalities
     Given TR user logged into the application
     Then Go to steady management screen
@@ -25,7 +25,7 @@ Feature: Steady Management
 #     Then Click on create new steady button
 #     Then Verify the validation for shift, steady name and other required fields
 
-  @downloadReport
+  @sanity
   Scenario: Steady Management - Download Report
     Given TR user logged into the application
     Then Go to steady management screen

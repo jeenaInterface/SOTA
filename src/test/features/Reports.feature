@@ -1,6 +1,6 @@
 Feature: Reports in SOTA APPLICATION
 
-    @labororderReceiverLOG @reports
+    @labororderReceiverLOG @sanity
     Scenario: VERIFY Labor Order Receiver Report
         Given TR user logged into the application
         Then I am on the Labor Order Receiver Report page
@@ -10,7 +10,7 @@ Feature: Reports in SOTA APPLICATION
         Then Verify the ignore Functionalities
         Then Verify the add remarks Functionalities
 
-    @LaborOrderDiscrepancies @reports
+    @LaborOrderDiscrepancies @sanity
     Scenario: VERIFY Labor Order Discrepancies Report
         Given TR user logged into the application
         # Then TR user creates a new labor order
@@ -23,7 +23,7 @@ Feature: Reports in SOTA APPLICATION
         Then Verify Reset Discrepancies Functionalities
         Then Verify Delete Discrepancies Functionalities
 
-    @DispatchNote @reports
+    @DispatchNote @sanity
     Scenario: VERIFY Dispatch Note Report
         Given TR user logged into the application
         Then I am on the Dispatch Note Report page
@@ -33,7 +33,7 @@ Feature: Reports in SOTA APPLICATION
         Then Verify Search and Reset Dispatch Note Functionalities
         Then Verify Delete Dispatch Note Functionalities
 
-    @steadyScheduleTrackingSheetReport @reports
+    @steadyScheduleTrackingSheetReport @sanity
     Scenario: VERIFY Steady Schedule Tracking Sheet Report
         Given TR user logged into the application
         Then I am on the Steady Schedule Tracking Sheet Report page
@@ -41,31 +41,31 @@ Feature: Reports in SOTA APPLICATION
         Then Verify Steady Schedule Tracking Sheet Report reset functionalities
         Then Click on Steady report button by select schedule option and verify the report downloaded successfully
 
-    @timesheetSteadyReport @reports
+    @timesheetSteadyReport @sanity
     Scenario: VERIFY Timesheet Steady Report
         Given TR user logged into the application
         Then I am on the Timesheet Steady Report page
         Then Click on timesheet Steady report button and verify the report downloaded successfully
 
-    @timesheetReport @reports
+    @timesheetReport @sanity
     Scenario: VERIFY Timesheet Steady Report with date range
         Given TR user logged into the application
         Then I am on the Timesheet Report page
         Then Click on timesheet Report button with date range and verify the report downloaded successfully
 
-    @TimesheetReviewRecapReport @reports
+    @TimesheetReviewRecapReport @sanity
     Scenario: VERIFY Timesheet Review Recap Report
         Given TR user logged into the application
         Then I am on the Timesheet Review Recap Report page
         Then Click on timesheet Review Recap report button and verify the report downloaded successfully
 
-    @SteadyJobAssignmentsDuplicateCheckReport @reports
+    @SteadyJobAssignmentsDuplicateCheckReport @sanity
     Scenario: VERIFY Steady Job Assignments Duplicate Check Report
         Given TR user logged into the application
         Then I am on the Steady Job Assignments Duplicate Check Report page
         Then Click on Steady Job Assignments Duplicate Check report button and verify the report downloaded successfully
     
-    @LaborOrderFinalizedTimesReport @reports
+    @LaborOrderFinalizedTimesReport @sanity
     Scenario: VERIFY Labor Order Finalized Times Report
         Given TR user logged into the application
         Then I am on the Labor Order Finalized Times Report page

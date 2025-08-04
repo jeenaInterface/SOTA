@@ -1,6 +1,6 @@
 Feature: Increase/Decrease Timesheet Management
 
-@increaseDecreaseTimesheet
+@sanity
   Scenario: TR management user creates and saves increase/decrease timesheet, OPS management approves, reject and deletes the entry - rail order
     Given TR user logged into the application
     And I navigate to the Increase-Decrease Timesheet page
@@ -15,7 +15,7 @@ Feature: Increase/Decrease Timesheet Management
     Then Then Reject the timesheet entry
     Then Then delete entire timesheet entry
 
-    @increaseDecreaseTimesheet
+    @sanity
   Scenario: TR management user creates and saves increase/decrease timesheet, OPS management approves, reject and deletes the entry - yard order
     Given TR user logged into the application
     And I navigate to the Increase-Decrease Timesheet page
@@ -31,7 +31,7 @@ Feature: Increase/Decrease Timesheet Management
     Then Then delete entire timesheet entry
 
 
-  @increaseDecreaseTimesheetvalidation
+  @sanity
   Scenario: Mandatory validation messages in increase-decrease timesheet
     Given Ops management user logged into the application
     When I navigate to the Increase-Decrease Timesheet page

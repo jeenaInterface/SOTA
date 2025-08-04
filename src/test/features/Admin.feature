@@ -1,6 +1,6 @@
 Feature: Admin module
 
-  @Admin
+  @sanity
   Scenario: Update LO Reference supporting data
     Given TR user logged into the application
     Then select Supporting Data from the admin menu
@@ -9,14 +9,14 @@ Feature: Admin module
     And Click on the update button
     Then Verify the success message is displayed
 
-  @Admin
+  @sanity
   Scenario: Manage Shift and Holiday settings
     Given TR user logged into the application
     Then select Shift and Holiday from the admin menu
     When Click on the save button
     Then Verify the shift holiday success message is displayed
 
-  @Admin
+  @sanity
   Scenario: Search/Reset/Download functioanlities in OCC Code
     Given TR user logged into the application
     Then select OCC Code from the admin menu
@@ -42,7 +42,7 @@ Feature: Admin module
     Then Verify OCC report is downloaded successfully
     And Verify OCC report contains data with row count
 
-  @Admin
+  @sanity
   Scenario: Search/Reset/Download functioanlities in steady positions
     Given TR user logged into the application
     Then select  Steady Positions & Functions from the admin menu
@@ -66,7 +66,7 @@ Feature: Admin module
     And Verify steady report contains data with row count
 
 
-  @Admin
+  @sanity
   Scenario: Search/Reset/Download functioanlities in steady job role
     Given TR user logged into the application    
     Then select steady Job Role from the admin menu

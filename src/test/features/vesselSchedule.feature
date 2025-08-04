@@ -1,6 +1,6 @@
 Feature: Vessel Schedule Management
 
-@vesselSchedule
+@sanity
 Scenario: Verify Add vessel functionalities with valid data
     Given Vessel schedule user logged into the application
     Then I am on the Vessel Schedule page

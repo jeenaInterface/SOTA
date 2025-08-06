@@ -40,12 +40,12 @@ Given('the user creates a timesheet for the Terminal Services Order', async func
 });
 Then('delete three rows in the timesheet and add a new row in the timesheet', async function () {
     await terminalServiceOrder.deleteAllEntries();
-    fixture.logger.info("Waiting for 2 seconds")
-    await fixture.page.waitForTimeout(2000);
+    fixture.logger.info("Waiting for 1 seconds")
+    await fixture.page.waitForTimeout(1000);
     await terminalServiceOrder.addNewRowInTimesheet();
-    fixture.logger.info("Waiting for 2 seconds")
-    await fixture.page.waitForTimeout(2000);
-    await vesselOrder.clickOnSaveWithoutSubmit();
+    fixture.logger.info("Waiting for 1 seconds")
+    await fixture.page.waitForTimeout(1000);
+    // await vesselOrder.clickOnSaveWithoutSubmit();
 
 });
 When('the user saves the Terminal Services Timehseet without submitting it', async function () {

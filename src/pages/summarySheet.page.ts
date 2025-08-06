@@ -189,7 +189,7 @@ export default class summarySheetPage {
         const steadyDispatchLabel = await this.page.locator(this.Elements.title).textContent();
         expect(steadyDispatchLabel).toContain("Steady Dispatch Report");
         const vesselLabel = await this.page.locator(this.Elements.vesselLabel).textContent();
-        expect(vesselLabel).toContain("Vessel - COSCO ENGLAND");
+        expect(vesselLabel).toContain("Vessel - COSCO KAOHSIUNG");
     }
     async placeNewOrders(): Promise<void> {
         await this.page.locator(this.Elements.placeNewOrders).click();

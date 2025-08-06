@@ -35,7 +35,6 @@ Then('the user cancel the order', async function () {
   await vesselOrder.ClickCancelButton();
 });
 Given('the user creates a new vessel timesheet', async function () {
-  vesselOrder = new vesselOrderPage(fixture.page)
   await vesselOrder.clickOnTimehseetMenu();
   let LatestWorkOrderDate: string
   await vesselOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);

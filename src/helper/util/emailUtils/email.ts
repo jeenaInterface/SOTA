@@ -32,7 +32,7 @@ async function sendEmail() {
       `,
       attachments: [
         {
-          filename: 'cucumber-report.html',
+          // filename: 'cucumber-report.html',
           path: sharedReportPath,
         },
       ],

@@ -1,0 +1,18 @@
+info: Aug-06-2025 12:22:39: 	Waiting for 1 seconds
+info: Aug-06-2025 12:22:40: 	Checking TRStatus for date: 2025-08-06
+info: Aug-06-2025 12:22:41: 	TRStatus element is attached. isVisible: true
+info: Aug-06-2025 12:22:41: 	TRStatus is visible for 2025-08-06, moving to next date.
+info: Aug-06-2025 12:22:42: 	Checking TRStatus for date: 2025-08-07
+info: Aug-06-2025 12:22:47: 	TRStatus element is not attached to DOM.
+info: Aug-06-2025 12:22:47: 	Order created for date: 2025-08-07
+info: Aug-06-2025 12:22:47: 	Waiting for 2 seconds
+info: Aug-06-2025 12:22:49: 	Waiting for 2 seconds
+info: Aug-06-2025 12:22:54: 	Waiting for 3 seconds
+info: Aug-06-2025 12:22:57: 	Waiting for 2 seconds
+info: Aug-06-2025 12:23:02: 	Waiting for 2 seconds
+info: Aug-06-2025 12:23:07: 	Waiting for 2 seconds
+info: Aug-06-2025 12:23:12: 	Waiting for 2 seconds
+info: Aug-06-2025 12:23:17: 	Waiting for 2 seconds
+info: Aug-06-2025 12:23:19: 	Waiting for 3 seconds
+info: Aug-06-2025 12:23:24: 	Waiting for 1 seconds
+info: Aug-06-2025 12:23:25: 	Waiting for 2 seconds

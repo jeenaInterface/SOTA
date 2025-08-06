@@ -27,7 +27,7 @@ Feature: Terminal Service Order and ops terminal service order timehseet functio
     Then the user cancel the Terminal Services Order
 
 
-  @sanity
+  @terminalServiceOrder
   Scenario: Terminal Services Order Timehseet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report
     Given TR user logged into the application
     Given the user creates a new Terminal Services Order

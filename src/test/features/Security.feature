@@ -3,7 +3,7 @@ Feature: Security Labor Order Management
     Background: 
         Given Security management user logged into the application
 
-    @securityLaborOrder
+    @sanity
     Scenario: Create security labor order and verify report download
         When User navigates to security labor order page
         When User selects date and clicks GO button
@@ -18,16 +18,14 @@ Feature: Security Labor Order Management
         Then verify cancel functionality
         When User downloads the security labor report
 
-
-    @securityLaborOrderValidation
+    @sanity
     Scenario: Verify Mandatory field validations
         When User navigates to security labor order page
         And User selects date and clicks GO button
         And User clicks Save button
         Then User should see message for Mandatory fields
 
-
-    @securityLaborOrderValidation
+    @sanity
     Scenario: Verify duplicate entry validation
         When User navigates to security labor order page
         When User selects date and clicks GO button

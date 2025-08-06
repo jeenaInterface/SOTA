@@ -44,7 +44,7 @@ export default class terminalServiceOrderPage {
         OThrFirstRow: "//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[9]/input[1]",
         plusBtton: "//i[contains(@class,'bi bi-plus-square')]",
         jobList: "(//input[contains(@class,'form-control dynamic-input')])[2]",
-        JobListAddButton: "//button[normalize-space(text())='ADD']",
+        JobListAddButton: "//button[normalize-space()='ADD']",
         FirstNamecell: "//input[@id='longshore0']",
         ST: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[8]/input[1]",
         OT: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet[1]/div[1]/div[1]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[9]/input[1]",
@@ -175,26 +175,26 @@ export default class terminalServiceOrderPage {
         await this.page.locator(this.Elements.SecondRowCheckBox).click();
         await this.page.locator(this.Elements.ThirdRowCheckBox).click();
         fixture.logger.info("Waiting for 2 seconds")
-        await fixture.page.waitForTimeout(5000);
+        await fixture.page.waitForTimeout(2000);
         await this.base.waitAndClick(this.Elements.deleteIcon);
         fixture.logger.info("Waiting for 2 seconds")
-        await fixture.page.waitForTimeout(5000);
+        await fixture.page.waitForTimeout(2000);
         await this.base.waitAndClick(this.Elements.YesButton);
         fixture.logger.info("Waiting for 2 seconds")
-        await fixture.page.waitForTimeout(5000);
+        await fixture.page.waitForTimeout(2000);
 
     }
 
     async addNewRowInTimesheet(): Promise<void> {
-        fixture.logger.info("Waiting for 3 seconds")
-        await fixture.page.waitForTimeout(3000);
-        await this.base.waitAndClick(this.Elements.plusBtton);
+        fixture.logger.info("Waiting for 1 seconds")
+        await fixture.page.waitForTimeout(1000);
+      await this.base.waitAndClick(this.Elements.plusBtton);
         await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('200');
         await this.page.getByPlaceholder('Search Job Type or OCC Code').press('Enter');
         await this.page.getByPlaceholder('Search Job Type or OCC Code').click();
         await this.page.getByPlaceholder('Search Job Type or OCC Code').fill('200 - SWEEPER - SWEEPER');
-        fixture.logger.info("Waiting for 1 seconds")
-        await fixture.page.waitForTimeout(1000);
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
         await this.base.waitAndClick(this.Elements.JobListAddButton);
 
     }

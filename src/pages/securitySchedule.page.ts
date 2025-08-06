@@ -61,6 +61,13 @@ export class SecuritySchedulePage {
         GoButton: "//button[normalize-space()='Go']",
         GoButtonTimeSheet: "//button[normalize-space()='GO']",
         saveAndSubmitButton: "//button[normalize-space()='SAVE AND SUBMIT']",
+        firstCell1:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[8]/input[1]",
+        secondCell1:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[9]/input[1]",
+        thirdCell1:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[10]/input[1]",
+        fourthCell1:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[11]/input[1]",
+firstcell2:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[1]/td[8]/input[1]",
+
+
     };
 
     async navigateToSchedule() {

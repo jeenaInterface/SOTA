@@ -33,4 +33,20 @@ Feature:  Payroll Management Functionalities
         Then Accounting user does the final approval
         Then Accouting user does PMA un approval and SOTA Un approval
 
-        
+    @payroll
+    Scenario: Verify Notify manager and remarks functionalities under OCU user
+        Given TR user logged into the application
+        Then TR user creates a new labor order
+        Then TR user verifies that the labor order is pushed to the summary sheet and verifies the details
+        Then TR user creates a timesheet for the same labor order
+        Then user click on logout button
+        Then Ops user logged into the application
+        Then Ops user submits and approve the timesheet
+        Then user click on logout button
+        Then OCU user logged into the application
+        Then OCU user does the Batch ready
+        Then Click on shift
+        Then verify the link in child tab payroll-timesheet screen
+        Then Add remarks by OCU user
+        Then verify Notify manager functionality
+    

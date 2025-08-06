@@ -74,20 +74,15 @@ Then('Click on save button', async function () {
     await schedulePage.saveTimesheet();
 });
 
-Then('Verify the success message for timesheet', async function () {
-    await schedulePage.verifyTimesheetSuccess();
+
+Then('verify submit functionality', async function () {
+    await schedulePage.submit();
 });
 
-Then('submit the timesheet', async function () {
-    await schedulePage.submitTimesheet();
-});
 
-Then('Verify the success message for timesheet submission', async function () {
-    await schedulePage.verifyTimesheetSuccess();
-});
 
-Then('Approve the timesheet', async function () {
-    await schedulePage.approveTimesheet();
+Then('verify approve functionality', async function () {
+    await schedulePage.Approval();
 });
 
 Then('Verify the success message for timesheet approval', async function () {
@@ -95,5 +90,22 @@ Then('Verify the success message for timesheet approval', async function () {
 });
 
 Then('Verify reject functionality', async function () {
-    await schedulePage.rejectTimesheet();
+    await schedulePage.Reject();
 });
+
+Then('Open the timesheet menu on security management user', async function () {
+    await schedulePage.navigateToTimesheet();
+      let LatestWorkOrderDate: string
+    await schedulePage.SelectDetailsOnLandingPageTimesheet(LatestWorkOrderDate);
+
+});
+Then('Verify remove approval functionality', async function () {
+    await schedulePage.RemoveApproval();
+
+
+});
+Then('verify save without submit functionality', async function () {
+    await schedulePage.saveWithoutSubmit();
+
+});
+

@@ -96,8 +96,10 @@ export default class yardOrderPagePOC {
         shiftBatchLevelScreen: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-payroll-mgmt-summary[1]/div[1]/div[2]/table[1]/tbody[1]/tr[1]/td[3]/span[1]",
         completeCheckList: "//input[@id='complete']",
         reviewNotesButton: "//i[@class='bi bi-card-list icon-lg m-2']",
+        ocuRemarksButton: "//tbody/tr[1]/td[18]/i[1]",
         reviewTextArea: "//textarea[@id='addComment']",
         addRemarksButton: "//button[normalize-space()='Add Remarks']",
+        saveRemarksButton: "//button[normalize-space()='SAVE REMARKS']",
         checklist1: "//div[@class='col-6']//div[1]//input[1]'",
         checklist2: "//div[@class='row justify-content-md-center']//div[2]//input[1]",
         checkList3: "//div[@class='row justify-content-md-center']//div[5]//input[1]",
@@ -119,6 +121,8 @@ export default class yardOrderPagePOC {
         successNotificationSOTAUnapproved: "//span[normalize-space(text())='Batch SOTA Un-Confirmed successfully']",
         SOTAUnnConfirm: "//button[normalize-space()='SOTA UN-CONFIRM?']",
         payrollMenu: "//div[normalize-space()='Payroll']",
+        TimesheetComments: "//span[contains(normalize-space(text()), 'Timesheet Comments updated successfully')]",
+        NotifyManagerButton: "//button[normalize-space()='NOTIFY MANAGER']",
 
 
 
@@ -671,6 +675,24 @@ export default class yardOrderPagePOC {
         await download.saveAs(downloadPathWithFileName);
         expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
         return downloadPathWithFileName;
+    }
+    async saveOCURemarksInfo(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.ocuRemarksButton);
+        await this.page.locator(this.Elements.reviewTextArea).fill("Test remarks");
+        await this.base.waitAndClick(this.Elements.addRemarksButton);
+        await this.base.waitAndClick(this.Elements.saveRemarksButton);
+        fixture.logger.info("Waiting for 2 seconds");
+        await fixture.page.waitForTimeout(2000);
+        const successMessage = await this.page.locator(this.Elements.TimesheetComments).textContent();
+        expect(successMessage).toContain("Timesheet Comments updated successfully");
+
+    }
+
+    async notifyManager(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.NotifyManagerButton);
+        const successMessage = await this.page.locator(this.Elements.TimesheetComments).textContent();
+        expect(successMessage).toContain("Timesheet Comments updated successfully");
+
     }
 
 } 

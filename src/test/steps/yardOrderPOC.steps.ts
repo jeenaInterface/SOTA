@@ -98,7 +98,7 @@ Then('Accounting user does the final approval', async function () {
 
 });
 
- Then('Accouting user does PMA un approval and SOTA Un approval', async function () {
+Then('Accouting user does PMA un approval and SOTA Un approval', async function () {
   await yardOrder.PMAProcess();
 
 });
@@ -122,16 +122,16 @@ Then('verify the link in child tab payroll-timesheet screen', async function () 
 
 
 Then('Verify Save Info functionality', async function () {
-    await yardOrder.saveInfo();
+  await yardOrder.saveInfo();
 
 });
 Then('Verify View timehseet functionality', async function () {
-    await yardOrder.viewTimehseet();
+  await yardOrder.viewTimehseet();
 
 });
 
 Then('Verify back button functionality', async function () {
-    await yardOrder.backButton();
+  await yardOrder.backButton();
 
 });
 Then('Verify timehseet report', async function () {
@@ -171,4 +171,24 @@ Then('verify download batch report', async function () {
     await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
   }
 
+});
+
+Then('OCU user does the Batch ready', async function () {
+  await yardOrder.clickOnPayrollMenu();
+  await yardOrder.selectTheBatch();
+  await yardOrder.ClickOnBatchReady();
+  await yardOrder.verifyBatchReadySuccessMessage();
+  await yardOrder.clickOnPayrollMenu();
+  await yardOrder.calculateWeekNumber();
+  await yardOrder.waitForDownloadButton();
+  await yardOrder.downloadBatchFile();
+  await yardOrder.verifyUploadSuccess();
+  await yardOrder.selectTheBatch();
+});
+Then('Add remarks by OCU user', async function () {
+  await yardOrder.saveOCURemarksInfo();
+});
+
+Then('verify Notify manager functionality', async function () {
+  await yardOrder.notifyManager();
 });

@@ -61,12 +61,47 @@ export class SecuritySchedulePage {
         GoButton: "//button[normalize-space()='Go']",
         GoButtonTimeSheet: "//button[normalize-space()='GO']",
         saveAndSubmitButton: "//button[normalize-space()='SAVE AND SUBMIT']",
-        firstCell1:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[8]/input[1]",
-        secondCell1:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[9]/input[1]",
-        thirdCell1:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[10]/input[1]",
-        fourthCell1:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[11]/input[1]",
-firstcell2:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[1]/td[8]/input[1]",
-
+        firstCell1: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[8]/input[1]",
+        secondCell1: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[9]/input[1]",
+        thirdCell1: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[10]/input[1]",
+        fourthCell1: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[1]/td[11]/input[1]",
+        firstcell2: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[2]/td[8]/input[1]",
+        secondcell2: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[2]/td[9]/input[1]",
+        thirdcell2: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[2]/td[10]/input[1]",
+        fourthcell2: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[2]/td[11]/input[1]",
+        firstcell3: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[3]/td[8]/input[1]",
+        secondcell3: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[3]/td[9]/input[1]",
+        thirdcell3: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[3]/td[10]/input[1]",
+        fourthcell3: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[1]/table[1]/tbody[1]/tr[3]/td[11]/input[1]",
+        firstcell4: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[1]/td[8]/input[1]",
+        secondcell4: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[1]/td[9]/input[1]",
+        thirdcell4: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[1]/td[10]/input[1]",
+        fourthcell4: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[1]/td[11]/input[1]",
+        firstcell5: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[2]/td[8]/input[1]",
+        secondcell5: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[2]/td[9]/input[1]",
+        thirdcell5: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[2]/td[10]/input[1]",
+        fourthcell5: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[2]/td[11]/input[1]",
+        firstcell6: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[3]/td[8]/input[1]",
+        secondcell6: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[3]/td[9]/input[1]",
+        thirdcell6: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[3]/td[10]/input[1]",
+        fourthcell6: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[2]/table[1]/tbody[1]/tr[3]/td[11]/input[1]",
+        firstcell7: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[8]/input[1]",
+        secondcell7: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[9]/input[1]",
+        thirdcell7: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[10]/input[1]",
+        fourthcell7: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[3]/table[1]/tbody[1]/tr[1]/td[11]/input[1]",
+        firstcell8: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[8]/input[1]",
+        secondcell8: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[9]/input[1]",
+        thirdcell8: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[10]/input[1]",
+        fourthcell8: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[3]/table[1]/tbody[1]/tr[2]/td[11]/input[1]",
+        firstcell9: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[3]/table[1]/tbody[1]/tr[3]/td[8]/input[1]",
+        secondcell9: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[3]/table[1]/tbody[1]/tr[3]/td[9]/input[1]",
+        thirdcell9: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[3]/table[1]/tbody[1]/tr[3]/td[10]/input[1]",
+        fourthcell9: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-timesheet-sse[1]/div[1]/div[1]/div[2]/div[1]/div[3]/table[1]/tbody[1]/tr[3]/td[11]/input[1]",
+        seargeantNameInTimesheet: "//input[@id='sergeantName']",
+        removeApproval: "//button[normalize-space()='REMOVE APPROVAL']",
+        approveButton: "//button[normalize-space()='APPROVE']",
+        rejectButton: "//button[normalize-space()='REJECT']",
+        saveWithoutSubmitButton: "//button[normalize-space()='SAVE WITHOUT SUBMITTING']",
 
     };
 
@@ -261,89 +296,92 @@ firstcell2:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/ap
     }
 
     async enterTimesheetHours() {
-        await this.page.getByRole('row', { name: '1 1ST 06:00 16:00 Acosta,' }).getByRole('spinbutton').first().click();
-        await this.page.getByRole('row', { name: '1 1ST 06:00 16:00 Acosta,' }).getByRole('spinbutton').first().fill('2');
-        await this.page.getByRole('row', { name: '1 1ST 06:00 16:00 Acosta,' }).getByRole('spinbutton').nth(1).click();
-        await this.page.getByRole('row', { name: '1 1ST 06:00 16:00 Acosta,' }).getByRole('spinbutton').nth(1).fill('2');
-        await this.page.getByRole('row', { name: '1 1ST 06:00 16:00 Acosta,' }).getByRole('spinbutton').nth(2).click();
-        await this.page.getByRole('row', { name: '1 1ST 06:00 16:00 Acosta,' }).getByRole('spinbutton').nth(2).fill('2');
-        await this.page.getByRole('row', { name: '1 1ST 06:00 16:00 Acosta,' }).getByRole('spinbutton').nth(3).click();
-        await this.page.getByRole('row', { name: '1 1ST 06:00 16:00 Acosta,' }).getByRole('spinbutton').nth(3).fill('2');
+        await this.page.locator(this.Elements.firstCell1).click();
+        await this.page.locator(this.Elements.firstCell1).fill('2');
+        await this.page.locator(this.Elements.secondCell1).click();
+        await this.page.locator(this.Elements.secondCell1).fill('2');
+        await this.page.locator(this.Elements.thirdCell1).click();
+        await this.page.locator(this.Elements.thirdCell1).fill('2');
+        await this.page.locator(this.Elements.fourthCell1).click();
+        await this.page.locator(this.Elements.fourthCell1).fill('2');
 
-        await this.page.getByRole('row', { name: '2 1ST 07:00 15:00 Ponce de' }).getByRole('spinbutton').first().click();
-        await this.page.getByRole('row', { name: '2 1ST 07:00 15:00 Ponce de' }).getByRole('spinbutton').first().fill('2');
-        await this.page.getByRole('row', { name: '2 1ST 07:00 15:00 Ponce de' }).getByRole('spinbutton').nth(1).click();
-        await this.page.getByRole('row', { name: '2 1ST 07:00 15:00 Ponce de' }).getByRole('spinbutton').nth(1).fill('2');
-        await this.page.getByRole('row', { name: '2 1ST 07:00 15:00 Ponce de' }).getByRole('spinbutton').nth(2).click();
-        await this.page.getByRole('row', { name: '2 1ST 07:00 15:00 Ponce de' }).getByRole('spinbutton').nth(2).fill('2');
-        await this.page.getByRole('row', { name: '2 1ST 07:00 15:00 Ponce de' }).getByRole('spinbutton').nth(3).click();
-        await this.page.getByRole('row', { name: '2 1ST 07:00 15:00 Ponce de' }).getByRole('spinbutton').nth(3).fill('2');
+        await this.page.locator(this.Elements.firstcell2).click();
+        await this.page.locator(this.Elements.firstcell2).fill('2');
+        await this.page.locator(this.Elements.secondcell2).click();
+        await this.page.locator(this.Elements.secondcell2).fill('2');
+        await this.page.locator(this.Elements.thirdcell2).click();
+        await this.page.locator(this.Elements.thirdcell2).fill('2');
+        await this.page.locator(this.Elements.fourthcell2).click();
+        await this.page.locator(this.Elements.fourthcell2).fill('2');
 
-        await this.page.getByRole('row', { name: '3 1ST 09:00 17:00 Ponce,' }).getByRole('spinbutton').first().click();
-        await this.page.getByRole('row', { name: '3 1ST 09:00 17:00 Ponce,' }).getByRole('spinbutton').first().fill('2');
-        await this.page.getByRole('row', { name: '3 1ST 09:00 17:00 Ponce,' }).getByRole('spinbutton').nth(1).click();
-        await this.page.getByRole('row', { name: '3 1ST 09:00 17:00 Ponce,' }).getByRole('spinbutton').nth(1).fill('2');
-        await this.page.getByRole('row', { name: '3 1ST 09:00 17:00 Ponce,' }).getByRole('spinbutton').nth(2).click();
-        await this.page.getByRole('row', { name: '3 1ST 09:00 17:00 Ponce,' }).getByRole('spinbutton').nth(2).fill('2');
-        await this.page.getByRole('row', { name: '3 1ST 09:00 17:00 Ponce,' }).getByRole('spinbutton').nth(3).click();
-        await this.page.getByRole('row', { name: '3 1ST 09:00 17:00 Ponce,' }).getByRole('spinbutton').nth(3).fill('2');
+        await this.page.locator(this.Elements.firstcell3).click();
+        await this.page.locator(this.Elements.firstcell3).fill('2');
+        await this.page.locator(this.Elements.secondcell3).click();
+        await this.page.locator(this.Elements.secondcell3).fill('2');
+        await this.page.locator(this.Elements.thirdcell3).click();
+        await this.page.locator(this.Elements.thirdcell3).fill('2');
+        await this.page.locator(this.Elements.fourthcell3).click();
+        await this.page.locator(this.Elements.fourthcell3).fill('2');
 
 
-        await this.page.getByRole('row', { name: '1 2ND 14:00 00:00 Acosta,' }).getByRole('spinbutton').first().click();
-        await this.page.getByRole('row', { name: '1 2ND 14:00 00:00 Acosta,' }).getByRole('spinbutton').first().fill('2');
-        await this.page.getByRole('row', { name: '1 2ND 14:00 00:00 Acosta,' }).getByRole('spinbutton').nth(1).click();
-        await this.page.getByRole('row', { name: '1 2ND 14:00 00:00 Acosta,' }).getByRole('spinbutton').nth(1).fill('2');
-        await this.page.getByRole('row', { name: '1 2ND 14:00 00:00 Acosta,' }).getByRole('spinbutton').nth(2).click();
-        await this.page.getByRole('row', { name: '1 2ND 14:00 00:00 Acosta,' }).getByRole('spinbutton').nth(2).fill('2');
-        await this.page.getByRole('row', { name: '1 2ND 14:00 00:00 Acosta,' }).getByRole('spinbutton').nth(3).click();
-        await this.page.getByRole('row', { name: '1 2ND 14:00 00:00 Acosta,' }).getByRole('spinbutton').nth(3).fill('2');
 
-        await this.page.getByRole('row', { name: '2 2ND 15:00 23:00 Ponce de' }).getByRole('spinbutton').first().click();
-        await this.page.getByRole('row', { name: '2 2ND 15:00 23:00 Ponce de' }).getByRole('spinbutton').first().fill('2');
-        await this.page.getByRole('row', { name: '2 2ND 15:00 23:00 Ponce de' }).getByRole('spinbutton').nth(1).click();
-        await this.page.getByRole('row', { name: '2 2ND 15:00 23:00 Ponce de' }).getByRole('spinbutton').nth(1).fill('2');
-        await this.page.getByRole('row', { name: '2 2ND 15:00 23:00 Ponce de' }).getByRole('spinbutton').nth(2).click();
-        await this.page.getByRole('row', { name: '2 2ND 15:00 23:00 Ponce de' }).getByRole('spinbutton').nth(2).fill('2');
-        await this.page.getByRole('row', { name: '2 2ND 15:00 23:00 Ponce de' }).getByRole('spinbutton').nth(3).click();
-        await this.page.getByRole('row', { name: '2 2ND 15:00 23:00 Ponce de' }).getByRole('spinbutton').nth(3).fill('2');
+        await this.page.locator(this.Elements.firstcell4).click();
+        await this.page.locator(this.Elements.firstcell4).fill('2');
+        await this.page.locator(this.Elements.secondcell4).click();
+        await this.page.locator(this.Elements.secondcell4).fill('2');
+        await this.page.locator(this.Elements.thirdcell4).click();
+        await this.page.locator(this.Elements.thirdcell4).fill('2');
+        await this.page.locator(this.Elements.fourthcell4).click();
+        await this.page.locator(this.Elements.fourthcell4).fill('2');
 
-        await this.page.getByRole('row', { name: '3 2ND 17:00 01:00 Ponce,' }).getByRole('spinbutton').first().click();
-        await this.page.getByRole('row', { name: '3 2ND 17:00 01:00 Ponce,' }).getByRole('spinbutton').first().fill('2');
-        await this.page.getByRole('row', { name: '3 2ND 17:00 01:00 Ponce,' }).getByRole('spinbutton').nth(1).click();
-        await this.page.getByRole('row', { name: '3 2ND 17:00 01:00 Ponce,' }).getByRole('spinbutton').nth(1).fill('2');
-        await this.page.getByRole('row', { name: '3 2ND 17:00 01:00 Ponce,' }).getByRole('spinbutton').nth(2).click();
-        await this.page.getByRole('row', { name: '3 2ND 17:00 01:00 Ponce,' }).getByRole('spinbutton').nth(2).fill('2');
-        await this.page.getByRole('row', { name: '3 2ND 17:00 01:00 Ponce,' }).getByRole('spinbutton').nth(3).click();
-        await this.page.getByRole('row', { name: '3 2ND 17:00 01:00 Ponce,' }).getByRole('spinbutton').nth(3).fill('2');
+        await this.page.locator(this.Elements.firstcell5).click();
+        await this.page.locator(this.Elements.firstcell5).fill('2');
+        await this.page.locator(this.Elements.secondcell5).click();
+        await this.page.locator(this.Elements.secondcell5).fill('2');
+        await this.page.locator(this.Elements.thirdcell5).click();
+        await this.page.locator(this.Elements.thirdcell5).fill('2');
+        await this.page.locator(this.Elements.fourthcell5).click();
+        await this.page.locator(this.Elements.fourthcell5).fill('2');
 
-        await this.page.getByRole('row', { name: '1 3RD 23:00 07:00 Acosta,' }).getByRole('spinbutton').first().click();
-        await this.page.getByRole('row', { name: '1 3RD 23:00 07:00 Acosta,' }).getByRole('spinbutton').first().fill('2');
-        await this.page.getByRole('row', { name: '1 3RD 23:00 07:00 Acosta,' }).getByRole('spinbutton').nth(1).click();
-        await this.page.getByRole('row', { name: '1 3RD 23:00 07:00 Acosta,' }).getByRole('spinbutton').nth(1).fill('2');
-        await this.page.getByRole('row', { name: '1 3RD 23:00 07:00 Acosta,' }).getByRole('spinbutton').nth(2).click();
-        await this.page.getByRole('row', { name: '1 3RD 23:00 07:00 Acosta,' }).getByRole('spinbutton').nth(2).fill('2');
-        await this.page.getByRole('row', { name: '1 3RD 23:00 07:00 Acosta,' }).getByRole('spinbutton').nth(3).click();
-        await this.page.getByRole('row', { name: '1 3RD 23:00 07:00 Acosta,' }).getByRole('spinbutton').nth(3).fill('2');
+        await this.page.locator(this.Elements.firstcell6).click();
+        await this.page.locator(this.Elements.firstcell6).fill('2');
+        await this.page.locator(this.Elements.secondcell6).click();
+        await this.page.locator(this.Elements.secondcell6).fill('2');
+        await this.page.locator(this.Elements.thirdcell6).click();
+        await this.page.locator(this.Elements.thirdcell6).fill('2');
+        await this.page.locator(this.Elements.fourthcell6).click();
+        await this.page.locator(this.Elements.fourthcell6).fill('2');
 
-        await this.page.getByRole('row', { name: '2 3RD 23:00 07:00 Ponce de' }).getByRole('spinbutton').first().click();
-        await this.page.getByRole('row', { name: '2 3RD 23:00 07:00 Ponce de' }).getByRole('spinbutton').first().fill('2');
-        await this.page.getByRole('row', { name: '2 3RD 23:00 07:00 Ponce de' }).getByRole('spinbutton').nth(1).click();
-        await this.page.getByRole('row', { name: '2 3RD 23:00 07:00 Ponce de' }).getByRole('spinbutton').nth(1).fill('2');
-        await this.page.getByRole('row', { name: '2 3RD 23:00 07:00 Ponce de' }).getByRole('spinbutton').nth(2).click();
-        await this.page.getByRole('row', { name: '2 3RD 23:00 07:00 Ponce de' }).getByRole('spinbutton').nth(2).fill('2');
-        await this.page.getByRole('row', { name: '2 3RD 23:00 07:00 Ponce de' }).getByRole('spinbutton').nth(3).click();
-        await this.page.getByRole('row', { name: '2 3RD 23:00 07:00 Ponce de' }).getByRole('spinbutton').nth(3).fill('2');
+        await this.page.locator(this.Elements.firstcell7).click();
+        await this.page.locator(this.Elements.firstcell7).fill('2');
+        await this.page.locator(this.Elements.secondcell7).click();
+        await this.page.locator(this.Elements.secondcell7).fill('2');
+        await this.page.locator(this.Elements.thirdcell7).click();
+        await this.page.locator(this.Elements.thirdcell7).fill('2');
+        await this.page.locator(this.Elements.fourthcell7).click();
+        await this.page.locator(this.Elements.fourthcell7).fill('2');
 
-        await this.page.getByRole('row', { name: '3 3RD 01:00 09:00 Ponce,' }).getByRole('spinbutton').first().click();
-        await this.page.getByRole('row', { name: '3 3RD 01:00 09:00 Ponce,' }).getByRole('spinbutton').first().fill('2');
-        await this.page.getByRole('row', { name: '3 3RD 01:00 09:00 Ponce,' }).getByRole('spinbutton').nth(1).click();
-        await this.page.getByRole('row', { name: '3 3RD 01:00 09:00 Ponce,' }).getByRole('spinbutton').nth(1).fill('2')
-        await this.page.getByRole('row', { name: '3 3RD 01:00 09:00 Ponce,' }).getByRole('spinbutton').nth(2).click();
-        await this.page.getByRole('row', { name: '3 3RD 01:00 09:00 Ponce,' }).getByRole('spinbutton').nth(2).fill('2');
-        await this.page.getByRole('row', { name: '3 3RD 01:00 09:00 Ponce,' }).getByRole('spinbutton').nth(3).click();
-        await this.page.getByRole('row', { name: '3 3RD 01:00 09:00 Ponce,' }).getByRole('spinbutton').nth(3).fill('2');
+        await this.page.locator(this.Elements.firstcell8).click();
+        await this.page.locator(this.Elements.firstcell8).fill('2');
+        await this.page.locator(this.Elements.secondcell8).click();
+        await this.page.locator(this.Elements.secondcell8).fill('2');
+        await this.page.locator(this.Elements.thirdcell8).click();
+        await this.page.locator(this.Elements.thirdcell8).fill('2');
+        await this.page.locator(this.Elements.fourthcell8).click();
+        await this.page.locator(this.Elements.fourthcell8).fill('2');
+
+
+        await this.page.locator(this.Elements.firstcell9).click();
+        await this.page.locator(this.Elements.firstcell9).fill('2');
+        await this.page.locator(this.Elements.secondcell9).click();
+        await this.page.locator(this.Elements.secondcell9).fill('2');
+        await this.page.locator(this.Elements.thirdcell9).click();
+        await this.page.locator(this.Elements.thirdcell9).fill('2');
+        await this.page.locator(this.Elements.fourthcell9).click();
+        await this.page.locator(this.Elements.fourthcell9).fill('2');
+
         await this.page.locator(this.Elements.saveAndSubmitButton).click();
-        fixture.logger.info("Waiting for 5 seconds");   
+        fixture.logger.info("Waiting for 5 seconds");
         await this.page.waitForTimeout(5000);
         await this.page.waitForSelector("//span[contains(text(),'Security Timesheet information saved successfully')]", { state: 'visible' });
         const successMessage = await this.page.locator("//span[contains(text(),'Security Timesheet information saved successfully')]").textContent();
@@ -358,17 +396,58 @@ firstcell2:"//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/ap
         await this.page.waitForSelector(this.Elements.timesheetSuccessMessage, { state: 'visible' });
     }
 
-    async submitTimesheet() {
+
+
+ 
+
+    async SelectDetailsOnLandingPageTimesheet(formatteddate: string): Promise<void> {
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        await this.page.locator(this.Elements.dateInput).click();
+        await this.page.locator(this.Elements.dateInput).fill(formatteddate);
+        await this.base.waitAndClick(this.Elements.GoButtonTimeSheet);
+    }
+    async saveWithoutSubmit(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.saveWithoutSubmitButton);
+        await this.page.waitForSelector("//span[contains(text(),'Security Timesheet information saved successfully')]", { state: 'visible' });
+        const successMessage = await this.page.locator("//span[contains(text(),'Security Timesheet information saved successfully')]").textContent();
+        expect(successMessage).toContain('Security Timesheet information saved successfully');
+        fixture.logger.info(successMessage);
+    }
+    async submit(): Promise<void> {
+        await this.page.locator(this.Elements.seargeantNameInTimesheet).fill("Test Sergeant");
         await this.base.waitAndClick(this.Elements.timesheetSubmitButton);
+        await this.page.waitForSelector("//span[contains(text(),'Security Timesheet information saved successfully')]", { state: 'visible' });
+        const successMessage = await this.page.locator("//span[contains(text(),'Security Timesheet information saved successfully')]").textContent();
+        expect(successMessage).toContain('Security Timesheet information saved successfully');
+        fixture.logger.info(successMessage);
+    }
+    async RemoveApproval(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.removeApproval);
+        await this.page.waitForSelector(this.Elements.yesButton, { state: 'visible' });
+        await this.base.waitAndClick(this.Elements.yesButton);
+        await this.page.waitForSelector("//span[contains(text(),'Security Timesheet information saved successfully')]", { state: 'visible' });
+        const successMessage = await this.page.locator("//span[contains(text(),'Security Timesheet information saved successfully')]").textContent();
+        expect(successMessage).toContain('Security Timesheet information saved successfully');
+        fixture.logger.info(successMessage);
     }
 
-    async approveTimesheet() {
-        await this.base.waitAndClick(this.Elements.timesheetApprovalButton);
-        await this.page.waitForSelector(this.Elements.timesheetApprovalSuccess, { state: 'visible' });
+    async Approval(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.approveButton);
+        await this.page.waitForSelector("//span[contains(text(),'Security Timesheet information saved successfully')]", { state: 'visible' });
+        const successMessage = await this.page.locator("//span[contains(text(),'Security Timesheet information saved successfully')]").textContent();
+        expect(successMessage).toContain('Security Timesheet information saved successfully');
+        fixture.logger.info(successMessage);
     }
 
-    async rejectTimesheet() {
-        await this.base.waitAndClick(this.Elements.timesheetRejectButton);
-        await this.page.waitForSelector(this.Elements.timesheetRejectSuccess, { state: 'visible' });
+    async Reject(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.rejectButton);
+        await this.page.waitForSelector(this.Elements.yesButton, { state: 'visible' });
+        await this.base.waitAndClick(this.Elements.yesButton);
+        await this.page.waitForSelector("//span[contains(text(),'Security Timesheet information saved successfully')]", { state: 'visible' });
+        const successMessage = await this.page.locator("//span[contains(text(),'Security Timesheet information saved successfully')]").textContent();
+        expect(successMessage).toContain('Security Timesheet information saved successfully');
+        fixture.logger.info(successMessage);
     }
+
 }

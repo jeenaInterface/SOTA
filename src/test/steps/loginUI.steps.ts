@@ -54,6 +54,12 @@ Then('Security sergeant user logged into the application', async function () {
   await login.enterPassword(data.userPasswordSergeant)
 
 });
+Then('Security manager user logged into the application', async function () {
+
+  await login.enterUserName(data.userEmailSecurityManager)
+  await login.enterPassword(data.userPasswordSecurityManager)
+
+});
 Then('user click on logout button', async function () {
   await login.logOutDropDownlist();
 });

@@ -878,7 +878,7 @@ body.darkmode .navbar-text {
                                 Passed
                             </p>
                         </td>
-                        <td class="percentage">100.00 %</td>
+                        <td class="percentage">0.00 %</td>
                     </tr>
                     <tr>
                         <td>
@@ -890,6 +890,17 @@ body.darkmode .navbar-text {
                         <td class="percentage">0.00 %</td>
                     </tr>
                     
+                    
+                    <tr>
+                        <td>
+                            <p data-bs-toggle="tooltip" data-placement="left"
+                               title="Features with undefined step definitions.">
+                                <i class="fa fa-question-circle not-defined-color"></i>
+                                Not Defined
+                            </p>
+                        </td>
+                        <td class="percentage">100.00 %</td>
+                    </tr>
                     
                     
                     
@@ -943,7 +954,7 @@ body.darkmode .navbar-text {
                                 Passed
                             </p>
                         </td>
-                        <td class="percentage">100.00 %</td>
+                        <td class="percentage">0.00 %</td>
                     </tr>
                     <tr>
                         <td>
@@ -954,6 +965,16 @@ body.darkmode .navbar-text {
                         </td>
                         <td class="percentage">0.00 %</td>
                     
+                    
+                    <tr>
+                        <td>
+                            <p data-bs-toggle="tooltip" data-placement="left" title="Scenario has no step implmentation.">
+                                <i class="fa fa-question-circle not-defined-color"></i>
+                                Not defined
+                            </p>
+                        </td>
+                        <td class="percentage">100.00 %</td>
+                    </tr>
                     
                     </tr>
                     
@@ -1058,6 +1079,8 @@ body.darkmode .navbar-text {
                         
                         
                         
+                        <th>Undefined</th>
+                        
                         
                     </tr>
                     </thead>
@@ -1066,7 +1089,7 @@ body.darkmode .navbar-text {
                     
                     <tr>
                         <td>
-                            <a href="features/23761298-54f2-4a62-82f6-995d0ec97b99-terminal-service-order-and-ops-terminal-service-order-timehseet-functionalities.html">Terminal Service Order and ops terminal service order timehseet functionalities</a>
+                            <a href="features/b0307ea6-facd-4801-b76a-5b89c377bf7d-security-schedule-and-timesheet-management.html">Security schedule and timesheet Management</a>
                         </td>
                         <td class="text-center">
                             
@@ -1081,8 +1104,8 @@ body.darkmode .navbar-text {
                             
                             
                             <i class="fa fa-tag fa-lg" data-bs-toggle="tooltip" data-placement="top"
-                               title="@terminalServiceOrder">
-                                <span>@terminalServiceOrder</span>
+                               title="@securitySchedule">
+                                <span>@securitySchedule</span>
                             </i>
                             
                             
@@ -1094,8 +1117,8 @@ body.darkmode .navbar-text {
                             
                             
                             
-                            <i class="fa fa-check-circle passed-color fa-lg" data-bs-toggle="tooltip" data-placement="top" title="Passed">
-                                <span>check-circle passed-color</span>
+                            <i class="fa fa-question-circle not-defined-color fa-lg" data-bs-toggle="tooltip" data-placement="top" title="Not Defined">
+                                <span>question-circle not-defined-color</span>
                             </i>
                         </td>
                         
@@ -1146,10 +1169,12 @@ body.darkmode .navbar-text {
                         
                         
                         <td class="text-right ">1</td>
-                        <td class="text-right ">1</td>
+                        <td class="text-right none">0</td>
                         <td class="text-right none">0</td>
                         
                         
+                        
+                        <td class="text-right ">1</td>
                         
                         
                     </tr>
@@ -1221,12 +1246,12 @@ body.darkmode .navbar-text {
                         ],
                         datasets: [{
                             data: [
-                                1,
                                 0,
                                 0,
                                 0,
                                 0,
-                                0
+                                0,
+                                1
                             ],
                             backgroundColor: [
                                 getColor(".passed-color", "#26B99A"),
@@ -1260,12 +1285,12 @@ body.darkmode .navbar-text {
                         ],
                         datasets: [{
                             data: [
-                                1,
                                 0,
                                 0,
                                 0,
                                 0,
-                                0
+                                0,
+                                1
                             ],
                             backgroundColor: [
                                 getColor(".passed-color", "#26B99A"),

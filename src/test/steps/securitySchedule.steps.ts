@@ -70,10 +70,6 @@ Then('Enter correct ST and OT hr.', async function () {
     await schedulePage.enterTimesheetHours();
 });
 
-Then('Click on save button', async function () {
-    await schedulePage.saveTimesheet();
-});
-
 
 Then('verify submit functionality', async function () {
     await schedulePage.submit();
@@ -94,7 +90,7 @@ Then('Verify reject functionality', async function () {
 });
 
 Then('Open the timesheet menu on security management user', async function () {
-    await schedulePage.navigateToTimesheet();
+    await schedulePage.navigateToTimesheetInSchedule();
       let LatestWorkOrderDate: string
     await schedulePage.SelectDetailsOnLandingPageTimesheet(LatestWorkOrderDate);
 
@@ -108,4 +104,20 @@ Then('verify save without submit functionality', async function () {
     await schedulePage.saveWithoutSubmit();
 
 });
+Then('verify daily security schedule under sergeant user', async function () {
+    await schedulePage.navigateToSchedulePageInSergeant();
 
+});
+Then('Verify labor Order page is opening under security management user', async function () {
+    await schedulePage.navigateToLaborOrderPageInSergeant();
+
+});
+
+Then('Select staffing for operations and click on save', async function () {
+    await schedulePage.selectStaffingForOperations();
+    await schedulePage.clickSaveButton();
+});
+
+Then('verify mandatory field validations for security schedule', async function () {
+    await schedulePage.verifyMandatoryFieldValidations();
+});

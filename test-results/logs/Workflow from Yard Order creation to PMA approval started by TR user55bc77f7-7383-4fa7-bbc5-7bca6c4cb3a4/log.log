@@ -1,0 +1,38 @@
+info: Aug-07-2025 14:08:04: 	Waiting for 1 seconds
+info: Aug-07-2025 14:08:05: 	Checking TRStatus for date: 2025-08-07
+info: Aug-07-2025 14:08:05: 	TRStatus element is attached. isVisible: true
+info: Aug-07-2025 14:08:05: 	TRStatus is visible for 2025-08-07, moving to next date.
+info: Aug-07-2025 14:08:09: 	Checking TRStatus for date: 2025-08-08
+info: Aug-07-2025 14:08:11: 	TRStatus element is attached. isVisible: true
+info: Aug-07-2025 14:08:11: 	TRStatus is visible for 2025-08-08, moving to next date.
+info: Aug-07-2025 14:08:12: 	Checking TRStatus for date: 2025-08-09
+info: Aug-07-2025 14:08:14: 	TRStatus element is attached. isVisible: true
+info: Aug-07-2025 14:08:14: 	TRStatus is visible for 2025-08-09, moving to next date.
+info: Aug-07-2025 14:08:17: 	Checking TRStatus for date: 2025-08-10
+info: Aug-07-2025 14:08:19: 	TRStatus element is attached. isVisible: true
+info: Aug-07-2025 14:08:19: 	TRStatus is visible for 2025-08-10, moving to next date.
+info: Aug-07-2025 14:08:21: 	Checking TRStatus for date: 2025-08-11
+info: Aug-07-2025 14:08:23: 	TRStatus element is attached. isVisible: true
+info: Aug-07-2025 14:08:23: 	TRStatus is visible for 2025-08-11, moving to next date.
+info: Aug-07-2025 14:08:24: 	Checking TRStatus for date: 2025-08-12
+info: Aug-07-2025 14:08:26: 	TRStatus element is attached. isVisible: true
+info: Aug-07-2025 14:08:26: 	TRStatus is visible for 2025-08-12, moving to next date.
+info: Aug-07-2025 14:08:28: 	Checking TRStatus for date: 2025-08-13
+info: Aug-07-2025 14:08:33: 	TRStatus element is not attached to DOM.
+info: Aug-07-2025 14:08:33: 	Order created for date: 2025-08-13
+info: Aug-07-2025 14:08:33: 	Waiting for 8 seconds
+info: Aug-07-2025 14:08:36: 	Waiting for 5 seconds
+info: Aug-07-2025 14:08:46: 	Waiting for 2 seconds
+info: Aug-07-2025 14:08:51: 	Waiting for 2 seconds
+info: Aug-07-2025 14:08:53: 	Waiting for 3 seconds
+info: Aug-07-2025 14:08:57: 	Waiting for 2 seconds
+info: Aug-07-2025 14:09:07: 	Waiting for 2 seconds
+info: Aug-07-2025 14:09:13: 	Waiting for 2 seconds
+info: Aug-07-2025 14:09:20: 	Waiting for 2 seconds
+info: Aug-07-2025 14:09:22: 	Waiting for 2 seconds
+info: Aug-07-2025 14:09:39: 	Waiting for 2 seconds
+info: Aug-07-2025 14:10:06: 	Waiting for 2 seconds
+info: Aug-07-2025 14:10:14: 	Waiting for 2 seconds
+info: Aug-07-2025 14:10:16: 	Waiting for 2 seconds
+info: Aug-07-2025 14:10:55: 	Waiting for 2 seconds
+info: Aug-07-2025 14:11:01: 	Waiting for 2 seconds

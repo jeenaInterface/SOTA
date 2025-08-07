@@ -55,10 +55,12 @@ Then('Ops user submits and approve the timesheet', async function () {
 
 Then('OCU user does the Batch ready and SOTA approval', async function () {
   await yardOrder.clickOnPayrollMenu();
+  await yardOrder.selectPayrollWeek();
   await yardOrder.selectTheBatch();
   await yardOrder.ClickOnBatchReady();
   await yardOrder.verifyBatchReadySuccessMessage();
   await yardOrder.clickOnPayrollMenu();
+  await yardOrder.selectPayrollWeek();
   await yardOrder.calculateWeekNumber();
   await yardOrder.waitForDownloadButton();
   await yardOrder.downloadBatchFile();
@@ -69,10 +71,12 @@ Then('OCU user does the Batch ready and SOTA approval', async function () {
 
 Then('OCU user does the Batch ready, batch Unready, SOTA Approval and verify difference report', async function () {
   await yardOrder.clickOnPayrollMenu();
+  await yardOrder.selectPayrollWeek();
   await yardOrder.selectTheBatch();
   await yardOrder.ClickOnBatchReady();
   await yardOrder.verifyBatchReadySuccessMessage();
   await yardOrder.clickOnPayrollMenu();
+  await yardOrder.selectPayrollWeek();
   await yardOrder.calculateWeekNumber();
   await yardOrder.waitForDownloadButton();
   await yardOrder.downloadBatchFile();
@@ -82,6 +86,7 @@ Then('OCU user does the Batch ready, batch Unready, SOTA Approval and verify dif
   await yardOrder.batchUnready();
   await yardOrder.ClickOnBatchReady();
   await yardOrder.clickOnPayrollMenu();
+  await yardOrder.selectPayrollWeek();
   await yardOrder.calculateWeekNumber();
   await yardOrder.waitForDownloadButton();
   await yardOrder.downloadBatchFile();
@@ -92,6 +97,7 @@ Then('OCU user does the Batch ready, batch Unready, SOTA Approval and verify dif
 
 Then('Accounting user does the final approval', async function () {
   await yardOrder.clickOnPayrollMenu();
+  await yardOrder.selectPayrollWeek();
   await yardOrder.selectTheBatch();
   await yardOrder.ClickOnPMAApproved();
   await yardOrder.verifyPMASuccessMessageAfterPMAApproval();
@@ -108,6 +114,7 @@ Then('user open payroll managemnt dashboard', async function () {
 
 });
 Then('Click on batch number', async function () {
+  await yardOrder.selectPayrollWeek();
   await yardOrder.selectTheBatch();
 
 });
@@ -175,10 +182,12 @@ Then('verify download batch report', async function () {
 
 Then('OCU user does the Batch ready', async function () {
   await yardOrder.clickOnPayrollMenu();
+  await yardOrder.selectPayrollWeek();
   await yardOrder.selectTheBatch();
   await yardOrder.ClickOnBatchReady();
   await yardOrder.verifyBatchReadySuccessMessage();
   await yardOrder.clickOnPayrollMenu();
+  await yardOrder.selectPayrollWeek();
   await yardOrder.calculateWeekNumber();
   await yardOrder.waitForDownloadButton();
   await yardOrder.downloadBatchFile();

@@ -1,5 +1,5 @@
 Feature:  Payroll Management Functionalities
-    @sanity
+    @payroll
     Scenario: Functionalities under payroll management
         Given TR user logged into the application
         Then TR user creates a new labor order
@@ -8,7 +8,7 @@ Feature:  Payroll Management Functionalities
         Then user click on logout button
         Then Ops user logged into the application
         Then Ops user submits and approve the timesheet
-        Then user open payroll managemnt dashboard
+        Then user open payroll managemnt dashboard 
         Then Click on batch number 
         Then Click on shift
         Then Verify Save Info functionality
@@ -33,7 +33,7 @@ Feature:  Payroll Management Functionalities
         Then Accounting user does the final approval
         Then Accouting user does PMA un approval and SOTA Un approval
 
-    @payroll
+    @saniy
     Scenario: Verify Notify manager and remarks functionalities under OCU user
         Given TR user logged into the application
         Then TR user creates a new labor order

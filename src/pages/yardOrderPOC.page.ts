@@ -7,9 +7,11 @@ import { setDefaultTimeout } from "@cucumber/cucumber"
 import { fixture } from "../hooks/pageFixture";
 import * as fs from 'fs';
 import * as path from 'path';
+import { parse } from 'csv-parse/sync';
+
+
 
 setDefaultTimeout(60 * 1000)
-
 export default class yardOrderPagePOC {
 
     protected base: PlaywrightWrapper;  // Change to protected so that subclasses can access it
@@ -123,6 +125,7 @@ export default class yardOrderPagePOC {
         payrollMenu: "//div[normalize-space()='Payroll']",
         TimesheetComments: "//span[contains(normalize-space(text()), 'Timesheet Comments updated successfully')]",
         NotifyManagerButton: "//button[normalize-space()='NOTIFY MANAGER']",
+        payrollWeek:"//select[@id='payrollWk']"
 
 
 
@@ -386,6 +389,40 @@ export default class yardOrderPagePOC {
         await this.page.locator(weekNumberXPath).click();
     }
 
+async selectPayrollWeek(): Promise<void> {
+    const filePath = path.resolve(__dirname, '../helper/util/test-data/payroll_weeks.csv');
+    const csvData = fs.readFileSync(filePath, 'utf-8');
+    const parse = require('csv-parse/sync').parse;
+    const records = parse(csvData, {
+        columns: true,
+        skip_empty_lines: true
+    });
+
+    const date = new Date(this.noTRStatusDate);
+    let weekNumber: string | undefined;
+
+    for (const row of records) {
+        const startDate = new Date(row['Start Date']);
+        const endDate = new Date(row['End Date']);
+        if (date >= startDate && date <= endDate) {
+            weekNumber = row['Week'];
+            break;
+        }
+    }
+
+    if (!weekNumber) {
+        throw new Error('Payroll week not found for the given date');
+    }
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+    // Select the payroll week in the dropdown
+    // The dropdown option format is: "<weekNumber> - WE - <endDate>"
+    const payrollWeekLabel = (await this.page.locator(this.Elements.payrollWeek).locator(`option:has-text('${weekNumber} - ')`).first().textContent())?.trim();
+    if (!payrollWeekLabel) {
+        throw new Error(`Payroll week label not found for week number: ${weekNumber}`);
+    }
+    await this.page.locator(this.Elements.payrollWeek).selectOption({ label: payrollWeekLabel });
+}
     async ClickOnBatchReady(): Promise<void> {
         await this.base.waitAndClick(this.Elements.batchReadyButton);
         await this.base.waitAndClick(this.Elements.BatchConfirmationPopUp);

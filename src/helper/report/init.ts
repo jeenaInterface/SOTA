@@ -9,7 +9,7 @@
 
 const fs = require("fs-extra");
 const localReport = "test-results/cucumber-report.html";
-const sharedReport = "C:\\Users\\jmanuel.SUYMIL\\OneDrive - Milestone Technologies Inc\\LBCT - Automation Practice\\Automation Reports\\test-results\\cucumber-report.html";
+const sharedReport = "C:\\Users\\jeena.manuel\\OneDrive - Milestone Technologies Inc\\LBCT - Automation Practice\\Automation Reports\\test-results\\cucumber-report.html";
 
 if (fs.existsSync(localReport)) {
     fs.copyFileSync(localReport, sharedReport);

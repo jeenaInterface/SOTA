@@ -3,7 +3,7 @@ import * as fs from 'fs';
 
 async function sendEmail() {
   try {
-    const sharedReportPath = 'C:\\Users\\jmanuel.SUYMIL\\OneDrive - Milestone Technologies Inc\\LBCT - Automation Practice\\Automation Reports\\test-results\\cucumber-report.html';
+    const sharedReportPath = 'C:\\Users\\jeena.manuel\\OneDrive - Milestone Technologies Inc\\LBCT - Automation Practice\\Automation Reports\\test-results\\cucumber-report.html';
     fs.copyFileSync('test-results/cucumber-report.html', sharedReportPath);
     // Add your actual OneDrive/SharePoint web link below
     const sharedReportWebUrl = 'https://milestn.sharepoint.com/:u:/r/sites/LBCT/Shared%20Documents/General/Automation%20Practice/Automation%20Reports/test-results/cucumber-report.html?csf=1&web=1&e=0hbgrC';

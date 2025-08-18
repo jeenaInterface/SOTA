@@ -8,6 +8,8 @@ Feature: New Order Form Functionalities
     # Then the user push the labor order to the summary sheet
     When the user navigates to the new order form
     And the user enters work date and shift
-    When the user fills details in local 13 tab
+    # When the user fills details in vessel tab under local 13  
+    # Then the user fills details in extra tab under local 13
     # And the user fills details in local 63 tab
+    Then the user fills details in dock work tab
     # And the user fills details in local 94 tab

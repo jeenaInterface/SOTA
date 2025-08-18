@@ -99,9 +99,23 @@ export default class vesselOrderPage {
         workDateNEWORDER: "//input[@id='sWorkDt']",
         shiftNEWOrder: "//select[@id='shift']",
         goButton: "//button[normalize-space(text())='GO']",
+        vesselOrderTab: "//a[contains(normalize-space(text()), 'COSCO KAOHSIUNG')]",
+        extratAB:"(//a[@aria-disabled='false'])[2]",
+        addNewOrder: "//button[normalize-space(text())='ADD NEW ORDER']",
+        hallAndTime:"(//input[@placeholder='--Enter Hall Name & Time--'])[1]",
+        code:"(//select[@data-toggle='tooltip'])[1]",
+        berthRequired:"//tbody/tr[2]/td[2]/select[1]",
+        bertthActual:"//tbody/tr[2]/td[3]/select[1]",
+        timeRequired: "//tbody/tr[3]/td[2]/select[1]",
+        timeActual: "//tbody/tr[3]/td[3]/select[1]",
+        jonType:"(//td[@colspan='2']//select)[2]",
+        jonTypeRequired: "(//label[normalize-space(text())='!']/following::input)[1]",
+        jonTypeActual: "(//input[@type='number'])[2]",
+        lateOrder:"(//label[normalize-space(text())='!']/following::input)[3]",
         local13Tab: "//a[normalize-space()='LOCAL 13']",
         local63Tab: "//a[normalize-space()='LOCAL 63']",
         local94Tab: "//a[normalize-space()='LOCAL 94']",
+        dockWorkTab:"(//a[@role='tab'])[2]",
         saveButton: "//button[normalize-space(text())='SAVE']",
         successMessageneworder: "//span[contains(normalize-space(text()), 'New Order information saved successfully')]",
         carbonField: "#carbon",
@@ -109,20 +123,24 @@ export default class vesselOrderPage {
         alcNo: "//tr[.//text()='Alc No']//input",
         reqRound: "select[name='reqRound']",
         orderedRound: "select[name='orderedRound']",
-        reqTime: "/html/body/app-root/app-home/div/div/section/div/app-neworder-form/div/div/neworder-form-details/div/div[1]/div[3]/div[2]/div/div/div[2]/table[1]/tbody/tr[2]/td[2]/select",
-        orderTime: "/html/body/app-root/app-home/div/div/section/div/app-neworder-form/div/div/neworder-form-details/div/div[1]/div[3]/div[2]/div/div/div[2]/table[1]/tbody/tr[2]/td[3]/select",
-        jobType: "select[name='jobType']",
+    reqTime: "(//select[@ng-reflect-name='reqTime'])[3]",
+        orderTime: "(//select[@ng-reflect-name='reqTime'])[4]",
+        jobType: "(//select[@data-placement='top'])[1]",
+        jobType1: "(//select[@data-placement='top'])[2]",
+        jobType2: "(//select[@data-placement='top'])[3]",
+        jobType3: "//select[@data-toggle='tooltip']",
         jobTypeReq: "input[name='jobTypeReq']",
         jobTypeOrd: "input[name='jobTypeOrd']",
         hallNameTime: "//input[@id='hallName']",
         reqJobType: "input[name='reqJobType']",
         orderedJobType: "input[name='orderedJobType']",
+        reqJobTypeDockWork: "(//input[@type='number'])[1]",
+        orderedJobTypeDockWork: "(//input[@type='number'])[2]",
         remarksInput: "//textarea[@placeholder='Enter your remarks here...']",
         addRemarksButton: "//button[normalize-space()='Add Remarks']",
         addSteadyTableButton: "//button[normalize-space()='ADD STEADY TABLE']",
         searchByName: "//input[@placeholder='Search By Name or Reg #']",
         invalidCheck: "#invalidCheck",
-        lateOrder: "#lateOrder1",
         carbonInput: '#carbon',
         reqRoundSelect: 'select[name="reqRound"]',
         orderedRoundSelect: 'select[name="orderedRound"]',
@@ -134,6 +152,7 @@ export default class vesselOrderPage {
         LaborOrderDifferenceReport: "//i[@title='Labor Order Difference Report']",
         labelOnDifferenceReport: "//h5[contains(text(),'Pier E - LB 24 - COSCO KAOHSIUNG - 090 - 100741 - ')]",
         summarysheetContent: "//td[normalize-space()='BACK']",
+        berthNewOrder:"//select[@ng-reflect-name='berth']"
     }
     async clickOnVesselOrderMenu(): Promise<void> {
         await this.base.goto(process.env.BASEURL, { timeout: 100000 });
@@ -529,7 +548,7 @@ export default class vesselOrderPage {
     async enterWorkDate() {
         await this.page.locator(this.Elements.workDateNEWORDER).click();
         // await this.page.locator(this.Elements.workDateNEWORDER).fill(this.noTRStatusDate);
-        await this.page.locator(this.Elements.workDateNEWORDER).fill("2025-07-30");
+        await this.page.locator(this.Elements.workDateNEWORDER).fill("2025-08-18");
         await this.page.locator(this.Elements.shiftNEWOrder).selectOption("Nightside");
         await this.base.waitAndClick(this.Elements.goButton);
 
@@ -537,17 +556,29 @@ export default class vesselOrderPage {
 
 
     async fillLocal13Details() {
+        await this.page.locator(this.Elements.vesselOrderTab).click();
         const carbonInput = this.page.locator('#carbon');
         const reqRoundSelect = this.page.locator('select[name="reqRound"]');
         const orderedRoundSelect = this.page.locator('select[name="orderedRound"]');
         const reqTimeSelectFirst = this.page.locator('select[name="reqTime"]').first();
-        // const reqTimeSelectSecond = this.page.locator('select[name="reqTime"]').nth(1);
+        const reqTimeSelectSecond = this.page.locator("//table[@class='table']/tbody[1]/tr[2]/td[3]/select[1]");
         const jobTypeSelect = this.page.locator('select[name="jobType"]');
         const jobTypeReqInput = this.page.locator('input[name="jobTypeReq"]');
         const jobTypeOrdInput = this.page.locator('input[name="jobTypeOrd"]');
         const alcNoTextbox = this.page.getByRole('row', { name: 'Alc No', exact: true }).getByRole('textbox');
+        const action = this.page.locator("//td[@class='table-row-xl']//select[@id='tag']");
+        const hallAndTime = this.page.locator("//table[contains(@class,'table table-newOrder')]/tbody[1]/tr[2]/td[4]/input[1]");
+        const addNewOrderButtonSelector = "//button[normalize-space()='ADD NEW ORDER']";
+        const deletetTab2 = "//i[@class='bi bi-x-square icon-color-danger']";
+        const remarks = "//i[@title='Remarks']";
+        await fixture.page.waitForTimeout(10000);
 
         await carbonInput.fill("1");
+        await action.selectOption("CUT");
+        await hallAndTime.fill("Hall 1 @ 10am");
+        await this.base.waitAndClick(remarks);
+        await this.page.locator(this.Elements.remarksInput).fill("Test remarks for Local 13");
+        await this.base.waitAndClick(this.Elements.addRemarksButton);
         await alcNoTextbox.fill("1");
         await reqRoundSelect.selectOption("MRO");
         await orderedRoundSelect.selectOption("MRO");
@@ -556,17 +587,39 @@ export default class vesselOrderPage {
         await jobTypeSelect.selectOption("GEAR LEADMAN-SPECIAL");
         await jobTypeReqInput.fill("1");
         await jobTypeOrdInput.fill("1");
-        await fixture.page.waitForTimeout(5000);
         await this.base.waitAndClick(this.Elements.saveButton);
-        await fixture.page.waitForTimeout(5000);
-        // expect(await this.page.locator(this.Elements.successMessageneworder)).toBeVisible();
-        // fixture.logger.info("Waiting for 2 seconds");
-        // await fixture.page.waitForTimeout(2000);
+        expect(await this.page.locator(this.Elements.successMessageneworder)).toBeVisible();
+        await this.base.waitAndClick(addNewOrderButtonSelector);
+        await this.base.waitAndClick(deletetTab2);
+        await this.base.waitAndClick(this.Elements.YesButtonOnDiscard);
+        await this.base.waitAndClick(this.Elements.saveButton);
+        fixture.logger.info("Waiting for 2 seconds");
+        await fixture.page.waitForTimeout(2000);
+    }
+        async fillExtraTab() {
+        await this.page.locator(this.Elements.extratAB).click();
+        await fixture.page.waitForTimeout(10000);
+        await this.page.locator(this.Elements.addNewOrder).click();
+        await this.page.locator(this.Elements.hallAndTime).fill('Hall 1 @ 10am');
+        await this.page.locator(this.Elements.code).selectOption('002 - DOCKWORK RAILS');
+        await this.page.locator(this.Elements.berthRequired).selectOption('Pier E - LB 24');
+        await this.page.locator(this.Elements.bertthActual).selectOption('Pier E - LB 24');
+        await this.page.locator(this.Elements.timeRequired).selectOption('6PM');
+        await this.page.locator(this.Elements.timeActual).selectOption('6PM');
+        await this.page.locator(this.Elements.jonType).selectOption('DA');
+        await this.page.locator(this.Elements.jonTypeRequired).fill('1');
+        await this.page.locator(this.Elements.jonTypeActual).fill('1');
+        await this.page.locator(this.Elements.lateOrder).click();
+        await this.base.waitAndClick(this.Elements.saveButton);
+        expect(await this.page.locator(this.Elements.successMessageneworder)).toBeVisible();
+        fixture.logger.info("Waiting for 2 seconds");
+        await fixture.page.waitForTimeout(2000);
     }
 
     async fillLocal63Details() {
-        await fixture.page.waitForTimeout(2000);
+        
         await this.base.waitAndClick(this.Elements.local63Tab);
+        await fixture.page.waitForTimeout(10000);
 
         // Fill hall name and time
         await this.page.locator(this.Elements.hallNameTime).click();
@@ -590,11 +643,10 @@ export default class vesselOrderPage {
 
         // Add steady table
         await this.page.locator(this.Elements.addSteadyTableButton).click();
-        await this.page.locator(this.Elements.reqTime).nth(2).selectOption('FLEX');
-        await this.page.locator(this.Elements.reqTime).nth(3).selectOption('REGULAR');
-        await this.page.locator(this.Elements.jobType).nth(1).selectOption('VPT');
-        await this.page.getByRole('cell', { name: '--Select--' }).getByRole('combobox').selectOption('SUPERVISOR-SHIP');
-
+        await this.page.locator(this.Elements.reqTime).selectOption('FLEX');
+        await this.page.locator(this.Elements.orderTime).selectOption('REGULAR');
+        await this.page.locator(this.Elements.jobType1).selectOption('VPT');
+        await this.page.locator(this.Elements.jobType2).selectOption('VPT');
         // Search and select employee
         await this.page.locator(this.Elements.searchByName).fill('john');
         await this.page.locator(this.Elements.searchByName).press('Enter');
@@ -603,6 +655,58 @@ export default class vesselOrderPage {
         // Check boxes
         await this.page.locator(this.Elements.invalidCheck).check();
         await this.page.locator(this.Elements.lateOrder).check();
+                await this.base.waitAndClick(this.Elements.saveButton);
+        expect(await this.page.locator(this.Elements.successMessageneworder)).toBeVisible();
+        fixture.logger.info("Waiting for 2 seconds");
+        await fixture.page.waitForTimeout(2000);
+    }
+
+       async dockworkDetails() {
+        await this.base.waitAndClick(this.Elements.local63Tab);
+        await this.base.waitAndClick(this.Elements.dockWorkTab);
+        await fixture.page.waitForTimeout(10000);
+        // Add specific details for Local 94
+        await this.page.locator(this.Elements.berthNewOrder).selectOption('Pier E - LB 24');
+
+        await this.page.locator(this.Elements.hallNameTime).click();
+        await this.page.locator(this.Elements.hallNameTime).fill('john @10am');
+
+        // Select options
+
+        await this.page.locator(this.Elements.addNewOrder).click();
+        await this.page.getByRole('combobox').nth(2).selectOption('REGULAR');
+        await this.page.getByRole('combobox').nth(3).selectOption('FLEX');
+        await this.page.locator(this.Elements.jobType3).selectOption('SR');
+
+        // Fill job type details
+        await this.page.locator(this.Elements.reqJobTypeDockWork).click();
+        await this.page.locator(this.Elements.reqJobTypeDockWork).fill('11');
+        await this.page.locator(this.Elements.orderedJobTypeDockWork).click();
+        await this.page.locator(this.Elements.orderedJobTypeDockWork).fill('1');
+
+        // Add remarks
+        await this.page.locator('.col > .bi').first().click();
+        await this.page.locator(this.Elements.remarksInput).fill('test');
+        await this.page.locator(this.Elements.addRemarksButton).click();
+
+        // Add steady table
+        await this.page.locator(this.Elements.addSteadyTableButton).click();
+        await this.page.locator(this.Elements.reqTime).selectOption('FLEX');
+        await this.page.locator(this.Elements.orderTime).selectOption('REGULAR');
+        await this.page.locator(this.Elements.jobType1).selectOption('VPT');
+        await this.page.locator(this.Elements.jobType2).selectOption('VPT');
+        // Search and select employee
+        await this.page.locator(this.Elements.searchByName).fill('john');
+        await this.page.locator(this.Elements.searchByName).press('Enter');
+        await this.page.locator(this.Elements.searchByName).fill('Allen, Johnny L - 1635032');
+
+        // Check boxes
+        await this.page.locator(this.Elements.invalidCheck).check();
+        await this.page.locator(this.Elements.lateOrder).check();
+                await this.base.waitAndClick(this.Elements.saveButton);
+        expect(await this.page.locator(this.Elements.successMessageneworder)).toBeVisible();
+        fixture.logger.info("Waiting for 2 seconds");
+        await fixture.page.waitForTimeout(2000);
     }
 
     async fillLocal94Details() {

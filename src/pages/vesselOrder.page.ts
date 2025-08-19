@@ -100,22 +100,22 @@ export default class vesselOrderPage {
         shiftNEWOrder: "//select[@id='shift']",
         goButton: "//button[normalize-space(text())='GO']",
         vesselOrderTab: "//a[contains(normalize-space(text()), 'COSCO KAOHSIUNG')]",
-        extratAB:"(//a[@aria-disabled='false'])[2]",
+        extratAB: "(//a[@aria-disabled='false'])[2]",
         addNewOrder: "//button[normalize-space(text())='ADD NEW ORDER']",
-        hallAndTime:"(//input[@placeholder='--Enter Hall Name & Time--'])[1]",
-        code:"(//select[@data-toggle='tooltip'])[1]",
-        berthRequired:"//tbody/tr[2]/td[2]/select[1]",
-        bertthActual:"//tbody/tr[2]/td[3]/select[1]",
+        hallAndTime: "(//input[@placeholder='--Enter Hall Name & Time--'])[1]",
+        code: "(//select[@data-toggle='tooltip'])[1]",
+        berthRequired: "//tbody/tr[2]/td[2]/select[1]",
+        bertthActual: "//tbody/tr[2]/td[3]/select[1]",
         timeRequired: "//tbody/tr[3]/td[2]/select[1]",
         timeActual: "//tbody/tr[3]/td[3]/select[1]",
-        jonType:"(//td[@colspan='2']//select)[2]",
+        jonType: "(//td[@colspan='2']//select)[2]",
         jonTypeRequired: "(//label[normalize-space(text())='!']/following::input)[1]",
         jonTypeActual: "(//input[@type='number'])[2]",
-        lateOrder:"(//label[normalize-space(text())='!']/following::input)[3]",
+        lateOrder: "(//label[normalize-space(text())='!']/following::input)[3]",
         local13Tab: "//a[normalize-space()='LOCAL 13']",
         local63Tab: "//a[normalize-space()='LOCAL 63']",
         local94Tab: "//a[normalize-space()='LOCAL 94']",
-        dockWorkTab:"(//a[@role='tab'])[2]",
+        dockWorkTab: "(//a[@role='tab'])[2]",
         saveButton: "//button[normalize-space(text())='SAVE']",
         successMessageneworder: "//span[contains(normalize-space(text()), 'New Order information saved successfully')]",
         carbonField: "#carbon",
@@ -123,7 +123,7 @@ export default class vesselOrderPage {
         alcNo: "//tr[.//text()='Alc No']//input",
         reqRound: "select[name='reqRound']",
         orderedRound: "select[name='orderedRound']",
-    reqTime: "(//select[@ng-reflect-name='reqTime'])[3]",
+        reqTime: "(//select[@ng-reflect-name='reqTime'])[3]",
         orderTime: "(//select[@ng-reflect-name='reqTime'])[4]",
         jobType: "(//select[@data-placement='top'])[1]",
         jobType1: "(//select[@data-placement='top'])[2]",
@@ -133,6 +133,7 @@ export default class vesselOrderPage {
         jobTypeOrd: "input[name='jobTypeOrd']",
         hallNameTime: "//input[@id='hallName']",
         reqJobType: "input[name='reqJobType']",
+        bossName: "//div[@class='display-flex m-0']//input[@id='vessel']",
         orderedJobType: "input[name='orderedJobType']",
         reqJobTypeDockWork: "(//input[@type='number'])[1]",
         orderedJobTypeDockWork: "(//input[@type='number'])[2]",
@@ -152,7 +153,16 @@ export default class vesselOrderPage {
         LaborOrderDifferenceReport: "//i[@title='Labor Order Difference Report']",
         labelOnDifferenceReport: "//h5[contains(text(),'Pier E - LB 24 - COSCO KAOHSIUNG - 090 - 100741 - ')]",
         summarysheetContent: "//td[normalize-space()='BACK']",
-        berthNewOrder:"//select[@ng-reflect-name='berth']"
+        berthNewOrder: "//select[@ng-reflect-name='berth']",
+        operationNewOrderTable: "(//input[@type='text'])[4]",
+        operationSteadyTable: "(//input[@type='text'])[6]",
+        bossNewOrderTable: "(//input[@type='text'])[5]",
+        bossSteadyTable: "(//input[@type='text'])[7]",
+        newOrderReport: "//button[normalize-space()='NEW ORDER REPORT']",
+        Report210: "//button[normalize-space()='210 Report']",
+        Report240: "//button[normalize-space()='240 Report']",
+        allocationinfo: "(//a[normalize-space()='Allocation Info'])[1]",
+        vesselNameLabel:"//th[normalize-space()='Vessel Name']"
     }
     async clickOnVesselOrderMenu(): Promise<void> {
         await this.base.goto(process.env.BASEURL, { timeout: 100000 });
@@ -547,8 +557,8 @@ export default class vesselOrderPage {
 
     async enterWorkDate() {
         await this.page.locator(this.Elements.workDateNEWORDER).click();
-        // await this.page.locator(this.Elements.workDateNEWORDER).fill(this.noTRStatusDate);
-        await this.page.locator(this.Elements.workDateNEWORDER).fill("2025-08-18");
+        await this.page.locator(this.Elements.workDateNEWORDER).fill(this.noTRStatusDate);
+        // await this.page.locator(this.Elements.workDateNEWORDER).fill("2025-08-20");
         await this.page.locator(this.Elements.shiftNEWOrder).selectOption("Nightside");
         await this.base.waitAndClick(this.Elements.goButton);
 
@@ -596,7 +606,7 @@ export default class vesselOrderPage {
         fixture.logger.info("Waiting for 2 seconds");
         await fixture.page.waitForTimeout(2000);
     }
-        async fillExtraTab() {
+    async fillExtraTab() {
         await this.page.locator(this.Elements.extratAB).click();
         await fixture.page.waitForTimeout(10000);
         await this.page.locator(this.Elements.addNewOrder).click();
@@ -615,9 +625,16 @@ export default class vesselOrderPage {
         fixture.logger.info("Waiting for 2 seconds");
         await fixture.page.waitForTimeout(2000);
     }
+     async allocationInfoTab() {
+        await this.page.locator(this.Elements.allocationinfo).click();
+        await fixture.page.waitForTimeout(5000);
+        const vesselName = await this.page.locator(this.Elements.vesselNameLabel).textContent();
+        expect(vesselName).toContain("Vessel Name");
+
+     }
 
     async fillLocal63Details() {
-        
+
         await this.base.waitAndClick(this.Elements.local63Tab);
         await fixture.page.waitForTimeout(10000);
 
@@ -655,14 +672,13 @@ export default class vesselOrderPage {
         // Check boxes
         await this.page.locator(this.Elements.invalidCheck).check();
         await this.page.locator(this.Elements.lateOrder).check();
-                await this.base.waitAndClick(this.Elements.saveButton);
+        await this.base.waitAndClick(this.Elements.saveButton);
         expect(await this.page.locator(this.Elements.successMessageneworder)).toBeVisible();
         fixture.logger.info("Waiting for 2 seconds");
         await fixture.page.waitForTimeout(2000);
     }
 
-       async dockworkDetails() {
-        await this.base.waitAndClick(this.Elements.local63Tab);
+    async dockworkDetails() {
         await this.base.waitAndClick(this.Elements.dockWorkTab);
         await fixture.page.waitForTimeout(10000);
         // Add specific details for Local 94
@@ -676,7 +692,7 @@ export default class vesselOrderPage {
         await this.page.locator(this.Elements.addNewOrder).click();
         await this.page.getByRole('combobox').nth(2).selectOption('REGULAR');
         await this.page.getByRole('combobox').nth(3).selectOption('FLEX');
-        await this.page.locator(this.Elements.jobType3).selectOption('SR');
+        await this.page.locator(this.Elements.jobType).selectOption('RC');
 
         // Fill job type details
         await this.page.locator(this.Elements.reqJobTypeDockWork).click();
@@ -693,8 +709,8 @@ export default class vesselOrderPage {
         await this.page.locator(this.Elements.addSteadyTableButton).click();
         await this.page.locator(this.Elements.reqTime).selectOption('FLEX');
         await this.page.locator(this.Elements.orderTime).selectOption('REGULAR');
-        await this.page.locator(this.Elements.jobType1).selectOption('VPT');
-        await this.page.locator(this.Elements.jobType2).selectOption('VPT');
+        await this.page.locator(this.Elements.jobType1).selectOption('FR');
+        await this.page.locator(this.Elements.jobType2).selectOption('DST');
         // Search and select employee
         await this.page.locator(this.Elements.searchByName).fill('john');
         await this.page.locator(this.Elements.searchByName).press('Enter');
@@ -703,7 +719,7 @@ export default class vesselOrderPage {
         // Check boxes
         await this.page.locator(this.Elements.invalidCheck).check();
         await this.page.locator(this.Elements.lateOrder).check();
-                await this.base.waitAndClick(this.Elements.saveButton);
+        await this.base.waitAndClick(this.Elements.saveButton);
         expect(await this.page.locator(this.Elements.successMessageneworder)).toBeVisible();
         fixture.logger.info("Waiting for 2 seconds");
         await fixture.page.waitForTimeout(2000);
@@ -711,7 +727,93 @@ export default class vesselOrderPage {
 
     async fillLocal94Details() {
         await this.base.waitAndClick(this.Elements.local94Tab);
+        await fixture.page.waitForTimeout(10000);
+        await this.page.locator(this.Elements.bossName).fill('john');
+        await this.page.locator(this.Elements.hallNameTime).click();
+        await this.page.locator(this.Elements.hallNameTime).fill('john @10am');
+
+        // Select options
+        await this.page.getByRole('combobox').nth(2).selectOption('5PM');
+        await this.page.getByRole('combobox').nth(3).selectOption('5PM');
+        await this.page.locator(this.Elements.jobType).selectOption('SB');
+
+        // Fill job type details
+        await this.page.locator(this.Elements.reqJobType).click();
+        await this.page.locator(this.Elements.reqJobType).fill('1');
+        await this.page.locator(this.Elements.orderedJobType).click();
+        await this.page.locator(this.Elements.orderedJobType).fill('1');
+
+        // Add remarks
+        await this.page.locator('.col > .bi').first().click();
+        await this.page.locator(this.Elements.remarksInput).fill('test');
+        await this.page.locator(this.Elements.addRemarksButton).click();
+
+        // Add steady table
+        await this.page.locator(this.Elements.addSteadyTableButton).click();
+        await this.page.locator(this.Elements.reqTime).selectOption('4PMfx');
+        await this.page.locator(this.Elements.orderTime).selectOption('4PMfx');
+        await this.page.locator(this.Elements.jobType1).selectOption('LB');
+        await this.page.locator(this.Elements.jobType2).selectOption('LB');
+        // Search and select employee
+        await this.page.locator(this.Elements.searchByName).fill('john');
+        await this.page.locator(this.Elements.searchByName).press('Enter');
+        await this.page.locator(this.Elements.searchByName).fill('Allen, Johnny L - 1635032');
+
+        // Check boxes
+        await this.page.locator(this.Elements.invalidCheck).check();
+        await this.page.locator(this.Elements.lateOrder).check();
+        await this.base.waitAndClick(this.Elements.saveButton);
+        expect(await this.page.locator(this.Elements.successMessageneworder)).toBeVisible();
+        fixture.logger.info("Waiting for 2 seconds");
+        await fixture.page.waitForTimeout(2000);
+    }
+    async dockworkDetailsLocal94() {
+        await this.base.waitAndClick(this.Elements.dockWorkTab);
+        await fixture.page.waitForTimeout(10000);
         // Add specific details for Local 94
+        await this.page.locator(this.Elements.berthNewOrder).selectOption('Pier E - LB 24');
+        await this.page.locator(this.Elements.bossName).fill('john');
+        await this.page.locator(this.Elements.hallNameTime).click();
+        await this.page.locator(this.Elements.hallNameTime).fill('john @10am');
+
+        // Select options
+
+        await this.page.locator(this.Elements.addNewOrder).click();
+        await this.page.locator(this.Elements.operationNewOrderTable).fill('vessel');
+        await this.page.locator(this.Elements.bossNewOrderTable).fill('John');
+        await this.page.getByRole('combobox').nth(2).selectOption('5PM');
+        await this.page.getByRole('combobox').nth(3).selectOption('5PM');
+        await this.page.locator(this.Elements.jobType).selectOption('YB');
+
+        // Fill job type details
+        await this.page.locator(this.Elements.reqJobTypeDockWork).click();
+        await this.page.locator(this.Elements.reqJobTypeDockWork).fill('1');
+        await this.page.locator(this.Elements.orderedJobTypeDockWork).click();
+        await this.page.locator(this.Elements.orderedJobTypeDockWork).fill('2');
+
+        // Add remarks
+        await this.page.locator('.col > .bi').first().click();
+        await this.page.locator(this.Elements.remarksInput).fill('test');
+        await this.page.locator(this.Elements.addRemarksButton).click();
+
+        // Add steady table
+        await this.page.locator(this.Elements.addSteadyTableButton).click();
+        await this.page.locator(this.Elements.operationSteadyTable).fill('vessel');
+        await this.page.locator(this.Elements.bossSteadyTable).fill('John');
+        await this.page.locator(this.Elements.reqTime).selectOption('5PM');
+        await this.page.locator(this.Elements.orderTime).selectOption('5PM');
+        await this.page.locator(this.Elements.jobType1).selectOption('DB');
+        await this.page.locator(this.Elements.jobType2).selectOption('DB');
+        // Search and select employee
+        await this.page.locator(this.Elements.searchByName).fill('john');
+        await this.page.locator(this.Elements.searchByName).press('Enter');
+        await this.page.locator(this.Elements.searchByName).fill('Allen, Johnny L - 1635032');
+
+
+        await this.base.waitAndClick(this.Elements.saveButton);
+        expect(await this.page.locator(this.Elements.successMessageneworder)).toBeVisible();
+        fixture.logger.info("Waiting for 2 seconds");
+        await fixture.page.waitForTimeout(2000);
     }
 
     async clickSaveButton() {
@@ -721,5 +823,52 @@ export default class vesselOrderPage {
     async verifySuccessMessagenewOrder() {
         expect(await this.page.locator(this.Elements.successMessageneworder))
     }
+    async downloadNewOrderReport(): Promise<string> {
+        const downloadPath = path.resolve(__dirname, 'downloads');
+        if (!fs.existsSync(downloadPath)) {
+            fs.mkdirSync(downloadPath, { recursive: true });
+        }
+        this.clearDownloadFolder(downloadPath);
+        const [download] = await Promise.all([
+            this.page.waitForEvent('download'),
+            this.page.locator(this.Elements.newOrderReport).click()
+        ]);
+        const downloadPathWithFileName = path.join(downloadPath, 'NewOrder_Report.xlsx');
+        await download.saveAs(downloadPathWithFileName);
+        expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+        return downloadPathWithFileName;
+    }
+    async download210Report(): Promise<string> {
+        const downloadPath = path.resolve(__dirname, 'downloads');
+        if (!fs.existsSync(downloadPath)) {
+            fs.mkdirSync(downloadPath, { recursive: true });
+        }
+        this.clearDownloadFolder(downloadPath);
+        const [download] = await Promise.all([
+            this.page.waitForEvent('download'),
+            this.page.locator(this.Elements.Report210).click()
+        ]);
+        const downloadPathWithFileName = path.join(downloadPath, 'NewOrder_Report.xlsx');
+        await download.saveAs(downloadPathWithFileName);
+        expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+        return downloadPathWithFileName;
+    }
+    async download240Report(): Promise<string> {
+        const downloadPath = path.resolve(__dirname, 'downloads');
+        if (!fs.existsSync(downloadPath)) {
+            fs.mkdirSync(downloadPath, { recursive: true });
+        }
+        this.clearDownloadFolder(downloadPath);
+        const [download] = await Promise.all([
+            this.page.waitForEvent('download'),
+            this.page.locator(this.Elements.Report240).click()
+        ]);
+        const downloadPathWithFileName = path.join(downloadPath, 'NewOrder_Report.xlsx');
+        await download.saveAs(downloadPathWithFileName);
+        expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+        return downloadPathWithFileName;
+    }
+
 
 }
+

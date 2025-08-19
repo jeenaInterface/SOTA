@@ -4,6 +4,8 @@ import { Given, setDefaultTimeout, Then, When } from "@cucumber/cucumber";
 import { fixture } from "../../hooks/pageFixture";
 import vesselOrderPage from "../../pages/vesselOrder.page";
 import summarySheetPage from "../../pages/summarySheet.page";
+import * as XLSX from 'xlsx';
+import * as fs from 'fs';
 
 
 let vesselOrder: vesselOrderPage;
@@ -93,54 +95,96 @@ Then('TR user verifies that the vessel labor order is pushed to the summary shee
 });
 
 When('the user navigates to the new order form', async function () {
-  vesselOrder = new vesselOrderPage(fixture.page);
-    await vesselOrder.navigateToNewOrderForm();
+  // vesselOrder = new vesselOrderPage(fixture.page);
+  await vesselOrder.navigateToNewOrderForm();
 });
 
 When('the user enters work date and shift', async function () {
-    await vesselOrder.enterWorkDate();
+  await vesselOrder.enterWorkDate();
 
 });
 
 
 When('the user fills details in vessel tab under local 13', async function () {
-    await vesselOrder.fillLocal13Details();
+  await vesselOrder.fillLocal13Details();
 });
 Then('the user fills details in extra tab under local 13', async function () {
-    await vesselOrder.fillExtraTab();
+  await vesselOrder.fillExtraTab();
 });
 
 When('the user fills details in local 63 tab', async function () {
-    await vesselOrder.fillLocal63Details();
+  await vesselOrder.fillLocal63Details();
 
 });
 When('the user fills details in dock work tab', async function () {
-    await vesselOrder.dockworkDetails();
+  await vesselOrder.dockworkDetails();
 
 
 });
 
 When('the user fills details in local 94 tab', async function () {
-    await vesselOrder.fillLocal94Details();
+  await vesselOrder.fillLocal94Details();
 });
+When('the user fills details in dock work under local 94', async function () {
+  await vesselOrder.dockworkDetailsLocal94();
+});
+
 Then('Verify download labor order difference report', async function () {
   await vesselOrder.downloadLaborOrderDifferenceReport();
-    await vesselOrder.clickOnSummarySheetMenu();
+  await vesselOrder.clickOnSummarySheetMenu();
   let LatestWorkOrderDate: string
   await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate)
   await summarySheet.VerifySummarySheetCreated();
 });
 Then('Verify hall labor report', async function () {
-await summarySheet.HallLaborReport();
+  await summarySheet.HallLaborReport();
   await vesselOrder.clickOnSummarySheetMenu();
   let LatestWorkOrderDate: string
   await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate)
   await summarySheet.VerifySummarySheetCreated();
 });
 Then('Verify steady dispatch report', async function () {
-    await summarySheet.steadyDispatchReport();
-    await vesselOrder.clickOnSummarySheetMenu();
-    let LatestWorkOrderDate: string
-    await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate)
-    await summarySheet.VerifySummarySheetCreated();
+  await summarySheet.steadyDispatchReport();
+  await vesselOrder.clickOnSummarySheetMenu();
+  let LatestWorkOrderDate: string
+  await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate)
+  await summarySheet.VerifySummarySheetCreated();
+});
+
+
+Then('Verify New order report is downloaded', async function () {
+  const filePath = await vesselOrder.downloadNewOrderReport();
+  // Attach the Excel file directly to the report
+  if (fs.existsSync(filePath) && this.attach) {
+    const fileBuffer = fs.readFileSync(filePath);
+    await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  }
+
+
+});
+Then('verify 210 report is downloaded', async function () {
+  const filePath = await vesselOrder.download210Report();
+
+  // Attach the Excel file directly to the report
+  if (fs.existsSync(filePath) && this.attach) {
+    const fileBuffer = fs.readFileSync(filePath);
+    await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  }
+
+
+});
+Then('Verify 240 report is downloaded', async function () {
+  const filePath = await vesselOrder.download240Report();
+
+  // Attach the Excel file directly to the report
+  if (fs.existsSync(filePath) && this.attach) {
+    const fileBuffer = fs.readFileSync(filePath);
+    await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+  }
+
+
+});
+
+When('Verify allocation info tab', async function () {
+  await vesselOrder.allocationInfoTab();
 });

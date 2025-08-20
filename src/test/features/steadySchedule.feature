@@ -12,15 +12,29 @@ Feature: Steady Schedule Functionalities
         And User clicks on GO button
         And Select Job code for some steadies under CO tab
         Then Enter remarks for first row
-        And Verify total and guarantee value
         And User clicks on Save button
-        # Then User should see success message for steady schedule
-        # And Select Job code for some steadies under FM tab
-        # And Verify total and guarantee value
-        # And User clicks on Save button
-        # Then User should see success message for steady schedule
-        # And Select Job code for some steadies under Vessel tab
-        # And Verify total and gurantee value
-        # And User clicks on Save button
-        # Then User should see success message for steady schedule
+        Then User should see success message for steady schedule
+        And Verify total and guarantee value
+        And Select Job code for some steadies under FM tab
+        Then Enter remarks for first row
+        And User clicks on Save button
+        Then User should see success message for steady schedule
+        And Verify total and guarantee value
+        And Select Job code for some steadies under Vessel tab
+        Then Enter remarks for first row
+        And User clicks on Save button
+        Then User should see success message for steady schedule
+        And Select Job code for some steadies under Yard tab
+        Then Enter remarks for first row
+        And User clicks on Save button
+        Then User should see success message for steady schedule
+        And Select Job code for some steadies under Rail tab
+        Then Enter remarks for first row
+        And User clicks on Save button
+        Then User should see success message for steady schedule
+        And Select Job code for some steadies under TSRV tab
+        Then Enter remarks for first row
+        And User clicks on Save button
+        Then User should see success message for steady schedule
+
 

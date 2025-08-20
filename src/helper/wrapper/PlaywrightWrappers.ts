@@ -7,7 +7,8 @@ export default class PlaywrightWrapper {
 
     async goto(url: string, p0: { timeout: number; }) {
         await this.page.goto(url, {
-            waitUntil: "domcontentloaded"
+            waitUntil: "domcontentloaded",
+            timeout: p0.timeout
         });
     }
 

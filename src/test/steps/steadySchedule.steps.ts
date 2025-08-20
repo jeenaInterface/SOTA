@@ -21,11 +21,9 @@ When('User clicks on Save button', async function () {
 });
 
 
-
 Then('User should see success message for steady schedule', async function () {
     await steadySchedulePage.verifySuccessMessage();
 });
-
 
 When('Select Job code for some steadies under CO tab', async function () {
     await steadySchedulePage.selectCOTab();
@@ -34,23 +32,28 @@ When('Select Job code for some steadies under CO tab', async function () {
 });
 
 When('Select Job code for some steadies under FM tab', async function () {
-    // await steadySchedulePage.selectFMTab();
-    // // Selecting job codes for multiple rows
-    // await steadySchedulePage.selectJobCode(1, 'WORK'); // Example job code
-    // await steadySchedulePage.selectJobCode(2, 'WORK'); // Example job code
+    await steadySchedulePage.selectFMTab();
 });
 
 When('Select Job code for some steadies under Vessel tab', async function () {
     await steadySchedulePage.selectVesselTab();
-    // // Selecting job codes for multiple rows
-    // await steadySchedulePage.selectJobCode(1, 'SC26'); // Example job code
-    // await steadySchedulePage.selectJobCode(2, 'SC26'); // Example job code
+});
+When('Select Job code for some steadies under Yard tab', async function () {
+    await steadySchedulePage.selectYardTab();
+});
+When('Select Job code for some steadies under Rail tab', async function () {
+    await steadySchedulePage.selectRailTab();
+});
+When('Select Job code for some steadies under TSRV tab', async function () {
+    await steadySchedulePage.selectTSRVTab();
 });
 
 Then('Enter remarks for first row', async function () {
     await steadySchedulePage.enterRemarks('Test remarks for steady schedule');
+    await steadySchedulePage.clickSaveButton();
+
 });
 
-Then('Verify total and gurantee value', async function () {
+Then('Verify total and guarantee value', async function () {
     await steadySchedulePage.verifyTotalAndGuaranteeValue();
 });

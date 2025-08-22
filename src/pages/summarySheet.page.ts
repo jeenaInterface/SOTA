@@ -61,7 +61,7 @@ export default class summarySheetPage {
         yesPopUp: "//button[normalize-space()='Yes']",
         transferToTrackingSheetMessage:"//div[@class='col-10 p-2']",
         title:"//span[@class='page-title p-1']",
-        vesselLabel:"//h5[normalize-space()='Vessel - COSCO ENGLAND']"
+        vesselLabel:"//h5[normalize-space()='Vessel - COSCO KAOHSIUNG']"
     };
 
 

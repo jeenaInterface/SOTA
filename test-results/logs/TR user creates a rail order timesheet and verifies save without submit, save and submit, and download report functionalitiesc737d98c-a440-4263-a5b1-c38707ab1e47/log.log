@@ -1,0 +1,30 @@
+info: Aug-22-2025 13:37:17: 	Waiting for 1 seconds
+info: Aug-22-2025 13:37:18: 	Checking TRStatus for date: 2025-08-22
+info: Aug-22-2025 13:37:20: 	TRStatus element is attached. isVisible: true
+info: Aug-22-2025 13:37:20: 	TRStatus is visible for 2025-08-22, moving to next date.
+info: Aug-22-2025 13:37:21: 	Checking TRStatus for date: 2025-08-23
+info: Aug-22-2025 13:37:25: 	TRStatus element is attached. isVisible: true
+info: Aug-22-2025 13:37:25: 	TRStatus is visible for 2025-08-23, moving to next date.
+info: Aug-22-2025 13:37:27: 	Checking TRStatus for date: 2025-08-24
+info: Aug-22-2025 13:37:29: 	TRStatus element is attached. isVisible: true
+info: Aug-22-2025 13:37:29: 	TRStatus is visible for 2025-08-24, moving to next date.
+info: Aug-22-2025 13:37:30: 	Checking TRStatus for date: 2025-08-25
+info: Aug-22-2025 13:37:35: 	TRStatus element is not attached to DOM.
+info: Aug-22-2025 13:37:35: 	Order created for date: 2025-08-25
+info: Aug-22-2025 13:37:36: 	Waiting for 2 seconds
+info: Aug-22-2025 13:37:40: 	Waiting for 2 seconds
+info: Aug-22-2025 13:37:44: 	Waiting for 3 seconds
+info: Aug-22-2025 13:37:47: 	Waiting for 2 seconds
+info: Aug-22-2025 13:37:53: 	Waiting for 2 seconds
+info: Aug-22-2025 13:37:55: 	Waiting for 2 seconds
+info: Aug-22-2025 13:37:57: 	Waiting for 2 seconds
+info: Aug-22-2025 13:37:59: 	Waiting for 2 seconds
+info: Aug-22-2025 13:38:01: 	Waiting for 2 seconds
+info: Aug-22-2025 13:38:14: 	Waiting for 2 seconds
+info: Aug-22-2025 13:38:28: 	Waiting for 2 seconds
+info: Aug-22-2025 13:38:31: 	Waiting for 2 seconds
+info: Aug-22-2025 13:38:35: 	Clerk rolling code not found, reopening the popup.
+info: Aug-22-2025 13:39:02: 	Waiting for 2 seconds
+info: Aug-22-2025 13:39:05: 	Waiting for 2 seconds
+info: Aug-22-2025 13:39:08: 	Waiting for 1 seconds
+info: Aug-22-2025 13:39:27: 	Waiting for 2 seconds

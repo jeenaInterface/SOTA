@@ -1,6 +1,6 @@
 Feature: New Order Form Functionalities
 
-  @sanity
+  @sanity @newOrderForm
   Scenario: Create a new order with local 13, 63 and 94 details
     Given TR user logged into the application
     Given the user creates a new vessel order

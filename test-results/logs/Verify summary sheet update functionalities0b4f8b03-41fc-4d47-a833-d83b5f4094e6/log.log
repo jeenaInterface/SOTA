@@ -1,0 +1,34 @@
+info: Aug-22-2025 14:44:46: 	Checking TRStatus for date: 2025-08-22
+info: Aug-22-2025 14:44:48: 	TRStatus element is attached. isVisible: true
+info: Aug-22-2025 14:44:48: 	TRStatus is visible for 2025-08-22, moving to next date.
+info: Aug-22-2025 14:44:52: 	Checking TRStatus for date: 2025-08-23
+info: Aug-22-2025 14:44:54: 	TRStatus element is attached. isVisible: true
+info: Aug-22-2025 14:44:54: 	TRStatus is visible for 2025-08-23, moving to next date.
+info: Aug-22-2025 14:44:57: 	Checking TRStatus for date: 2025-08-24
+info: Aug-22-2025 14:45:00: 	TRStatus element is attached. isVisible: true
+info: Aug-22-2025 14:45:00: 	TRStatus is visible for 2025-08-24, moving to next date.
+info: Aug-22-2025 14:45:03: 	Checking TRStatus for date: 2025-08-25
+info: Aug-22-2025 14:45:05: 	TRStatus element is attached. isVisible: true
+info: Aug-22-2025 14:45:05: 	TRStatus is visible for 2025-08-25, moving to next date.
+info: Aug-22-2025 14:45:09: 	Checking TRStatus for date: 2025-08-26
+info: Aug-22-2025 14:45:11: 	TRStatus element is attached. isVisible: true
+info: Aug-22-2025 14:45:11: 	TRStatus is visible for 2025-08-26, moving to next date.
+info: Aug-22-2025 14:45:15: 	Checking TRStatus for date: 2025-08-27
+info: Aug-22-2025 14:45:20: 	TRStatus element is not attached to DOM.
+info: Aug-22-2025 14:45:20: 	Order created for date: 2025-08-27
+info: Aug-22-2025 14:45:21: 	Waiting for 2 seconds
+info: Aug-22-2025 14:45:24: 	Waiting for 2 seconds
+info: Aug-22-2025 14:45:28: 	Waiting for 3 seconds
+info: Aug-22-2025 14:45:31: 	Waiting for 2 seconds
+info: Aug-22-2025 14:45:37: 	Clicked on the vessel order tab
+info: Aug-22-2025 14:45:39: 	Waiting for 2 seconds
+info: Aug-22-2025 14:45:46: 	Waiting for 5 seconds
+info: Aug-22-2025 14:45:52: 	Waiting for 2 seconds
+info: Aug-22-2025 14:45:57: 	Clicked on the vessel order tab
+info: Aug-22-2025 14:45:57: 	Waiting for 2 seconds
+info: Aug-22-2025 14:46:06: 	Waiting for 2 seconds
+info: Aug-22-2025 14:46:11: 	Clicked on the vessel order tab
+info: Aug-22-2025 14:46:11: 	Waiting for 2 seconds
+info: Aug-22-2025 14:46:14: 	Waiting for 2 seconds
+info: Aug-22-2025 14:46:18: 	Clicked on the vessel order tab
+info: Aug-22-2025 14:46:27: 	Waiting for 2 seconds

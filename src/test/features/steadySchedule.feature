@@ -7,7 +7,7 @@ Feature: Steady Schedule Functionalities
         Given TR user logged into the application
         And User navigates to the steady schedule page
 
-    @steadyschedule @smoke
+    @steadyschedule @sanity
     Scenario: Update steady schedule
         And User clicks on GO button
         And Select Job code for some steadies under CO tab

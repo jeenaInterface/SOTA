@@ -29,10 +29,43 @@ When('Verify total value and gurantee value in vessel - forman tab', async funct
 });
 
 
-// When('Select Job code for some steadies under vessel - crane operator tab', async function () {
-//     await steadyTrackingSheetPage.selectTab('Vessel - Crane Operator');
-//     await steadyTrackingSheetPage.selectJobCode('Vessel - Crane Operator');
-// });
+When('Select Job code for some steadies under vessel - crane operator tab', async function () {
+    await steadyTrackingSheetPage.selectJobCode_vessel_Crane_Operator_Tab();
+});
+When('Verify total value and gurantee value in vessel - crane operator tab', async function () {
+    await steadyTrackingSheetPage.verifyTotalValueVessel_craneoperator_Tab();
+});
+When('Select Job code for some steadies under yard - clerk tab', async function () {
+    await steadyTrackingSheetPage.selectJobCode_yard_clerk_Tab();
+});
+When('Select Job code for some steadies under yard - forman tab', async function () {
+    await steadyTrackingSheetPage.selectJobCode_yard_Foreman_Tab();
+});
+When('Select Job code for some steadies under yard - crane operator tab', async function () {
+    await steadyTrackingSheetPage.selectJobCode_yard_craneOperator_Tab();
+});
+When('Select Job code for some steadies under yard - longshore tab', async function () {
+    await steadyTrackingSheetPage.selectJobCode_yard_Longshore_Tab();
+});
+
+When('Select Job code for some steadies under rail - clerk tab', async function () {
+    await steadyTrackingSheetPage.selectJobCode_rail_clerk_Tab();
+});
+
+When('Select Job code for some steadies under rail - forman tab', async function () {
+    await steadyTrackingSheetPage.selectJobCode_rail_Foreman_Tab();
+});
+
+When('Select Job code for some steadies under rail - crane operator tab', async function () {
+    await steadyTrackingSheetPage.selectJobCode_rail_craneoperator_Tab();
+});
+
+When('Select Job code for some steadies under rail - longshore tab', async function () {
+    await steadyTrackingSheetPage.selectJobCode_rail_Longshore_Tab();
+});
+When('Select Job code for some steadies under TSRV - longshore tab', async function () {
+    await steadyTrackingSheetPage.selectJobCode_TSRV_Longshore_Tab();
+});
 
 Then('Enter remarks for first row in the steady tracking sheet', async function () {
     await steadyTrackingSheetPage.enterRemarks('Test remarks');

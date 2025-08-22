@@ -7,7 +7,7 @@ Feature: Steady tracking sheet Functionalities
         Given TR user logged into the application
         And User navigates to the steady tracking sheet page
 
-    @steadyTrackingSheet @smoke
+    @steadyTrackingSheet @sanity
     Scenario: Update steady tracking sheet
         And Select Job code for some steadies under Ops - Clerk tab
         Then Enter remarks for first row in the steady tracking sheet
@@ -23,47 +23,47 @@ Feature: Steady tracking sheet Functionalities
         Then  Enter remarks for first row in the steady tracking sheet
         And User clicks on Save button in the steady tracking sheet
         Then User should see success message for steady tracking sheet
-        And Verify total value and gurantee value in vessel - forman tab
-        # And Select Job code for some steadies under vessel - crane operator tab
-        # Then Enter remarks for first row
-        # And User clicks on Save button
-        # Then User should see success message for steady tracking sheet
-        # And Select Job code for some steadies under yard - clerk tab
-        # Then Enter remarks for first row
-        # And User clicks on Save button
-        # Then User should see success message for steady tracking sheet
-        # And Select Job code for some steadies under yard - forman tab
-        # Then Enter remarks for first row
-        # And User clicks on Save button
-        # Then User should see success message for steady tracking sheet
-        # And Select Job code for some steadies under yard - crane operator tab
-        # Then Enter remarks for first row
-        # And User clicks on Save button
-        # Then User should see success message for steady tracking sheet
-        # And Select Job code for some steadies under yard - longshore tab
-        # Then Enter remarks for first row
-        # And User clicks on Save button
-        # Then User should see success message for steady tracking sheet
-        # And Select Job code for some steadies under rail - clerk tab
-        # Then Enter remarks for first row
-        # And User clicks on Save button
-        # Then User should see success message for steady tracking sheet
-        # And Select Job code for some steadies under rail - forman tab
-        # Then Enter remarks for first row    
-        # And User clicks on Save button
-        # Then User should see success message for steady tracking sheet
-        # And Select Job code for some steadies under rail - crane operator tab
-        # Then Enter remarks for first row
-        # And User clicks on Save button
-        # Then User should see success message for steady tracking sheet
-        # And Select Job code for some steadies under rail - longshore tab
-        # Then Enter remarks for first row
-        # And User clicks on Save button
-        # Then User should see success message for steady tracking sheet
-        # And Select Job code for some steadies under TSRV - longshore tab
-        # Then Enter remarks for first row
-        # And User clicks on Save button
-        # Then User should see success message for steady tracking sheet
+        And Select Job code for some steadies under vessel - crane operator tab
+        Then  Enter remarks for first row in the steady tracking sheet
+        And User clicks on Save button in the steady tracking sheet
+        Then User should see success message for steady tracking sheet
+        And Select Job code for some steadies under yard - clerk tab
+        Then Enter remarks for first row in the steady tracking sheet
+        And User clicks on Save button in the steady tracking sheet
+        Then User should see success message for steady tracking sheet
+        And Select Job code for some steadies under yard - forman tab
+        Then Enter remarks for first row in the steady tracking sheet
+        And User clicks on Save button in the steady tracking sheet
+        Then User should see success message for steady tracking sheet
+        And Select Job code for some steadies under yard - crane operator tab
+        Then Enter remarks for first row in the steady tracking sheet
+        And User clicks on Save button in the steady tracking sheet
+        Then User should see success message for steady tracking sheet
+        And Select Job code for some steadies under yard - longshore tab
+        Then Enter remarks for first row in the steady tracking sheet
+        And User clicks on Save button in the steady tracking sheet
+        Then User should see success message for steady tracking sheet
+        And Select Job code for some steadies under rail - clerk tab
+        Then Enter remarks for first row in the steady tracking sheet
+        And User clicks on Save button in the steady tracking sheet
+        Then User should see success message for steady tracking sheet
+        And Select Job code for some steadies under rail - forman tab
+        Then Enter remarks for first row in the steady tracking sheet
+        And User clicks on Save button in the steady tracking sheet
+        Then User should see success message for steady tracking sheet
+        And Select Job code for some steadies under rail - crane operator tab
+        Then Enter remarks for first row in the steady tracking sheet
+        And User clicks on Save button in the steady tracking sheet
+        Then User should see success message for steady tracking sheet
+        And Select Job code for some steadies under rail - longshore tab
+        Then Enter remarks for first row in the steady tracking sheet
+        And User clicks on Save button in the steady tracking sheet
+        Then User should see success message for steady tracking sheet
+        And Select Job code for some steadies under TSRV - longshore tab
+        Then Enter remarks for first row in the steady tracking sheet
+        And User clicks on Save button in the steady tracking sheet
+        Then User should see success message for steady tracking sheet
+
 
 
 

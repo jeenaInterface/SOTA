@@ -13,7 +13,7 @@ Feature: Reports in SOTA APPLICATION
     @LaborOrderDiscrepancies @sanity
     Scenario: VERIFY Labor Order Discrepancies Report
         Given TR user logged into the application
-        # Then TR user creates a new labor order
+        Then TR user creates a new labor order
         Then I am on the Labor Order Discrepancies Report page
         Then Verify Add Discrepancies Functionalities
         Then Verify Update Discrepancies Functionalities

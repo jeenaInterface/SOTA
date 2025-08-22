@@ -31,6 +31,7 @@ export class SteadyTrackingSheetPage {
         opsTab: "//a[normalize-space(text())='Ops']",
         clerkTab: "//a[normalize-space(text())='Clerk']",
         foremenTab: "//a[normalize-space(text())='Foremen']",
+        craneoperatorTab: "//a[normalize-space(text())='Crane Operator']",
         craneOperatorTab: "//a[normalize-space(text())='Crane Operator']",
         longshoreTab: "//a[normalize-space(text())='Longshore']",
         addRemarksButton: "(//button[normalize-space()='Add Remarks'])[1]",
@@ -46,7 +47,10 @@ export class SteadyTrackingSheetPage {
         textareaInCalendar7: "//tbody/tr/td[7]/textarea[1]",
         remarksButtonAboveCalendar: "(//th[contains(@class,'bg-white p-0')]//i)[1]",
         vesselTab: "//a[@id='parentTab-1']",
-        guaranteeValue: "(//input[@for='gttotal'])[1]"
+        guaranteeValue: "(//input[@for='gttotal'])[1]",
+        yardTab: "//a[@id='parentTab-2']",
+        railTab:"//a[@id='parentTab-3']",
+        TSRVTab:"//a[@id='parentTab-4']",
 
 
     };
@@ -87,6 +91,7 @@ export class SteadyTrackingSheetPage {
     async clickSaveButton(): Promise<void> {
         await this.base.waitAndClick(this.Elements.saveButton);
         fixture.logger.info('Clicked Save button');
+        await fixture.page.waitForTimeout(3000);
     }
 
     async verifySuccessMessage(): Promise<void> {
@@ -138,7 +143,60 @@ export class SteadyTrackingSheetPage {
 
 
     }
+    async selectJobCode_vessel_Crane_Operator_Tab(): Promise<void> {
+        // Example: fill job code for first row, update selector as needed
+        await this.base.waitAndClick(this.Elements.vesselTab);
+        await this.base.waitAndClick(this.Elements.craneOperatorTab);
+        await this.page.locator(this.Elements.jobCodeInputSelector1).fill('HH26');
+        await this.page.locator(this.Elements.jobCodeInputSelector2).fill('HH26 -R');
+        await this.page.locator(this.Elements.jobCodeInputSelector3).fill('HH26');
+        await this.page.locator(this.Elements.jobCodeInputSelector4).fill('HH26');
 
+    }
+    async selectJobCode_yard_clerk_Tab(): Promise<void> {
+        // Example: fill job code for first row, update selector as needed
+        await this.base.waitAndClick(this.Elements.yardTab);
+        await this.base.waitAndClick(this.Elements.clerkTab);
+        await this.page.locator(this.Elements.jobCodeInputSelector1).fill('SC26');
+        await this.page.locator(this.Elements.jobCodeInputSelector2).fill('SC26');
+        await this.page.locator(this.Elements.jobCodeInputSelector3).fill('SC26');
+        await this.page.locator(this.Elements.jobCodeInputSelector4).fill('SC26');
+        await this.page.locator(this.Elements.jobCodeInputSelector5).fill('SC26');
+        await this.page.locator(this.Elements.jobCodeInputSelector6).fill('SC26');
+        await this.page.locator(this.Elements.jobCodeInputSelector7).fill('SC26');
+        await fixture.page.waitForTimeout(1000);
+
+    }
+    async selectJobCode_yard_Foreman_Tab(): Promise<void> {
+        // Example: fill job code for first row, update selector as needed
+        await this.base.waitAndClick(this.Elements.yardTab);
+        await this.base.waitAndClick(this.Elements.foremenTab);
+        await this.page.locator(this.Elements.jobCodeInputSelector1).fill('LB26');
+        await this.page.locator(this.Elements.jobCodeInputSelector2).fill('LB26');
+        await this.page.locator(this.Elements.jobCodeInputSelector3).fill('LB26');
+        await this.page.locator(this.Elements.jobCodeInputSelector4).fill('LB26');
+
+    }
+    async selectJobCode_yard_craneOperator_Tab(): Promise<void> {
+        // Example: fill job code for first row, update selector as needed
+        await this.base.waitAndClick(this.Elements.yardTab);
+        await this.base.waitAndClick(this.Elements.craneOperatorTab);
+        await this.page.locator(this.Elements.jobCodeInputSelector1).fill('HH26');
+        await this.page.locator(this.Elements.jobCodeInputSelector2).fill('HH26');
+        await this.page.locator(this.Elements.jobCodeInputSelector3).fill('HH26');
+        await this.page.locator(this.Elements.jobCodeInputSelector4).fill('HH26');
+
+    }
+    async selectJobCode_yard_Longshore_Tab(): Promise<void> {
+        // Example: fill job code for first row, update selector as needed
+        await this.base.waitAndClick(this.Elements.yardTab);
+        await this.base.waitAndClick(this.Elements.longshoreTab);
+        await this.page.locator(this.Elements.jobCodeInputSelector1).fill('YH');
+        await this.page.locator(this.Elements.jobCodeInputSelector2).fill('YH');
+        await this.page.locator(this.Elements.jobCodeInputSelector3).fill('YH');
+        await this.page.locator(this.Elements.jobCodeInputSelector4).fill('YH');
+
+    }
     async verifyTotalValue(): Promise<void> {
         //GET THE TEXT OF TOTAL VALUE
         expect(await this.page.locator(this.Elements.totalValue)).toBeVisible();
@@ -153,8 +211,21 @@ export class SteadyTrackingSheetPage {
         fixture.logger.info('Verified total value');
         const totalValue = await this.page.locator(this.Elements.totalValue).textContent();
         expect(totalValue).toContain('3');
+        //GET THE TEXT OF GUARANTEE VALUE
+        expect(await this.page.locator(this.Elements.guaranteeValue)).toBeVisible();
         const guaranteeValue = await this.page.locator(this.Elements.guaranteeValue).textContent();
         expect(guaranteeValue).toContain('10');
+    }
+    async verifyTotalValueVessel_craneoperator_Tab(): Promise<void> {
+        //GET THE TEXT OF TOTAL VALUE
+        expect(await this.page.locator(this.Elements.totalValue)).toBeVisible();
+        fixture.logger.info('Verified total value');
+        const totalValue = await this.page.locator(this.Elements.totalValue).textContent();
+        expect(totalValue).toContain('3');
+        //GET THE TEXT OF GUARANTEE VALUE
+        expect(await this.page.locator(this.Elements.guaranteeValue)).toBeVisible();
+        const guaranteeValue = await this.page.locator(this.Elements.guaranteeValue).textContent();
+        expect(guaranteeValue).toContain('2');
     }
 
     async verifyTotalAndGuaranteeValue(): Promise<void> {
@@ -165,4 +236,55 @@ export class SteadyTrackingSheetPage {
         expect(await this.page.locator(guaranteeValueSelector)).toBeVisible();
         fixture.logger.info('Verified total and guarantee value');
     }
+        async selectJobCode_rail_Longshore_Tab(): Promise<void> {
+        // Example: fill job code for first row, update selector as needed
+        await this.base.waitAndClick(this.Elements.railTab);
+        await this.base.waitAndClick(this.Elements.longshoreTab);
+        await this.page.locator(this.Elements.jobCodeInputSelector1).fill('YU');
+        await this.page.locator(this.Elements.jobCodeInputSelector2).fill('YU');
+        await this.page.locator(this.Elements.jobCodeInputSelector3).fill('YU');
+        await this.page.locator(this.Elements.jobCodeInputSelector4).fill('YU');
+
+    }
+        async selectJobCode_rail_clerk_Tab(): Promise<void> {
+        // Example: fill job code for first row, update selector as needed
+        await this.base.waitAndClick(this.Elements.railTab);
+        await this.base.waitAndClick(this.Elements.clerkTab);
+        await this.page.locator(this.Elements.jobCodeInputSelector1).fill('SC26');
+        await this.page.locator(this.Elements.jobCodeInputSelector2).fill('SC26');
+        await this.page.locator(this.Elements.jobCodeInputSelector3).fill('SC26');
+        await this.page.locator(this.Elements.jobCodeInputSelector4).fill('SC26');
+
+    }
+        async selectJobCode_rail_craneoperator_Tab(): Promise<void> {
+        // Example: fill job code for first row, update selector as needed
+        await this.base.waitAndClick(this.Elements.railTab);
+        await this.base.waitAndClick(this.Elements.craneOperatorTab);
+        await this.page.locator(this.Elements.jobCodeInputSelector1).fill('HH26');
+        await this.page.locator(this.Elements.jobCodeInputSelector2).fill('HH26');
+        await this.page.locator(this.Elements.jobCodeInputSelector3).fill('HH26');
+        await this.page.locator(this.Elements.jobCodeInputSelector4).fill('HH26');
+
+    }
+        async selectJobCode_rail_Foreman_Tab(): Promise<void> {
+        // Example: fill job code for first row, update selector as needed
+        await this.base.waitAndClick(this.Elements.railTab);
+        await this.base.waitAndClick(this.Elements.foremenTab);
+        await this.page.locator(this.Elements.jobCodeInputSelector1).fill('LB26');
+        await this.page.locator(this.Elements.jobCodeInputSelector2).fill('LB26');
+        await this.page.locator(this.Elements.jobCodeInputSelector3).fill('LB26');
+        await this.page.locator(this.Elements.jobCodeInputSelector4).fill('LB26');
+
+    }
+            async selectJobCode_TSRV_Longshore_Tab(): Promise<void> {
+        // Example: fill job code for first row, update selector as needed
+        await this.base.waitAndClick(this.Elements.TSRVTab);
+        await this.base.waitAndClick(this.Elements.longshoreTab);
+        await this.page.locator(this.Elements.jobCodeInputSelector1).fill('MS');
+        await this.page.locator(this.Elements.jobCodeInputSelector2).fill('MS');
+        await this.page.locator(this.Elements.jobCodeInputSelector3).fill('MS');
+        await this.page.locator(this.Elements.jobCodeInputSelector4).fill('MS');
+
+    }
+    
 }

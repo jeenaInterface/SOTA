@@ -1,0 +1,37 @@
+info: Sep-02-2025 16:23:05: 	Waiting for 1 seconds
+info: Sep-02-2025 16:23:06: 	Checking TRStatus for date: 2025-09-02
+info: Sep-02-2025 16:23:07: 	TRStatus element is attached. isVisible: true
+info: Sep-02-2025 16:23:07: 	TRStatus is visible for 2025-09-02, moving to next date.
+info: Sep-02-2025 16:23:09: 	Checking TRStatus for date: 2025-09-03
+info: Sep-02-2025 16:23:11: 	TRStatus element is attached. isVisible: true
+info: Sep-02-2025 16:23:11: 	TRStatus is visible for 2025-09-03, moving to next date.
+info: Sep-02-2025 16:23:12: 	Checking TRStatus for date: 2025-09-04
+info: Sep-02-2025 16:23:17: 	TRStatus element is not attached to DOM.
+info: Sep-02-2025 16:23:17: 	Order created for date: 2025-09-04
+info: Sep-02-2025 16:23:17: 	Waiting for 2 seconds
+info: Sep-02-2025 16:23:19: 	Waiting for 2 seconds
+info: Sep-02-2025 16:23:23: 	Waiting for 3 seconds
+info: Sep-02-2025 16:23:26: 	Waiting for 2 seconds
+info: Sep-02-2025 16:23:32: 	Waiting for 2 seconds
+info: Sep-02-2025 16:23:34: 	Waiting for 2 seconds
+info: Sep-02-2025 16:23:36: 	Waiting for 2 seconds
+info: Sep-02-2025 16:23:38: 	Waiting for 1 seconds
+info: Sep-02-2025 16:23:39: 	Waiting for 1 seconds
+info: Sep-02-2025 16:23:41: 	Waiting for 2 seconds
+info: Sep-02-2025 16:23:43: 	Waiting for 1 seconds
+info: Sep-02-2025 16:23:44: 	Waiting for 2 seconds
+info: Sep-02-2025 16:23:46: 	Waiting for 2 seconds
+info: Sep-02-2025 16:23:48: 	Waiting for 2 seconds
+info: Sep-02-2025 16:23:50: 	Waiting for 2 seconds
+info: Sep-02-2025 16:24:02: 	Waiting for 2 seconds
+info: Sep-02-2025 16:24:07: 	Waiting for 2 seconds
+info: Sep-02-2025 16:24:17: 	Waiting for 2 seconds
+info: Sep-02-2025 16:24:21: 	Waiting for 2 seconds
+info: Sep-02-2025 16:24:25: 	Sweeper rolling code not found, reopening the popup.
+info: Sep-02-2025 16:24:49: 	Waiting for 2 seconds
+info: Sep-02-2025 16:24:52: 	Waiting for 2 seconds
+info: Sep-02-2025 16:24:54: 	Waiting for 1 seconds
+info: Sep-02-2025 16:25:00: 	Waiting for 2 seconds
+info: Sep-02-2025 16:25:02: 	Waiting for 2 seconds
+info: Sep-02-2025 16:25:19: 	Waiting for 2 seconds
+info: Sep-02-2025 16:25:24: 	Waiting for 2 seconds

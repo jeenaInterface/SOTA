@@ -1,0 +1,15 @@
+info: Sep-02-2025 17:21:42: 	Waiting for 1 seconds
+info: Sep-02-2025 17:21:43: 	Checking TRStatus for date: 2025-09-02
+info: Sep-02-2025 17:21:44: 	TRStatus element is attached. isVisible: true
+info: Sep-02-2025 17:21:44: 	TRStatus is visible for 2025-09-02, moving to next date.
+info: Sep-02-2025 17:21:46: 	Checking TRStatus for date: 2025-09-03
+info: Sep-02-2025 17:21:48: 	TRStatus element is attached. isVisible: true
+info: Sep-02-2025 17:21:48: 	TRStatus is visible for 2025-09-03, moving to next date.
+info: Sep-02-2025 17:21:49: 	Checking TRStatus for date: 2025-09-04
+info: Sep-02-2025 17:21:54: 	TRStatus element is not attached to DOM.
+info: Sep-02-2025 17:21:54: 	Order created for date: 2025-09-04
+info: Sep-02-2025 17:21:54: 	Waiting for 2 seconds
+info: Sep-02-2025 17:21:58: 	Waiting for 2 seconds
+info: Sep-02-2025 17:22:01: 	Waiting for 3 seconds
+info: Sep-02-2025 17:22:05: 	Waiting for 3 seconds
+info: Sep-02-2025 17:22:08: 	Waiting for 3 seconds

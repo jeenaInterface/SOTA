@@ -1,0 +1,7 @@
+info: Sep-02-2025 19:04:54: 	Waiting for 1 seconds
+info: Sep-02-2025 19:04:56: 	Order status field is attached. Value: 'Cancelled'
+info: Sep-02-2025 19:04:56: 	Order already exists for 2025-08-28 (status: 'Cancelled'), moving to next date.
+info: Sep-02-2025 19:04:57: 	Waiting for 1 seconds
+info: Sep-02-2025 19:04:59: 	Order status field is attached. Value: ''
+info: Sep-02-2025 19:04:59: 	Order can be created for date: 2025-08-29
+info: Sep-02-2025 19:04:59: 	Waiting for 3 seconds

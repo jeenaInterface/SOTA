@@ -124,7 +124,7 @@ export class SecuritySchedulePage {
         const maxAttempts = 10;
 
         // Start from current date minus 50 days
-        currentDate.setDate(currentDate.getDate() - 50);
+        currentDate.setDate(currentDate.getDate() - 5);
 
         for (let attempts = 0; attempts < maxAttempts; attempts++) {
             formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)

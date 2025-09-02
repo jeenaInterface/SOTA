@@ -1,7 +1,7 @@
 Feature: Security schedule and timesheet Management
 
 
-    @sanity
+    @sanity @securityScheduleAndTimesheet
     Scenario: Create security schedule, Create timesheet, verify functionalities and validations
         Given Security management user logged into the application
         When User navigates to security schedule page
@@ -35,7 +35,7 @@ Feature: Security schedule and timesheet Management
         Then Verify reject functionality
         Then verify approve functionality
 
-    @securityLaborOrderValidation @sanity
+    @@securityScheduleAndTimesheet @sanity
     Scenario: Verify Mandatory field validations
         Given Security management user logged into the application
         When User navigates to security schedule page
@@ -43,7 +43,7 @@ Feature: Security schedule and timesheet Management
         When Select staffing for operations and click on save
         Then verify mandatory field validations for security schedule
 
-    @sanity
+    @sanity @securityScheduleAndTimesheet
     Scenario: Verify Individual row deletion in security schedule
         Given Security management user logged into the application
         When User navigates to security schedule page

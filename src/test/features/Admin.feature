@@ -88,3 +88,16 @@ Feature: Admin module
     When Click on download report button
     Then Verify steady job role is downloaded successfully
     And Verify steady job role contains data with row count
+
+ @sanity @securityTemplate
+    Scenario: Create/Edit/Search/Reset/Download functioanlities in Daily Security Schedule Templates
+    Given TR user logged into the application    
+    Then select Daily Security Schedule Templates from the admin menu
+    When Click on the Add staffing template button
+    And Enter template name and new job details
+    And click on SAVE button and confirm the success message
+    Then Verify Action Log is created with details
+    When verify search functionality
+    # And verify reset functionality
+    # And Verify download functionality of Daily Security Schedule Templates
+    

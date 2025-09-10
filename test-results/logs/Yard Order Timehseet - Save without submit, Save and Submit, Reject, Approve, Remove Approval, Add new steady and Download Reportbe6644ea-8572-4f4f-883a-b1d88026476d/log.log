@@ -1,0 +1,24 @@
+info: Sep-08-2025 11:55:47: 	Waiting for 1 seconds
+info: Sep-08-2025 11:55:48: 	Checking TRStatus for date: 2025-09-08
+info: Sep-08-2025 11:55:50: 	TRStatus element is attached. isVisible: true
+info: Sep-08-2025 11:55:50: 	TRStatus is visible for 2025-09-08, moving to next date.
+info: Sep-08-2025 11:55:51: 	Checking TRStatus for date: 2025-09-09
+info: Sep-08-2025 11:55:56: 	TRStatus element is not attached to DOM.
+info: Sep-08-2025 11:55:56: 	Order created for date: 2025-09-09
+info: Sep-08-2025 11:55:56: 	Waiting for 5 seconds
+info: Sep-08-2025 11:56:03: 	Waiting for 2 seconds
+info: Sep-08-2025 11:56:06: 	Waiting for 3 seconds
+info: Sep-08-2025 11:56:09: 	Waiting for 2 seconds
+info: Sep-08-2025 11:56:14: 	Waiting for 2 seconds
+info: Sep-08-2025 11:56:16: 	Waiting for 2 seconds
+info: Sep-08-2025 11:56:18: 	Waiting for 2 seconds
+info: Sep-08-2025 11:56:22: 	Waiting for 2 seconds
+info: Sep-08-2025 11:56:24: 	Waiting for 2 seconds
+info: Sep-08-2025 11:56:36: 	Waiting for 2 seconds
+info: Sep-08-2025 11:56:54: 	Waiting for 2 seconds
+info: Sep-08-2025 11:56:58: 	Waiting for 2 seconds
+info: Sep-08-2025 11:57:02: 	Foreman rolling code not found, reopening the popup.
+info: Sep-08-2025 11:57:25: 	Waiting for 2 seconds
+info: Sep-08-2025 11:57:28: 	Waiting for 2 seconds
+info: Sep-08-2025 11:57:30: 	Waiting for 1 seconds
+info: Sep-08-2025 11:57:44: 	Waiting for 2 seconds

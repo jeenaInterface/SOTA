@@ -7,8 +7,10 @@ import * as path from 'path';
 import * as XLSX from 'xlsx';
 
 export class adminPage {
+
     protected base: PlaywrightWrapper;  // Change to protected so that subclasses can access it
     public page: Page;  // Same with page property
+    public randomText: string = "";
 
     constructor(page: Page) {
         this.base = new PlaywrightWrapper(page);
@@ -47,7 +49,33 @@ export class adminPage {
         steadyJobRoleMenu: "//a[normalize-space()='Steady Job Roles']",
         jobWorkedInput: "//input[@placeholder='Search Job Worked']",
         jobWorkedCell: "//tbody//tr[1]//td[4]",
-        steadyJobRoleSuccessMessage: "//span[contains(text(),'The information has been updated successfully')]"
+        steadyJobRoleSuccessMessage: "//span[contains(text(),'The information has been updated successfully')]",
+        securityTemplateMenu: "//a[normalize-space(text())='Daily Security Schedule Templates']",
+        AddStaffingforOperation: "//button[normalize-space(text())='Add Staffing for Operation']",
+        sseStaffTemplateInfoName: "//input[@formcontrolname='sseStaffTemplateInfoName']",
+        startTime1: "(//select[@id='startTime0'])[1]",
+        endTime1: "(//select[@id='endTime0'])[1]",
+        startTime2: "(//select[@ng-reflect-name='startTime0'])[2]",
+        endTime2: "(//select[@ng-reflect-name='endTime0'])[2]",
+        startTime3: "(//select[@ng-reflect-name='startTime0'])[3]",
+        endTime3: "(//select[@ng-reflect-name='endTime0'])[3]",
+        addNewJob: "(//i[contains(@class,'bi bi-plus-square')]//span)[3]",
+        startTime4: "//select[@ng-reflect-name='startTime1']",
+        endTime4: "//select[@id='endTime1']",
+        saveButtonSecurityTemplate: "//button[normalize-space()='SAVE']",
+        securityTemplateSuccessMessage: "//div[contains(@class,'row alert-block')]//div[1]",
+        location: "/html/body/app-root/app-home/div/div/section/div/app-daily-security-schedule-details/div/div[3]/table/tbody/tr[4]/td[3]/select",
+        actionLog: "//button[normalize-space()='ACTION LOG']",
+        headerTitle: "(//span[@class='page-title p-1 m-1'])[1]",
+        actionTypeTextbox: "(//label[normalize-space(text())='Data Key']/following::input)[1]",
+        searchResult: "//td[normalize-space(text())='Add']",
+        closeButton: "//button[normalize-space(text())='CLOSE']",
+        searchBox: "//input[@formcontrolname='name']",
+        SearchButton: "//button[normalize-space(text())='SEARCH']",
+        securityStaffingname: "//table[contains(@class,'table table-form')]/tbody[1]/tr[2]/td[2]",
+
+
+
     }
 
 
@@ -376,26 +404,84 @@ export class adminPage {
     async verifySteadyJobRoleReport(): Promise<void> {
         const downloadPath = path.resolve(__dirname, 'downloads');
         const filePath = path.join(downloadPath, 'SteadyJobRoleReport.xlsx');
-        
+
         expect(fs.existsSync(filePath)).toBeTruthy();
         const stats = fs.statSync(filePath);
         expect(stats.size).toBeGreaterThan(0);
-        
+
         fixture.logger.info("Steady Job Role Report verified successfully");
     }
 
     async getSteadyJobRoleReportRowCount(): Promise<number> {
         const downloadPath = path.resolve(__dirname, 'downloads');
         const filePath = path.join(downloadPath, 'SteadyJobRoleReport.xlsx');
-        
+
         const workbook = XLSX.readFile(filePath);
         const sheetName = workbook.SheetNames[0];
         const worksheet = workbook.Sheets[sheetName];
-        
+
         const jsonData = XLSX.utils.sheet_to_json(worksheet);
         const rowCount = jsonData.length;
-        
+
         fixture.logger.info(`Total rows in Steady Job Role Report: ${rowCount}`);
         return rowCount;
     }
+    async clickOnSecurityTemplateMenu(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.adminMenu);
+        await this.base.waitAndClick(this.Elements.securityTemplateMenu);
+    }
+    async AddStaffingforOperation(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.AddStaffingforOperation);
+
+    }
+
+    async FillDetails(): Promise<void> {
+        this.randomText = `template_${Math.random().toString(36).substring(2, 10)}`;
+        await this.page.locator(this.Elements.sseStaffTemplateInfoName).fill(this.randomText);
+        await this.page.locator(this.Elements.startTime1).selectOption("08:00");
+        await this.page.locator(this.Elements.endTime1).selectOption("12:00");
+        await this.page.locator(this.Elements.startTime2).selectOption("12:00");
+        await this.page.locator(this.Elements.endTime2).selectOption("16:00");
+        await this.page.locator(this.Elements.startTime3).selectOption("16:00");
+        await this.page.locator(this.Elements.endTime3).selectOption("20:00");
+        await this.base.waitAndClick(this.Elements.addNewJob);
+        await this.page.locator('xpath=' + this.Elements.location).selectOption("GW");
+        await this.page.locator(this.Elements.startTime4).selectOption("20:00");
+        await this.page.locator(this.Elements.endTime4).selectOption("23:00");
+    }
+
+    async clickSaveButtonSecurityTemplate(): Promise<void> {
+        await this.page.locator(this.Elements.saveButtonSecurityTemplate).click();
+        fixture.logger.info("Clicked on save button");
+    }
+    async verifySecurityTemplateSuccessMessage(): Promise<void> {
+        await this.page.locator(this.Elements.securityTemplateSuccessMessage).waitFor({ state: 'visible' });
+        expect(await this.page.locator(this.Elements.securityTemplateSuccessMessage)).toBeVisible();
+    }
+
+    async verifyActionlog(): Promise<void> {
+
+        await this.page.locator(this.Elements.actionLog).click();
+        await expect(this.page.locator(this.Elements.headerTitle)).toBeVisible();
+        await this.page.locator(this.Elements.actionTypeTextbox).fill('Add');
+        await expect(this.page.locator(this.Elements.searchResult)).toHaveText('Add');
+        await this.page.locator(this.Elements.closeButton).click();
+    }
+    async verifySearchFunctionality(): Promise<void> {
+
+        await this.page.locator(this.Elements.backButton).click();
+        await this.page.locator(this.Elements.searchBox).fill(this.randomText);
+        await this.page.locator(this.Elements.searchButton).click();
+        await expect(this.page.locator(this.Elements.securityStaffingname)).toContainText(this.randomText);
+
+    }
+    async verifyResetFunctionality(): Promise<void> {
+
+        await this.page.locator(this.Elements.searchBox).fill(this.randomText);
+        await this.page.locator(this.Elements.resetButton).click();
+        const value = await this.page.locator(this.Elements.searchBox).inputValue();
+        expect(value).toBe('');
+
+    }
+
 }

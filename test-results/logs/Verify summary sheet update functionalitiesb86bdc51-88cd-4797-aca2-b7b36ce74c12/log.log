@@ -1,0 +1,31 @@
+info: Sep-08-2025 12:34:26: 	Checking TRStatus for date: 2025-09-08
+info: Sep-08-2025 12:34:28: 	TRStatus element is attached. isVisible: true
+info: Sep-08-2025 12:34:28: 	TRStatus is visible for 2025-09-08, moving to next date.
+info: Sep-08-2025 12:34:31: 	Checking TRStatus for date: 2025-09-09
+info: Sep-08-2025 12:34:34: 	TRStatus element is attached. isVisible: true
+info: Sep-08-2025 12:34:34: 	TRStatus is visible for 2025-09-09, moving to next date.
+info: Sep-08-2025 12:34:37: 	Checking TRStatus for date: 2025-09-10
+info: Sep-08-2025 12:34:39: 	TRStatus element is attached. isVisible: true
+info: Sep-08-2025 12:34:39: 	TRStatus is visible for 2025-09-10, moving to next date.
+info: Sep-08-2025 12:34:43: 	Checking TRStatus for date: 2025-09-11
+info: Sep-08-2025 12:34:44: 	TRStatus element is attached. isVisible: true
+info: Sep-08-2025 12:34:44: 	TRStatus is visible for 2025-09-11, moving to next date.
+info: Sep-08-2025 12:34:48: 	Checking TRStatus for date: 2025-09-12
+info: Sep-08-2025 12:34:53: 	TRStatus element is not attached to DOM.
+info: Sep-08-2025 12:34:53: 	Order created for date: 2025-09-12
+info: Sep-08-2025 12:34:53: 	Waiting for 2 seconds
+info: Sep-08-2025 12:34:58: 	Waiting for 2 seconds
+info: Sep-08-2025 12:35:02: 	Waiting for 3 seconds
+info: Sep-08-2025 12:35:05: 	Waiting for 2 seconds
+info: Sep-08-2025 12:35:11: 	Clicked on the vessel order tab
+info: Sep-08-2025 12:35:12: 	Waiting for 2 seconds
+info: Sep-08-2025 12:35:19: 	Waiting for 5 seconds
+info: Sep-08-2025 12:35:24: 	Waiting for 2 seconds
+info: Sep-08-2025 12:35:29: 	Clicked on the vessel order tab
+info: Sep-08-2025 12:35:29: 	Waiting for 2 seconds
+info: Sep-08-2025 12:35:38: 	Waiting for 2 seconds
+info: Sep-08-2025 12:35:44: 	Clicked on the vessel order tab
+info: Sep-08-2025 12:35:44: 	Waiting for 2 seconds
+info: Sep-08-2025 12:35:46: 	Waiting for 2 seconds
+info: Sep-08-2025 12:35:51: 	Clicked on the vessel order tab
+info: Sep-08-2025 12:36:00: 	Waiting for 2 seconds

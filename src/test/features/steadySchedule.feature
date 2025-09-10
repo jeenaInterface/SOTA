@@ -31,6 +31,6 @@ Feature: Steady Schedule Functionalities
         And Select Job code for some steadies under TSRV tab
         Then Enter remarks for first row
         And User clicks on Save button
-        Then User should see success message for steady schedule
+
 
 

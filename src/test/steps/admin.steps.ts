@@ -2,7 +2,7 @@ import { Given, Then, When } from '@cucumber/cucumber';
 import { expect } from '@playwright/test';
 import { fixture } from '../../hooks/pageFixture';
 import { adminPage } from '../../pages/admin.page';
-
+import * as fs from 'fs';
 
 let admin: adminPage;
 
@@ -197,7 +197,7 @@ Then('Verify steady job role contains data with row count', async function () {
 // Then 
 // When 
 // And 
-// And Verify download functionality of Daily Security Schedule Templates
+// And 
 
 Then('select Daily Security Schedule Templates from the admin menu', async function () {
     admin = new adminPage(fixture.page);
@@ -221,4 +221,13 @@ Then('verify search functionality', async function () {
 });
 Then('verify reset functionality', async function () {
     await admin.verifyResetFunctionality();
+});
+
+Then('Verify download functionality of Daily Security Schedule Templates', async function () {
+        const filePath = await admin.downloadSecurityTemplateReport();
+        // Attach the Excel file directly to the report
+         if (fs.existsSync(filePath) && this.attach) {
+             const fileBuffer = fs.readFileSync(filePath);
+             await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+         }
 });

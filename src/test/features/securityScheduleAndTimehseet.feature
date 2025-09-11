@@ -35,7 +35,7 @@ Feature: Security schedule and timesheet Management
         Then Verify reject functionality
         Then verify approve functionality
 
-    @@securityScheduleAndTimesheet @sanity
+    @securityScheduleAndTimesheet @sanity
     Scenario: Verify Mandatory field validations
         Given Security management user logged into the application
         When User navigates to security schedule page

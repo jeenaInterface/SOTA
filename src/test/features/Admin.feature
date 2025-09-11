@@ -98,6 +98,7 @@ Feature: Admin module
     And click on SAVE button and confirm the success message
     Then Verify Action Log is created with details
     When verify search functionality
-    # And verify reset functionality
-    # And Verify download functionality of Daily Security Schedule Templates
+    And verify reset functionality
+    And Verify download functionality of Daily Security Schedule Templates
+
     

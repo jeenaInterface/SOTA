@@ -63,6 +63,7 @@ export default class railOrderPage {
         RollingCodeTextBox: "//input[@id='rollingCode']",
         RollingCodeCloseButton: "//div[@id='rollingCode']//button[@class='btn button-action'][normalize-space()='Close']",
         GoButton: "//button[normalize-space()='Go']",
+        yesCheckBox:"(//input[@id='radio-button'])[2]"
     }
     async clickOnRailOrderMenu(): Promise<void> {
         await this.base.goto(process.env.BASEURL, { timeout: 100000 });
@@ -173,7 +174,17 @@ export default class railOrderPage {
         await this.base.waitAndClick(this.Elements.TimehseetMenu);
         await this.base.waitAndClick(this.Elements.railTimehseet);
     }
-    async SelectDetailsOnLandingPageTimehseet(formatteddate: string): Promise<void> {
+    async SelectDetailsOnLandingPageTimehseetTRUser(formatteddate: string): Promise<void> {
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        await this.page.locator(this.Elements.workDatetimehseet).click();
+        await this.page.locator(this.Elements.workDatetimehseet).fill(this.noTRStatusDate);
+        await this.page.locator(this.Elements.shift).selectOption("2ND");
+        await this.page.locator(this.Elements.jobType).selectOption("Testing - 790197");
+        await this.page.locator(this.Elements.yesCheckBox).check();
+        await this.base.waitAndClick(this.Elements.Go);
+    }
+        async SelectDetailsOnLandingPageTimehseet(formatteddate: string): Promise<void> {
         fixture.logger.info("Waiting for 2 seconds")
         await fixture.page.waitForTimeout(2000);
         await this.page.locator(this.Elements.workDatetimehseet).click();

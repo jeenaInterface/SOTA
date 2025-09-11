@@ -47,7 +47,7 @@ Then('Verify that the appropriate validation message for start time field', asyn
 Given('the user creates a timesheet for the yard order', async function () {
   await YardOrder.clickOnTimehseetMenu();
   let LatestWorkOrderDate: string
-  await YardOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
+  await YardOrder.SelectDetailsOnLandingPageTimehseetTRUSER(LatestWorkOrderDate);
   await YardOrder.clickOnForemanTab();
   await YardOrder.FillHrsTab();
 });

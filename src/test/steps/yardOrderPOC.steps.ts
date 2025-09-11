@@ -37,7 +37,7 @@ Then('TR user verifies that the labor order is pushed to the summary sheet and v
 Then('TR user creates a timesheet for the same labor order', async function () {
   await yardOrder.clickOnTimehseetMenu();
   let LatestWorkOrderDate: string
-  await yardOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
+  await yardOrder.SelectDetailsOnLandingPageTimehseetTRUSER(LatestWorkOrderDate);
   await yardOrder.clickOnForemanTab();
   await yardOrder.FillHrsTab();
   await yardOrder.clickOnSaveAndSubmit();

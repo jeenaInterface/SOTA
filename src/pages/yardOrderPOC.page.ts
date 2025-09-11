@@ -35,6 +35,7 @@ export default class yardOrderPagePOC {
         workDate: "//input[@type='date']",
         shift: "//select[@ng-reflect-name='shift']",
         jobType: "//select[@ng-reflect-name='jobCode']",
+        yesCheckBox:"(//input[@id='radio-button'])[2]",
         Go: "//button[normalize-space(text())='GO']",
         startTime: "//select[@id='startTime']",
         // clerktab:"//a[normalize-space(text())='Clerk']",
@@ -316,7 +317,18 @@ export default class yardOrderPagePOC {
         await this.base.waitAndClick(this.Elements.TimehseetMenu);
         await this.base.waitAndClick(this.Elements.yardTimehseet);
     }
-    async SelectDetailsOnLandingPageTimehseet(formatteddate: string): Promise<void> {
+    async SelectDetailsOnLandingPageTimehseetTRUSER(formatteddate: string): Promise<void> {
+        const LatestWorkOrderDate = await this.getLatestWorkOrderDate();
+        console.log(LatestWorkOrderDate);
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        await this.page.locator(this.Elements.workDatetimehseet).click();
+        await this.page.locator(this.Elements.workDatetimehseet).fill(this.noTRStatusDate);
+        await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
+        await this.page.locator(this.Elements.yesCheckBox).check();
+        await this.base.waitAndClick(this.Elements.Go);
+    }
+        async SelectDetailsOnLandingPageTimehseet(formatteddate: string): Promise<void> {
         const LatestWorkOrderDate = await this.getLatestWorkOrderDate();
         console.log(LatestWorkOrderDate);
         fixture.logger.info("Waiting for 2 seconds")

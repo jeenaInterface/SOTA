@@ -31,6 +31,7 @@ export default class vesselOrderPage {
         workDate: "//input[@aria-describedby='Work Date']",
         workDateSummarySheet: "//input[@type='date']",
         shift: "//select[@ng-reflect-name='shift']",
+        yesCheckBox:"(//input[@id='radio-button'])[2]",
         jobNo: "//input[@ng-reflect-name='jobNo']",
         Go: "//button[normalize-space(text())='GO']",
         TRStatus: "//select[@ng-reflect-name='trStatus']",
@@ -341,7 +342,19 @@ export default class vesselOrderPage {
     async getLatestWorkOrderDate(): Promise<string> {
         return this.noTRStatusDate;  // Access the global noTRStatusDate
     }
-    async SelectDetailsOnLandingPageTimehseet(formatteddate: string): Promise<void> {
+    async SelectDetailsOnLandingPageTimehseetTRUSER(formatteddate: string): Promise<void> {
+        const LatestWorkOrderDate = await this.getLatestWorkOrderDate();
+        console.log(LatestWorkOrderDate);
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        await this.page.locator(this.Elements.workDatetimehseet).click();
+        await this.page.locator(this.Elements.workDatetimehseet).fill(this.noTRStatusDate);
+        // await this.page.locator(this.Elements.workDatetimehseet).fill('2025-07-29');
+        await this.page.locator(this.Elements.shift).selectOption("2ND");
+        await this.page.locator(this.Elements.yesCheckBox).check();
+        this.selectJobNumber();
+    }
+        async SelectDetailsOnLandingPageTimehseet(formatteddate: string): Promise<void> {
         const LatestWorkOrderDate = await this.getLatestWorkOrderDate();
         console.log(LatestWorkOrderDate);
         fixture.logger.info("Waiting for 2 seconds")

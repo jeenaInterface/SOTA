@@ -1,0 +1,24 @@
+info: Sep-11-2025 13:56:03: 	Waiting for 1 seconds
+info: Sep-11-2025 13:56:04: 	Checking TRStatus for date: 2025-09-11
+info: Sep-11-2025 13:56:05: 	TRStatus element is attached. isVisible: true
+info: Sep-11-2025 13:56:05: 	TRStatus is visible for 2025-09-11, moving to next date.
+info: Sep-11-2025 13:56:06: 	Checking TRStatus for date: 2025-09-12
+info: Sep-11-2025 13:56:11: 	TRStatus element is not attached to DOM.
+info: Sep-11-2025 13:56:11: 	Order created for date: 2025-09-12
+info: Sep-11-2025 13:56:11: 	Waiting for 2 seconds
+info: Sep-11-2025 13:56:15: 	Waiting for 2 seconds
+info: Sep-11-2025 13:56:18: 	Waiting for 3 seconds
+info: Sep-11-2025 13:56:21: 	Waiting for 2 seconds
+info: Sep-11-2025 13:56:27: 	Waiting for 2 seconds
+info: Sep-11-2025 13:56:29: 	Waiting for 2 seconds
+info: Sep-11-2025 13:56:31: 	Waiting for 2 seconds
+info: Sep-11-2025 13:56:33: 	Waiting for 2 seconds
+info: Sep-11-2025 13:56:35: 	Waiting for 2 seconds
+info: Sep-11-2025 13:56:45: 	Waiting for 2 seconds
+info: Sep-11-2025 13:56:59: 	Waiting for 2 seconds
+info: Sep-11-2025 13:57:03: 	Waiting for 2 seconds
+info: Sep-11-2025 13:57:07: 	Clerk rolling code not found, reopening the popup.
+info: Sep-11-2025 13:57:29: 	Waiting for 2 seconds
+info: Sep-11-2025 13:57:32: 	Waiting for 2 seconds
+info: Sep-11-2025 13:57:34: 	Waiting for 1 seconds
+info: Sep-11-2025 13:57:47: 	Waiting for 2 seconds

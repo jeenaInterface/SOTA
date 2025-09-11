@@ -32,7 +32,7 @@ Feature: Rail order and ops rail order timehseet functionalities
     Then the user push the Rail labor order to the summary sheet
     Then the user cancel the Rail order
 
-  @sanity
+  @sanity @rail
   Scenario: TR user creates a rail order timesheet and verifies save without submit, save and submit, and download report functionalities
     Given TR user logged into the application
     Given the user creates a new Rail order

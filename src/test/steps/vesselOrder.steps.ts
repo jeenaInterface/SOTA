@@ -39,7 +39,7 @@ Then('the user cancel the order', async function () {
 Given('the user creates a new vessel timesheet', async function () {
   await vesselOrder.clickOnTimehseetMenu();
   let LatestWorkOrderDate: string
-  await vesselOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
+  await vesselOrder.SelectDetailsOnLandingPageTimehseetTRUSER(LatestWorkOrderDate);
   await vesselOrder.clickOnForemanTab();
   await vesselOrder.FillHrsTab();
 });

@@ -28,6 +28,7 @@ export default class YardOrderPage {
         shift: "//select[@ng-reflect-name='shift']",
         jobType: "//select[@ng-reflect-name='jobCode']",
         Go: "//button[normalize-space(text())='GO']",
+        yesCheckBox:"(//input[@id='radio-button'])[2]",
         TRStatus: "//select[@ng-reflect-name='trStatus']",
         homeicon: "//div[@ng-reflect-router-link='/home']//a[1]",
         dataList: "//datalist[@id='nameListData']",
@@ -171,7 +172,17 @@ export default class YardOrderPage {
         await this.base.waitAndClick(this.Elements.TimehseetMenu);
         await this.base.waitAndClick(this.Elements.yardTimehseet);
     }
-    async SelectDetailsOnLandingPageTimehseet(formatteddate: string): Promise<void> {
+    async SelectDetailsOnLandingPageTimehseetTRUSER(formatteddate: string): Promise<void> {
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        await this.page.locator(this.Elements.workDatetimehseet).click();
+        await this.page.locator(this.Elements.workDatetimehseet).fill(this.noTRStatusDate);
+        await this.page.locator(this.Elements.shift).selectOption("2ND");
+        await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");
+        await this.page.locator(this.Elements.yesCheckBox).check();
+        await this.base.waitAndClick(this.Elements.Go);
+    }
+        async SelectDetailsOnLandingPageTimehseet(formatteddate: string): Promise<void> {
         fixture.logger.info("Waiting for 2 seconds")
         await fixture.page.waitForTimeout(2000);
         await this.page.locator(this.Elements.workDatetimehseet).click();

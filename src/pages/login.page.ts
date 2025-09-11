@@ -35,10 +35,9 @@ export default class LoginPage {
     // }
     async navigateToLoginPage(): Promise<void> {
         await this.base.goto(process.env.BASEURL, { timeout: 60000 });
-        //         await this.page.evaluate(() => {
-        //     window.moveTo(1920, 1080);
-        //     window.resizeTo(screen.width, screen.height);
-        // });
+
+
+        // this.page.setViewportSize({ width: 1800, height: 1500 });
 
         await this.page.waitForSelector(this.Elements.userName, { state: 'visible', timeout: 15000 });
     }
@@ -54,11 +53,11 @@ export default class LoginPage {
         await this.page.getByRole('button', { name: 'Sign in' }).click();
     }
 
-// ...existing code...
-async clickLoginButton(): Promise<void> {
+    // ...existing code...
+    async clickLoginButton(): Promise<void> {
         await this.page.getByRole('button', { name: 'Yes' }).click();
-}
-// ...existing code...
+    }
+    // ...existing code...
 
     async login(username: string, password: string): Promise<void> {
         await this.navigateToLoginPage();

@@ -56,7 +56,7 @@ Then('Verify that the appropriate validation message for steady name and steady 
 Given('the user creates a new rail timesheet', async function () {
   await railOrder.clickOnTimehseetMenu();
   let LatestWorkOrderDate: string;
-  await railOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
+  await railOrder.SelectDetailsOnLandingPageTimehseetTRUser(LatestWorkOrderDate);
   await railOrder.clickOnClerkTab();
   await railOrder.FillHrsTab();
 });

@@ -33,7 +33,7 @@ Feature: Vessel order and ops vessel timehseet functionalities
     Then the user push the labor order to the summary sheet
     Then the user cancel the order
 
-  @sanity
+  @sanity @vessel
   Scenario: Vessel Order Timesheet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report
     Given TR user logged into the application
     Given the user creates a new vessel order

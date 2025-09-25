@@ -88,7 +88,7 @@ export default class terminalServiceOrderPage {
         await this.page.locator(this.Elements.Go).click();
 
         fixture.logger.info("Waiting for 1 seconds");
-        await fixture.page.waitForTimeout(1000);
+        await fixture.page.waitForTimeout(2000);
 
         for (let attempts = 0; attempts < maxAttempts; attempts++) {
             formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)

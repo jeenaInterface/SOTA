@@ -246,5 +246,24 @@ export default class steadyManagementPage {
             throw new Error('Add button is not visible after selection');
         }
     }
+
+        async verifyUpdateSteadyNotAvailable(): Promise<void> {
+            // Check that update button or edit functionality is not present for LR management user
+            await this.base.waitAndClick(this.Elements.FirstRowInTheTable);
+            const updateButton = this.page.locator(this.Elements.save);
+            const isVisible = await updateButton.isVisible();
+            if (isVisible) {
+                throw new Error('Update steady functionality should not be available for LR management user');
+            }
+        }
+
+        async verifyCreateNewSteadyButtonNotVisible(): Promise<void> {
+            // Check that create new steady button is not visible for LR management user
+            const createButton = this.page.locator(this.Elements.createNewSteadyButton);
+            const isVisible = await createButton.isVisible();
+            if (isVisible) {
+                throw new Error('Create new steady button should not be visible for LR management user');
+            }
+        }
 }
 

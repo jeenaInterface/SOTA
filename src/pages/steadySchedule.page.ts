@@ -9,7 +9,7 @@ export class SteadySchedulePage {
     constructor(page: Page) {
         this.base = new PlaywrightWrapper(page);
         this.page = page;
-    }    private Elements = {
+    } private Elements = {
         steadyMenu: "//div[normalize-space()='Steady']",
         steadyScheduleMenu: "//a[normalize-space()='Steady Schedules']",
         goButton: "//button[normalize-space()='GO']",
@@ -30,7 +30,7 @@ export class SteadySchedulePage {
         remarksArea: "(//textarea[@id='addComment'])[1]",
         addRemarksButton: "(//button[normalize-space()='Add Remarks'])[1]",
         addRemarksButton2: "//day-remark-modal[@id='dayRemarks']//button[@type='button'][normalize-space()='Add Remarks']",
-        remarksButtonInCalendar:"(//i[@data-bs-target='#dayRemarks'])[1]",
+        remarksButtonInCalendar: "(//i[@data-bs-target='#dayRemarks'])[1]",
         textareaInCalendar1: "//tbody/tr/td[1]/textarea[1]",
         textareaInCalendar2: "//tbody/tr/td[2]/textarea[1]",
         textareaInCalendar3: "//tbody/tr/td[3]/textarea[1]",
@@ -39,9 +39,9 @@ export class SteadySchedulePage {
         textareaInCalendar6: "//tbody/tr/td[6]/textarea[1]",
         textareaInCalendar7: "//tbody/tr/td[7]/textarea[1]",
         remarksButtonAboveCalendar: "(//th[contains(@class,'bg-white p-0')]//i)[1]",
-        yardTab:"//a[normalize-space(text())='YARD']",
-        railTab:"//a[normalize-space(text())='RAIL']",
-        TSRVTab:"//a[normalize-space(text())='TSRV']",
+        yardTab: "//a[normalize-space(text())='YARD']",
+        railTab: "//a[normalize-space(text())='RAIL']",
+        TSRVTab: "//a[normalize-space(text())='TSRV']",
 
     };
 
@@ -88,7 +88,7 @@ export class SteadySchedulePage {
         await jobCodeInput3.clear();
         await jobCodeInput3.fill('SC26 -TURN');
     }
-        async selectYardTab(): Promise<void> {
+    async selectYardTab(): Promise<void> {
         await this.base.waitAndClick(this.Elements.yardTab);
         const jobCodeInput1 = this.page.locator(this.Elements.jobCodeInput1);
         await jobCodeInput1.clear();
@@ -100,7 +100,7 @@ export class SteadySchedulePage {
         await jobCodeInput3.clear();
         await jobCodeInput3.fill('SC26 -TURN');
     }
-        async selectRailTab(): Promise<void> {
+    async selectRailTab(): Promise<void> {
         await this.base.waitAndClick(this.Elements.railTab);
         const jobCodeInput1 = this.page.locator(this.Elements.jobCodeInput1);
         await jobCodeInput1.clear();
@@ -112,7 +112,7 @@ export class SteadySchedulePage {
         await jobCodeInput3.clear();
         await jobCodeInput3.fill('SC26 -TURN');
     }
-        async selectTSRVTab(): Promise<void> {
+    async selectTSRVTab(): Promise<void> {
         await this.base.waitAndClick(this.Elements.TSRVTab);
         const jobCodeInput1 = this.page.locator(this.Elements.jobCodeInput1);
         await jobCodeInput1.clear();
@@ -135,7 +135,7 @@ export class SteadySchedulePage {
         const jobCodeInput3 = this.page.locator(this.Elements.jobCodeInput3);
         await jobCodeInput3.clear();
         await jobCodeInput3.fill('VSL1 -TURN');
-    
+
     }
 
 
@@ -184,5 +184,13 @@ export class SteadySchedulePage {
         const message = await this.page.locator(this.Elements.successMessage).textContent();
         expect(message).toContain('Steady Schedule Information saved successfully');
         fixture.logger.info('Success message verified');
+    }
+    async verifyUpdateScheduleNotAvailable(): Promise<void> {
+
+        const updateButton = this.page.locator(this.Elements.saveButton);
+        const isVisible = await updateButton.isVisible();
+        if (isVisible) {
+            throw new Error('Update steady functionality should not be available for LR management user');
+        }
     }
 }

@@ -101,4 +101,19 @@ Feature: Admin module
     And verify reset functionality
     And Verify download functionality of Daily Security Schedule Templates
 
+  @sanity @lrUser
+  Scenario: LR managment user - View functionality
+    Given LR managment user logged into the application
+    Then select OCC Code from the admin menu
+    When Select Operational Type as "OPS"
+    And Select Labor Type as "Hall"
+    And Enter Job Type as "AUTO DRIVER"
+    And Enter OCC Code as "1"
+    When Click on the search button
+    And Verify Job Type is "AUTO DRIVER"
+    Then click on that row
+    Then Verify update occ functioanlities not available for LR managment user
+    Then Click on back button
+
+
     

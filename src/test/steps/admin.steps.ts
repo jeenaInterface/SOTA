@@ -191,14 +191,6 @@ Then('Verify steady job role contains data with row count', async function () {
 });
 
 
-// When 
-// And 
-// And 
-// Then 
-// When 
-// And 
-// And 
-
 Then('select Daily Security Schedule Templates from the admin menu', async function () {
     admin = new adminPage(fixture.page);
     await admin.clickOnSecurityTemplateMenu();
@@ -224,10 +216,14 @@ Then('verify reset functionality', async function () {
 });
 
 Then('Verify download functionality of Daily Security Schedule Templates', async function () {
-        const filePath = await admin.downloadSecurityTemplateReport();
-        // Attach the Excel file directly to the report
-         if (fs.existsSync(filePath) && this.attach) {
-             const fileBuffer = fs.readFileSync(filePath);
-             await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-         }
+    const filePath = await admin.downloadSecurityTemplateReport();
+    // Attach the Excel file directly to the report
+    if (fs.existsSync(filePath) && this.attach) {
+        const fileBuffer = fs.readFileSync(filePath);
+        await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    }
+});
+
+Then('Verify update occ functioanlities not available for LR managment user', async function () {
+    await admin.verifyUpdateOCCNotAvailable();
 });

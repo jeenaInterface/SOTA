@@ -286,5 +286,13 @@ export class SteadyTrackingSheetPage {
         await this.page.locator(this.Elements.jobCodeInputSelector4).fill('MS');
 
     }
+        async verifyUpdateScheduleNotAvailable(): Promise<void> {
+
+        const updateButton = this.page.locator(this.Elements.saveButton);
+        const isVisible = await updateButton.isVisible();
+        if (isVisible) {
+            throw new Error('Update steady functionality should not be available for LR management user');
+        }
+    }
     
 }

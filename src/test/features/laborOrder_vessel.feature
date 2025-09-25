@@ -1,4 +1,4 @@
-Feature: Vessel order and ops vessel timehseet functionalities
+Feature: Vessel order and ops vessel timesheet functionalities
   @auth
   Scenario: TR user creates a new vessel order and then discards the order
     Given the user creates a new vessel order

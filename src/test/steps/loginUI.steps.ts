@@ -33,6 +33,13 @@ Then('OCU user logged into the application', async function () {
   await login.enterUserName(data.userEmailOCU)
   await login.enterPassword(data.userPasswordOCU)
 });
+Then('OCU management user logged into the application', async function () {
+  login = new loginPage(fixture.page);
+  await login.navigateToLoginPage();
+  await login.enterUserName(data.userEmailOCU)
+  await login.enterPassword(data.userPasswordOCU)
+  await login.clickLoginButton();
+});
 Then('Accounting user logged into the application', async function () {
   await login.enterUserName(data.userEmailAccounts)
   await login.enterPassword(data.userPasswordAccounts)
@@ -69,5 +76,12 @@ Given('Vessel schedule user logged into the application', async function () {
   await login.navigateToLoginPage();
   await login.enterUserName(data.userEmailVesselSchedule)
   await login.enterPassword(data.userPasswordVesselSchedule)
+  await login.clickLoginButton();
+});
+Given('LR managment user logged into the application', async function () {
+  login = new loginPage(fixture.page);
+  await login.navigateToLoginPage();
+  await login.enterUserName(data.lrManagementUserEmail)
+  await login.enterPassword(data.userPasswordLRUser)
   await login.clickLoginButton();
 });

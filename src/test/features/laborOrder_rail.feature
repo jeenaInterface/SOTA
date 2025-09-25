@@ -1,4 +1,4 @@
-Feature: Rail order and ops rail order timehseet functionalities
+Feature: Rail order and ops rail order timesheet functionalities
 
   @auth
   Scenario: TR user creates a new Rail order and then discards the order

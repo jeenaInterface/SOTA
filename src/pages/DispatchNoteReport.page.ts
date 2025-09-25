@@ -174,7 +174,7 @@ export class DispatchNoteReportPage {
         fixture.page.setDefaultTimeout(2000)
         await this.base.waitAndClick(this.Elements.deleteButton);
         await this.base.waitAndClick(this.Elements.yesButton);
-        await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(2000);
         const validationMessageForDelete = await this.page.locator(this.Elements.LaborOrderDispatchNoteDeletedMessage).textContent();
         expect(validationMessageForDelete).toContain("Dispatch Notes information deleted successfully");
     }

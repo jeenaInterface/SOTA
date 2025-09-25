@@ -57,3 +57,7 @@ Then('Enter remarks for first row', async function () {
 Then('Verify total and guarantee value', async function () {
     await steadySchedulePage.verifyTotalAndGuaranteeValue();
 });
+
+Then('Verify update steady functionalities not available for LR managment user', async function () {
+    await steadySchedulePage.verifyUpdateScheduleNotAvailable();
+});

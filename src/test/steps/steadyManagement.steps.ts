@@ -84,3 +84,13 @@ Then('Verify the steady report is downloaded successfully', async function () {
         await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
     }
 });
+
+Then('Verify update steady functioanlities not available for LR managment user', async function () {
+    // Check that update button or functionality is not present for LR management user
+    await steady.verifyUpdateSteadyNotAvailable();
+});
+
+Then('Verify LR managment user not able to see create new steady button', async function () {
+    // Check that 'create new steady' button is not visible for LR management user
+    await steady.verifyCreateNewSteadyButtonNotVisible();
+});

@@ -1,4 +1,4 @@
-Feature: Yard Order and ops yard order timehseet functioanlities
+Feature: Yard Order and ops yard order timesheet functioanlities
 
     @auth1
     Scenario: TR user creates a new Yard order and then discards the order
@@ -34,7 +34,7 @@ Feature: Yard Order and ops yard order timehseet functioanlities
         Then the user cancel the Yard order
 
 @sanity @yard
-  Scenario: Yard Order Timehseet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report
+  Scenario: Yard Order Timesheet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report
     Given TR user logged into the application
     Given the user creates a new Yard order
     Then the user push the Yard labor order to the summary sheet

@@ -83,3 +83,6 @@ Then('Verify total value', async function () {
     await steadyTrackingSheetPage.verifyTotalValue();
 });
 
+Then('Verify update steady tracking functionalities not available for LR managment user', async function () {
+    await steadyTrackingSheetPage.verifyUpdateScheduleNotAvailable();
+});

@@ -73,7 +73,7 @@ export class adminPage {
         searchBox: "//input[@formcontrolname='name']",
         SearchButton: "//button[normalize-space(text())='SEARCH']",
         securityStaffingname: "//table[contains(@class,'table table-form')]/tbody[1]/tr[2]/td[2]",
-        downloadReport:"//button[normalize-space(text())='Download Report']"
+        downloadReport: "//button[normalize-space(text())='Download Report']"
 
 
 
@@ -484,7 +484,7 @@ export class adminPage {
         expect(value).toBe('');
 
     }
-        async downloadSecurityTemplateReport(): Promise<string> {
+    async downloadSecurityTemplateReport(): Promise<string> {
         const downloadPath = path.resolve(__dirname, 'downloads');
         if (!fs.existsSync(downloadPath)) {
             fs.mkdirSync(downloadPath, { recursive: true });
@@ -499,6 +499,14 @@ export class adminPage {
         const downloadPathWithFileName = path.join(downloadPath, 'SecurityStaffingTemplate.xlsx');
         await download.saveAs(downloadPathWithFileName);
         return downloadPathWithFileName;
+    }
+    async verifyUpdateOCCNotAvailable(): Promise<void> {
+
+        const updateButton = this.page.locator(this.Elements.saveButton);
+        const isVisible = await updateButton.isVisible();
+        if (isVisible) {
+            throw new Error('Update steady functionality should not be available for LR management user');
+        }
     }
 
 }

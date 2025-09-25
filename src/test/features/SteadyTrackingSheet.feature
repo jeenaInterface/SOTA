@@ -3,12 +3,12 @@ Feature: Steady tracking sheet Functionalities
     I want to manage steady tracking sheets
     So that I can maintain and track steady assignments
 
-    Background:
-        Given TR user logged into the application
-        And User navigates to the steady tracking sheet page
+
 
     @steadyTrackingSheet @sanity
     Scenario: Update steady tracking sheet
+        Given TR user logged into the application
+        And User navigates to the steady tracking sheet page
         And Select Job code for some steadies under Ops - Clerk tab
         Then Enter remarks for first row in the steady tracking sheet
         And User clicks on Save button in the steady tracking sheet
@@ -66,5 +66,10 @@ Feature: Steady tracking sheet Functionalities
 
 
 
+   @sanity 
+  Scenario: LR managment user - View functionality
+  Given LR managment user logged into the application
+  And User navigates to the steady tracking sheet page
+  Then Verify update steady tracking functionalities not available for LR managment user
 
 

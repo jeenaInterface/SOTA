@@ -3,3 +3,6 @@ node_modules/
 @rerun.txt
 playwright/.auth
 \nplaywright/.auth
+test-results/*
+test-results/cucumber-report.html
+test-results/cucumber-report.json

@@ -3,12 +3,11 @@ Feature: Steady Schedule Functionalities
     I want to manage steady schedules
     So that I can maintain and track steady assignments
 
-    Background: 
-        Given TR user logged into the application
-        And User navigates to the steady schedule page
 
     @steadyschedule @sanity
     Scenario: Update steady schedule
+        Given TR user logged into the application
+        And User navigates to the steady schedule page
         And User clicks on GO button
         And Select Job code for some steadies under CO tab
         Then Enter remarks for first row
@@ -33,4 +32,10 @@ Feature: Steady Schedule Functionalities
         And User clicks on Save button
 
 
+    @sanity
+    Scenario: LR managment user - View functionality
+        Given LR managment user logged into the application
+        And User navigates to the steady schedule page
+        And User clicks on GO button
+        Then Verify update steady functionalities not available for LR managment user
 

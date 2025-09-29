@@ -1,12 +1,12 @@
 import { LaunchOptions, chromium, firefox, webkit } from "playwright-core";
 
 const options: LaunchOptions = {
-    headless: !true
-    // headless: true
+    // headless: !true
+    headless: true
 }
 export const invokeBrowser = () => {
     
-    const browserType = process.env.npm_config_BROWSER || "chrome";
+    const browserType = process.env.npm_config_BROWSER || "msedge";
     args: ['--ignore-certificate-errors']
     switch (browserType) {
         case "chrome":

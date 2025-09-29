@@ -1,70 +1,70 @@
 import { Given, Then, When } from "@cucumber/cucumber";
 import { fixture } from "../../hooks/pageFixture";
 import loginPage from "../../pages/login.page";
-import * as data from "../../helper/util/test-data/payloads.json"
 
 let login: loginPage;
+
 
 Given('TR user logged into the application', async function () {
   login = new loginPage(fixture.page);
   await login.navigateToLoginPage();
-  await login.enterUserName(data.userEmailTR);
-  await login.enterPassword(data.userPasswordTR);
+  await login.enterUserName(process.env.userEmailTR);
+  await login.enterPassword(process.env.userPasswordTR);
   await login.clickLoginButton();
 });
 
 Then('TR management user logged into the application', async function () {
-  await login.enterUserName(data.userEmailTR);
-  await login.enterPassword(data.userPasswordTR);
+  await login.enterUserName(process.env.userEmailTR);
+  await login.enterPassword(process.env.userPasswordTR);
 });
 
 Then('Ops management user logged into the application', async function () {
   login = new loginPage(fixture.page);
   await login.navigateToLoginPage();
-  await login.enterUserName(data.userEmailOps);
-  await login.enterPassword(data.userPasswordOps);
+  await login.enterUserName(process.env.userEmailOps);
+  await login.enterPassword(process.env.userPasswordOps);
   await login.clickLoginButton();
 });
 Then('Ops user logged into the application', async function () {
-  await login.enterUserName(data.userEmailOps)
-  await login.enterPassword(data.userPasswordOps)
+  await login.enterUserName(process.env.userEmailOps)
+  await login.enterPassword(process.env.userPasswordOps)
 });
 Then('OCU user logged into the application', async function () {
-  await login.enterUserName(data.userEmailOCU)
-  await login.enterPassword(data.userPasswordOCU)
+  await login.enterUserName(process.env.userEmailOCU)
+  await login.enterPassword(process.env.userPasswordOCU)
 });
 Then('OCU management user logged into the application', async function () {
   login = new loginPage(fixture.page);
   await login.navigateToLoginPage();
-  await login.enterUserName(data.userEmailOCU)
-  await login.enterPassword(data.userPasswordOCU)
+  await login.enterUserName(process.env.userEmailOCU)
+  await login.enterPassword(process.env.userPasswordOCU)
   await login.clickLoginButton();
 });
 Then('Accounting user logged into the application', async function () {
-  await login.enterUserName(data.userEmailAccounts)
-  await login.enterPassword(data.userPasswordAccounts)
+  await login.enterUserName(process.env.userEmailAccounts)
+  await login.enterPassword(process.env.userPasswordAccounts)
 });
 Then('Timehseet entry user logged into the application', async function () {
-  await login.enterUserName(data.userEmailentry)
-  await login.enterPassword(data.userPasswordentry)
+  await login.enterUserName(process.env.userEmailentry)
+  await login.enterPassword(process.env.userPasswordentry)
 });
 Given('Security management user logged into the application', async function () {
   login = new loginPage(fixture.page);
   await login.navigateToLoginPage();
-  await login.enterUserName(data.userEmailSecurityManager)
-  await login.enterPassword(data.userPasswordSecurityManager)
+  await login.enterUserName(process.env.userEmailSecurityManager)
+  await login.enterPassword(process.env.userPasswordSecurityManager)
   await login.clickLoginButton();
 });
 Then('Security sergeant user logged into the application', async function () {
 
-  await login.enterUserName(data.userEmailSecuritySergeant)
-  await login.enterPassword(data.userPasswordSergeant)
+  await login.enterUserName(process.env.userEmailSecuritySergeant)
+  await login.enterPassword(process.env.userPasswordSergeant)
 
 });
 Then('Security manager user logged into the application', async function () {
 
-  await login.enterUserName(data.userEmailSecurityManager)
-  await login.enterPassword(data.userPasswordSecurityManager)
+  await login.enterUserName(process.env.userEmailSecurityManager)
+  await login.enterPassword(process.env.userPasswordSecurityManager)
 
 });
 Then('user click on logout button', async function () {
@@ -74,14 +74,14 @@ Then('user click on logout button', async function () {
 Given('Vessel schedule user logged into the application', async function () {
   login = new loginPage(fixture.page);
   await login.navigateToLoginPage();
-  await login.enterUserName(data.userEmailVesselSchedule)
-  await login.enterPassword(data.userPasswordVesselSchedule)
+  await login.enterUserName(process.env.userEmailVesselSchedule)
+  await login.enterPassword(process.env.userPasswordVesselSchedule)
   await login.clickLoginButton();
 });
 Given('LR managment user logged into the application', async function () {
   login = new loginPage(fixture.page);
   await login.navigateToLoginPage();
-  await login.enterUserName(data.lrManagementUserEmail)
-  await login.enterPassword(data.userPasswordLRUser)
+  await login.enterUserName(process.env.lrManagementUserEmail)
+  await login.enterPassword(process.env.userPasswordLRUser)
   await login.clickLoginButton();
 });

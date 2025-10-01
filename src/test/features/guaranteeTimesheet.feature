@@ -1,6 +1,6 @@
 Feature:  Guarantee Timesheet Management
 
-@sanity
+@sanity @guaranteeTimesheet
   Scenario: TR management user creates and saves Guarantee timesheet, OPS management approves, reject and deletes the entry - rail order
     Given TR user logged into the application
     And I navigate to the Guarantee Timesheet page

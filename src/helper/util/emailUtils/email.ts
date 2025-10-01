@@ -30,12 +30,12 @@ async function sendEmail() {
         </p>
         <p>From<br>QA team</p>
       `,
-      attachments: [
-        {
-          // filename: 'cucumber-report.html',
-          path: sharedReportPath,
-        },
-      ],
+      // attachments: [
+      //   {
+      //     // filename: 'cucumber-report.html',
+      //     // path: sharedReportPath,
+      //   },
+      // ],
     };
 
     await transporter.sendMail(mailOptions);

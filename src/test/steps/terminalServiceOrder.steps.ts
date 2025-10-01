@@ -66,7 +66,20 @@ Then('Ops user submits and approve the Terminal Services Timehseet', async funct
     await vesselOrder.SubmitTimehseet();
     await vesselOrder.ApprovetheTimehseet()
 });
+Then('TS user submits and approve the Terminal Services Timehseet', async function () {
+
+    await terminalServiceOrder.clickOnTimehseetMenu();
+    let LatestWorkOrderDate: string
+    await terminalServiceOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
+    await terminalServiceOrder.clickOnSweeperTab();
+    await terminalServiceOrder.FillHrsTab();
+    await vesselOrder.SubmitTimehseet();
+    await vesselOrder.ApprovetheTimehseet()
+});
 Then('ops user reject the Terminal Services Timehseet', async function () {
+    await vesselOrder.clickOnReject();
+});
+Then('TS user reject the Terminal Services Timehseet', async function () {
     await vesselOrder.clickOnReject();
 });
 Then('verify remove approval functionality of Terminal Services Timehseet', async function () {

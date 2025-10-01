@@ -18,6 +18,23 @@ Feature:  Yard order Functionalities - Yard Order, Summary Sheet, Timesheet, SOT
         Then Accounting user logged into the application
         Then Accounting user does the final approval
 
+@sanity
+Scenario: Verify the mandatory validations in Yard order
+        Given TR user logged into the application
+        Then TR user creates a new labor order
+        Then TR user creates a yard order timesheet for the same labor order without entering any details
+        Then user click on logout button
+        Then Ops user logged into the application
+        Then Ops user click on save and submit button without entering any details in the timesheet
+        Then Delete one timesheet row and click on save without save button
+        Then Enter 10 on ST field and click on save and submit button
+        Then Verify validation message is showing if enter value greater than 8 hours in ST field
+        Then Enter 16 on OT field and click on save and submit button
+        Then Verify validation message is showing if enter value greater than 15 hours in OT field
+        Then Enter 10 on DFT field and click on save and submit button
+        Then Verify validation message is showing if enter value greater than 2 hours in DFT field
+        Then user click on logout button
 
+ 
 
 

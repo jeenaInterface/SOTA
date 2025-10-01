@@ -72,3 +72,14 @@ Feature: Reports in SOTA APPLICATION
         Then Click on Labor Order Finalized Times report button and verify the report downloaded successfully
         Then Click on Finalized after deadlines report button and verify the report downloaded successfully
 
+    @new @sanity
+    Scenario: VERIFY Steady Job Assignments Duplicate Check Report
+        Given LR managment user logged into the application
+        Then I am on the Steady Job Assignments Duplicate Check Report page
+        Then Click on Steady Job Assignments Duplicate Check report button and verify the report downloaded successfully
+
+    @new @sanity
+    Scenario: VERIFY Timesheet Steady Report with date range
+        Given Ops management user logged into the application
+        Then I am on the Timesheet Report page
+        Then Click on timesheet Report button with date range and verify the report downloaded successfully

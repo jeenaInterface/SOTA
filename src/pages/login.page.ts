@@ -21,7 +21,7 @@ export default class LoginPage {
         confirmButton: "button[name='Yes']",
         logOutButton: "//i[@role='button']",
         logOut: "//a[normalize-space(text())='Logout']",
-        pickAnAccount: "(//div[@data-bind='text: ((session.isSignedIn || session.isSamsungSso) && session.unsafe_fullName) || session.unsafe_displayName'])[1]",
+        pickAnAccount: "//small[@data-bind='text: session.unsafe_displayName']",
         useAnotherAccount: "//div[normalize-space(text())='Use another account']"
     };
 

@@ -85,3 +85,8 @@ Given('LR managment user logged into the application', async function () {
   await login.enterPassword(process.env.userPasswordLRUser)
   await login.clickLoginButton();
 });
+Given('TS managment user logged into the application', async function () {
+  await login.enterUserName(process.env.TSManagementUserEmail)
+  await login.enterPassword(process.env.userPasswordTS)
+
+});

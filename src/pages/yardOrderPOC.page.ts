@@ -35,7 +35,7 @@ export default class yardOrderPagePOC {
         workDate: "//input[@type='date']",
         shift: "//select[@ng-reflect-name='shift']",
         jobType: "//select[@ng-reflect-name='jobCode']",
-        yesCheckBox:"(//input[@id='radio-button'])[2]",
+        yesCheckBox: "(//input[@id='radio-button'])[2]",
         Go: "//button[normalize-space(text())='GO']",
         startTime: "//select[@id='startTime']",
         // clerktab:"//a[normalize-space(text())='Clerk']",
@@ -99,7 +99,7 @@ export default class yardOrderPagePOC {
         shiftBatchLevelScreen: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-payroll-mgmt-summary[1]/div[1]/div[2]/table[1]/tbody[1]/tr[1]/td[3]/span[1]",
         completeCheckList: "//input[@id='complete']",
         reviewNotesButton: "//i[@class='bi bi-card-list icon-lg m-2']",
-        ocuRemarksButton: "//tbody/tr[1]/td[18]/i[1]",
+        ocuRemarksButton: "(//i[@data-bs-target='#remarks'])[2]",
         reviewTextArea: "//textarea[@id='addComment']",
         addRemarksButton: "//button[normalize-space()='Add Remarks']",
         saveRemarksButton: "//button[normalize-space()='SAVE REMARKS']",
@@ -126,7 +126,13 @@ export default class yardOrderPagePOC {
         payrollMenu: "//div[normalize-space()='Payroll']",
         TimesheetComments: "//span[contains(normalize-space(text()), 'Timesheet Comments updated successfully')]",
         NotifyManagerButton: "//button[normalize-space()='NOTIFY MANAGER']",
-        payrollWeek:"//select[@id='payrollWk']"
+        payrollWeek: "//select[@id='payrollWk']",
+        errorValidationMessage: "//div[@class='col-10 p-2']//span[1]",
+        deletesecondRow: "//table[contains(@class,'table table-form')]/tbody[1]/tr[2]/td[21]/i[1]",
+        saveWithOutSubmitting: "//button[normalize-space(text())='SAVE WITHOUT SUBMITTING']",
+        EightHourMessage: "//span[normalize-space(text())='The ST hours should not exceed 8.']",
+        SixteenHourMessage: "//span[normalize-space(text())='The OT hours should not exceed 15.']",
+        DFTHrValidation:"//span[normalize-space(text())='The DFT hours should not exceed 2.']"
 
 
 
@@ -328,7 +334,7 @@ export default class yardOrderPagePOC {
         await this.page.locator(this.Elements.yesCheckBox).check();
         await this.base.waitAndClick(this.Elements.Go);
     }
-        async SelectDetailsOnLandingPageTimehseet(formatteddate: string): Promise<void> {
+    async SelectDetailsOnLandingPageTimehseet(formatteddate: string): Promise<void> {
         const LatestWorkOrderDate = await this.getLatestWorkOrderDate();
         console.log(LatestWorkOrderDate);
         fixture.logger.info("Waiting for 2 seconds")
@@ -369,6 +375,15 @@ export default class yardOrderPagePOC {
         await fixture.page.waitForTimeout(3000);
 
     }
+    async SubmitandApprovetheTimehseetWithoutenterMandatoryData(): Promise<void> {
+        await fixture.page.waitForTimeout(1000);
+        await this.page.locator(this.Elements.conductSaftyTalk).check();
+        await this.page.locator(this.Elements.TimehseetApprovalName).fill("TestUser");
+        await this.base.waitAndClick(this.Elements.SaveANDSubmit);
+        const errorValidationMessage = await this.page.locator(this.Elements.errorValidationMessage).textContent();
+        expect(errorValidationMessage).toContain("Validation Errors for");
+
+    }
 
     async clickOnPayrollMenu(): Promise<void> {
         await this.base.waitAndClick(this.Elements.payrollLink);
@@ -401,40 +416,40 @@ export default class yardOrderPagePOC {
         await this.page.locator(weekNumberXPath).click();
     }
 
-async selectPayrollWeek(): Promise<void> {
-    const filePath = path.resolve(__dirname, '../helper/util/test-data/payroll_weeks.csv');
-    const csvData = fs.readFileSync(filePath, 'utf-8');
-    const parse = require('csv-parse/sync').parse;
-    const records = parse(csvData, {
-        columns: true,
-        skip_empty_lines: true
-    });
+    async selectPayrollWeek(): Promise<void> {
+        const filePath = path.resolve(__dirname, '../helper/util/test-data/payroll_weeks.csv');
+        const csvData = fs.readFileSync(filePath, 'utf-8');
+        const parse = require('csv-parse/sync').parse;
+        const records = parse(csvData, {
+            columns: true,
+            skip_empty_lines: true
+        });
 
-    const date = new Date(this.noTRStatusDate);
-    let weekNumber: string | undefined;
+        const date = new Date(this.noTRStatusDate);
+        let weekNumber: string | undefined;
 
-    for (const row of records) {
-        const startDate = new Date(row['Start Date']);
-        const endDate = new Date(row['End Date']);
-        if (date >= startDate && date <= endDate) {
-            weekNumber = row['Week'];
-            break;
+        for (const row of records) {
+            const startDate = new Date(row['Start Date']);
+            const endDate = new Date(row['End Date']);
+            if (date >= startDate && date <= endDate) {
+                weekNumber = row['Week'];
+                break;
+            }
         }
-    }
 
-    if (!weekNumber) {
-        throw new Error('Payroll week not found for the given date');
-    }
+        if (!weekNumber) {
+            throw new Error('Payroll week not found for the given date');
+        }
         fixture.logger.info("Waiting for 2 seconds")
         await fixture.page.waitForTimeout(2000);
-    // Select the payroll week in the dropdown
-    // The dropdown option format is: "<weekNumber> - WE - <endDate>"
-    const payrollWeekLabel = (await this.page.locator(this.Elements.payrollWeek).locator(`option:has-text('${weekNumber} - ')`).first().textContent())?.trim();
-    if (!payrollWeekLabel) {
-        throw new Error(`Payroll week label not found for week number: ${weekNumber}`);
+        // Select the payroll week in the dropdown
+        // The dropdown option format is: "<weekNumber> - WE - <endDate>"
+        const payrollWeekLabel = (await this.page.locator(this.Elements.payrollWeek).locator(`option:has-text('${weekNumber} - ')`).first().textContent())?.trim();
+        if (!payrollWeekLabel) {
+            throw new Error(`Payroll week label not found for week number: ${weekNumber}`);
+        }
+        await this.page.locator(this.Elements.payrollWeek).selectOption({ label: payrollWeekLabel });
     }
-    await this.page.locator(this.Elements.payrollWeek).selectOption({ label: payrollWeekLabel });
-}
     async ClickOnBatchReady(): Promise<void> {
         await this.base.waitAndClick(this.Elements.batchReadyButton);
         await this.base.waitAndClick(this.Elements.BatchConfirmationPopUp);
@@ -726,6 +741,8 @@ async selectPayrollWeek(): Promise<void> {
         return downloadPathWithFileName;
     }
     async saveOCURemarksInfo(): Promise<void> {
+        fixture.logger.info("Waiting for 1 seconds");
+        await fixture.page.waitForTimeout(1000);
         await this.base.waitAndClick(this.Elements.ocuRemarksButton);
         await this.page.locator(this.Elements.reviewTextArea).fill("Test remarks");
         await this.base.waitAndClick(this.Elements.addRemarksButton);
@@ -744,4 +761,55 @@ async selectPayrollWeek(): Promise<void> {
 
     }
 
-} 
+    async deleteSecondRow(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.deletesecondRow);
+        await this.base.waitAndClick(this.Elements.BatchConfirmationPopUp);
+        fixture.logger.info("Waiting for 2 seconds");
+        await fixture.page.waitForTimeout(2000);
+        await this.base.waitAndClick(this.Elements.saveWithOutSubmitting);
+
+    }
+
+    async FillHrsTab10(): Promise<void> {
+        await this.page.locator(this.Elements.SThrFirstRow).fill("10");
+        await this.base.waitAndClick(this.Elements.SaveANDSubmit);
+
+
+    }
+    async FillHrsTab10ValidationMessage(): Promise<void> {
+        const successMessage = await this.page.locator(this.Elements.EightHourMessage).textContent();
+        expect(successMessage).toContain("The ST hours should not exceed 8.");
+
+
+    }
+    async FillOTTab16(): Promise<void> {
+        await this.page.locator(this.Elements.SThrFirstRow).fill("8");
+        await this.page.locator(this.Elements.OThrFirstRow).fill("16");
+        await this.base.waitAndClick(this.Elements.SaveANDSubmit);
+
+    }
+    async FillotTab16ValidationMessage(): Promise<void> {
+        const successMessage = await this.page.locator(this.Elements.SixteenHourMessage).textContent();
+        expect(successMessage).toContain("The OT hours should not exceed 15.");
+
+
+    }
+        async FillDFTTab10(): Promise<void> {
+        await this.page.locator(this.Elements.OThrFirstRow).fill("15");
+        await this.page.locator(this.Elements.DFThrFirstRow).fill("10");
+        await this.base.waitAndClick(this.Elements.SaveANDSubmit);
+
+    }
+        async FillDFTTab10ValidationMessage(): Promise<void> {
+        const successMessage = await this.page.locator(this.Elements.DFTHrValidation).textContent();
+        expect(successMessage).toContain("The DFT hours should not exceed 2.");
+
+
+    }
+            async FillDFTTab2(): Promise<void> {
+        await this.page.locator(this.Elements.DFThrFirstRow).fill("2");
+        await this.base.waitAndClick(this.Elements.SaveANDSubmit);
+
+    }
+
+}

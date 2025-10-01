@@ -201,3 +201,55 @@ Then('Add remarks by OCU user', async function () {
 Then('verify Notify manager functionality', async function () {
   await yardOrder.notifyManager();
 });
+
+
+Then('TR user creates a yard order timesheet for the same labor order without entering any details', async function () {
+  await yardOrder.clickOnTimehseetMenu();
+  let LatestWorkOrderDate: string
+  await yardOrder.SelectDetailsOnLandingPageTimehseetTRUSER(LatestWorkOrderDate);
+  await yardOrder.clickOnSaveAndSubmit();
+  await yardOrder.verifySuccessMessage();
+});
+
+Then('Ops user click on save and submit button without entering any details in the timesheet', async function () {
+  await yardOrder.clickOnTimehseetMenu();
+  let LatestWorkOrderDate: string
+  await yardOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
+  await yardOrder.clickOnForemanTab();
+  await yardOrder.SubmitandApprovetheTimehseetWithoutenterMandatoryData()
+});
+
+Then('Delete one timesheet row and click on save without save button', async function () {
+
+  await yardOrder.deleteSecondRow()
+});
+Then('Enter 10 on ST field and click on save and submit button', async function () {
+
+  await yardOrder.FillHrsTab10()
+});
+Then('Verify validation message is showing if enter value greater than 8 hours in ST field', async function () {
+
+  await yardOrder.FillHrsTab10ValidationMessage()
+});
+
+
+Then('Enter 16 on OT field and click on save and submit button', async function () {
+
+  await yardOrder.FillOTTab16()
+});
+
+Then('Verify validation message is showing if enter value greater than 15 hours in OT field', async function () {
+
+  await yardOrder.FillotTab16ValidationMessage()
+});
+
+Then('Enter 10 on DFT field and click on save and submit button', async function () {
+
+  await yardOrder.FillDFTTab10()
+});
+
+Then('Verify validation message is showing if enter value greater than 2 hours in DFT field', async function () {
+
+  await yardOrder.FillDFTTab10ValidationMessage()
+  await yardOrder.FillDFTTab2()
+});

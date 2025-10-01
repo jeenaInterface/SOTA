@@ -3,7 +3,7 @@ Feature: Security Labor Order Management
     Background: 
         Given Security management user logged into the application
 
-    @sanity
+    @sanity @securityLaborOrder
     Scenario: Create security labor order and verify report download
         When User navigates to security labor order page
         When User selects date and clicks GO button

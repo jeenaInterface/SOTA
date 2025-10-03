@@ -16,5 +16,15 @@ Feature: Verify summary sheet functionaities
         Then Verify place new orders button is redirecting to new order form
 
 
-
+    @sanity @dispatchUpdateTab
+    Scenario:Verify dispatch update tab in summary sheet
+        Given TR user logged into the application
+        Then the user creates a new vessel order
+        Then the user push the labor order to the summary sheet
+        Then TR user verifies that the vessel labor order is pushed to the summary sheet and verifies the details
+        Then Cliclk on dispatch update tab 
+        Then Add steady and hall details under replacement section and click on save button
+        # Then Add steady and hall details under Add section and click on save button
+        # Then Add steady and hall details under remove section and click on save button
+        # Then Add steady and hall details under shift section and click on save button
 

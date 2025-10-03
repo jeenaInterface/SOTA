@@ -39,11 +39,12 @@ Then('Verify download duplicate report', async function () {
 });
 
 Then('Verify transfer to tracking sheet', async function () {
-    await summarySheetPage.transferToTrackingSheet();
+  await summarySheetPage.transferToTrackingSheet();
 
 });
 
 Then('Verify place new orders button is redirecting to new order form', async function () {
-    await summarySheetPage.placeNewOrders();
+  await summarySheetPage.placeNewOrders();
 
 });
+

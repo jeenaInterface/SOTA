@@ -148,7 +148,7 @@ export default class yardOrderPagePOC {
     async SelectDetailsOnLandingPage(): Promise<string> {
         let currentDate = new Date();
         let formattedDate: string;
-        const maxAttempts = 10;
+        const maxAttempts = 30;
 
         // await this.page.locator(this.Elements.shift).selectOption("2ND");
         await this.page.locator(this.Elements.jobType).selectOption("Yard Ops - 690101");

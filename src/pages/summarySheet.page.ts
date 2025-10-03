@@ -57,11 +57,23 @@ export default class summarySheetPage {
         placeNewOrders: "//i[@title='Place New Orders']",
         labelOnDifferenceReport: "//h5[contains(text(),'Pier E - LB 24 - COSCO ENGLAND - 050 - 100643 - 2N')]",
         summarysheetContent: "//td[normalize-space()='BACK']",
-        hallreportlabel:"//span[@class='page-title p-1']",
+        hallreportlabel: "//span[@class='page-title p-1']",
         yesPopUp: "//button[normalize-space()='Yes']",
-        transferToTrackingSheetMessage:"//div[@class='col-10 p-2']",
-        title:"//span[@class='page-title p-1']",
-        vesselLabel:"//h5[normalize-space()='Vessel - COSCO KAOHSIUNG']"
+        transferToTrackingSheetMessage: "//div[@class='col-10 p-2']",
+        successMessage: "//span[contains(normalize-space(text()), 'Dispatch Update information updated successfully')]",
+        title: "//span[@class='page-title p-1']",
+        vesselLabel: "//h5[normalize-space()='Vessel - COSCO KAOHSIUNG']",
+        dispatchUpdateTab: "//a[normalize-space(text())='DISPATCH UPDATE']",
+        repacementSteadyAddButton: "(//div[contains(@class,'d-flex justify-content-between')]//i)[1]",
+        repacementHallCount: "//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[2]/input[1]",
+        repacementHallAddButton: "(//div[contains(@class,'d-flex justify-content-between')]//i)[2]",
+        repacementHallTextBox: "//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[1]/input[1]",
+        RemarksTextArea: "(//textarea[contains(@class,'p-2 w-100')])[1]",
+        AddRemarksButton: "(//button[normalize-space()='Add Remarks'])[1]",
+        replacementSteadyRemarks: "//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[2]/i[1]",
+        joblistAddButton: "//button[normalize-space(text())='Add Job Type']",
+        remarksButtonHall:"//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[3]/i[1]"
+        // 
     };
 
 
@@ -199,4 +211,34 @@ export default class summarySheetPage {
         const newOrder = await this.page.locator(this.Elements.title).textContent();
         expect(newOrder).toContain("New Order Form");
     }
+        async clickOnDispatchButton(): Promise<void> {
+        await this.page.locator(this.Elements.dispatchUpdateTab).click();
+    }
+    async replacementAdd(): Promise<void> {
+
+        await this.page.locator(this.Elements.repacementHallAddButton).click();
+        await this.page.getByPlaceholder('Search By Job Type or OCC Code').fill('221');
+        await this.page.getByPlaceholder('Search By Job Type or OCC Code').press('Enter');
+        await this.page.getByPlaceholder('Search By Job Type or OCC Code').click();
+        await this.page.getByPlaceholder('Search By Job Type or OCC Code').fill('221 - GEAR LEADMEN SPECIAL');
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        await this.base.waitAndClick(this.Elements.joblistAddButton);
+        await this.page.locator(this.Elements.repacementHallCount).click();
+        await this.page.locator(this.Elements.repacementHallCount).fill('1');
+        await this.base.waitAndClick(this.Elements.remarksButtonHall);
+        await this.page.locator(this.Elements.RemarksTextArea).fill("MGR REMARKS!");
+        fixture.logger.info("Waiting for 1 seconds")
+        await fixture.page.waitForTimeout(1000);
+        await this.base.waitAndClick(this.Elements.AddRemarksButton);
+        await this.page.locator(this.Elements.saveButton).click();
+        fixture.logger.info("Waiting for 2 seconds")
+        await fixture.page.waitForTimeout(2000);
+        const successmessage = await this.page.locator(this.Elements.successMessage).textContent();
+        expect(successmessage).toContain("Dispatch Update information updated successfully");
+
+
+    }
+
+
 }

@@ -188,3 +188,11 @@ Then('Verify 240 report is downloaded', async function () {
 When('Verify allocation info tab', async function () {
   await vesselOrder.allocationInfoTab();
 });
+Then('Cliclk on dispatch update tab', async function () {
+  await summarySheet.clickOnDispatchButton();
+
+});
+Then('Add steady and hall details under replacement section and click on save button', async function () {
+  await summarySheet.replacementAdd();
+
+});

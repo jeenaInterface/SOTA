@@ -27,7 +27,7 @@ export class SteadyTrackingSheetPage {
         jobCodeInputSelector5: "(//label[text()='RM']/following::input)[5]",
         jobCodeInputSelector6: "(//label[text()='RM']/following::input)[6]",
         jobCodeInputSelector7: "(//label[text()='RM']/following::input)[7]",
-        totalValue: "(//td[contains(@class,'w-8 bg-white')])[1]",
+        totalValue: "(//label[@for='ttotal'])[1]",
         opsTab: "//a[normalize-space(text())='Ops']",
         clerkTab: "//a[normalize-space(text())='Clerk']",
         foremenTab: "//a[normalize-space(text())='Foremen']",

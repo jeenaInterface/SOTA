@@ -1,6 +1,6 @@
 Feature: Verify summary sheet functionaities
 
-    @sanity @summarySheet
+    @sanity @summarySheet @Retest
     Scenario:Verify summary sheet update functionalities
         Given TR user logged into the application
         Then the user creates a new vessel order
@@ -16,7 +16,7 @@ Feature: Verify summary sheet functionaities
         Then Verify place new orders button is redirecting to new order form
 
 
-    @sanity @dispatchUpdateTab
+    @sanity @dispatchUpdateTab @Retest
     Scenario:Verify dispatch update tab in summary sheet
         Given TR user logged into the application
         Then the user creates a new vessel order

@@ -13,7 +13,12 @@ let context: BrowserContext;
 
 BeforeAll(async function () {
     getEnv();
-    browser = await invokeBrowser();
+    try {
+        browser = await invokeBrowser();
+    } catch (err) {
+        console.error('BeforeAll: failed to launch browser:', err && err.stack ? err.stack : err);
+        throw err; // rethrow so cucumber shows the failure
+    }
 });
 // It will trigger for not auth scenarios
 Before({ tags: "not @auth" }, async function ({ pickle }) {

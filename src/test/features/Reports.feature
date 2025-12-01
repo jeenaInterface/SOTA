@@ -65,7 +65,7 @@ Feature: Reports in SOTA APPLICATION
         Then I am on the Steady Job Assignments Duplicate Check Report page
         Then Click on Steady Job Assignments Duplicate Check report button and verify the report downloaded successfully
     
-    @LaborOrderFinalizedTimesReport @sanity
+    @LaborOrderFinalizedTimesReport @sanity @rerun
     Scenario: VERIFY Labor Order Finalized Times Report
         Given TR user logged into the application
         Then I am on the Labor Order Finalized Times Report page

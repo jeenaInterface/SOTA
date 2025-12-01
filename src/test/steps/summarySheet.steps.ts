@@ -20,11 +20,10 @@ Then('update manning details, calo status and NF and Cut time in summary sheet a
 });
 
 Then('Verify download summary sheet report', async function () {
-
   const filePath = await summarySheetPage.downloadsummaryreport();
   if (filePath && fs.existsSync(filePath) && this.attach) {
     const fileBuffer = fs.readFileSync(filePath);
-    await this.attach(fileBuffer, 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+    await this.attach(fileBuffer, 'application/pdf');
   }
 });
 

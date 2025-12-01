@@ -43,7 +43,7 @@ Feature: Security schedule and timesheet Management
         When Select staffing for operations and click on save
         Then verify mandatory field validations for security schedule
 
-    @sanity @securityScheduleAndTimesheet
+    @sanity @securityScheduleAndTimesheet @rerun
     Scenario: Verify Individual row deletion in security schedule
         Given Security management user logged into the application
         When User navigates to security schedule page

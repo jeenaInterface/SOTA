@@ -66,7 +66,7 @@ Feature: Steady tracking sheet Functionalities
 
 
 
-   @sanity 
+   @sanity @Retest
   Scenario: LR managment user - View functionality
   Given LR managment user logged into the application
   And User navigates to the steady tracking sheet page

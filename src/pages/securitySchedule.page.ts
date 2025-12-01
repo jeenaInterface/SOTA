@@ -336,6 +336,9 @@ export class SecuritySchedulePage {
         await this.page.waitForSelector("//span[contains(text(),'ST/ OT/ ST2/ OT2 exceeds limit of 10 Hours')]", { state: 'visible' });
         const errorMessage = await this.page.locator("//span[contains(text(),'ST/ OT/ ST2/ OT2 exceeds limit of 10 Hours')]").textContent();
         expect(errorMessage).toContain('ST/ OT/ ST2/ OT2 exceeds limit of 10 Hours');
+        fixture.logger.info("Waiting for 1 seconds");
+        await this.page.waitForTimeout(1000);
+
     }
 
     async enterTimesheetHours() {

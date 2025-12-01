@@ -117,6 +117,7 @@ export class DispatchNoteReportPage {
     }
 
     async updateDispatchNote(): Promise<void> {
+        await this.base.waitAndClick(this.Elements.search);
         await this.base.waitAndClick(this.Elements.FirstRow);
         await this.page.locator(this.Elements.descriptionInput).fill(await this.randomText());
         await this.base.waitAndClick(this.Elements.updateDispatchNoteButton);

@@ -30,7 +30,7 @@ export class SecurityPage {
         jobTypeDropdown: (rowIndex: number) => `//select[@id='jobType${rowIndex}']`,
         startTimeDropdown: "//tbody/tr/td[4]/select[1]",
         finishTimeDropdown: "//tbody/tr/td[6]/select[1]",
-        remarksTextArea: (rowIndex: number) => `//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-labor-order-sse[1]/div[1]/div[1]/div[2]/table[1]/tbody[1]/tr[${rowIndex + 1}]/td[7]/input[1]`,
+        remarksTextArea: (rowIndex: number) => `//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-labor-order-sse[1]/div[1]/div[1]/div[2]/table[1]/tbody[1]/tr[${rowIndex + 1}]/td[8]/input[1]`,
         saveButton: "//button[normalize-space()='SAVE']",
         successMessage: "//span[contains(text(),'Security Labor Order details saved successfully')]",
         submitButton: "//button[normalize-space()='SAVE AND SUBMIT']",
@@ -41,8 +41,8 @@ export class SecurityPage {
         cancelButton: "//button[normalize-space()='CANCEL ORDER']",
         yesButtonOnCancel: "//button[normalize-space()='Yes']",
         orderCancelledMessage: "//span[contains(text(),'Order information has been cancelled successfully')]",
-        deleteSecondRow: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-labor-order-sse[1]/div[1]/div[1]/div[2]/table[1]/tbody[1]/tr[2]/td[8]/i[1]",
-        duplicateEntryMessage: "//span[contains(text(),'Cannot add a duplicate record for the same Job Type, Start Time and Finish Time')]",
+        deleteSecondRow: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-labor-order-sse[1]/div[1]/div[1]/div[2]/table[1]/tbody[1]/tr[2]/td[9]/i[1]",
+        duplicateEntryMessage: "//span[contains(text(),'Cannot add a duplicate record for the same Job Type, Actual Work Date, Start Time and Finish Time.')]",
         mandatoryFieldsMessage: "//span[contains(text(),'Date/Time Of Order information is mandatory')]",
         actualWorkDate: (rowIndex: number) => `//input[@id='actWorkDt_${rowIndex}']`,
     };
@@ -150,7 +150,7 @@ export class SecurityPage {
     async verifyDuplicateEntryMessage(): Promise<void> {
         await this.page.waitForSelector(this.Elements.duplicateEntryMessage, { state: 'visible' });
         const message = await this.page.locator(this.Elements.duplicateEntryMessage).textContent();
-        expect(message).toContain('Cannot add a duplicate record for the same Job Type, Start Time and Finish Time');
+        expect(message).toContain('Cannot add a duplicate record for the same Job Type, Actual Work Date, Start Time and Finish Time.');
     }
 
     async selectAvailableSecurityOrderDate(): Promise<string> {

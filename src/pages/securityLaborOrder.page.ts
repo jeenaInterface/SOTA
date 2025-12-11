@@ -28,8 +28,8 @@ export class SecurityPage {
         yesButton: "//button[normalize-space()='Yes']",
         numberOfJobsInput: "//tbody/tr/td[1]/input[1]",
         jobTypeDropdown: (rowIndex: number) => `//select[@id='jobType${rowIndex}']`,
-        startTimeDropdown: "//tbody/tr/td[3]/select[1]",
-        finishTimeDropdown: "//tbody/tr/td[5]/select[1]",
+        startTimeDropdown: "//tbody/tr/td[4]/select[1]",
+        finishTimeDropdown: "//tbody/tr/td[6]/select[1]",
         remarksTextArea: (rowIndex: number) => `//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-labor-order-sse[1]/div[1]/div[1]/div[2]/table[1]/tbody[1]/tr[${rowIndex + 1}]/td[7]/input[1]`,
         saveButton: "//button[normalize-space()='SAVE']",
         successMessage: "//span[contains(text(),'Security Labor Order details saved successfully')]",
@@ -38,12 +38,13 @@ export class SecurityPage {
         laborOrderSuccessMessage: "//span[contains(text(),'Security Labor Order details saved successfully')]",
         orderStatus: "//div[6]//input[1]",
         jobOrderBy: "//div[3]//input[1]",
-        cancelButton:"//button[normalize-space()='CANCEL ORDER']",
+        cancelButton: "//button[normalize-space()='CANCEL ORDER']",
         yesButtonOnCancel: "//button[normalize-space()='Yes']",
         orderCancelledMessage: "//span[contains(text(),'Order information has been cancelled successfully')]",
         deleteSecondRow: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-labor-order-sse[1]/div[1]/div[1]/div[2]/table[1]/tbody[1]/tr[2]/td[8]/i[1]",
         duplicateEntryMessage: "//span[contains(text(),'Cannot add a duplicate record for the same Job Type, Start Time and Finish Time')]",
-        mandatoryFieldsMessage: "//span[contains(text(),'Date/Time Of Order information is mandatory')]"
+        mandatoryFieldsMessage: "//span[contains(text(),'Date/Time Of Order information is mandatory')]",
+        actualWorkDate: (rowIndex: number) => `//input[@id='actWorkDt_${rowIndex}']`,
     };
     async downloadSecurityLaborReport(): Promise<string> {
         const downloadPath = path.resolve(__dirname, 'downloads');
@@ -105,7 +106,9 @@ export class SecurityPage {
     async selectJobType(jobType: string, rowIndex: number): Promise<void> {
         await this.page.locator(this.Elements.jobTypeDropdown(rowIndex)).selectOption({ label: jobType });
     }
-
+    async selectActualWorkDate(date: string, rowIndex: number): Promise<void> {
+        await this.page.locator(this.Elements.actualWorkDate(rowIndex)).fill(date);
+    }
     async selectStartTime(time: string, rowIndex: number): Promise<void> {
         await this.page.locator(this.Elements.startTimeDropdown).nth(rowIndex).selectOption(time);
     }

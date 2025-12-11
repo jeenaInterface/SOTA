@@ -22,6 +22,7 @@ When('User enters order date and time', async function () {
 
 When('User adds job details with following information:', async function (dataTable) {
     const jobs = dataTable.hashes();
+    const today = new Date().toISOString().split('T')[0];
     for (let i = 0; i < jobs.length; i++) {
         await securityPage.clickPlusButton();
         await securityPage.enterNumberOfJobs(jobs[i]['Number of Jobs'], i);
@@ -29,6 +30,7 @@ When('User adds job details with following information:', async function (dataTa
         await securityPage.selectStartTime(jobs[i]['Start Time'], i);
         await securityPage.selectFinishTime(jobs[i]['Finish Time'], i);
         await securityPage.enterRemarks(jobs[i]['remarks'], i);
+        await securityPage.selectActualWorkDate(today, i);
     }
 });
 

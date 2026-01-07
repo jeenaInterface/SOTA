@@ -444,7 +444,8 @@ export default class yardOrderPagePOC {
         await fixture.page.waitForTimeout(2000);
         // Select the payroll week in the dropdown
         // The dropdown option format is: "<weekNumber> - WE - <endDate>"
-        const payrollWeekLabel = (await this.page.locator(this.Elements.payrollWeek).locator(`option:has-text('${weekNumber} - ')`).first().textContent())?.trim();
+        const paddedWeekNumber = weekNumber.padStart(2, '0');
+        const payrollWeekLabel = (await this.page.locator(this.Elements.payrollWeek).locator(`option:has-text('${paddedWeekNumber} - ')`).first().textContent())?.trim();
         if (!payrollWeekLabel) {
             throw new Error(`Payroll week label not found for week number: ${weekNumber}`);
         }

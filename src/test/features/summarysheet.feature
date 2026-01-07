@@ -1,6 +1,6 @@
 Feature: Verify summary sheet functionaities
 
-    @sanity @summarySheet @Retest
+    @sanity @summarySheet @test1
     Scenario:Verify summary sheet update functionalities
         Given TR user logged into the application
         Then the user creates a new vessel order

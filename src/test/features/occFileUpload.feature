@@ -3,7 +3,7 @@ Feature:  OCCFile upload Functionalities
     I want to manage OCC file upload
     So that I can maintain and track OCC assignments
 
-    @sanity @fileUpload
+    @sanity @fileUpload @test1
     Scenario: Upload OCC file
         Given OCU management user logged into the application
         Then Go to PMA Employee-OCC File Upload

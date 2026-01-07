@@ -1,7 +1,7 @@
 Feature: Steady Management
 
 
-  @sanity @rerun
+  @sanity @failed
   Scenario: Steady Management - search, Update,reset functionalities
     Given TR user logged into the application
     Then Go to steady management screen

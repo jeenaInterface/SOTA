@@ -18,7 +18,7 @@ Feature: Terminal Service Order and ops terminal service order timehseet functio
     Then the user discards the Terminal Services Order
 
 
-  @sanity
+  @sanity @failed
   Scenario: TR user creates, firms, pushes to summary sheet, and cancels a Terminal Services Order
     Given TR user logged into the application
     Given the user creates a new Terminal Services Order

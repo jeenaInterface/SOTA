@@ -27,13 +27,13 @@
 import { LaunchOptions, chromium, firefox, webkit } from "playwright-core";
 
 const options: LaunchOptions = {
-  // headless: false, // set true to run headless
-  headless: true,
+  headless: false, // set true to run headless
+  // headless: true,
   args: ['--ignore-certificate-errors'],
 };
 
 export const invokeBrowser = () => {
-  const browserType = (process.env.npm_config_BROWSER || "edge").toLowerCase();
+  const browserType = (process.env.npm_config_BROWSER || "chrome").toLowerCase();
 
   switch (browserType) {
     case "chrome":

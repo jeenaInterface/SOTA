@@ -33,20 +33,20 @@ export default class yardOrderPagePOC {
         yardOrder: "//a[normalize-space(text())='Ops Yard Order']",
         payrollManagemnetDashboardMenu: "//a[normalize-space()='Payroll Management Dashboard']",
         workDate: "//input[@type='date']",
-        shift: "//select[@ng-reflect-name='shift']",
-        jobType: "//select[@ng-reflect-name='jobCode']",
+        shift: "//select[@id='shift']",
+        jobType: "//select[@id='jobCode']",
         yesCheckBox: "(//input[@id='radio-button'])[2]",
         Go: "//button[normalize-space(text())='GO']",
         startTime: "//select[@id='startTime']",
         // clerktab:"//a[normalize-space(text())='Clerk']",
         stdDbFX: "//*[@id='first']/div/div/tbody/tr[1]/td[9]/input",
         SteadyDBName: "//datalist//option[contains(text(), 'DiLeva, John J (John D) - 38407')]",
-        stdDbFXFlexList: "//select[@ng-reflect-name='YARD BOSScbSteadyFx00']",
+        stdDbFXFlexList: "(//select[@id='cbSteadyFx'])[1]",
         stdFX: "//*[@id='first']/div/div/tbody/tr[1]/td[10]/input",
         SteadyFXName: "//datalist//option[contains(text(), 'Ramirez, Johnny M (Johnny) - 34343')]",
-        stdFXFlexList: "//select[@ng-reflect-name='YARD BOSScbSteadyFx10']",
-        YardBossddl1: "//input[@ng-reflect-name='YARD BOSStxSteadyNm00']",
-        YardBossddl2: "//input[@ng-reflect-name='YARD BOSStxSteadyNm01']",
+        stdFXFlexList: "(//select[@id='cbSteadyFx'])[2]",
+        YardBossddl1: "(//input[@id='YARD BOSStxSteadyNm00'])[1]",
+        YardBossddl2: "(//input[@id='YARD BOSStxSteadyNm01'])[1]",
         FlexTypeList: "//select[contains(.,'FD')]",
         notes: "//div[@class='col-12']//textarea[1]",
         SaveMaycan: "//button[normalize-space(text())='SAVE/MAY-CAN']",
@@ -54,22 +54,22 @@ export default class yardOrderPagePOC {
         Push: "//button[normalize-space(text())='SAVE/PUSH']",
         successNotification: "//span[contains(normalize-space(text()), 'Order information has been saved successfully')]",
         pushbuttonNotification: "//span[contains(normalize-space(text()), 'The Order information has been pushed to Summary Sheet')]",
-        TRStatus: "//select[@ng-reflect-name='trStatus']",
-        homeicon: "//div[@ng-reflect-router-link='/home']//a[1]",
+        TRStatus: "(//select[@id='trStatus'])[1]",
+        homeicon: "//div[@routerlink='/home']//a[1]",
         summarysheet: "//a[normalize-space(text())='Summary Sheet']",
         YardOrderTab: "//a[normalize-space(text())='Yard Ops - 690101']",
         stdDbFXsummarySheet: "//*[@id='vesselLongshore']/div[1]/div/div/tbody/tr[1]/td[9]/input",
-        SteadyDBNamesummarySheet: "//input[@ng-reflect-name='YARD BOSStxSteadyNm00']",
-        stdDbFXFlexListsummarySheet: "//select[@ng-reflect-name='YARD BOSScbSteadyFx00']",
+        SteadyDBNamesummarySheet: "(//input[@id='YARD BOSStxSteadyNm00'])[1]",
+        stdDbFXFlexListsummarySheet: "(//select[@id='cbSteadyFx'])[1]",
         stdFXsummarySheet: "//*[@id='vesselLongshore']/div[1]/div/div/tbody/tr[1]/td[10]/input",
-        SteadyFXNamesummarySheet: "//input[@ng-reflect-name='YARD BOSStxSteadyNm01']",
-        stdFXFlexListsummarySheet: "//select[@ng-reflect-name='YARD BOSScbSteadyFx10']",
+        SteadyFXNamesummarySheet: "(//input[@id='YARD BOSStxSteadyNm01'])[1]",
+        stdFXFlexListsummarySheet: "(//select[@id='cbSteadyFx'])[2]",
         WorkDateInsideLaborOrder: "//input[@id='workDt' and @class='form-control']",
         TimehseetMenu: "//div[normalize-space(text())='Timesheet']",
         yardTimehseet: "//a[normalize-space(text())='Ops Yard Timesheet']",
         workDatetimehseet: "//input[@id='sWorkDt']",
-        shifttimehseet: "//select[@ng-reflect-name='shift']",
-        jobTypetimehseet: "//select[@ng-reflect-name='jobCode']",
+        shifttimehseet: "(//select[@id='shift'])[1]",
+        jobTypetimehseet: "(//select[@id='jobCode'])[1]",
         // Go: "//button[normalize-space(text())='GO']",
         ForemanTab: "//a[normalize-space(text())='Foreman']",
         SThrFirstRow: "//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[8]/input[1]",
@@ -302,17 +302,17 @@ export default class yardOrderPagePOC {
     async VerifySteadyDetailsAndManningCount(): Promise<void> {
         await this.base.waitAndClick(this.Elements.YardOrderTab);
         await this.base.waitAndClick(this.Elements.stdDbFXsummarySheet);
-        const StdDbFxYardBossCount = await this.page.locator(this.Elements.stdDbFXsummarySheet).getAttribute('ng-reflect-model');
+        const StdDbFxYardBossCount = await this.page.locator(this.Elements.stdDbFXsummarySheet).inputValue();
         expect(StdDbFxYardBossCount).toContain('1');
-        const StdFxYardBossCount = await this.page.locator(this.Elements.stdFXsummarySheet).getAttribute('ng-reflect-model');
+        const StdFxYardBossCount = await this.page.locator(this.Elements.stdFXsummarySheet).inputValue();
         expect(StdFxYardBossCount).toContain("1");
-        const SteadyDBName = await this.page.locator(this.Elements.SteadyDBNamesummarySheet).getAttribute('ng-reflect-model');
+        const SteadyDBName = await this.page.locator(this.Elements.SteadyDBNamesummarySheet).inputValue();
         expect(SteadyDBName).toContain("DiLeva, John J (John D) - 3840");
-        const stdDbFXFlexList = await this.page.locator(this.Elements.stdDbFXFlexListsummarySheet).getAttribute('ng-reflect-model');
+        const stdDbFXFlexList = await this.page.locator(this.Elements.stdDbFXFlexListsummarySheet).inputValue();
         expect(stdDbFXFlexList).toContain("2");
-        const SteadyFXName = await this.page.locator(this.Elements.SteadyFXNamesummarySheet).getAttribute('ng-reflect-model');
+        const SteadyFXName = await this.page.locator(this.Elements.SteadyFXNamesummarySheet).inputValue();
         expect(SteadyFXName).toContain("Ramirez, Johnny M (Johnny) - 3");
-        const stdFXFlexList = await this.page.locator(this.Elements.stdFXFlexListsummarySheet).getAttribute('ng-reflect-model');
+        const stdFXFlexList = await this.page.locator(this.Elements.stdFXFlexListsummarySheet).inputValue();
         expect(stdFXFlexList).toContain("1");
 
     }

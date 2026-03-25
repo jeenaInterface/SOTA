@@ -22,7 +22,8 @@ export default class LoginPage {
         logOutButton: "//i[@role='button']",
         logOut: "//a[normalize-space(text())='Logout']",
         pickAnAccount: "//small[@data-bind='text: session.unsafe_displayName']",
-        useAnotherAccount: "//div[normalize-space(text())='Use another account']"
+        useAnotherAccount: "//div[normalize-space(text())='Use another account']",
+        dashboard:"//span[normalize-space(text())='SOTA Dashboard']"
     };
 
     // async navigateToLoginPage(): Promise<void> {
@@ -34,21 +35,32 @@ export default class LoginPage {
 
     // }
     async navigateToLoginPage(): Promise<void> {
-        await this.base.goto(process.env.BASEURL, { timeout: 60000 });
 
+    for (let i = 0; i < 5; i++) {
+        await this.base.goto(process.env.BASEURL!, { timeout: 100000 });
 
-        // this.page.setViewportSize({ width: 1800, height: 1500 });
+        try {
+            await this.page.waitForSelector(this.Elements.userName, {
+                state: 'visible',
+                timeout: 10000
+            });
+            return; // username found
+        } catch {
+            await this.page.reload();
+        }
+    }
 
-        await this.page.waitForSelector(this.Elements.userName, { state: 'visible', timeout: 15000 });
+    throw new Error('Username field not found after 5 attempts');
+
     }
     async enterUserName(user: string): Promise<void> {
-        await this.page.waitForSelector(this.Elements.userName, { state: 'visible', timeout: 15000 });
+        await this.page.waitForSelector(this.Elements.userName, { state: 'visible', timeout: 100000 });
         await this.page.locator(this.Elements.userName).fill(user);
         await this.base.waitAndClick(this.Elements.next);
     }
 
     async enterPassword(password: string): Promise<void> {
-        await this.page.waitForSelector(this.Elements.password, { state: 'visible', timeout: 15000 });
+        await this.page.waitForSelector(this.Elements.password, { state: 'visible', timeout: 100000 });
         await this.page.locator(this.Elements.password).fill(password);
         await this.page.getByRole('button', { name: 'Sign in' }).click();
     }
@@ -64,6 +76,18 @@ export default class LoginPage {
         await this.enterUserName(username);
         await this.enterPassword(password);
         await this.clickLoginButton();
+        //add delay to wait for the login process to complete
+        await this.page.waitForTimeout(10000);
+        //do multiple refresh until the dashboard is visible or max 5 times
+        for (let i = 0; i < 5; i++) {
+            try {
+                await this.page.waitForSelector(this.Elements.dashboard, { state: 'visible', timeout: 100000 });
+                return; // dashboard found
+            } catch {
+                await this.page.reload();
+            }   
+        }
+        throw new Error('Dashboard not found after 5 attempts');
     }
 
     async logOutDropDownlist(): Promise<void> {

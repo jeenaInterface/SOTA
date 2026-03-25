@@ -1,6 +1,6 @@
 Feature: Increase/Decrease Timesheet Management
 
-@sanity
+@sanity @test2
   Scenario: TR management user creates and saves increase/decrease timesheet, OPS management approves, reject and deletes the entry - rail order
     Given TR user logged into the application
     And I navigate to the Increase-Decrease Timesheet page

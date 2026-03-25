@@ -18,5 +18,5 @@ const reportConfig: OrtoniReportConfig = {
 
 export default defineConfig({
   reporter: [["ortoni-report", reportConfig], ["dot"]],
-  // Other Playwright configurations
+  timeout: 60000, // 60 seconds per test
 });

@@ -32,7 +32,7 @@ Feature: Steady Schedule Functionalities
         And User clicks on Save button
 
 
-    @sanity @failed2
+    @sanity @test2
     Scenario: LR managment user - View functionality
         Given LR managment user logged into the application
         And User navigates to the steady schedule page

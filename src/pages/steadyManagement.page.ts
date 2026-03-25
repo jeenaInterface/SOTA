@@ -26,7 +26,7 @@ export default class steadyManagementPage {
     private Elements = {
         steady: "//div[normalize-space(text())='Steady']",
         steadyManagement: "//div[@data-bs-popper='static']//a[1]",
-        OperationType: "//select[@ng-reflect-name='opsType']",
+        OperationType: "//select[@formcontrolname='opsType']",
         column: "th",
         orderDetails: "//small[text()='Order Id']/following-sibling::div",
         button: "(//button[text()='View'])[1]",
@@ -41,7 +41,6 @@ export default class steadyManagementPage {
         createNewSteadyButton: "//button[normalize-space()='ADD STEADY']",
         downloadReportButton: "//button[normalize-space()='DOWNLOAD REPORT']",
         steadyReportButton: "//button[normalize-space()='STEADY DETAILS REPORT']",
-        operationalTypeDefault: "//select[@ng-reflect-name='opsType']//option[@value='']",
         steadyNameField: "//input[@formcontrolname='name']",
         successMessage: "//span[contains(text(),'successfully')]",
         downloadPath: "//downloads/steady-report.xlsx",
@@ -65,11 +64,11 @@ export default class steadyManagementPage {
         name1:"//input[@formcontrolname='emer1Nm']",
         name2:"//input[@formcontrolname='emer2Nm']",
         relation1:"//input[@formcontrolname='emer1Rel']",
-        relation2:"//input[@ng-reflect-name='emer2Rel']",
-        cell1:"//input[@ng-reflect-name='emer1CellPhone']",
-        cell2:"//input[@ng-reflect-name='emer2CellPhone']",
-        home1:"//input[@ng-reflect-name='emer1HomePhone']",
-        home2:"//input[@ng-reflect-name='emer2HomePhone']",
+        relation2:"//input[@formcontrolname='emer2Rel']",
+        cell1:"//input[@formcontrolname='emer1CellPhone']",
+        cell2:"//input[@formcontrolname='emer2CellPhone']",
+        home1:"//input[@formcontrolname='emer1HomePhone']",
+        home2:"//input[@formcontrolname='emer2HomePhone']",
     };
 
     async clicksteadyMenuButton(): Promise<void> {

@@ -18,7 +18,7 @@ Feature: Security Labor Order Management
         Then verify cancel functionality
         When User downloads the security labor report
 
-    @sanity @securityLaborOrder1
+    @sanity @securityLaborOrder18
     Scenario: Verify Mandatory field validations
         When User navigates to security labor order page
         And User selects date and clicks GO button

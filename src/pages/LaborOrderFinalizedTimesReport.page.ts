@@ -48,6 +48,7 @@ export class LaborOrderFinalizedTimesReportPage {
         const downloadPathWithFileName = path.join(downloadPath, 'Labor_Order_Finalized_Times_Report.xlsx');
         await download.saveAs(downloadPathWithFileName);
         expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+         await new Promise(resolve => setTimeout(resolve, 1000));
         return downloadPathWithFileName;
     }
 
@@ -64,6 +65,7 @@ export class LaborOrderFinalizedTimesReportPage {
         const downloadPathWithFileName = path.join(downloadPath, 'Labor_Order_Finalized_After_Deadlines_Report.xlsx');
         await download.saveAs(downloadPathWithFileName);
         expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+         await new Promise(resolve => setTimeout(resolve, 1000));
         return downloadPathWithFileName;
     }
 

@@ -6,19 +6,13 @@ import { getEnv } from "../helper/env/env";
 import { createLogger } from "winston";
 import { options } from "../helper/util/logger";
 const fs = require("fs-extra");
-import { ITestCaseHookParameter } from '@cucumber/cucumber';
 
 let browser: Browser;
 let context: BrowserContext;
 
 BeforeAll(async function () {
     getEnv();
-    try {
-        browser = await invokeBrowser();
-    } catch (err) {
-        console.error('BeforeAll: failed to launch browser:', err && err.stack ? err.stack : err);
-        throw err; // rethrow so cucumber shows the failure
-    }
+    browser = await invokeBrowser();
 });
 // It will trigger for not auth scenarios
 Before({ tags: "not @auth" }, async function ({ pickle }) {
@@ -28,12 +22,14 @@ Before({ tags: "not @auth" }, async function ({ pickle }) {
             dir: "test-results/videos",
         },
     });
+    
     const page = await context.newPage();
     fixture.page = page;
     fixture.logger = createLogger(options(scenarioName));
 });
 
 
+// It will trigger for auth scenarios
 Before({ tags: '@auth' }, async function ({ pickle }) {
     const scenarioName = pickle.name + pickle.id
     context = await browser.newContext({
@@ -46,8 +42,6 @@ Before({ tags: '@auth' }, async function ({ pickle }) {
     fixture.page = page;
     fixture.logger = createLogger(options(scenarioName));
 });
-
-
 
 After(async function ({ pickle, result }) {
     let videoPath: string;
@@ -103,18 +97,15 @@ After(async function ({ pickle, result }) {
 
 });
 
-AfterAll(async function() {
+AfterAll(async function () {
     await browser.close();
+
 })
 
 
 function getStorageState(user: string): string | { cookies: { name: string; value: string; domain: string; path: string; expires: number; httpOnly: boolean; secure: boolean; sameSite: "Strict" | "Lax" | "None"; }[]; origins: { origin: string; localStorage: { name: string; value: string; }[]; }[]; } {
-    if (user.includes("TR"))
-        return "src/helper/auth/TR.json";
-    else if (user.includes("Ops"))
-        return "src/helper/auth/Ops.json";
-    else if (user.includes("OCU"))
-        return "src/helper/auth/ops.json";
-    else if (user.includes("Accounting"))
-        return "src/helper/auth/ops.json";
+    if (user.endsWith("admin"))
+        return "src/helper/auth/admin.json";
+    else if (user.endsWith("lead"))
+        return "src/helper/auth/lead.json";
 }

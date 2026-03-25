@@ -5,7 +5,7 @@ Feature: Steady tracking sheet Functionalities
 
 
 
-    @steadyTrackingSheet @sanity
+    @steadyTrackingSheet @sanity @test4
     Scenario: Update steady tracking sheet
         Given TR user logged into the application
         And User navigates to the steady tracking sheet page

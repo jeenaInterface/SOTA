@@ -18,7 +18,7 @@ export class SecurityPage {
 
     private Elements = {
         securityMenu: "//div[normalize-space()='Security Menu']",
-        homeicon: "//div[@ng-reflect-router-link='/home']//a[1]",
+        homeicon: "//div[@routerlink='/home']//a[1]",
         securityLaborOrderMenu: "//a[normalize-space()='Security Labor Order']",
         dateInput: "//input[@id='sWorkDate']",
         goButton: "//button[normalize-space()='GO']",

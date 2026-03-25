@@ -1,6 +1,6 @@
 Feature:  Payroll Management Functionalities
 
-    @sanity @test1
+    @sanity @payroll
     Scenario: Functionalities under payroll management
         Given TR user logged into the application
         Then TR user creates a new labor order

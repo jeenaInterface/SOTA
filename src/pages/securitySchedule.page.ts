@@ -17,7 +17,7 @@ export class SecuritySchedulePage {
         securityMenu: "//div[normalize-space()='Security Menu']",
         laborOrder: "//a[normalize-space()='Security Labor Order']",
         scheduleMenu: "//a[normalize-space()='Daily Security Schedule']",
-        homeicon: "//div[@ng-reflect-router-link='/home']//a[1]",
+        homeicon: "//div[@routerlink='/home']//a[1]",
         dateInput: "//input[@id='sWorkDt']",
         dateInTimesheet: "//input[@id='sWorkDate']",
         shiftDropdown: "//select[@id='shift']",
@@ -124,7 +124,7 @@ export class SecuritySchedulePage {
         const maxAttempts = 10;
 
         // Start from current date minus 50 days
-        currentDate.setDate(currentDate.getDate() - 5);
+        currentDate.setDate(currentDate.getDate() - 15);
 
         for (let attempts = 0; attempts < maxAttempts; attempts++) {
             formattedDate = `${currentDate.getFullYear()}-${(currentDate.getMonth() + 1)

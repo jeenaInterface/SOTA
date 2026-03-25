@@ -121,6 +121,7 @@ export class LaborOrderDiscrepanciesReportPage {
         await download.saveAs(downloadPathWithFileName);
         console.log(`File downloaded to: ${downloadPathWithFileName}`);
         expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+         await new Promise(resolve => setTimeout(resolve, 1000));
         return downloadPathWithFileName;
 
     }
@@ -143,6 +144,7 @@ export class LaborOrderDiscrepanciesReportPage {
         await download.saveAs(downloadPathWithFileName);
         console.log(`File downloaded to: ${downloadPathWithFileName}`);
         expect(fs.existsSync(downloadPathWithFileName)).toBeTruthy();
+         await new Promise(resolve => setTimeout(resolve, 1000));
         return downloadPathWithFileName;
 
 

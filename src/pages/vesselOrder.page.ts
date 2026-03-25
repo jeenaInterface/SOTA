@@ -30,12 +30,12 @@ export default class vesselOrderPage {
         vesselOrder: "//a[normalize-space(text())='Ops Vessel Order']",
         workDate: "//input[@aria-describedby='Work Date']",
         workDateSummarySheet: "//input[@type='date']",
-        shift: "//select[@ng-reflect-name='shift']",
+        shift: "(//select[@id='shift'])[1]",
         yesCheckBox:"(//input[@id='radio-button'])[2]",
-        jobNo: "//input[@ng-reflect-name='jobNo']",
+        jobNo: "(//input[@id='jobNo'])[1]",
         Go: "//button[normalize-space(text())='GO']",
-        TRStatus: "//select[@ng-reflect-name='trStatus']",
-        homeicon: "//div[@ng-reflect-router-link='/home']//a[1]",
+        TRStatus: "(//select[@id='trStatus'])[1]",
+        homeicon: "//div[@routerlink='/home']//a[1]",
         dataList: "//datalist[@id='nameListData']",
         berth: "//select[@id='berth']",
         startTime: "//select[@id='startTime']",
@@ -47,7 +47,7 @@ export default class vesselOrderPage {
         STDYFX: "//*[@id='first']/div/div/tbody/tr[1]/td[7]/input",
         LASHBOSSSTEADY: "//input[@list='nameListData00']",
         LASHBOSSSTEADYflexType: "//select[@id='cbSteadyFx']",
-        textArea: "//textarea[@ng-reflect-name='notes']",
+        textArea: "//textarea[@id='notes']",
         savemaycan: "//button[normalize-space(text())='SAVE/MAY-CAN']",
         SteadyDBName: "//datalist//option[contains(text(), 'Albano, Bill (Bill) - 38280')]",
         successNotification: "//span[contains(normalize-space(text()), 'Order information has been saved successfully')]",
@@ -63,7 +63,7 @@ export default class vesselOrderPage {
         TimehseetMenu: "//div[normalize-space(text())='Timesheet']",
         vesselTimehseet: "//a[normalize-space(text())='Ops Vessel Timesheet']",
         workDatetimehseet: "//input[@id='sWorkDt']",
-        shifttimehseet: "//select[@ng-reflect-name='shift']",
+        shifttimehseet: "(//select[@id='shift'])[1]",
         ForemanTab: "//a[normalize-space(text())='Foreman']",
         SThrFirstRow: "//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[8]/input[1]",
         OThrFirstRow: "//table[contains(@class,'table table-form')]/tbody[1]/tr[1]/td[9]/input[1]",
@@ -94,6 +94,7 @@ export default class vesselOrderPage {
         RollingCodeCloseButton: "//div[@id='rollingCode']//button[@class='btn button-action'][normalize-space()='Close']",
         GoButton: "//button[normalize-space()='Go']",
         validationMessageForMandatoryFields: "(//span[@class='text-bold color-white'])[1]",
+        LongShoreTab:"//a[normalize-space(text())='Longshore']",
         stdyHammerhead: "//*[@id='first']/div/div/tbody/tr[5]/td[10]/input",
         stdyValidationMessage: "//span[normalize-space(text())='The total Flex Steady Count and the total Flex Steady names are not matching for Longshore']",
         newOrderMenu: "//a[normalize-space()='New Order Form']",
@@ -124,8 +125,8 @@ export default class vesselOrderPage {
         alcNo: "//tr[.//text()='Alc No']//input",
         reqRound: "select[name='reqRound']",
         orderedRound: "select[name='orderedRound']",
-        reqTime: "(//select[@ng-reflect-name='reqTime'])[3]",
-        orderTime: "(//select[@ng-reflect-name='reqTime'])[4]",
+        reqTime: "(//select[@name='reqTime'])[1]",
+        orderTime: "(//select[@name='reqTime'])[2]",
         jobType: "(//select[@data-placement='top'])[1]",
         jobType1: "(//select[@data-placement='top'])[2]",
         jobType2: "(//select[@data-placement='top'])[3]",
@@ -141,6 +142,9 @@ export default class vesselOrderPage {
         remarksInput: "//textarea[@placeholder='Enter your remarks here...']",
         addRemarksButton: "//button[normalize-space()='Add Remarks']",
         addSteadyTableButton: "//button[normalize-space()='ADD STEADY TABLE']",
+        reqTimeSteady:"(//select[@name='reqTime'])[3]",
+        orderTimeSteady:"(//select[@name='reqTime'])[4]",
+
         searchByName: "//input[@placeholder='Search By Name or Reg #']",
         invalidCheck: "#invalidCheck",
         carbonInput: '#carbon',
@@ -154,7 +158,7 @@ export default class vesselOrderPage {
         LaborOrderDifferenceReport: "//i[@title='Labor Order Difference Report']",
         labelOnDifferenceReport: "//h5[contains(text(),'Pier E - LB 24 - COSCO KAOHSIUNG - 090 - 100741 - ')]",
         summarysheetContent: "//td[normalize-space()='BACK']",
-        berthNewOrder: "//select[@ng-reflect-name='berth']",
+        berthNewOrder: "(//select[@id='berth'])[1]",
         operationNewOrderTable: "(//input[@type='text'])[4]",
         operationSteadyTable: "(//input[@type='text'])[6]",
         bossNewOrderTable: "(//input[@type='text'])[5]",
@@ -529,6 +533,7 @@ export default class vesselOrderPage {
     }
     async validationMessageForSteadtcount(): Promise<void> {
         this.EnterHeaderDetails()
+        await this.base.waitAndClick(this.Elements.LongShoreTab);
         await this.page.locator(this.Elements.stdyHammerhead).fill("1");
         await this.page.locator('body').click();
         await this.base.waitAndClick(this.Elements.savemaycan);
@@ -673,8 +678,8 @@ export default class vesselOrderPage {
 
         // Add steady table
         await this.page.locator(this.Elements.addSteadyTableButton).click();
-        await this.page.locator(this.Elements.reqTime).selectOption('FLEX');
-        await this.page.locator(this.Elements.orderTime).selectOption('REGULAR');
+        await this.page.locator(this.Elements.reqTimeSteady).selectOption('FLEX');
+        await this.page.locator(this.Elements.orderTimeSteady).selectOption('REGULAR');
         await this.page.locator(this.Elements.jobType1).selectOption('VPT');
         await this.page.locator(this.Elements.jobType2).selectOption('VPT');
         // Search and select employee
@@ -688,7 +693,7 @@ export default class vesselOrderPage {
         await this.base.waitAndClick(this.Elements.saveButton);
         expect(await this.page.locator(this.Elements.successMessageneworder)).toBeVisible();
         fixture.logger.info("Waiting for 2 seconds");
-        await fixture.page.waitForTimeout(2000);
+        await fixture.page.waitForTimeout(10000);
     }
 
     async dockworkDetails() {
@@ -720,8 +725,8 @@ export default class vesselOrderPage {
 
         // Add steady table
         await this.page.locator(this.Elements.addSteadyTableButton).click();
-        await this.page.locator(this.Elements.reqTime).selectOption('FLEX');
-        await this.page.locator(this.Elements.orderTime).selectOption('REGULAR');
+        await this.page.locator(this.Elements.reqTimeSteady).selectOption('FLEX');
+        await this.page.locator(this.Elements.orderTimeSteady).selectOption('REGULAR');
         await this.page.locator(this.Elements.jobType1).selectOption('FR');
         await this.page.locator(this.Elements.jobType2).selectOption('DST');
         // Search and select employee
@@ -763,8 +768,8 @@ export default class vesselOrderPage {
 
         // Add steady table
         await this.page.locator(this.Elements.addSteadyTableButton).click();
-        await this.page.locator(this.Elements.reqTime).selectOption('4PMfx');
-        await this.page.locator(this.Elements.orderTime).selectOption('4PMfx');
+        await this.page.locator(this.Elements.reqTimeSteady).selectOption('4PMfx');
+        await this.page.locator(this.Elements.orderTimeSteady).selectOption('4PMfx');
         await this.page.locator(this.Elements.jobType1).selectOption('LB');
         await this.page.locator(this.Elements.jobType2).selectOption('LB');
         // Search and select employee
@@ -813,8 +818,8 @@ export default class vesselOrderPage {
         await this.page.locator(this.Elements.addSteadyTableButton).click();
         await this.page.locator(this.Elements.operationSteadyTable).fill('vessel');
         await this.page.locator(this.Elements.bossSteadyTable).fill('John');
-        await this.page.locator(this.Elements.reqTime).selectOption('5PM');
-        await this.page.locator(this.Elements.orderTime).selectOption('5PM');
+        await this.page.locator(this.Elements.reqTimeSteady).selectOption('5PM');
+        await this.page.locator(this.Elements.orderTimeSteady).selectOption('5PM');
         await this.page.locator(this.Elements.jobType1).selectOption('DB');
         await this.page.locator(this.Elements.jobType2).selectOption('DB');
         // Search and select employee

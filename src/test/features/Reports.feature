@@ -23,7 +23,7 @@ Feature: Reports in SOTA APPLICATION
         Then Verify Reset Discrepancies Functionalities
         Then Verify Delete Discrepancies Functionalities
 
-    @DispatchNote @sanity @failed
+    @DispatchNote @sanity @test2
     Scenario: VERIFY Dispatch Note Report
         Given TR user logged into the application
         Then I am on the Dispatch Note Report page
@@ -53,19 +53,19 @@ Feature: Reports in SOTA APPLICATION
         Then I am on the Timesheet Report page
         Then Click on timesheet Report button with date range and verify the report downloaded successfully
 
-    @TimesheetReviewRecapReport @sanity
+    @TimesheetReviewRecapReport @sanity @test2
     Scenario: VERIFY Timesheet Review Recap Report
         Given TR user logged into the application
         Then I am on the Timesheet Review Recap Report page
         Then Click on timesheet Review Recap report button and verify the report downloaded successfully
 
-    @SteadyJobAssignmentsDuplicateCheckReport @sanity @failed
+    @SteadyJobAssignmentsDuplicateCheckReport @sanity @test3
     Scenario: VERIFY Steady Job Assignments Duplicate Check Report
         Given TR user logged into the application
         Then I am on the Steady Job Assignments Duplicate Check Report page
         Then Click on Steady Job Assignments Duplicate Check report button and verify the report downloaded successfully
     
-    @LaborOrderFinalizedTimesReport @sanity @rerun
+    @LaborOrderFinalizedTimesReport @sanity @test2
     Scenario: VERIFY Labor Order Finalized Times Report
         Given TR user logged into the application
         Then I am on the Labor Order Finalized Times Report page

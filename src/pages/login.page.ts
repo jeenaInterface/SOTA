@@ -77,7 +77,7 @@ export default class LoginPage {
         await this.enterPassword(password);
         await this.clickLoginButton();
         //add delay to wait for the login process to complete
-        await this.page.waitForTimeout(10000);
+        await this.page.waitForTimeout(100000);
         //do multiple refresh until the dashboard is visible or max 5 times
         for (let i = 0; i < 5; i++) {
             try {

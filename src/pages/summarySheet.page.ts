@@ -14,8 +14,8 @@ export default class summarySheetPage {
     public page: Page;  // Same with page property
 
     // Declare the global variable for noTRStatusDate at the class level
-    public noTRStatusDate: string;
-    private weekNumber: number;
+    public noTRStatusDate: string = '';
+    private weekNumber: number = 0;
 
     // Constructor accepts the Page object
     constructor(page: Page) {
@@ -36,17 +36,17 @@ export default class summarySheetPage {
         // New locators for summary sheet update
         calStatus: "#calStatus",
         newOrderStatus: "#newOrderStatus",
-        comeBackCatchUpSpin2: "//*[@id='vesselLongshore']/div[2]/div/div/tbody/tr[1]/td[15]/input",
-        comeBackCatchUpSpin3: "//*[@id='vesselLongshore']/div[2]/div/div/tbody/tr[1]/td[16]/input",
+        comeBackCatchUpSpin2: "(//label[normalize-space(text())='COME BACK']/following::input)[3]",
+        comeBackCatchUpSpin3: "(//label[normalize-space(text())='COME BACK']/following::input)[4]",
         references: "#references",
         gangsFinish: "#gangsFinish",
         manningField15: "//*[@id='vesselLongshore']/div[2]/div/div/tbody/tr[1]/td[4]/input",
         manningField16: "//*[@id='vesselLongshore']/div[2]/div/div/tbody/tr[1]/td[5]/input",
         manningField16Row3: "//*[@id='vesselLongshore']/div[2]/div/div/tbody/tr[1]/td[5]/input",
         swingLashIcon: "//*[@id='vesselLongshore']/div[3]/div/div/tbody/tr[4]/td[3]/input",
-        remarksButton: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-summary-sheet[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/tbody[1]/tr[1]/td[17]/i[1]",
-        remarksInput: "//*[@placeholder='Enter your remarks here...']",
-        addRemarksButton: "//button[normalize-space()='Add Remarks']",
+        // remarksButton: "//body[1]/app-root[1]/app-home[1]/div[1]/div[1]/section[1]/div[1]/app-summary-sheet[1]/div[1]/div[1]/div[1]/div[3]/div[1]/div[3]/div[1]/div[2]/div[1]/div[1]/tbody[1]/tr[1]/td[17]/i[1]",
+        // remarksInput: "//*[@placeholder='Enter your remarks here...']",
+        // addRemarksButton: "//button[normalize-space()='Add Remarks']",
         trNotes: "#trNotes",
         downloadReport: "//button[normalize-space()='DOWNLOAD REPORT']",
         LaborOrderDifferenceReport: "//i[@title='Labor Order Difference Report']",

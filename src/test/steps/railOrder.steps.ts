@@ -55,7 +55,7 @@ Then('Verify that the appropriate validation message for steady name and steady 
 
 Given('the user creates a new rail timesheet', async function () {
   await railOrder.clickOnTimehseetMenu();
-  let LatestWorkOrderDate: string;
+  let LatestWorkOrderDate: string = '';
   await railOrder.SelectDetailsOnLandingPageTimehseetTRUser(LatestWorkOrderDate);
   await railOrder.clickOnClerkTab();
   await railOrder.FillHrsTab();
@@ -73,7 +73,7 @@ Then('the user saves and submits the rail order', async function () {
 
 Then('Ops user submits and approve the rail order timesheet', async function () {
   await railOrder.clickOnTimehseetMenu();
-  let LatestWorkOrderDate: string;
+  let LatestWorkOrderDate: string = '';
   await railOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
   await railOrder.clickOnClerkTab();
   await vesselOrder.SubmitTimehseet();
@@ -90,7 +90,7 @@ Then('verify remove approval functionality in rail timehseet', async function ()
 });
 
 Then('Labor entry add new steady details and mgr comments and submit the rail order timehseet', async function () {
-  let RollingCode: string;
+  let RollingCode: string = '';
   await railOrder.pasteRollingCode(RollingCode);
   await railOrder.AddNewRowRail();
   await vesselOrder.SubmitTimehseet();

@@ -34,7 +34,7 @@ Then('the user cancel the Terminal Services Order', async function () {
 
 Given('the user creates a timesheet for the Terminal Services Order', async function () {
     await terminalServiceOrder.clickOnTimehseetMenu();
-    let LatestWorkOrderDate: string
+    let LatestWorkOrderDate: string = '';
     await terminalServiceOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
     await terminalServiceOrder.clickOnSweeperTab();
 });
@@ -59,7 +59,7 @@ Then('the user saves and submits the Terminal Services Timehseet', async functio
 Then('Ops user submits and approve the Terminal Services Timehseet', async function () {
 
     await terminalServiceOrder.clickOnTimehseetMenu();
-    let LatestWorkOrderDate: string
+    let LatestWorkOrderDate: string = '';
     await terminalServiceOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
     await terminalServiceOrder.clickOnSweeperTab();
     await terminalServiceOrder.FillHrsTab();
@@ -69,7 +69,7 @@ Then('Ops user submits and approve the Terminal Services Timehseet', async funct
 Then('TS user submits and approve the Terminal Services Timehseet', async function () {
 
     await terminalServiceOrder.clickOnTimehseetMenu();
-    let LatestWorkOrderDate: string
+    let LatestWorkOrderDate: string = '';
     await terminalServiceOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
     await terminalServiceOrder.clickOnSweeperTab();
     await terminalServiceOrder.FillHrsTab();
@@ -87,7 +87,7 @@ Then('verify remove approval functionality of Terminal Services Timehseet', asyn
     await terminalServiceOrder.storeRollingCodeTerminalServiceOrderTimesheet();
 });
 Then('Labor entry add new steady details and mgr comments and submit the Terminal Services Timehseet', async function () {
-    let RollingCode: string
+    let RollingCode: string = '';
     await terminalServiceOrder.pasteRollingCode(RollingCode);
     await terminalServiceOrder.AddNewRowterminal();
     await vesselOrder.SubmitTimehseet();

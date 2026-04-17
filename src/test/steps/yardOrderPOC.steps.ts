@@ -29,14 +29,14 @@ Given('TR user creates a new labor order', async function () {
 
 Then('TR user verifies that the labor order is pushed to the summary sheet and verifies the details', async function () {
   await yardOrder.clickOnSummarySheetMenu();
-  let LatestWorkOrderDate: string;
+ let LatestWorkOrderDate: string = '';
   await yardOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate);
   await yardOrder.VerifySummarySheetCreated();
   await yardOrder.VerifySteadyDetailsAndManningCount();
 });
 Then('TR user creates a timesheet for the same labor order', async function () {
   await yardOrder.clickOnTimehseetMenu();
-  let LatestWorkOrderDate: string
+  let LatestWorkOrderDate: string = '';
   await yardOrder.SelectDetailsOnLandingPageTimehseetTRUSER(LatestWorkOrderDate);
   await yardOrder.clickOnForemanTab();
   await yardOrder.FillHrsTab();
@@ -45,7 +45,7 @@ Then('TR user creates a timesheet for the same labor order', async function () {
 });
 Then('Ops user submits and approve the timesheet', async function () {
   await yardOrder.clickOnTimehseetMenu();
-  let LatestWorkOrderDate: string
+  let LatestWorkOrderDate: string = '';
   await yardOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
   await yardOrder.clickOnForemanTab();
   await yardOrder.SubmitandApprovetheTimehseet()
@@ -205,7 +205,7 @@ Then('verify Notify manager functionality', async function () {
 
 Then('TR user creates a yard order timesheet for the same labor order without entering any details', async function () {
   await yardOrder.clickOnTimehseetMenu();
-  let LatestWorkOrderDate: string
+  let LatestWorkOrderDate: string = '';
   await yardOrder.SelectDetailsOnLandingPageTimehseetTRUSER(LatestWorkOrderDate);
   await yardOrder.clickOnSaveAndSubmit();
   await yardOrder.verifySuccessMessage();
@@ -213,7 +213,7 @@ Then('TR user creates a yard order timesheet for the same labor order without en
 
 Then('Ops user click on save and submit button without entering any details in the timesheet', async function () {
   await yardOrder.clickOnTimehseetMenu();
-  let LatestWorkOrderDate: string
+  let LatestWorkOrderDate: string = '';
   await yardOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
   await yardOrder.clickOnForemanTab();
   await yardOrder.SubmitandApprovetheTimehseetWithoutenterMandatoryData()

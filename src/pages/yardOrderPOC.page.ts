@@ -18,8 +18,8 @@ export default class yardOrderPagePOC {
     public page: Page;  // Same with page property
 
     // Declare the global variable for noTRStatusDate at the class level
-    public noTRStatusDate: string;
-    private weekNumber: number;
+    public noTRStatusDate: string = '';
+    private weekNumber: number = 0;
 
     // Constructor accepts the Page object
     constructor(page: Page) {
@@ -240,14 +240,13 @@ export default class yardOrderPagePOC {
         await this.page.locator(this.Elements.YardBossddl1).press("Enter");
         // Locate the option element using XPath and get the text
         const YardBossddl1Steady = await this.page.locator(this.Elements.SteadyDBName).textContent();
-        await this.page.locator(this.Elements.YardBossddl1).fill(YardBossddl1Steady);
+        await this.page.locator(this.Elements.YardBossddl1).fill(YardBossddl1Steady || '');
         await this.page.locator(this.Elements.stdDbFXFlexList).selectOption('2');
         await this.page.locator(this.Elements.YardBossddl2).fill("34343");
         await this.page.locator(this.Elements.YardBossddl2).press("Enter");
         const YardBossddl2Steady = await this.page.locator(this.Elements.SteadyFXName).textContent();
-        await this.page.locator(this.Elements.YardBossddl2).fill(YardBossddl2Steady);
+        await this.page.locator(this.Elements.YardBossddl2).fill(YardBossddl2Steady || '');
         await this.page.locator(this.Elements.stdFXFlexList).selectOption('1');
-
     }
 
     async ClickSaveMayCan(): Promise<void> {
@@ -405,8 +404,8 @@ export default class yardOrderPagePOC {
             3: 5, // Wednesday -> batch 5
             4: 6, // Thursday -> batch 6
             5: 7  // Friday -> batch 7
-        };
-        const weekNumber = weekNumberMap[dayOfWeek];
+        } as const;
+        const weekNumber = weekNumberMap[dayOfWeek as keyof typeof weekNumberMap];
         console.log(`Clicking on week number: ${weekNumber}`);
 
         // Click on the particular number (week number)
@@ -476,9 +475,9 @@ export default class yardOrderPagePOC {
             3: 5, // Wednesday -> batch 5
             4: 6, // Thursday -> batch 6
             5: 7  // Friday -> batch 7
-        };
+        } as const;
 
-        this.weekNumber = weekNumberMap[dayOfWeek];
+        this.weekNumber = weekNumberMap[dayOfWeek as keyof typeof weekNumberMap];
         console.log(`Calculated week number: ${this.weekNumber}`);
     }
     async waitForDifferenceButton(): Promise<void> {
@@ -768,6 +767,8 @@ export default class yardOrderPagePOC {
         fixture.logger.info("Waiting for 2 seconds");
         await fixture.page.waitForTimeout(2000);
         await this.base.waitAndClick(this.Elements.saveWithOutSubmitting);
+        await fixture.page.waitForTimeout(2000);
+
 
     }
 

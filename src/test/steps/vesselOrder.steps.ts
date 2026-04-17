@@ -38,7 +38,7 @@ Then('the user cancel the order', async function () {
 });
 Given('the user creates a new vessel timesheet', async function () {
   await vesselOrder.clickOnTimehseetMenu();
-  let LatestWorkOrderDate: string
+  let LatestWorkOrderDate: string = '';
   await vesselOrder.SelectDetailsOnLandingPageTimehseetTRUSER(LatestWorkOrderDate);
   await vesselOrder.clickOnForemanTab();
   await vesselOrder.FillHrsTab();
@@ -55,7 +55,7 @@ Then('the user saves and submits the vessel order', async function () {
 });
 Then('Ops user submits and approve the vessel timesheet', async function () {
   await vesselOrder.clickOnTimehseetMenu();
-  let LatestWorkOrderDate: string
+  let LatestWorkOrderDate: string = '';
   await vesselOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
   await vesselOrder.clickOnForemanTab();
   await vesselOrder.SubmitTimehseet();
@@ -73,7 +73,7 @@ Then('verify remove approval functionality', async function () {
   await vesselOrder.storeRollingCode()
 });
 Then('Labor entry add new steady details and mgr comments and submit the timehseet', async function () {
-  let RollingCode: string
+  let RollingCode: string = '';
   await vesselOrder.pasteRollingCode(RollingCode);
   await vesselOrder.AddNewRow();
   await vesselOrder.SubmitTimehseet();
@@ -90,7 +90,7 @@ Then('Verify that the appropriate validation message for steady name and steady 
 });
 Then('TR user verifies that the vessel labor order is pushed to the summary sheet and verifies the details', async function () {
   await vesselOrder.clickOnSummarySheetMenu();
-  let LatestWorkOrderDate: string
+  let LatestWorkOrderDate: string = '';
   await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate);
 });
 
@@ -132,21 +132,21 @@ When('the user fills details in dock work under local 94', async function () {
 Then('Verify download labor order difference report', async function () {
   await vesselOrder.downloadLaborOrderDifferenceReport();
   await vesselOrder.clickOnSummarySheetMenu();
-  let LatestWorkOrderDate: string
+  let LatestWorkOrderDate: string = '';
   await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate)
   await summarySheet.VerifySummarySheetCreated();
 });
 Then('Verify hall labor report', async function () {
   await summarySheet.HallLaborReport();
   await vesselOrder.clickOnSummarySheetMenu();
-  let LatestWorkOrderDate: string
+  let LatestWorkOrderDate: string = '';
   await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate)
   await summarySheet.VerifySummarySheetCreated();
 });
 Then('Verify steady dispatch report', async function () {
   await summarySheet.steadyDispatchReport();
   await vesselOrder.clickOnSummarySheetMenu();
-  let LatestWorkOrderDate: string
+  let LatestWorkOrderDate: string = '';
   await vesselOrder.SelectDetailsOnLandingPageSummarysheet(LatestWorkOrderDate)
   await summarySheet.VerifySummarySheetCreated();
 });

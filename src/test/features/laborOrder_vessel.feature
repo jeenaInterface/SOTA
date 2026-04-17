@@ -12,7 +12,7 @@ Feature: Vessel order and ops vessel timesheet functionalities
     Then the user push the labor order to the summary sheet
     Then the user cancel the order
 
-  @sanity @vessel
+  @sanity @rerun2
   Scenario: The TR user creates a new vessel order and discards it
     Given TR user logged into the application
     Given the user creates a new vessel order

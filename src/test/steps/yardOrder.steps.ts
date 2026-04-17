@@ -46,7 +46,7 @@ Then('Verify that the appropriate validation message for start time field', asyn
 
 Given('the user creates a timesheet for the yard order', async function () {
   await YardOrder.clickOnTimehseetMenu();
-  let LatestWorkOrderDate: string
+  let LatestWorkOrderDate: string = '';
   await YardOrder.SelectDetailsOnLandingPageTimehseetTRUSER(LatestWorkOrderDate);
   await YardOrder.clickOnForemanTab();
   await YardOrder.FillHrsTab();
@@ -64,7 +64,7 @@ When('the user saves and submits the yard order', async function () {
 });
 Then('Ops user submits and approve the yard timesheet', async function () {
   await YardOrder.clickOnTimehseetMenu();
-  let LatestWorkOrderDate: string
+  let LatestWorkOrderDate: string = '';
   await YardOrder.SelectDetailsOnLandingPageTimehseet(LatestWorkOrderDate);
   await YardOrder.clickOnForemanTab();
   await vesselOrder.SubmitTimehseet();
@@ -82,7 +82,7 @@ Then('verify remove approval functionality of yard timehseet', async function ()
   await vesselOrder.storeRollingCode()
 });
 Then('Labor entry add new steady details and mgr comments and submit the yard order timehseet', async function () {
-  let RollingCode: string
+  let RollingCode: string = '';
   await vesselOrder.pasteRollingCode(RollingCode);
   await YardOrder.AddNewRowYard();
   await vesselOrder.SubmitTimehseet();

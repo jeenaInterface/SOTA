@@ -11,8 +11,8 @@ export default class YardOrderPage {
     public page: Page;  // Same with page property
 
     // Declare the global variable for noTRStatusDate at the class level
-    public noTRStatusDate: string;
-    private weekNumber: number;
+    public noTRStatusDate: string = '';
+    private weekNumber: number = 0;
 
     // Constructor accepts the Page object
     constructor(page: Page) {
@@ -146,7 +146,7 @@ export default class YardOrderPage {
         await this.page.locator(this.Elements.YardBossddl1).fill("36464");
         await this.page.locator(this.Elements.YardBossddl1).press("Enter");
         const YardBossddl1Steady = await this.page.locator(this.Elements.SteadyFXName).textContent();
-        await this.page.locator(this.Elements.YardBossddl1).fill(YardBossddl1Steady);
+        await this.page.locator(this.Elements.YardBossddl1).fill(YardBossddl1Steady || '');
         await this.page.locator(this.Elements.stdFXFlexList).selectOption('1');
 
     }

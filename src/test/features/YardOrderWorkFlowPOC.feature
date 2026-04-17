@@ -18,7 +18,7 @@ Feature:  Yard order Functionalities - Yard Order, Summary Sheet, Timesheet, SOT
         Then Accounting user logged into the application
         Then Accounting user does the final approval
 
-@sanity @Retest
+@sanity @Retest @yardOrderValidations @rerun
 Scenario: Verify the mandatory validations in Yard order
         Given TR user logged into the application
         Then TR user creates a new labor order

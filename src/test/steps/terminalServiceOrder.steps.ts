@@ -66,6 +66,14 @@ Then('Ops user submits and approve the Terminal Services Timehseet', async funct
     await vesselOrder.SubmitTimehseet();
     await vesselOrder.ApprovetheTimehseet()
 });
+
+Then('Ops lead user submits and approve the Terminal Services Timehseet', async function () {
+
+    await terminalServiceOrder.clickOnSweeperTab();
+    await terminalServiceOrder.FillHrsTab();
+    await vesselOrder.SubmitTimehseet();
+    await vesselOrder.ApprovetheTimehseet()
+});
 Then('TS user submits and approve the Terminal Services Timehseet', async function () {
 
     await terminalServiceOrder.clickOnTimehseetMenu();

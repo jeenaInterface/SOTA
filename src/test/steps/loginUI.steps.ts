@@ -90,3 +90,10 @@ Given('TS managment user logged into the application', async function () {
   await login.enterPassword(process.env.userPasswordTS)
 
 });
+Given('Ops Lead user logged into the application', async function () {
+  login = new loginPage(fixture.page);
+  await login.navigateToLoginPage();
+  await login.enterUserName(process.env.opsLeadUserEmail);
+  await login.enterPassword(process.env.userPasswordOpsLead);
+  await login.clickLoginButton();
+});

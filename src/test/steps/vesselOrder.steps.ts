@@ -62,6 +62,13 @@ Then('Ops user submits and approve the vessel timesheet', async function () {
   await vesselOrder.ApprovetheTimehseet()
 
 });
+
+Then('Ops lead user submits and approve the vessel timesheet', async function () {
+  await vesselOrder.clickOnForemanTab();
+  await vesselOrder.SubmitTimehseet();
+  await vesselOrder.ApprovetheTimehseet()
+
+});
 Then('the user verifies the download report functionality for the vessel order', async function () {
   await vesselOrder.downloadTimehseetReport();
 });

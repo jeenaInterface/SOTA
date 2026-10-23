@@ -79,7 +79,11 @@ Then('Ops user submits and approve the rail order timesheet', async function () 
   await vesselOrder.SubmitTimehseet();
   await vesselOrder.ApprovetheTimehseet();
 });
-
+Then('Ops lead submits and approve the rail order timesheet', async function () {
+  await railOrder.clickOnClerkTab();
+  await vesselOrder.SubmitTimehseet();
+  await vesselOrder.ApprovetheTimehseet();
+});
 Then('ops user reject the rail timesheet', async function () {
   await vesselOrder.clickOnReject();
 });

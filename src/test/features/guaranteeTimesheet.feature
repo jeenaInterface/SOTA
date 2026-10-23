@@ -1,6 +1,6 @@
 Feature:  Guarantee Timesheet Management
 
-@sanity @guaranteeTimesheet
+@sanity @guaranteeTimesheet @regression10
   Scenario: TR management user creates and saves Guarantee timesheet, OPS management approves, reject and deletes the entry - rail order
     Given TR user logged into the application
     And I navigate to the Guarantee Timesheet page
@@ -27,4 +27,13 @@ Feature:  Guarantee Timesheet Management
     Then Delete entire guarantee timesheet entry
 
 
-
+@sanity @guaranteeTimesheetOpsLead @regression10
+  Scenario: Ops Lead user creates and saves Guarantee timesheet, OPS management approves, reject and deletes the entry - rail order
+    Given Ops Lead user logged into the application
+    And I navigate to the Guarantee Timesheet page
+    When I select landing page details for Guarantee timesheet with work order date, shift and job type
+    And I create a new row in the Guarantee tab and enter steady, ST, and OT hours
+    And Ops user approve the timesheet entry
+    Then verify the GuaranteeTimesheet report downloaded successfully
+    Then Then Reject the guarantee timesheet entry
+    Then delete entire guarantee timesheet 

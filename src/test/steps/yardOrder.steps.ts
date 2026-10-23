@@ -71,6 +71,12 @@ Then('Ops user submits and approve the yard timesheet', async function () {
   await vesselOrder.ApprovetheTimehseet()
 
 });
+Then('Ops lead user submits and approve the yard timesheet', async function () {
+  await YardOrder.clickOnForemanTab();
+  await vesselOrder.SubmitTimehseet();
+  await vesselOrder.ApprovetheTimehseet()
+
+});
 Then('the user verifies the download report functionality for the yard order', async function () {
   await vesselOrder.downloadTimehseetReport();
 });

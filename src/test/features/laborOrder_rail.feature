@@ -32,7 +32,7 @@ Feature: Rail order and ops rail order timesheet functionalities
     Then the user push the Rail labor order to the summary sheet
     Then the user cancel the Rail order
 
-  @sanity @rerun2
+  @sanity @rerun2 @bug @regression15 @nre10
   Scenario: TR user creates a rail order timesheet and verifies save without submit, save and submit, and download report functionalities
     Given TR user logged into the application
     Given the user creates a new Rail order
@@ -54,3 +54,17 @@ Feature: Rail order and ops rail order timesheet functionalities
     Then the user verifies the download report functionality for the rail order
     Then user click on logout button
 
+  @sanity @rerun2 @bug @regression15 @nre10 @railOpsLead
+  Scenario: Ops Lead user creates a rail order timesheet and verifies save without submit, save and submit, and download report functionalities
+    Given Ops Lead user logged into the application
+    Given the user creates a new Rail order
+    Then the user push the Rail labor order to the summary sheet
+    Given the user creates a new rail timesheet
+    When the user saves the rail order without submitting it
+    Then the user saves and submits the rail order
+    Then Ops lead submits and approve the rail order timesheet
+    Then ops user reject the rail timesheet
+    Then verify remove approval functionality in rail timehseet
+    Then Ops lead submits and approve the rail order timesheet
+    Then the user verifies the download report functionality for the rail order
+    Then user click on logout button

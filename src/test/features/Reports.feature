@@ -10,7 +10,7 @@ Feature: Reports in SOTA APPLICATION
         Then Verify the ignore Functionalities
         Then Verify the add remarks Functionalities
 
-    @LaborOrderDiscrepancies @sanity @rerun
+    @LaborOrderDiscrepancies @sanity @regression30
     Scenario: Verify Labor Order Discrepancies Report
         Given TR user logged into the application
         Then TR user creates a new labor order
@@ -33,7 +33,7 @@ Feature: Reports in SOTA APPLICATION
         Then Verify Search and Reset Dispatch Note Functionalities
         Then Verify Delete Dispatch Note Functionalities
 
-    @steadyScheduleTrackingSheetReport @sanity
+    @steadyScheduleTrackingSheetReport @sanity @regression10
     Scenario: Verify Steady Schedule Tracking Sheet Report
         Given TR user logged into the application
         Then I am on the Steady Schedule Tracking Sheet Report page

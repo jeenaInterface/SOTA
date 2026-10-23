@@ -4,7 +4,7 @@ Feature: Steady Schedule Functionalities
     So that I can maintain and track steady assignments
 
 
-    @steadyschedule @sanity @rerun
+    @steadyschedule @sanity @regression10
     Scenario: Update steady schedule
         Given TR user logged into the application
         And User navigates to the steady schedule page

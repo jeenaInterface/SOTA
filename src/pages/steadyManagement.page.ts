@@ -40,6 +40,7 @@ export default class steadyManagementPage {
         resetButton: "//button[normalize-space()='RESET']",
         createNewSteadyButton: "//button[normalize-space()='ADD STEADY']",
         downloadReportButton: "//button[normalize-space(text())='ACTIVE STEADY RECAP']",
+        // downloadReportButton: "//button[normalize-space(text())='DOWNLOAD REPORT']",
         steadyReportButton: "//button[normalize-space()='STEADY DETAILS REPORT']",
         steadyNameField: "//input[@formcontrolname='name']",
         successMessage: "//span[contains(text(),'successfully')]",

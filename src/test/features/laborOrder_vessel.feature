@@ -25,7 +25,7 @@ Feature: Vessel order and ops vessel timesheet functionalities
     Then Verify that the appropriate validation message for steady name and steady count field
 
 
-  @sanity @vesselCancel @vessel
+  @sanity @vesselCancel @bug
   Scenario: TR user creates, firms, pushes to summary sheet, and cancels a vessel order
     Given TR user logged into the application
     Given the user creates a new vessel order
@@ -33,7 +33,7 @@ Feature: Vessel order and ops vessel timesheet functionalities
     Then the user push the labor order to the summary sheet
     Then the user cancel the order
 
-  @sanity @vessel1 @test3
+  @sanity @vessel1  @regression50
   Scenario: Vessel Order Timesheet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report
     Given TR user logged into the application
     Given the user creates a new vessel order
@@ -55,3 +55,17 @@ Feature: Vessel order and ops vessel timesheet functionalities
     Then the user verifies the download report functionality for the vessel order
     Then user click on logout button
 
+ @sanity @vessel1  @regression50 @vesselOpsLead
+  Scenario: Vessel Order Timesheet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report by ops lead
+    Given Ops Lead user logged into the application
+    Given the user creates a new vessel order
+    Then the user push the labor order to the summary sheet
+    Given the user creates a new vessel timesheet
+    When the user saves the vessel order without submitting it
+    Then the user saves and submits the vessel order
+    Then Ops lead user submits and approve the vessel timesheet
+    Then ops user reject the vessel timesheet
+    Then verify remove approval functionality
+    Then Ops lead user submits and approve the vessel timesheet
+    Then the user verifies the download report functionality for the vessel order
+    Then user click on logout button

@@ -1,6 +1,6 @@
 Feature:  Payroll Management Functionalities
 
-    @sanity @payroll @rerun
+    @sanity @payroll @regression50 @nre3
     Scenario: Functionalities under payroll management
         Given TR user logged into the application
         Then TR user creates a new labor order
@@ -9,8 +9,8 @@ Feature:  Payroll Management Functionalities
         Then user click on logout button
         Then Ops user logged into the application
         Then Ops user submits and approve the timesheet
-        Then user open payroll managemnt dashboard 
-        Then Click on batch number 
+        Then user open payroll managemnt dashboard
+        Then Click on batch number
         Then Click on shift
         Then Verify Save Info functionality
         Then Verify View timehseet functionality
@@ -21,7 +21,7 @@ Feature:  Payroll Management Functionalities
         Then user click on logout button
         Then TR management user logged into the application
         Then user open payroll managemnt dashboard
-        Then Click on batch number 
+        Then Click on batch number
         Then verify OCU log history
         Then verify download batch report
         Then Click on shift
@@ -34,7 +34,7 @@ Feature:  Payroll Management Functionalities
         Then Accounting user does the final approval
         Then Accouting user does PMA un approval and SOTA Un approval
 
-    @sanity @OCU @rerun
+    @sanity @OCU @regression50 @nre3
     Scenario: Verify Notify manager and remarks functionalities under OCU user
         Given TR user logged into the application
         Then TR user creates a new labor order
@@ -50,4 +50,6 @@ Feature:  Payroll Management Functionalities
         Then verify the link in child tab payroll-timesheet screen
         Then Add remarks by OCU user
         Then verify Notify manager functionality
-    
+
+
+   

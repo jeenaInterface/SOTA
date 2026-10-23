@@ -18,7 +18,7 @@ Feature: Yard Order and ops yard order timesheet functioanlities
         Given the user creates a new Yard order
         Then the user discards the Yard order
 
-    @sanity @test2 @yard
+    @sanity @test2 @bug 
     Scenario: Verify Mandatory validation messages in yard order
         Given TR user logged into the application
         Then Verify that the appropriate validation message for start time field
@@ -33,7 +33,7 @@ Feature: Yard Order and ops yard order timesheet functioanlities
         Then the user push the Yard labor order to the summary sheet
         Then the user cancel the Yard order
 
-@sanity @yard1 @test1 
+@sanity @yard1 @regression10 @regression50
   Scenario: Yard Order Timesheet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report
     Given TR user logged into the application
     Given the user creates a new Yard order
@@ -52,5 +52,20 @@ Feature: Yard Order and ops yard order timesheet functioanlities
     Then user click on logout button
     Then Ops user logged into the application
     Then Ops user submits and approve the yard timesheet
+    Then the user verifies the download report functionality for the yard order
+    Then user click on logout button
+
+    @sanity @yardOpslead @regression10 @regression50
+  Scenario: Yard Order Timesheet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report by ops lead
+    Given Ops Lead user logged into the application
+    Given the user creates a new Yard order
+    Then the user push the Yard labor order to the summary sheet
+    Given the user creates a timesheet for the yard order
+    When the user saves the yard order without submitting it
+    Then the user saves and submits the yard order
+    Then Ops lead user submits and approve the yard timesheet
+    Then ops user reject the yard timesheet
+    Then verify remove approval functionality of yard timehseet
+    Then Ops lead user submits and approve the yard timesheet
     Then the user verifies the download report functionality for the yard order
     Then user click on logout button

@@ -1,6 +1,6 @@
 Feature: Admin module
 
-  @sanity @admin
+  @sanity @admin @bug
   Scenario: Update LO Reference supporting data
     Given TR user logged into the application
     Then select Supporting Data from the admin menu
@@ -101,7 +101,7 @@ Feature: Admin module
     And verify reset functionality
     And Verify download functionality of Daily Security Schedule Templates
 
-  @sanity @lrUser @admin
+  @sanity @lrUser1 @admin
   Scenario: LR managment user - View functionality
     Given LR managment user logged into the application
     Then select OCC Code from the admin menu
@@ -116,4 +116,104 @@ Feature: Admin module
     Then Click on back button
 
 
-    
+      @sanity @admin @bug @loOpsLead
+  Scenario: Update LO Reference supporting data
+    Given Ops Lead user logged into the application
+    Then select Supporting Data from the admin menu
+    When Select LO_Reference from the type list
+    And Click on the edit button
+    And Click on the update button
+    Then Verify the success message is displayed
+
+  @sanity @admin
+  Scenario: Manage Shift and Holiday settings
+    Given Ops Lead user logged into the application
+    Then select Shift and Holiday from the admin menu
+    When Click on the save button
+    Then Verify the shift holiday success message is displayed
+
+  @sanity @admin
+  Scenario: Search/Reset/Download functioanlities in OCC Code
+    Given Ops Lead user logged into the application
+    Then select OCC Code from the admin menu
+    When Select Operational Type as "OPS"
+    And Select Labor Type as "Hall"
+    And Enter Job Type as "AUTO DRIVER"
+    And Enter OCC Code as "1"
+    When Click on the search button
+    And Verify Job Type is "AUTO DRIVER"
+    Then click on that row
+    Then click on save button and confirm the success message
+    Then Click on back button
+    When Select Operational Type as "OPS"
+    And Select Labor Type as "Hall"
+    And Enter Job Type as "AUTO DRIVER"
+    And Enter OCC Code as "1"
+    When Click on the reset button
+    Then Verify Operational Type is reset to default
+    And Verify Labor Type is reset to default
+    And Verify Job Type field is empty
+    And Verify OCC Code field is empty
+    When Click on download report button
+    Then Verify OCC report is downloaded successfully
+    And Verify OCC report contains data with row count
+
+  @sanity @steadyPositions @admin
+  Scenario: Search/Reset/Download functioanlities in steady positions
+    Given Ops Lead user logged into the application
+    Then select  Steady Positions & Functions from the admin menu
+    When Select Operational Type as "Vessel"
+    And Select position as "25% Clerk"
+    And select function as "Vessel"
+    When Click on the search button
+    And Verify position is "25% Clerk"
+    Then click on that position
+    Then click on save button and confirm the success message
+    Then Click on back button
+    When Select Operational Type as "Vessel"
+    And Select position as "25% Clerk"
+    And select function as "Vessel"
+    When Click on the reset button
+    Then Verify Operational Type is reset to default
+    And Verify position is reset to default
+    And Verify function is reset to default
+    When Click on download report button
+    Then Verify steady report is downloaded successfully
+    And Verify steady report contains data with row count
+
+
+  @sanity @admin
+  Scenario: Search/Reset/Download functioanlities in steady job role
+    Given Ops Lead user logged into the application  
+    Then select steady Job Role from the admin menu
+    When Select Operational Type as "Vessel"
+    And Select position as "25% Clerk"
+    And Enter Job Worked as "SUPERCARGO"
+    When Click on the search button
+    And Verify Job Worked is "SUPERCARGO"
+    Then click on that Job Worked 
+    Then click on save button and confirm the success message
+    Then Click on back button
+    When Select Operational Type as "Vessel"
+    And Select position as "25% Clerk"
+    And Enter Job Worked as "SUPERCARGO"
+    When Click on the reset button
+    Then Verify Operational Type is reset to default
+    And Verify position is reset to default
+    And Verify Job Worked is reset to default
+    When Click on download report button
+    Then Verify steady job role is downloaded successfully
+    And Verify steady job role contains data with row count
+
+ @sanity @securityTemplate @admin
+    Scenario: Create/Edit/Search/Reset/Download functioanlities in Daily Security Schedule Templates
+    Given Ops Lead user logged into the application   
+    Then select Daily Security Schedule Templates from the admin menu
+    When Click on the Add staffing template button
+    And Enter template name and new job details
+    And click on SAVE button and confirm the success message
+    Then Verify Action Log is created with details
+    When verify search functionality
+    And verify reset functionality
+    And Verify download functionality of Daily Security Schedule Templates
+

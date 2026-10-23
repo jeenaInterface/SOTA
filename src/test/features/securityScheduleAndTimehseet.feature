@@ -1,7 +1,7 @@
 Feature: Security schedule and timesheet Management
 
 
-    @sanity @securityScheduleAndTimesheet1 @rerun
+    @sanity @securityScheduleAndTimesheet1 @rerun @regression50
     Scenario: Create security schedule, Create timesheet, verify functionalities and validations
         Given Security management user logged into the application
         When User navigates to security schedule page

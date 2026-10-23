@@ -25,14 +25,14 @@ Feature: Steady Management
 #     Then Click on create new steady button
 #     Then Verify the validation for shift, steady name and other required fields
 
-  @sanity @rerun @steadyPositions @rerun
+  @sanity @rerun @steadyPositions @rerun5
   Scenario: Steady Management - Download Report
     Given TR user logged into the application
     Then Go to steady management screen
     Then Verify the download report is downloaded successfully  
     Then Verify the steady report is downloaded successfully
 
-    @sanity @steadyPositions @rerun
+    @sanity @steadyPositions @rerun5
   Scenario: LR managment user - View functionality
     Given LR managment user logged into the application
     Then Go to steady management screen

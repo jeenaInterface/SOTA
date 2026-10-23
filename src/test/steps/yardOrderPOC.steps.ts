@@ -113,6 +113,11 @@ Then('user open payroll managemnt dashboard', async function () {
   await yardOrder.clickPayrollManagementDashnoard();
 
 });
+Then('Ops lead user open payroll managemnt dashboard', async function () {
+  yardOrder = new yardOrderPage(fixture.page)
+  await yardOrder.clickPayrollManagementDashnoard();
+
+});
 Then('Click on batch number', async function () {
   await yardOrder.selectPayrollWeek();
   await yardOrder.selectTheBatch();

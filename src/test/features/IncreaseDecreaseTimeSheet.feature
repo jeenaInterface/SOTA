@@ -1,6 +1,6 @@
 Feature: Increase/Decrease Timesheet Management
 
-@sanity @test2
+@sanity @test10 @regression30
   Scenario: TR management user creates and saves increase/decrease timesheet, OPS management approves, reject and deletes the entry - rail order
     Given TR user logged into the application
     And I navigate to the Increase-Decrease Timesheet page
@@ -15,7 +15,7 @@ Feature: Increase/Decrease Timesheet Management
     Then Then Reject the timesheet entry
     Then Then delete entire timesheet entry
 
-    @sanity @regressionyardorder
+    @sanity @regressionyardorder @regression50
   Scenario: TR management user creates and saves increase/decrease timesheet, OPS management approves, reject and deletes the entry - yard order
     Given TR user logged into the application
     And I navigate to the Increase-Decrease Timesheet page
@@ -31,7 +31,7 @@ Feature: Increase/Decrease Timesheet Management
     Then Then delete entire timesheet entry
 
 
-  @sanity
+  @sanity @bug12 @regression11
   Scenario: Mandatory validation messages in increase-decrease timesheet
     Given Ops management user logged into the application
     When I navigate to the Increase-Decrease Timesheet page
@@ -41,3 +41,12 @@ Feature: Increase/Decrease Timesheet Management
     Then Verify validation message for Longshore Name, Payroll and Hours
     Then Verify validation message for LBCT Management Name
     Then Delete entire timesheet entire entry
+
+  @sanity @regressionyardorderOpsLead @regression50
+  Scenario: Ops Lead user creates and saves increase/decrease timesheet, approves, reject and deletes the entry - yard order
+    Given Ops Lead user logged into the application
+    And I navigate to the Increase-Decrease Timesheet page
+    When I select landing page details for a yard order with work order date as current date minus 15 days
+    And I create a new row in the Increase-decrease tab and enter steady, ST, OT and DFT hours
+    Then verify the report downloaded successfully
+    Then Then delete entire timesheet entry

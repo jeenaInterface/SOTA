@@ -27,7 +27,7 @@ Feature: Terminal Service Order and ops terminal service order timehseet functio
     Then the user cancel the Terminal Services Order
 
 
-  @sanity @TSOrderTimehseet
+  @sanity @TSOrderTimehseet @regression50 @nre3
   Scenario: Terminal Services Order Timesheet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report
     Given TR user logged into the application
     Given the user creates a new Terminal Services Order
@@ -51,7 +51,7 @@ Feature: Terminal Service Order and ops terminal service order timehseet functio
     Then Ops user submits and approve the Terminal Services Timehseet
     Then user click on logout button
 
-      @sanity @TSManagementUser @TSOrderTimehseet1
+      @sanity @TSManagementUser @bug @regression50
   Scenario: Terminal Services Order Timesheet - TS MANAGEMNET USER approve the timesheet
     Given TR user logged into the application
     Given the user creates a new Terminal Services Order
@@ -73,4 +73,21 @@ Feature: Terminal Service Order and ops terminal service order timehseet functio
     Then user click on logout button
     Then TS managment user logged into the application
     Then TS user submits and approve the Terminal Services Timehseet
+    Then user click on logout button
+
+
+      @sanity @TSOrderTimehseetOpslead @regression50 @nre3
+  Scenario: Terminal Services Order Timesheet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report by Ops Lead user
+    Given Ops Lead user logged into the application
+    Given the user creates a new Terminal Services Order
+    Then the user push the Terminal Services Order to the summary sheet
+    Given the user creates a timesheet for the Terminal Services Order
+    Then delete three rows in the timesheet and add a new row in the timesheet
+    Then the user saves the Terminal Services Timehseet without submitting it
+    Then the user saves and submits the Terminal Services Timehseet
+    Then Ops lead user submits and approve the Terminal Services Timehseet
+    Then ops user reject the Terminal Services Timehseet
+    Then verify remove approval functionality of Terminal Services Timehseet
+    Then the user verifies the download report functionality for the Terminal Services Timehseet
+    Then Ops lead user submits and approve the Terminal Services Timehseet
     Then user click on logout button

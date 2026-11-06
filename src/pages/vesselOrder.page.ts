@@ -156,7 +156,7 @@ export default class vesselOrderPage {
         jobTypeOrdInput: 'input[name="jobTypeOrd"]',
         alcNoRowTextbox: { row: 'Alc No', role: 'textbox' },
         LaborOrderDifferenceReport: "//i[@title='Labor Order Difference Report']",
-        labelOnDifferenceReport: "//h5[contains(text(),'Pier E - LB 24 - COSCO KAOHSIUNG - 090 - 100741 - ')]",
+        labelOnDifferenceReport: "//a[contains(normalize-space(.),'Pier E - LB 24 - COSCO KAOHSIUNG - 090 - 100741 -')]",
         summarysheetContent: "//td[normalize-space()='BACK']",
         berthNewOrder: "(//select[@id='berth'])[1]",
         operationNewOrderTable: "(//input[@type='text'])[4]",

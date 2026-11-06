@@ -33,7 +33,7 @@ Feature: Yard Order and ops yard order timesheet functioanlities
         Then the user push the Yard labor order to the summary sheet
         Then the user cancel the Yard order
 
-@sanity @yard1 @regression10 @regression50
+@sanity @yard1 @regression10 @regression51
   Scenario: Yard Order Timesheet - Save without submit, Save and Submit, Reject, Approve, Remove Approval, Add new steady and Download Report
     Given TR user logged into the application
     Given the user creates a new Yard order

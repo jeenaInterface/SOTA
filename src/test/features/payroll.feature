@@ -1,6 +1,6 @@
 Feature:  Payroll Management Functionalities
 
-    @sanity @payroll @regression50 @nre3
+    @sanity @payroll @regression51 @nre3
     Scenario: Functionalities under payroll management
         Given TR user logged into the application
         Then TR user creates a new labor order
@@ -34,7 +34,7 @@ Feature:  Payroll Management Functionalities
         Then Accounting user does the final approval
         Then Accouting user does PMA un approval and SOTA Un approval
 
-    @sanity @OCU @regression50 @nre3
+    @sanity @OCU @regression51 @nre3
     Scenario: Verify Notify manager and remarks functionalities under OCU user
         Given TR user logged into the application
         Then TR user creates a new labor order

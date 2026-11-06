@@ -10,7 +10,7 @@ Feature: Reports in SOTA APPLICATION
         Then Verify the ignore Functionalities
         Then Verify the add remarks Functionalities
 
-    @LaborOrderDiscrepancies @sanity @regression30
+    @LaborOrderDiscrepancies @sanity @regression51
     Scenario: Verify Labor Order Discrepancies Report
         Given TR user logged into the application
         Then TR user creates a new labor order
@@ -83,3 +83,75 @@ Feature: Reports in SOTA APPLICATION
         Given Ops management user logged into the application
         Then I am on the Timesheet Report page
         Then Click on timesheet Report button with date range and verify the report downloaded successfully
+
+         @labororderReceiverLOG @sanity @rerun
+    Scenario: Verify Labor Order Receiver Report
+        Given Ops Lead user logged into the application
+        Then I am on the Labor Order Receiver Report page
+        Then Select One Jan 1 from the from date field
+        And Select current date from the to date field
+        And I click on the Search button
+        Then Verify the ignore Functionalities
+        Then Verify the add remarks Functionalities
+
+    @LaborOrderDiscrepancies @sanity @regression30
+    Scenario: Verify Labor Order Discrepancies Report
+        Given Ops Lead user logged into the application
+        Then TR user creates a new labor order
+        Then I am on the Labor Order Discrepancies Report page
+        Then Verify Add Discrepancies Functionalities
+        Then Verify Update Discrepancies Functionalities
+        Then Verify discrepancies report downloaded successfully
+        Then Verify discrepancies summary report downloaded successfully
+        Then Verify Search Discrepancies Functionalities
+        Then Verify Reset Discrepancies Functionalities
+        Then Verify Delete Discrepancies Functionalities
+
+    @DispatchNote @sanity @test2
+    Scenario: Verify Dispatch Note Report
+        Given Ops Lead user logged into the application
+        Then I am on the Dispatch Note Report page
+        Then Verify Add Dispatch Note Functionalities
+        Then Verify Update Dispatch Note Functionalities
+        Then Verify Dispatch Note downloaded successfully
+        Then Verify Search and Reset Dispatch Note Functionalities
+        Then Verify Delete Dispatch Note Functionalities
+
+    @steadyScheduleTrackingSheetReport @sanity @regression10
+    Scenario: Verify Steady Schedule Tracking Sheet Report
+        Given Ops Lead user logged into the application
+        Then I am on the Steady Schedule Tracking Sheet Report page
+        Then Click on Steady report button by select Tracking option and verify the report downloaded successfully
+        Then Verify Steady Schedule Tracking Sheet Report reset functionalities
+        Then Click on Steady report button by select schedule option and verify the report downloaded successfully
+
+    @timesheetSteadyReport @sanity
+    Scenario: Verify Timesheet Steady Report
+        Given Ops Lead user logged into the application
+        Then I am on the Timesheet Steady Report page
+        Then Click on timesheet Steady report button and verify the report downloaded successfully
+
+    @timesheetReport @sanity
+    Scenario: Verify Timesheet Steady Report with date range
+        Given Ops Lead user logged into the application
+        Then I am on the Timesheet Report page
+        Then Click on timesheet Report button with date range and verify the report downloaded successfully
+
+    @TimesheetReviewRecapReport @sanity @test2
+    Scenario: Verify Timesheet Review Recap Report
+        Given Ops Lead user logged into the application
+        Then I am on the Timesheet Review Recap Report page
+        Then Click on timesheet Review Recap report button and verify the report downloaded successfully
+
+    @SteadyJobAssignmentsDuplicateCheckReport @sanity @rerun
+    Scenario: Verify Steady Job Assignments Duplicate Check Report
+        Given Ops Lead user logged into the application
+        Then I am on the Steady Job Assignments Duplicate Check Report page
+        Then Click on Steady Job Assignments Duplicate Check report button and verify the report downloaded successfully
+    
+    @LaborOrderFinalizedTimesReport @sanity @test2
+    Scenario: Verify Labor Order Finalized Times Report
+        Given Ops Lead user logged into the application
+        Then I am on the Labor Order Finalized Times Report page
+        Then Click on Labor Order Finalized Times report button and verify the report downloaded successfully
+        Then Click on Finalized after deadlines report button and verify the report downloaded successfully
